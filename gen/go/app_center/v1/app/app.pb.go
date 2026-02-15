@@ -253,7 +253,7 @@ type GetApplicationInfoReply_Application struct {
 	StableVersion  int32                  `protobuf:"varint,3,opt,name=stableVersion,proto3" json:"stableVersion,omitempty"`
 	GrayVersion    int32                  `protobuf:"varint,4,opt,name=grayVersion,proto3" json:"grayVersion,omitempty"`
 	BetaVersion    int32                  `protobuf:"varint,5,opt,name=betaVersion,proto3" json:"betaVersion,omitempty"`
-	GrayPercentage float32                `protobuf:"fixed32,6,opt,name=grayPercentage,proto3" json:"grayPercentage,omitempty"`
+	GrayPercentage float64                `protobuf:"fixed64,6,opt,name=grayPercentage,proto3" json:"grayPercentage,omitempty"`
 	Name           string                 `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	Status         string                 `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
 	Admin          string                 `protobuf:"bytes,9,opt,name=admin,proto3" json:"admin,omitempty"`
@@ -328,7 +328,7 @@ func (x *GetApplicationInfoReply_Application) GetBetaVersion() int32 {
 	return 0
 }
 
-func (x *GetApplicationInfoReply_Application) GetGrayPercentage() float32 {
+func (x *GetApplicationInfoReply_Application) GetGrayPercentage() float64 {
 	if x != nil {
 		return x.GrayPercentage
 	}
@@ -397,7 +397,7 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\rstableVersion\x18\x03 \x01(\x05R\rstableVersion\x12 \n" +
 	"\vgrayVersion\x18\x04 \x01(\x05R\vgrayVersion\x12 \n" +
 	"\vbetaVersion\x18\x05 \x01(\x05R\vbetaVersion\x12&\n" +
-	"\x0egrayPercentage\x18\x06 \x01(\x02R\x0egrayPercentage\x12\x12\n" +
+	"\x0egrayPercentage\x18\x06 \x01(\x01R\x0egrayPercentage\x12\x12\n" +
 	"\x04name\x18\a \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\b \x01(\tR\x06status\x12\x14\n" +
 	"\x05admin\x18\t \x01(\tR\x05admin\x12$\n" +

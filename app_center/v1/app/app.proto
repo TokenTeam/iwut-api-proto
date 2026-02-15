@@ -41,7 +41,7 @@ message GetApplicationInfoReply {
     int32 stableVersion = 3;
     int32 grayVersion = 4;
     int32 betaVersion = 5;
-    float grayPercentage = 6;
+    double grayPercentage = 6;
     string name = 7;
     string status = 8;
     string admin = 9;
