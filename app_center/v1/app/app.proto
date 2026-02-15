@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package app_center.v1.app;
+
+import "google/api/annotations.proto";
+
+option go_package = "iwut-app-center/api/app_center/v1/app;app";
+
+service App {
+  rpc getApplicationInfo (GetApplicationInfoRequest) returns (GetApplicationInfoReply) {
+    option (google.api.http) = {
+      get: "/app/info"
+    };
+  }
+  rpc getAppList (GetAppListRequest) returns (GetAppListReply) {
+    option (google.api.http) = {
+      get: "/app/list"
+    };
+  }
+}
+
+message GetAppListRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+message GetAppListReply {
+  int32 code = 1;
+  string message = 2;
+
+}
+
+message GetApplicationInfoRequest {
+  optional string clientId = 1;
+  optional string appId = 2;
+}
+
+message GetApplicationInfoReply {
+  message Application {
+    string clientId = 1;
+    string clientSecret = 2;
+    int32 stableVersion = 3;
+    int32 grayVersion = 4;
+    int32 betaVersion = 5;
+    float grayPercentage = 6;
+    string name = 7;
+    string status = 8;
+    string admin = 9;
+    repeated string collaborators = 10;
+    string id = 11;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional Application data = 3;
+  string traceId = 4;
+}
