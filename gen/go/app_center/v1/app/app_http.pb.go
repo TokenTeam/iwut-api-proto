@@ -19,10 +19,14 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationAppcreateApp = "/app_center.v1.app.App/createApp"
+const OperationAppcreateAppVersion = "/app_center.v1.app.App/createAppVersion"
 const OperationAppgetAppList = "/app_center.v1.app.App/getAppList"
 const OperationAppgetApplicationInfo = "/app_center.v1.app.App/getApplicationInfo"
 
 type AppHTTPServer interface {
+	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
+	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error)
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
 }
@@ -31,6 +35,8 @@ func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r := s.Route("/")
 	r.GET("/app/info", _App_GetApplicationInfo0_HTTP_Handler(srv))
 	r.GET("/app/list", _App_GetAppList0_HTTP_Handler(srv))
+	r.POST("/app/create", _App_CreateApp0_HTTP_Handler(srv))
+	r.POST("/app/create-version", _App_CreateAppVersion0_HTTP_Handler(srv))
 }
 
 func _App_GetApplicationInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
@@ -71,7 +77,53 @@ func _App_GetAppList0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) err
 	}
 }
 
+func _App_CreateApp0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAppRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppcreateApp)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateApp(ctx, req.(*CreateAppRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateAppReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_CreateAppVersion0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAppVersionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppcreateAppVersion)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateAppVersion(ctx, req.(*CreateAppVersionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateAppVersionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AppHTTPClient interface {
+	CreateApp(ctx context.Context, req *CreateAppRequest, opts ...http.CallOption) (rsp *CreateAppReply, err error)
+	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
 	GetAppList(ctx context.Context, req *GetAppListRequest, opts ...http.CallOption) (rsp *GetAppListReply, err error)
 	GetApplicationInfo(ctx context.Context, req *GetApplicationInfoRequest, opts ...http.CallOption) (rsp *GetApplicationInfoReply, err error)
 }
@@ -82,6 +134,32 @@ type AppHTTPClientImpl struct {
 
 func NewAppHTTPClient(client *http.Client) AppHTTPClient {
 	return &AppHTTPClientImpl{client}
+}
+
+func (c *AppHTTPClientImpl) CreateApp(ctx context.Context, in *CreateAppRequest, opts ...http.CallOption) (*CreateAppReply, error) {
+	var out CreateAppReply
+	pattern := "/app/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppcreateApp))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...http.CallOption) (*CreateAppVersionReply, error) {
+	var out CreateAppVersionReply
+	pattern := "/app/create-version"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppcreateAppVersion))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *AppHTTPClientImpl) GetAppList(ctx context.Context, in *GetAppListRequest, opts ...http.CallOption) (*GetAppListReply, error) {

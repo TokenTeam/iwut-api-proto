@@ -17,13 +17,28 @@ service App {
       get: "/app/list"
     };
   }
+  rpc createApp (CreateAppRequest) returns (CreateAppReply) {
+    option (google.api.http) = {
+      post: "/app/create"
+      body: "*"
+    };
+  }
+  rpc createAppVersion (CreateAppVersionRequest) returns (CreateAppVersionReply) {
+    option (google.api.http) = {
+      post: "/app/create-version"
+      body: "*"
+    };
+  }
 }
 
 message GetAppListRequest {
   int32 page = 1;
   int32 pageSize = 2;
+
 }
 message GetAppListReply {
+  message ApplicationVersion {}
+
   int32 code = 1;
   string message = 2;
 
@@ -39,17 +54,67 @@ message GetApplicationInfoReply {
     string clientId = 1;
     string clientSecret = 2;
     int32 stableVersion = 3;
-    int32 grayVersion = 4;
+    int32 greyVersion = 4;
     int32 betaVersion = 5;
-    double grayPercentage = 6;
-    string name = 7;
-    string status = 8;
-    string admin = 9;
-    repeated string collaborators = 10;
-    string id = 11;
+    int32 greyShuffleCode = 6;
+    double greyPercentage = 7;
+    string name = 8;
+    string status = 9;
+    string admin = 10;
+    repeated string collaborators = 11;
+    int32 next_version = 12;
+    string id = 13;
   }
   int32 code = 1;
   string message = 2;
   optional Application data = 3;
+  string traceId = 4;
+}
+
+message CreateAppRequest {
+  string name = 1;
+}
+
+message CreateAppReply {
+  message CreateAppReplyData {
+    string clientId = 1;
+    string clientSecret = 2;
+    string name = 3;
+    string admin = 4;
+    string id = 5;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional CreateAppReplyData data = 3;
+  string traceId = 4;
+}
+
+message CreateAppVersionRequest {
+  message Rule {
+    string operator = 1;
+    repeated Rule rules = 2;
+    optional string Field = 3;
+    optional string DefaultField = 4;
+    optional string value = 5;
+  }
+  string clientId = 1;
+  repeated string basicScope = 2;
+  repeated string optionalScope = 3;
+  string versionName = 4;
+  repeated string redirectUris = 5;
+  string displayName = 6;
+  string description = 7;
+  string url = 8;
+  string icon = 9;
+  optional Rule rule = 10;
+}
+message CreateAppVersionReply {
+  message CreateAppVersionReplyData {
+    string clientId = 1;
+    int32 internalVersion = 2;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional CreateAppVersionReplyData data = 3;
   string traceId = 4;
 }

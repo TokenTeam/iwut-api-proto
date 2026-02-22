@@ -24,19 +24,61 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_CLIENT_NOT_FOUND ErrorReason = 0
-	ErrorReason_UNKNOWN_ERROR    ErrorReason = 1
+	ErrorReason_CLIENT_NOT_FOUND        ErrorReason = 0
+	ErrorReason_UNKNOWN_ERROR           ErrorReason = 1
+	ErrorReason_APP_NAME_ALREADY_EXISTS ErrorReason = 2
+	ErrorReason_IMPOSSIBLE_ERROR        ErrorReason = 3
+	ErrorReason_INVALID_JWT             ErrorReason = 4
+	ErrorReason_NOT_A_DEVELOPER         ErrorReason = 5
+	ErrorReason_INVALID_SCOPE           ErrorReason = 6
+	ErrorReason_VERSION_TOO_LONG        ErrorReason = 7
+	ErrorReason_DESCRIPTION_TOO_LONG    ErrorReason = 8
+	ErrorReason_INVALID_URI             ErrorReason = 9
+	ErrorReason_NAME_TOO_LONG           ErrorReason = 10
+	ErrorReason_PERMISSION_DENIED       ErrorReason = 11
+	ErrorReason_BETA_VERSION_NOT_FOUND  ErrorReason = 12
+	ErrorReason_TESTER_LIMIT_EXCEEDED   ErrorReason = 13
+	ErrorReason_INVALID_EXPIRATION      ErrorReason = 14
+	ErrorReason_INVITE_NOT_FOUND        ErrorReason = 15
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "CLIENT_NOT_FOUND",
-		1: "UNKNOWN_ERROR",
+		0:  "CLIENT_NOT_FOUND",
+		1:  "UNKNOWN_ERROR",
+		2:  "APP_NAME_ALREADY_EXISTS",
+		3:  "IMPOSSIBLE_ERROR",
+		4:  "INVALID_JWT",
+		5:  "NOT_A_DEVELOPER",
+		6:  "INVALID_SCOPE",
+		7:  "VERSION_TOO_LONG",
+		8:  "DESCRIPTION_TOO_LONG",
+		9:  "INVALID_URI",
+		10: "NAME_TOO_LONG",
+		11: "PERMISSION_DENIED",
+		12: "BETA_VERSION_NOT_FOUND",
+		13: "TESTER_LIMIT_EXCEEDED",
+		14: "INVALID_EXPIRATION",
+		15: "INVITE_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
-		"CLIENT_NOT_FOUND": 0,
-		"UNKNOWN_ERROR":    1,
+		"CLIENT_NOT_FOUND":        0,
+		"UNKNOWN_ERROR":           1,
+		"APP_NAME_ALREADY_EXISTS": 2,
+		"IMPOSSIBLE_ERROR":        3,
+		"INVALID_JWT":             4,
+		"NOT_A_DEVELOPER":         5,
+		"INVALID_SCOPE":           6,
+		"VERSION_TOO_LONG":        7,
+		"DESCRIPTION_TOO_LONG":    8,
+		"INVALID_URI":             9,
+		"NAME_TOO_LONG":           10,
+		"PERMISSION_DENIED":       11,
+		"BETA_VERSION_NOT_FOUND":  12,
+		"TESTER_LIMIT_EXCEEDED":   13,
+		"INVALID_EXPIRATION":      14,
+		"INVITE_NOT_FOUND":        15,
 	}
 )
 
@@ -71,10 +113,25 @@ var File_v1_error_reason_error_reason_proto protoreflect.FileDescriptor
 
 const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*6\n" +
+	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*\xf2\x02\n" +
 	"\vErrorReason\x12\x14\n" +
 	"\x10CLIENT_NOT_FOUND\x10\x00\x12\x11\n" +
-	"\rUNKNOWN_ERROR\x10\x01B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
+	"\rUNKNOWN_ERROR\x10\x01\x12\x1b\n" +
+	"\x17APP_NAME_ALREADY_EXISTS\x10\x02\x12\x14\n" +
+	"\x10IMPOSSIBLE_ERROR\x10\x03\x12\x0f\n" +
+	"\vINVALID_JWT\x10\x04\x12\x13\n" +
+	"\x0fNOT_A_DEVELOPER\x10\x05\x12\x11\n" +
+	"\rINVALID_SCOPE\x10\x06\x12\x14\n" +
+	"\x10VERSION_TOO_LONG\x10\a\x12\x18\n" +
+	"\x14DESCRIPTION_TOO_LONG\x10\b\x12\x0f\n" +
+	"\vINVALID_URI\x10\t\x12\x11\n" +
+	"\rNAME_TOO_LONG\x10\n" +
+	"\x12\x15\n" +
+	"\x11PERMISSION_DENIED\x10\v\x12\x1a\n" +
+	"\x16BETA_VERSION_NOT_FOUND\x10\f\x12\x19\n" +
+	"\x15TESTER_LIMIT_EXCEEDED\x10\r\x12\x16\n" +
+	"\x12INVALID_EXPIRATION\x10\x0e\x12\x14\n" +
+	"\x10INVITE_NOT_FOUND\x10\x0fB&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
 
 var (
 	file_v1_error_reason_error_reason_proto_rawDescOnce sync.Once

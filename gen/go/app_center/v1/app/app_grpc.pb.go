@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	App_GetApplicationInfo_FullMethodName = "/app_center.v1.app.App/getApplicationInfo"
 	App_GetAppList_FullMethodName         = "/app_center.v1.app.App/getAppList"
+	App_CreateApp_FullMethodName          = "/app_center.v1.app.App/createApp"
+	App_CreateAppVersion_FullMethodName   = "/app_center.v1.app.App/createAppVersion"
 )
 
 // AppClient is the client API for App service.
@@ -29,6 +31,8 @@ const (
 type AppClient interface {
 	GetApplicationInfo(ctx context.Context, in *GetApplicationInfoRequest, opts ...grpc.CallOption) (*GetApplicationInfoReply, error)
 	GetAppList(ctx context.Context, in *GetAppListRequest, opts ...grpc.CallOption) (*GetAppListReply, error)
+	CreateApp(ctx context.Context, in *CreateAppRequest, opts ...grpc.CallOption) (*CreateAppReply, error)
+	CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error)
 }
 
 type appClient struct {
@@ -59,12 +63,34 @@ func (c *appClient) GetAppList(ctx context.Context, in *GetAppListRequest, opts 
 	return out, nil
 }
 
+func (c *appClient) CreateApp(ctx context.Context, in *CreateAppRequest, opts ...grpc.CallOption) (*CreateAppReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAppReply)
+	err := c.cc.Invoke(ctx, App_CreateApp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAppVersionReply)
+	err := c.cc.Invoke(ctx, App_CreateAppVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppServer is the server API for App service.
 // All implementations must embed UnimplementedAppServer
 // for forward compatibility.
 type AppServer interface {
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
 	GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error)
+	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
+	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	mustEmbedUnimplementedAppServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedAppServer) GetApplicationInfo(context.Context, *GetApplicatio
 }
 func (UnimplementedAppServer) GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppList not implemented")
+}
+func (UnimplementedAppServer) CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateApp not implemented")
+}
+func (UnimplementedAppServer) CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAppVersion not implemented")
 }
 func (UnimplementedAppServer) mustEmbedUnimplementedAppServer() {}
 func (UnimplementedAppServer) testEmbeddedByValue()             {}
@@ -138,6 +170,42 @@ func _App_GetAppList_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_CreateApp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAppRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).CreateApp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_CreateApp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).CreateApp(ctx, req.(*CreateAppRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_CreateAppVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAppVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).CreateAppVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_CreateAppVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).CreateAppVersion(ctx, req.(*CreateAppVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // App_ServiceDesc is the grpc.ServiceDesc for App service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getAppList",
 			Handler:    _App_GetAppList_Handler,
+		},
+		{
+			MethodName: "createApp",
+			Handler:    _App_CreateApp_Handler,
+		},
+		{
+			MethodName: "createAppVersion",
+			Handler:    _App_CreateAppVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

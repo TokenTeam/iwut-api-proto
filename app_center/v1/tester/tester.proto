@@ -1,0 +1,44 @@
+syntax = "proto3";
+package app_center.v1.tester;
+
+import "google/api/annotations.proto";
+
+option go_package = "iwut-app-center/api/app_center/v1/tester;tester";
+
+service Tester {
+  rpc getTestLink(GetTestLinkRequest) returns (GetTestLinkReply) {
+    option (google.api.http) = {
+      get: "/tester/test-link"
+    };
+  }
+  rpc addTester (AddTesterRequest) returns (AddTesterReply) {
+    option (google.api.http) = {
+      get: "/tester/add"
+    };
+  }
+}
+message GetTestLinkRequest {
+  string clientId = 1;
+  int32 version = 2;
+  uint64 expireTime = 3; // 秒
+}
+
+message GetTestLinkReply {
+  message GetTaskLinkData {
+    string testLink = 1;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional GetTaskLinkData data = 3;
+  string traceId = 4;
+}
+
+message AddTesterRequest {
+  string inviteId = 1;
+}
+
+message AddTesterReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
