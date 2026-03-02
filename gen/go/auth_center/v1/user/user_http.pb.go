@@ -24,14 +24,18 @@ const _ = http.SupportPackageIsVersion1
 const OperationUserdeleteAccount = "/auth_center.v1.user.User/deleteAccount"
 const OperationUsergetProfile = "/auth_center.v1.user.User/getProfile"
 const OperationUsergetProfileKeys = "/auth_center.v1.user.User/getProfileKeys"
+const OperationUserrevokeAuthorization = "/auth_center.v1.user.User/revokeAuthorization"
+const OperationUsersetUserDeveloperId = "/auth_center.v1.user.User/setUserDeveloperId"
 const OperationUserupdatePassword = "/auth_center.v1.user.User/updatePassword"
 const OperationUserupdateProfile = "/auth_center.v1.user.User/updateProfile"
 const OperationUserupdateUserConsent = "/auth_center.v1.user.User/updateUserConsent"
 
 type UserHTTPServer interface {
 	DeleteAccount(context.Context, *emptypb.Empty) (*DeleteAccountReply, error)
-	GetProfile(context.Context, *emptypb.Empty) (*GetProfileReply, error)
+	GetProfile(context.Context, *GetProfileRequest) (*GetProfileReply, error)
 	GetProfileKeys(context.Context, *emptypb.Empty) (*GetProfileKeysReply, error)
+	RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error)
+	SetUserDeveloperId(context.Context, *SetUserDeveloperIdRequest) (*SetUserDeveloperIdReply, error)
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordReply, error)
 	UpdateProfile(context.Context, *structpb.Struct) (*UpdateProfileReply, error)
 	UpdateUserConsent(context.Context, *UpdateUserConsentRequest) (*UpdateUserConsentReply, error)
@@ -45,6 +49,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/user/update-profile", _User_UpdateProfile0_HTTP_Handler(srv))
 	r.GET("/user/profile-keys", _User_GetProfileKeys0_HTTP_Handler(srv))
 	r.POST("/user/update-consent", _User_UpdateUserConsent0_HTTP_Handler(srv))
+	r.POST("/user/set-developer-id", _User_SetUserDeveloperId0_HTTP_Handler(srv))
+	r.POST("/user/revoke_authorization", _User_RevokeAuthorization0_HTTP_Handler(srv))
 }
 
 func _User_UpdatePassword0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -90,13 +96,13 @@ func _User_DeleteAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context
 
 func _User_GetProfile0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in emptypb.Empty
+		var in GetProfileRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUsergetProfile)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetProfile(ctx, req.(*emptypb.Empty))
+			return srv.GetProfile(ctx, req.(*GetProfileRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -170,10 +176,56 @@ func _User_UpdateUserConsent0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Con
 	}
 }
 
+func _User_SetUserDeveloperId0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetUserDeveloperIdRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUsersetUserDeveloperId)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetUserDeveloperId(ctx, req.(*SetUserDeveloperIdRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetUserDeveloperIdReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_RevokeAuthorization0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RevokeAuthorizationRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserrevokeAuthorization)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RevokeAuthorization(ctx, req.(*RevokeAuthorizationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RevokeAuthorizationReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	DeleteAccount(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *DeleteAccountReply, err error)
-	GetProfile(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetProfileReply, err error)
+	GetProfile(ctx context.Context, req *GetProfileRequest, opts ...http.CallOption) (rsp *GetProfileReply, err error)
 	GetProfileKeys(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetProfileKeysReply, err error)
+	RevokeAuthorization(ctx context.Context, req *RevokeAuthorizationRequest, opts ...http.CallOption) (rsp *RevokeAuthorizationReply, err error)
+	SetUserDeveloperId(ctx context.Context, req *SetUserDeveloperIdRequest, opts ...http.CallOption) (rsp *SetUserDeveloperIdReply, err error)
 	UpdatePassword(ctx context.Context, req *UpdatePasswordRequest, opts ...http.CallOption) (rsp *UpdatePasswordReply, err error)
 	UpdateProfile(ctx context.Context, req *structpb.Struct, opts ...http.CallOption) (rsp *UpdateProfileReply, err error)
 	UpdateUserConsent(ctx context.Context, req *UpdateUserConsentRequest, opts ...http.CallOption) (rsp *UpdateUserConsentReply, err error)
@@ -200,7 +252,7 @@ func (c *UserHTTPClientImpl) DeleteAccount(ctx context.Context, in *emptypb.Empt
 	return &out, nil
 }
 
-func (c *UserHTTPClientImpl) GetProfile(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*GetProfileReply, error) {
+func (c *UserHTTPClientImpl) GetProfile(ctx context.Context, in *GetProfileRequest, opts ...http.CallOption) (*GetProfileReply, error) {
 	var out GetProfileReply
 	pattern := "/user/profile"
 	path := binding.EncodeURL(pattern, in, true)
@@ -220,6 +272,32 @@ func (c *UserHTTPClientImpl) GetProfileKeys(ctx context.Context, in *emptypb.Emp
 	opts = append(opts, http.Operation(OperationUsergetProfileKeys))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...http.CallOption) (*RevokeAuthorizationReply, error) {
+	var out RevokeAuthorizationReply
+	pattern := "/user/revoke_authorization"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserrevokeAuthorization))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) SetUserDeveloperId(ctx context.Context, in *SetUserDeveloperIdRequest, opts ...http.CallOption) (*SetUserDeveloperIdReply, error) {
+	var out SetUserDeveloperIdReply
+	pattern := "/user/set-developer-id"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUsersetUserDeveloperId))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

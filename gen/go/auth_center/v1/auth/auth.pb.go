@@ -929,7 +929,7 @@ const file_v1_auth_auth_proto_rawDesc = "" +
 	"\x0fgetResetUrlMail\x12'.auth_center.v1.auth.GetResetUrlRequest\x1a%.auth_center.v1.auth.GetResetUrlReply\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/auth/get-reset-url-mail\x12o\n" +
 	"\bregister\x12$.auth_center.v1.auth.RegisterRequest\x1a\".auth_center.v1.auth.RegisterReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/auth/register\x12\x84\x01\n" +
 	"\rresetPassword\x12).auth_center.v1.auth.ResetPasswordRequest\x1a'.auth_center.v1.auth.ResetPasswordReply\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/auth/reset-password\x12\x80\x01\n" +
-	"\frefreshToken\x12(.auth_center.v1.auth.RefreshTokenRequest\x1a&.auth_center.v1.auth.RefreshTokenReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/auth/refresh-tokenB/Z-iwut-auth_center/api/auth_center/v1/auth;authb\x06proto3"
+	"\frefreshToken\x12(.auth_center.v1.auth.RefreshTokenRequest\x1a&.auth_center.v1.auth.RefreshTokenReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/auth/refresh-tokenB6Z4iwut-auth_center/api/gen/go/auth_center/v1/auth;authb\x06proto3"
 
 var (
 	file_v1_auth_auth_proto_rawDescOnce sync.Once

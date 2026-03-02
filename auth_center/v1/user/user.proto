@@ -21,7 +21,7 @@ service User {
       get: "/user/delete-account"
     };
   }
-  rpc getProfile (google.protobuf.Empty) returns (GetProfileReply) {
+  rpc getProfile (GetProfileRequest) returns (GetProfileReply) {
     option (google.api.http) = {
       get: "/user/profile"
     };
@@ -46,6 +46,20 @@ service User {
       body: "*"
     };
   }
+
+  rpc setUserDeveloperId (SetUserDeveloperIdRequest) returns (SetUserDeveloperIdReply) {
+    option (google.api.http) = {
+      post: "/user/set-developer-id"
+      body: "*"
+    };
+  }
+
+  rpc revokeAuthorization (RevokeAuthorizationRequest) returns (RevokeAuthorizationReply) {
+    option (google.api.http) = {
+      post: "/user/revoke_authorization"
+      body: "*"
+    };
+  }
 }
 
 message UpdatePasswordRequest {
@@ -65,6 +79,10 @@ message DeleteAccountReply {
   string traceId = 3;
 }
 
+message GetProfileRequest {
+  optional string userId = 1;
+  repeated string keys = 2;
+}
 message GetProfileReply {
   message GetProfileReplyData {
     string userId = 1;
@@ -116,4 +134,24 @@ message UpdateUserConsentReply {
   int32 code = 1;
   string message = 2;
   string traceId = 3;
+}
+
+message SetUserDeveloperIdRequest {
+  string developerId = 1;
+}
+
+message SetUserDeveloperIdReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message RevokeAuthorizationRequest {
+  string clientId = 1;
+}
+
+message RevokeAuthorizationReply {
+  int32 code = 1;
+  string message = 2;
+  optional string trace_id = 3;
 }

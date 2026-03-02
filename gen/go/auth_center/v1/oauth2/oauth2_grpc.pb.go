@@ -20,11 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OAuth2_Authorize_FullMethodName           = "/auth_center.v1.oauth2.OAuth2/authorize"
-	OAuth2_GetToken_FullMethodName            = "/auth_center.v1.oauth2.OAuth2/getToken"
-	OAuth2_RevokeAuthorization_FullMethodName = "/auth_center.v1.oauth2.OAuth2/revokeAuthorization"
-	OAuth2_GetUserProfile_FullMethodName      = "/auth_center.v1.oauth2.OAuth2/getUserProfile"
-	OAuth2_SetUserStorage_FullMethodName      = "/auth_center.v1.oauth2.OAuth2/setUserStorage"
+	OAuth2_Authorize_FullMethodName      = "/auth_center.v1.oauth2.OAuth2/authorize"
+	OAuth2_GetToken_FullMethodName       = "/auth_center.v1.oauth2.OAuth2/getToken"
+	OAuth2_GetUserProfile_FullMethodName = "/auth_center.v1.oauth2.OAuth2/getUserProfile"
+	OAuth2_SetUserStorage_FullMethodName = "/auth_center.v1.oauth2.OAuth2/setUserStorage"
 )
 
 // OAuth2Client is the client API for OAuth2 service.
@@ -33,7 +32,6 @@ const (
 type OAuth2Client interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeReply, error)
 	GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*GetTokenReply, error)
-	RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...grpc.CallOption) (*RevokeAuthorizationReply, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileReply, error)
 	SetUserStorage(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*SetUserStorageReply, error)
 }
@@ -66,16 +64,6 @@ func (c *oAuth2Client) GetToken(ctx context.Context, in *GetTokenRequest, opts .
 	return out, nil
 }
 
-func (c *oAuth2Client) RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...grpc.CallOption) (*RevokeAuthorizationReply, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RevokeAuthorizationReply)
-	err := c.cc.Invoke(ctx, OAuth2_RevokeAuthorization_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *oAuth2Client) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserProfileReply)
@@ -102,7 +90,6 @@ func (c *oAuth2Client) SetUserStorage(ctx context.Context, in *structpb.Struct, 
 type OAuth2Server interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeReply, error)
 	GetToken(context.Context, *GetTokenRequest) (*GetTokenReply, error)
-	RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileReply, error)
 	SetUserStorage(context.Context, *structpb.Struct) (*SetUserStorageReply, error)
 	mustEmbedUnimplementedOAuth2Server()
@@ -120,9 +107,6 @@ func (UnimplementedOAuth2Server) Authorize(context.Context, *AuthorizeRequest) (
 }
 func (UnimplementedOAuth2Server) GetToken(context.Context, *GetTokenRequest) (*GetTokenReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetToken not implemented")
-}
-func (UnimplementedOAuth2Server) RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error) {
-	return nil, status.Error(codes.Unimplemented, "method RevokeAuthorization not implemented")
 }
 func (UnimplementedOAuth2Server) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
@@ -187,24 +171,6 @@ func _OAuth2_GetToken_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OAuth2_RevokeAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RevokeAuthorizationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OAuth2Server).RevokeAuthorization(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OAuth2_RevokeAuthorization_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OAuth2Server).RevokeAuthorization(ctx, req.(*RevokeAuthorizationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _OAuth2_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserProfileRequest)
 	if err := dec(in); err != nil {
@@ -255,10 +221,6 @@ var OAuth2_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getToken",
 			Handler:    _OAuth2_GetToken_Handler,
-		},
-		{
-			MethodName: "revokeAuthorization",
-			Handler:    _OAuth2_RevokeAuthorization_Handler,
 		},
 		{
 			MethodName: "getUserProfile",

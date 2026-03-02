@@ -19,12 +19,6 @@ service OAuth2 {
       body: "*"
     };
   }
-  rpc revokeAuthorization (RevokeAuthorizationRequest) returns (RevokeAuthorizationReply) {
-    option (google.api.http) = {
-      post: "/oauth2/revoke_authorization"
-      body: "*"
-    };
-  }
   rpc getUserProfile (GetUserProfileRequest ) returns (GetUserProfileReply) {
     option (google.api.http) = {
       post: "/oauth2/user_profile"
@@ -78,16 +72,6 @@ message GetTokenReply {
   optional string scope = 6;
   optional string error = 7;
   optional string error_description = 8;
-}
-
-message RevokeAuthorizationRequest {
-  string clientId = 1;
-}
-
-message RevokeAuthorizationReply {
-  int32 code = 1;
-  string message = 2;
-  optional string trace_id = 3;
 }
 
 message GetUserProfileRequest {

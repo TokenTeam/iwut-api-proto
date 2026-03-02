@@ -21,12 +21,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_UpdatePassword_FullMethodName    = "/auth_center.v1.user.User/updatePassword"
-	User_DeleteAccount_FullMethodName     = "/auth_center.v1.user.User/deleteAccount"
-	User_GetProfile_FullMethodName        = "/auth_center.v1.user.User/getProfile"
-	User_UpdateProfile_FullMethodName     = "/auth_center.v1.user.User/updateProfile"
-	User_GetProfileKeys_FullMethodName    = "/auth_center.v1.user.User/getProfileKeys"
-	User_UpdateUserConsent_FullMethodName = "/auth_center.v1.user.User/updateUserConsent"
+	User_UpdatePassword_FullMethodName      = "/auth_center.v1.user.User/updatePassword"
+	User_DeleteAccount_FullMethodName       = "/auth_center.v1.user.User/deleteAccount"
+	User_GetProfile_FullMethodName          = "/auth_center.v1.user.User/getProfile"
+	User_UpdateProfile_FullMethodName       = "/auth_center.v1.user.User/updateProfile"
+	User_GetProfileKeys_FullMethodName      = "/auth_center.v1.user.User/getProfileKeys"
+	User_UpdateUserConsent_FullMethodName   = "/auth_center.v1.user.User/updateUserConsent"
+	User_SetUserDeveloperId_FullMethodName  = "/auth_center.v1.user.User/setUserDeveloperId"
+	User_RevokeAuthorization_FullMethodName = "/auth_center.v1.user.User/revokeAuthorization"
 )
 
 // UserClient is the client API for User service.
@@ -35,10 +37,12 @@ const (
 type UserClient interface {
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordReply, error)
 	DeleteAccount(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*DeleteAccountReply, error)
-	GetProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileReply, error)
+	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileReply, error)
 	UpdateProfile(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*UpdateProfileReply, error)
 	GetProfileKeys(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileKeysReply, error)
 	UpdateUserConsent(ctx context.Context, in *UpdateUserConsentRequest, opts ...grpc.CallOption) (*UpdateUserConsentReply, error)
+	SetUserDeveloperId(ctx context.Context, in *SetUserDeveloperIdRequest, opts ...grpc.CallOption) (*SetUserDeveloperIdReply, error)
+	RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...grpc.CallOption) (*RevokeAuthorizationReply, error)
 }
 
 type userClient struct {
@@ -69,7 +73,7 @@ func (c *userClient) DeleteAccount(ctx context.Context, in *emptypb.Empty, opts 
 	return out, nil
 }
 
-func (c *userClient) GetProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileReply, error) {
+func (c *userClient) GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetProfileReply)
 	err := c.cc.Invoke(ctx, User_GetProfile_FullMethodName, in, out, cOpts...)
@@ -109,16 +113,38 @@ func (c *userClient) UpdateUserConsent(ctx context.Context, in *UpdateUserConsen
 	return out, nil
 }
 
+func (c *userClient) SetUserDeveloperId(ctx context.Context, in *SetUserDeveloperIdRequest, opts ...grpc.CallOption) (*SetUserDeveloperIdReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserDeveloperIdReply)
+	err := c.cc.Invoke(ctx, User_SetUserDeveloperId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...grpc.CallOption) (*RevokeAuthorizationReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RevokeAuthorizationReply)
+	err := c.cc.Invoke(ctx, User_RevokeAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
 type UserServer interface {
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordReply, error)
 	DeleteAccount(context.Context, *emptypb.Empty) (*DeleteAccountReply, error)
-	GetProfile(context.Context, *emptypb.Empty) (*GetProfileReply, error)
+	GetProfile(context.Context, *GetProfileRequest) (*GetProfileReply, error)
 	UpdateProfile(context.Context, *structpb.Struct) (*UpdateProfileReply, error)
 	GetProfileKeys(context.Context, *emptypb.Empty) (*GetProfileKeysReply, error)
 	UpdateUserConsent(context.Context, *UpdateUserConsentRequest) (*UpdateUserConsentReply, error)
+	SetUserDeveloperId(context.Context, *SetUserDeveloperIdRequest) (*SetUserDeveloperIdReply, error)
+	RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -135,7 +161,7 @@ func (UnimplementedUserServer) UpdatePassword(context.Context, *UpdatePasswordRe
 func (UnimplementedUserServer) DeleteAccount(context.Context, *emptypb.Empty) (*DeleteAccountReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAccount not implemented")
 }
-func (UnimplementedUserServer) GetProfile(context.Context, *emptypb.Empty) (*GetProfileReply, error) {
+func (UnimplementedUserServer) GetProfile(context.Context, *GetProfileRequest) (*GetProfileReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProfile not implemented")
 }
 func (UnimplementedUserServer) UpdateProfile(context.Context, *structpb.Struct) (*UpdateProfileReply, error) {
@@ -146,6 +172,12 @@ func (UnimplementedUserServer) GetProfileKeys(context.Context, *emptypb.Empty) (
 }
 func (UnimplementedUserServer) UpdateUserConsent(context.Context, *UpdateUserConsentRequest) (*UpdateUserConsentReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateUserConsent not implemented")
+}
+func (UnimplementedUserServer) SetUserDeveloperId(context.Context, *SetUserDeveloperIdRequest) (*SetUserDeveloperIdReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserDeveloperId not implemented")
+}
+func (UnimplementedUserServer) RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method RevokeAuthorization not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -205,7 +237,7 @@ func _User_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _User_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -217,7 +249,7 @@ func _User_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: User_GetProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetProfile(ctx, req.(*emptypb.Empty))
+		return srv.(UserServer).GetProfile(ctx, req.(*GetProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -276,6 +308,42 @@ func _User_UpdateUserConsent_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SetUserDeveloperId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserDeveloperIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetUserDeveloperId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetUserDeveloperId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetUserDeveloperId(ctx, req.(*SetUserDeveloperIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_RevokeAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).RevokeAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_RevokeAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).RevokeAuthorization(ctx, req.(*RevokeAuthorizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -306,6 +374,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateUserConsent",
 			Handler:    _User_UpdateUserConsent_Handler,
+		},
+		{
+			MethodName: "setUserDeveloperId",
+			Handler:    _User_SetUserDeveloperId_Handler,
+		},
+		{
+			MethodName: "revokeAuthorization",
+			Handler:    _User_RevokeAuthorization_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
