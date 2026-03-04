@@ -12,6 +12,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -787,8 +788,8 @@ type GetProfileReply_GetProfileReplyData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,3,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt     int64                  `protobuf:"varint,4,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	Attrs         map[string]string      `protobuf:"bytes,5,rep,name=attrs,proto3" json:"attrs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -838,18 +839,18 @@ func (x *GetProfileReply_GetProfileReplyData) GetEmail() string {
 	return ""
 }
 
-func (x *GetProfileReply_GetProfileReplyData) GetCreatedAt() int64 {
+func (x *GetProfileReply_GetProfileReplyData) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *GetProfileReply_GetProfileReplyData) GetUpdatedAt() int64 {
+func (x *GetProfileReply_GetProfileReplyData) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return 0
+	return nil
 }
 
 func (x *GetProfileReply_GetProfileReplyData) GetAttrs() map[string]string {
@@ -915,7 +916,7 @@ var File_v1_user_user_proto protoreflect.FileDescriptor
 
 const file_v1_user_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12v1/user/user.proto\x12\x13auth_center.v1.user\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1bgoogle/protobuf/empty.proto\"[\n" +
+	"\x12v1/user/user.proto\x12\x13auth_center.v1.user\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"[\n" +
 	"\x15UpdatePasswordRequest\x12 \n" +
 	"\voldPassword\x18\x01 \x01(\tR\voldPassword\x12 \n" +
 	"\vnewPassword\x18\x02 \x01(\tR\vnewPassword\"]\n" +
@@ -930,17 +931,17 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\x11GetProfileRequest\x12\x1b\n" +
 	"\x06userId\x18\x01 \x01(\tH\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04keys\x18\x02 \x03(\tR\x04keysB\t\n" +
-	"\a_userId\"\xcc\x03\n" +
+	"\a_userId\"\x84\x04\n" +
 	"\x0fGetProfileReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12Q\n" +
 	"\x04data\x18\x03 \x01(\v28.auth_center.v1.user.GetProfileReply.GetProfileReplyDataH\x00R\x04data\x88\x01\x01\x12\x18\n" +
-	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\x94\x02\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xcc\x02\n" +
 	"\x13GetProfileReplyData\x12\x16\n" +
 	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1c\n" +
-	"\tcreatedAt\x18\x03 \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\x04 \x01(\x03R\tupdatedAt\x12Y\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x128\n" +
+	"\tcreatedAt\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
+	"\tupdatedAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12Y\n" +
 	"\x05attrs\x18\x05 \x03(\v2C.auth_center.v1.user.GetProfileReply.GetProfileReplyData.AttrsEntryR\x05attrs\x1a8\n" +
 	"\n" +
 	"AttrsEntry\x12\x10\n" +
@@ -1022,34 +1023,37 @@ var file_v1_user_user_proto_goTypes = []any{
 	(*GetProfileReply_GetProfileReplyData)(nil), // 13: auth_center.v1.user.GetProfileReply.GetProfileReplyData
 	nil, // 14: auth_center.v1.user.GetProfileReply.GetProfileReplyData.AttrsEntry
 	(*GetProfileKeysReply_GetProfileKeysReplyData)(nil), // 15: auth_center.v1.user.GetProfileKeysReply.GetProfileKeysReplyData
-	(*emptypb.Empty)(nil),                               // 16: google.protobuf.Empty
-	(*structpb.Struct)(nil),                             // 17: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                       // 16: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                               // 17: google.protobuf.Empty
+	(*structpb.Struct)(nil),                             // 18: google.protobuf.Struct
 }
 var file_v1_user_user_proto_depIdxs = []int32{
 	13, // 0: auth_center.v1.user.GetProfileReply.data:type_name -> auth_center.v1.user.GetProfileReply.GetProfileReplyData
 	15, // 1: auth_center.v1.user.GetProfileKeysReply.data:type_name -> auth_center.v1.user.GetProfileKeysReply.GetProfileKeysReplyData
-	14, // 2: auth_center.v1.user.GetProfileReply.GetProfileReplyData.attrs:type_name -> auth_center.v1.user.GetProfileReply.GetProfileReplyData.AttrsEntry
-	0,  // 3: auth_center.v1.user.User.updatePassword:input_type -> auth_center.v1.user.UpdatePasswordRequest
-	16, // 4: auth_center.v1.user.User.deleteAccount:input_type -> google.protobuf.Empty
-	3,  // 5: auth_center.v1.user.User.getProfile:input_type -> auth_center.v1.user.GetProfileRequest
-	17, // 6: auth_center.v1.user.User.updateProfile:input_type -> google.protobuf.Struct
-	16, // 7: auth_center.v1.user.User.getProfileKeys:input_type -> google.protobuf.Empty
-	7,  // 8: auth_center.v1.user.User.updateUserConsent:input_type -> auth_center.v1.user.UpdateUserConsentRequest
-	9,  // 9: auth_center.v1.user.User.setUserDeveloperId:input_type -> auth_center.v1.user.SetUserDeveloperIdRequest
-	11, // 10: auth_center.v1.user.User.revokeAuthorization:input_type -> auth_center.v1.user.RevokeAuthorizationRequest
-	1,  // 11: auth_center.v1.user.User.updatePassword:output_type -> auth_center.v1.user.UpdatePasswordReply
-	2,  // 12: auth_center.v1.user.User.deleteAccount:output_type -> auth_center.v1.user.DeleteAccountReply
-	4,  // 13: auth_center.v1.user.User.getProfile:output_type -> auth_center.v1.user.GetProfileReply
-	5,  // 14: auth_center.v1.user.User.updateProfile:output_type -> auth_center.v1.user.UpdateProfileReply
-	6,  // 15: auth_center.v1.user.User.getProfileKeys:output_type -> auth_center.v1.user.GetProfileKeysReply
-	8,  // 16: auth_center.v1.user.User.updateUserConsent:output_type -> auth_center.v1.user.UpdateUserConsentReply
-	10, // 17: auth_center.v1.user.User.setUserDeveloperId:output_type -> auth_center.v1.user.SetUserDeveloperIdReply
-	12, // 18: auth_center.v1.user.User.revokeAuthorization:output_type -> auth_center.v1.user.RevokeAuthorizationReply
-	11, // [11:19] is the sub-list for method output_type
-	3,  // [3:11] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	16, // 2: auth_center.v1.user.GetProfileReply.GetProfileReplyData.createdAt:type_name -> google.protobuf.Timestamp
+	16, // 3: auth_center.v1.user.GetProfileReply.GetProfileReplyData.updatedAt:type_name -> google.protobuf.Timestamp
+	14, // 4: auth_center.v1.user.GetProfileReply.GetProfileReplyData.attrs:type_name -> auth_center.v1.user.GetProfileReply.GetProfileReplyData.AttrsEntry
+	0,  // 5: auth_center.v1.user.User.updatePassword:input_type -> auth_center.v1.user.UpdatePasswordRequest
+	17, // 6: auth_center.v1.user.User.deleteAccount:input_type -> google.protobuf.Empty
+	3,  // 7: auth_center.v1.user.User.getProfile:input_type -> auth_center.v1.user.GetProfileRequest
+	18, // 8: auth_center.v1.user.User.updateProfile:input_type -> google.protobuf.Struct
+	17, // 9: auth_center.v1.user.User.getProfileKeys:input_type -> google.protobuf.Empty
+	7,  // 10: auth_center.v1.user.User.updateUserConsent:input_type -> auth_center.v1.user.UpdateUserConsentRequest
+	9,  // 11: auth_center.v1.user.User.setUserDeveloperId:input_type -> auth_center.v1.user.SetUserDeveloperIdRequest
+	11, // 12: auth_center.v1.user.User.revokeAuthorization:input_type -> auth_center.v1.user.RevokeAuthorizationRequest
+	1,  // 13: auth_center.v1.user.User.updatePassword:output_type -> auth_center.v1.user.UpdatePasswordReply
+	2,  // 14: auth_center.v1.user.User.deleteAccount:output_type -> auth_center.v1.user.DeleteAccountReply
+	4,  // 15: auth_center.v1.user.User.getProfile:output_type -> auth_center.v1.user.GetProfileReply
+	5,  // 16: auth_center.v1.user.User.updateProfile:output_type -> auth_center.v1.user.UpdateProfileReply
+	6,  // 17: auth_center.v1.user.User.getProfileKeys:output_type -> auth_center.v1.user.GetProfileKeysReply
+	8,  // 18: auth_center.v1.user.User.updateUserConsent:output_type -> auth_center.v1.user.UpdateUserConsentReply
+	10, // 19: auth_center.v1.user.User.setUserDeveloperId:output_type -> auth_center.v1.user.SetUserDeveloperIdReply
+	12, // 20: auth_center.v1.user.User.revokeAuthorization:output_type -> auth_center.v1.user.RevokeAuthorizationReply
+	13, // [13:21] is the sub-list for method output_type
+	5,  // [5:13] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_v1_user_user_proto_init() }
