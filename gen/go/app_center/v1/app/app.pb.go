@@ -992,7 +992,9 @@ type GetAppVersionInfoReply_ApplicationVersion struct {
 	Description     string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
 	Icon            string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
-	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"` // 这里没有返回 tester, 大且没用
+	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	DeletedAt       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=deletedAt,proto3" json:"deletedAt,omitempty"` // 这里没有返回 tester, 大且没用
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1095,6 +1097,20 @@ func (x *GetAppVersionInfoReply_ApplicationVersion) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
 }
 
 type GetApplicationInfoReply_Application struct {
@@ -1495,12 +1511,12 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\rcollaborators\x18\x0e \x03(\tR\rcollaborators\"P\n" +
 	"\x18GetAppVersionInfoRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\x05R\aversion\"\xff\x03\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\"\xf3\x04\n" +
 	"\x16GetAppVersionInfoReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12U\n" +
 	"\x04data\x18\x03 \x01(\v2<.app_center.v1.app.GetAppVersionInfoReply.ApplicationVersionH\x00R\x04data\x88\x01\x01\x12\x18\n" +
-	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xbc\x02\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xb0\x03\n" +
 	"\x12ApplicationVersion\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
 	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersion\x12\x18\n" +
@@ -1514,7 +1530,9 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
 	"\x04icon\x18\t \x01(\tR\x04icon\x12\x16\n" +
 	"\x06status\x18\n" +
-	" \x01(\tR\x06statusB\a\n" +
+	" \x01(\tR\x06status\x128\n" +
+	"\tcreatedAt\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
+	"\tdeletedAt\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAtB\a\n" +
 	"\x05_data\"7\n" +
 	"\x19GetApplicationInfoRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\"\xf8\x05\n" +
@@ -1653,28 +1671,30 @@ var file_v1_app_app_proto_depIdxs = []int32{
 	17, // 4: app_center.v1.app.CreateAppVersionReply.data:type_name -> app_center.v1.app.CreateAppVersionReply.CreateAppVersionReplyData
 	18, // 5: app_center.v1.app.UpdateAppRuleRequest.rule:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
 	19, // 6: app_center.v1.app.GetAppListReply.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
-	19, // 7: app_center.v1.app.GetApplicationInfoReply.Application.createdAt:type_name -> google.protobuf.Timestamp
-	19, // 8: app_center.v1.app.GetApplicationInfoReply.Application.deletedAt:type_name -> google.protobuf.Timestamp
-	18, // 9: app_center.v1.app.UpdateAppRuleRequest.Rule.rules:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
-	3,  // 10: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
-	1,  // 11: app_center.v1.app.App.getAppVersionInfo:input_type -> app_center.v1.app.GetAppVersionInfoRequest
-	20, // 12: app_center.v1.app.App.getAppList:input_type -> google.protobuf.Empty
-	5,  // 13: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
-	7,  // 14: app_center.v1.app.App.createAppVersion:input_type -> app_center.v1.app.CreateAppVersionRequest
-	9,  // 15: app_center.v1.app.App.updateAppRule:input_type -> app_center.v1.app.UpdateAppRuleRequest
-	11, // 16: app_center.v1.app.App.updateAppRedirectUri:input_type -> app_center.v1.app.UpdateAppRedirectUriRequest
-	4,  // 17: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
-	2,  // 18: app_center.v1.app.App.getAppVersionInfo:output_type -> app_center.v1.app.GetAppVersionInfoReply
-	0,  // 19: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
-	6,  // 20: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
-	8,  // 21: app_center.v1.app.App.createAppVersion:output_type -> app_center.v1.app.CreateAppVersionReply
-	10, // 22: app_center.v1.app.App.updateAppRule:output_type -> app_center.v1.app.UpdateAppRuleReply
-	12, // 23: app_center.v1.app.App.updateAppRedirectUri:output_type -> app_center.v1.app.UpdateAppRedirectUriReply
-	17, // [17:24] is the sub-list for method output_type
-	10, // [10:17] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	19, // 7: app_center.v1.app.GetAppVersionInfoReply.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
+	19, // 8: app_center.v1.app.GetAppVersionInfoReply.ApplicationVersion.deletedAt:type_name -> google.protobuf.Timestamp
+	19, // 9: app_center.v1.app.GetApplicationInfoReply.Application.createdAt:type_name -> google.protobuf.Timestamp
+	19, // 10: app_center.v1.app.GetApplicationInfoReply.Application.deletedAt:type_name -> google.protobuf.Timestamp
+	18, // 11: app_center.v1.app.UpdateAppRuleRequest.Rule.rules:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
+	3,  // 12: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
+	1,  // 13: app_center.v1.app.App.getAppVersionInfo:input_type -> app_center.v1.app.GetAppVersionInfoRequest
+	20, // 14: app_center.v1.app.App.getAppList:input_type -> google.protobuf.Empty
+	5,  // 15: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
+	7,  // 16: app_center.v1.app.App.createAppVersion:input_type -> app_center.v1.app.CreateAppVersionRequest
+	9,  // 17: app_center.v1.app.App.updateAppRule:input_type -> app_center.v1.app.UpdateAppRuleRequest
+	11, // 18: app_center.v1.app.App.updateAppRedirectUri:input_type -> app_center.v1.app.UpdateAppRedirectUriRequest
+	4,  // 19: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
+	2,  // 20: app_center.v1.app.App.getAppVersionInfo:output_type -> app_center.v1.app.GetAppVersionInfoReply
+	0,  // 21: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
+	6,  // 22: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
+	8,  // 23: app_center.v1.app.App.createAppVersion:output_type -> app_center.v1.app.CreateAppVersionReply
+	10, // 24: app_center.v1.app.App.updateAppRule:output_type -> app_center.v1.app.UpdateAppRuleReply
+	12, // 25: app_center.v1.app.App.updateAppRedirectUri:output_type -> app_center.v1.app.UpdateAppRedirectUriReply
+	19, // [19:26] is the sub-list for method output_type
+	12, // [12:19] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_v1_app_app_proto_init() }

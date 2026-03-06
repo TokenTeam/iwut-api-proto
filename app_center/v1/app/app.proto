@@ -94,6 +94,8 @@ message GetAppVersionInfoReply {
     string url = 8;
     string icon = 9;
     string status = 10;
+    google.protobuf.Timestamp createdAt = 11;
+    google.protobuf.Timestamp deletedAt = 12;
     // 这里没有返回 tester, 大且没用
   }
   int32 code = 1;
