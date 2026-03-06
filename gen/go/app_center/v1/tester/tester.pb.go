@@ -26,7 +26,7 @@ type GetTestLinkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
 	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
-	ExpireTime    uint64                 `protobuf:"varint,3,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	ExpireTime    uint64                 `protobuf:"varint,3,opt,name=expireTime,proto3" json:"expireTime,omitempty"` // 秒
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

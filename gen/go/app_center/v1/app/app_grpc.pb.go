@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,10 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	App_GetApplicationInfo_FullMethodName = "/app_center.v1.app.App/getApplicationInfo"
-	App_GetAppList_FullMethodName         = "/app_center.v1.app.App/getAppList"
-	App_CreateApp_FullMethodName          = "/app_center.v1.app.App/createApp"
-	App_CreateAppVersion_FullMethodName   = "/app_center.v1.app.App/createAppVersion"
+	App_GetApplicationInfo_FullMethodName   = "/app_center.v1.app.App/getApplicationInfo"
+	App_GetAppVersionInfo_FullMethodName    = "/app_center.v1.app.App/getAppVersionInfo"
+	App_GetAppList_FullMethodName           = "/app_center.v1.app.App/getAppList"
+	App_CreateApp_FullMethodName            = "/app_center.v1.app.App/createApp"
+	App_CreateAppVersion_FullMethodName     = "/app_center.v1.app.App/createAppVersion"
+	App_UpdateAppRule_FullMethodName        = "/app_center.v1.app.App/updateAppRule"
+	App_UpdateAppRedirectUri_FullMethodName = "/app_center.v1.app.App/updateAppRedirectUri"
 )
 
 // AppClient is the client API for App service.
@@ -30,9 +34,12 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AppClient interface {
 	GetApplicationInfo(ctx context.Context, in *GetApplicationInfoRequest, opts ...grpc.CallOption) (*GetApplicationInfoReply, error)
-	GetAppList(ctx context.Context, in *GetAppListRequest, opts ...grpc.CallOption) (*GetAppListReply, error)
+	GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...grpc.CallOption) (*GetAppVersionInfoReply, error)
+	GetAppList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAppListReply, error)
 	CreateApp(ctx context.Context, in *CreateAppRequest, opts ...grpc.CallOption) (*CreateAppReply, error)
 	CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error)
+	UpdateAppRule(ctx context.Context, in *UpdateAppRuleRequest, opts ...grpc.CallOption) (*UpdateAppRuleReply, error)
+	UpdateAppRedirectUri(ctx context.Context, in *UpdateAppRedirectUriRequest, opts ...grpc.CallOption) (*UpdateAppRedirectUriReply, error)
 }
 
 type appClient struct {
@@ -53,7 +60,17 @@ func (c *appClient) GetApplicationInfo(ctx context.Context, in *GetApplicationIn
 	return out, nil
 }
 
-func (c *appClient) GetAppList(ctx context.Context, in *GetAppListRequest, opts ...grpc.CallOption) (*GetAppListReply, error) {
+func (c *appClient) GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...grpc.CallOption) (*GetAppVersionInfoReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppVersionInfoReply)
+	err := c.cc.Invoke(ctx, App_GetAppVersionInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) GetAppList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAppListReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAppListReply)
 	err := c.cc.Invoke(ctx, App_GetAppList_FullMethodName, in, out, cOpts...)
@@ -83,14 +100,37 @@ func (c *appClient) CreateAppVersion(ctx context.Context, in *CreateAppVersionRe
 	return out, nil
 }
 
+func (c *appClient) UpdateAppRule(ctx context.Context, in *UpdateAppRuleRequest, opts ...grpc.CallOption) (*UpdateAppRuleReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppRuleReply)
+	err := c.cc.Invoke(ctx, App_UpdateAppRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) UpdateAppRedirectUri(ctx context.Context, in *UpdateAppRedirectUriRequest, opts ...grpc.CallOption) (*UpdateAppRedirectUriReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppRedirectUriReply)
+	err := c.cc.Invoke(ctx, App_UpdateAppRedirectUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppServer is the server API for App service.
 // All implementations must embed UnimplementedAppServer
 // for forward compatibility.
 type AppServer interface {
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
-	GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error)
+	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
+	GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error)
 	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
+	UpdateAppRule(context.Context, *UpdateAppRuleRequest) (*UpdateAppRuleReply, error)
+	UpdateAppRedirectUri(context.Context, *UpdateAppRedirectUriRequest) (*UpdateAppRedirectUriReply, error)
 	mustEmbedUnimplementedAppServer()
 }
 
@@ -104,7 +144,10 @@ type UnimplementedAppServer struct{}
 func (UnimplementedAppServer) GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetApplicationInfo not implemented")
 }
-func (UnimplementedAppServer) GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error) {
+func (UnimplementedAppServer) GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppVersionInfo not implemented")
+}
+func (UnimplementedAppServer) GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppList not implemented")
 }
 func (UnimplementedAppServer) CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error) {
@@ -112,6 +155,12 @@ func (UnimplementedAppServer) CreateApp(context.Context, *CreateAppRequest) (*Cr
 }
 func (UnimplementedAppServer) CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateAppVersion not implemented")
+}
+func (UnimplementedAppServer) UpdateAppRule(context.Context, *UpdateAppRuleRequest) (*UpdateAppRuleReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppRule not implemented")
+}
+func (UnimplementedAppServer) UpdateAppRedirectUri(context.Context, *UpdateAppRedirectUriRequest) (*UpdateAppRedirectUriReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppRedirectUri not implemented")
 }
 func (UnimplementedAppServer) mustEmbedUnimplementedAppServer() {}
 func (UnimplementedAppServer) testEmbeddedByValue()             {}
@@ -152,8 +201,26 @@ func _App_GetApplicationInfo_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_GetAppVersionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppVersionInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).GetAppVersionInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_GetAppVersionInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).GetAppVersionInfo(ctx, req.(*GetAppVersionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _App_GetAppList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAppListRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -165,7 +232,7 @@ func _App_GetAppList_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: App_GetAppList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppServer).GetAppList(ctx, req.(*GetAppListRequest))
+		return srv.(AppServer).GetAppList(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -206,6 +273,42 @@ func _App_CreateAppVersion_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_UpdateAppRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateAppRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_UpdateAppRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateAppRule(ctx, req.(*UpdateAppRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_UpdateAppRedirectUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppRedirectUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateAppRedirectUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_UpdateAppRedirectUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateAppRedirectUri(ctx, req.(*UpdateAppRedirectUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // App_ServiceDesc is the grpc.ServiceDesc for App service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -218,6 +321,10 @@ var App_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _App_GetApplicationInfo_Handler,
 		},
 		{
+			MethodName: "getAppVersionInfo",
+			Handler:    _App_GetAppVersionInfo_Handler,
+		},
+		{
 			MethodName: "getAppList",
 			Handler:    _App_GetAppList_Handler,
 		},
@@ -228,6 +335,14 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "createAppVersion",
 			Handler:    _App_CreateAppVersion_Handler,
+		},
+		{
+			MethodName: "updateAppRule",
+			Handler:    _App_UpdateAppRule_Handler,
+		},
+		{
+			MethodName: "updateAppRedirectUri",
+			Handler:    _App_UpdateAppRedirectUri_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

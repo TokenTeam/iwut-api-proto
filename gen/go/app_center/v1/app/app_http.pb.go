@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -22,21 +23,30 @@ const _ = http.SupportPackageIsVersion1
 const OperationAppcreateApp = "/app_center.v1.app.App/createApp"
 const OperationAppcreateAppVersion = "/app_center.v1.app.App/createAppVersion"
 const OperationAppgetAppList = "/app_center.v1.app.App/getAppList"
+const OperationAppgetAppVersionInfo = "/app_center.v1.app.App/getAppVersionInfo"
 const OperationAppgetApplicationInfo = "/app_center.v1.app.App/getApplicationInfo"
+const OperationAppupdateAppRedirectUri = "/app_center.v1.app.App/updateAppRedirectUri"
+const OperationAppupdateAppRule = "/app_center.v1.app.App/updateAppRule"
 
 type AppHTTPServer interface {
 	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
-	GetAppList(context.Context, *GetAppListRequest) (*GetAppListReply, error)
+	GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error)
+	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
+	UpdateAppRedirectUri(context.Context, *UpdateAppRedirectUriRequest) (*UpdateAppRedirectUriReply, error)
+	UpdateAppRule(context.Context, *UpdateAppRuleRequest) (*UpdateAppRuleReply, error)
 }
 
 func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r := s.Route("/")
 	r.GET("/app/info", _App_GetApplicationInfo0_HTTP_Handler(srv))
+	r.GET("/app/version-info", _App_GetAppVersionInfo0_HTTP_Handler(srv))
 	r.GET("/app/list", _App_GetAppList0_HTTP_Handler(srv))
 	r.POST("/app/create", _App_CreateApp0_HTTP_Handler(srv))
 	r.POST("/app/create-version", _App_CreateAppVersion0_HTTP_Handler(srv))
+	r.POST("/app/update-rule", _App_UpdateAppRule0_HTTP_Handler(srv))
+	r.POST("/app/update-redirect-uri", _App_UpdateAppRedirectUri0_HTTP_Handler(srv))
 }
 
 func _App_GetApplicationInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
@@ -58,15 +68,34 @@ func _App_GetApplicationInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Cont
 	}
 }
 
+func _App_GetAppVersionInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAppVersionInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppgetAppVersionInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAppVersionInfo(ctx, req.(*GetAppVersionInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetAppVersionInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _App_GetAppList0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetAppListRequest
+		var in emptypb.Empty
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationAppgetAppList)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAppList(ctx, req.(*GetAppListRequest))
+			return srv.GetAppList(ctx, req.(*emptypb.Empty))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -121,11 +150,58 @@ func _App_CreateAppVersion0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Contex
 	}
 }
 
+func _App_UpdateAppRule0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppRuleRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppupdateAppRule)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppRule(ctx, req.(*UpdateAppRuleRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppRuleReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_UpdateAppRedirectUri0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppRedirectUriRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppupdateAppRedirectUri)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppRedirectUri(ctx, req.(*UpdateAppRedirectUriRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppRedirectUriReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AppHTTPClient interface {
 	CreateApp(ctx context.Context, req *CreateAppRequest, opts ...http.CallOption) (rsp *CreateAppReply, err error)
 	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
-	GetAppList(ctx context.Context, req *GetAppListRequest, opts ...http.CallOption) (rsp *GetAppListReply, err error)
+	GetAppList(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetAppListReply, err error)
+	GetAppVersionInfo(ctx context.Context, req *GetAppVersionInfoRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoReply, err error)
 	GetApplicationInfo(ctx context.Context, req *GetApplicationInfoRequest, opts ...http.CallOption) (rsp *GetApplicationInfoReply, err error)
+	UpdateAppRedirectUri(ctx context.Context, req *UpdateAppRedirectUriRequest, opts ...http.CallOption) (rsp *UpdateAppRedirectUriReply, err error)
+	UpdateAppRule(ctx context.Context, req *UpdateAppRuleRequest, opts ...http.CallOption) (rsp *UpdateAppRuleReply, err error)
 }
 
 type AppHTTPClientImpl struct {
@@ -162,11 +238,24 @@ func (c *AppHTTPClientImpl) CreateAppVersion(ctx context.Context, in *CreateAppV
 	return &out, nil
 }
 
-func (c *AppHTTPClientImpl) GetAppList(ctx context.Context, in *GetAppListRequest, opts ...http.CallOption) (*GetAppListReply, error) {
+func (c *AppHTTPClientImpl) GetAppList(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*GetAppListReply, error) {
 	var out GetAppListReply
 	pattern := "/app/list"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationAppgetAppList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...http.CallOption) (*GetAppVersionInfoReply, error) {
+	var out GetAppVersionInfoReply
+	pattern := "/app/version-info"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAppgetAppVersionInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -182,6 +271,32 @@ func (c *AppHTTPClientImpl) GetApplicationInfo(ctx context.Context, in *GetAppli
 	opts = append(opts, http.Operation(OperationAppgetApplicationInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) UpdateAppRedirectUri(ctx context.Context, in *UpdateAppRedirectUriRequest, opts ...http.CallOption) (*UpdateAppRedirectUriReply, error) {
+	var out UpdateAppRedirectUriReply
+	pattern := "/app/update-redirect-uri"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppupdateAppRedirectUri))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) UpdateAppRule(ctx context.Context, in *UpdateAppRuleRequest, opts ...http.CallOption) (*UpdateAppRuleReply, error) {
+	var out UpdateAppRuleReply
+	pattern := "/app/update-rule"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppupdateAppRule))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

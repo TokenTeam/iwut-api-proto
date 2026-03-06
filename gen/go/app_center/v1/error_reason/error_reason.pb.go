@@ -24,22 +24,24 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_CLIENT_NOT_FOUND        ErrorReason = 0
-	ErrorReason_UNKNOWN_ERROR           ErrorReason = 1
-	ErrorReason_APP_NAME_ALREADY_EXISTS ErrorReason = 2
-	ErrorReason_IMPOSSIBLE_ERROR        ErrorReason = 3
-	ErrorReason_INVALID_JWT             ErrorReason = 4
-	ErrorReason_NOT_A_DEVELOPER         ErrorReason = 5
-	ErrorReason_INVALID_SCOPE           ErrorReason = 6
-	ErrorReason_VERSION_TOO_LONG        ErrorReason = 7
-	ErrorReason_DESCRIPTION_TOO_LONG    ErrorReason = 8
-	ErrorReason_INVALID_URI             ErrorReason = 9
-	ErrorReason_NAME_TOO_LONG           ErrorReason = 10
-	ErrorReason_PERMISSION_DENIED       ErrorReason = 11
-	ErrorReason_BETA_VERSION_NOT_FOUND  ErrorReason = 12
-	ErrorReason_TESTER_LIMIT_EXCEEDED   ErrorReason = 13
-	ErrorReason_INVALID_EXPIRATION      ErrorReason = 14
-	ErrorReason_INVITE_NOT_FOUND        ErrorReason = 15
+	ErrorReason_CLIENT_NOT_FOUND         ErrorReason = 0  // 客户端未找到
+	ErrorReason_UNKNOWN_ERROR            ErrorReason = 1  // 未知错误
+	ErrorReason_APP_NAME_ALREADY_EXISTS  ErrorReason = 2  // 应用名称已存在
+	ErrorReason_IMPOSSIBLE_ERROR         ErrorReason = 3  // 不可能发生的错误
+	ErrorReason_INVALID_JWT              ErrorReason = 4  // 无效的JWT
+	ErrorReason_NOT_A_DEVELOPER          ErrorReason = 5  // 非开发者
+	ErrorReason_INVALID_SCOPE            ErrorReason = 6  // 无效的权限范围
+	ErrorReason_VERSION_TOO_LONG         ErrorReason = 7  // 版本号过长
+	ErrorReason_DESCRIPTION_TOO_LONG     ErrorReason = 8  // 描述信息过长
+	ErrorReason_INVALID_URI              ErrorReason = 9  // 无效的URI
+	ErrorReason_NAME_TOO_LONG            ErrorReason = 10 // 名称过长
+	ErrorReason_PERMISSION_DENIED        ErrorReason = 11 // 权限不足
+	ErrorReason_BETA_VERSION_NOT_FOUND   ErrorReason = 12 // 测试版本未找到
+	ErrorReason_TESTER_LIMIT_EXCEEDED    ErrorReason = 13 // 测试人员数量超过限制
+	ErrorReason_INVALID_EXPIRATION       ErrorReason = 14 // 无效的过期时间
+	ErrorReason_INVITE_NOT_FOUND         ErrorReason = 15 // 邀请链接未找到
+	ErrorReason_CLIENT_VERSION_NOT_FOUNT ErrorReason = 16 // 客户端版本未找到
+	ErrorReason_INVALID_RULE             ErrorReason = 17 // 无效的规则
 )
 
 // Enum value maps for ErrorReason.
@@ -61,24 +63,28 @@ var (
 		13: "TESTER_LIMIT_EXCEEDED",
 		14: "INVALID_EXPIRATION",
 		15: "INVITE_NOT_FOUND",
+		16: "CLIENT_VERSION_NOT_FOUNT",
+		17: "INVALID_RULE",
 	}
 	ErrorReason_value = map[string]int32{
-		"CLIENT_NOT_FOUND":        0,
-		"UNKNOWN_ERROR":           1,
-		"APP_NAME_ALREADY_EXISTS": 2,
-		"IMPOSSIBLE_ERROR":        3,
-		"INVALID_JWT":             4,
-		"NOT_A_DEVELOPER":         5,
-		"INVALID_SCOPE":           6,
-		"VERSION_TOO_LONG":        7,
-		"DESCRIPTION_TOO_LONG":    8,
-		"INVALID_URI":             9,
-		"NAME_TOO_LONG":           10,
-		"PERMISSION_DENIED":       11,
-		"BETA_VERSION_NOT_FOUND":  12,
-		"TESTER_LIMIT_EXCEEDED":   13,
-		"INVALID_EXPIRATION":      14,
-		"INVITE_NOT_FOUND":        15,
+		"CLIENT_NOT_FOUND":         0,
+		"UNKNOWN_ERROR":            1,
+		"APP_NAME_ALREADY_EXISTS":  2,
+		"IMPOSSIBLE_ERROR":         3,
+		"INVALID_JWT":              4,
+		"NOT_A_DEVELOPER":          5,
+		"INVALID_SCOPE":            6,
+		"VERSION_TOO_LONG":         7,
+		"DESCRIPTION_TOO_LONG":     8,
+		"INVALID_URI":              9,
+		"NAME_TOO_LONG":            10,
+		"PERMISSION_DENIED":        11,
+		"BETA_VERSION_NOT_FOUND":   12,
+		"TESTER_LIMIT_EXCEEDED":    13,
+		"INVALID_EXPIRATION":       14,
+		"INVITE_NOT_FOUND":         15,
+		"CLIENT_VERSION_NOT_FOUNT": 16,
+		"INVALID_RULE":             17,
 	}
 )
 
@@ -113,7 +119,7 @@ var File_v1_error_reason_error_reason_proto protoreflect.FileDescriptor
 
 const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*\xf2\x02\n" +
+	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*\xa2\x03\n" +
 	"\vErrorReason\x12\x14\n" +
 	"\x10CLIENT_NOT_FOUND\x10\x00\x12\x11\n" +
 	"\rUNKNOWN_ERROR\x10\x01\x12\x1b\n" +
@@ -131,7 +137,9 @@ const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\x16BETA_VERSION_NOT_FOUND\x10\f\x12\x19\n" +
 	"\x15TESTER_LIMIT_EXCEEDED\x10\r\x12\x16\n" +
 	"\x12INVALID_EXPIRATION\x10\x0e\x12\x14\n" +
-	"\x10INVITE_NOT_FOUND\x10\x0fB&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
+	"\x10INVITE_NOT_FOUND\x10\x0f\x12\x1c\n" +
+	"\x18CLIENT_VERSION_NOT_FOUNT\x10\x10\x12\x10\n" +
+	"\fINVALID_RULE\x10\x11B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
 
 var (
 	file_v1_error_reason_error_reason_proto_rawDescOnce sync.Once

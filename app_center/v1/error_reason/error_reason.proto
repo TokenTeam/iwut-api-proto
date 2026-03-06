@@ -5,20 +5,22 @@ package helloworld.v1;
 option go_package = "iwut-app-center/api/app_center/v1;v1";
 
 enum ErrorReason {
-  CLIENT_NOT_FOUND = 0;
-  UNKNOWN_ERROR = 1;
-  APP_NAME_ALREADY_EXISTS = 2;
-  IMPOSSIBLE_ERROR = 3;
-  INVALID_JWT = 4;
-  NOT_A_DEVELOPER = 5;
-  INVALID_SCOPE = 6;
-  VERSION_TOO_LONG = 7;
-  DESCRIPTION_TOO_LONG = 8;
-  INVALID_URI = 9;
-  NAME_TOO_LONG = 10;
-  PERMISSION_DENIED = 11;
-  BETA_VERSION_NOT_FOUND = 12;
-  TESTER_LIMIT_EXCEEDED = 13;
-  INVALID_EXPIRATION = 14;
-  INVITE_NOT_FOUND = 15;
+  CLIENT_NOT_FOUND = 0;           // 客户端未找到
+  UNKNOWN_ERROR = 1;              // 未知错误
+  APP_NAME_ALREADY_EXISTS = 2;    // 应用名称已存在
+  IMPOSSIBLE_ERROR = 3;           // 不可能发生的错误
+  INVALID_JWT = 4;                // 无效的JWT
+  NOT_A_DEVELOPER = 5;            // 非开发者
+  INVALID_SCOPE = 6;              // 无效的权限范围
+  VERSION_TOO_LONG = 7;           // 版本号过长
+  DESCRIPTION_TOO_LONG = 8;       // 描述信息过长
+  INVALID_URI = 9;                // 无效的URI
+  NAME_TOO_LONG = 10;             // 名称过长
+  PERMISSION_DENIED = 11;         // 权限不足
+  BETA_VERSION_NOT_FOUND = 12;    // 测试版本未找到
+  TESTER_LIMIT_EXCEEDED = 13;     // 测试人员数量超过限制
+  INVALID_EXPIRATION = 14;        // 无效的过期时间
+  INVITE_NOT_FOUND = 15;          // 邀请链接未找到
+  CLIENT_VERSION_NOT_FOUNT = 16;  // 客户端版本未找到
+  INVALID_RULE = 17;              // 无效的规则
 }

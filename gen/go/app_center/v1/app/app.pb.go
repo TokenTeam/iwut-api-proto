@@ -10,6 +10,8 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,69 +24,24 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetAppListRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetAppListRequest) Reset() {
-	*x = GetAppListRequest{}
-	mi := &file_v1_app_app_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetAppListRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetAppListRequest) ProtoMessage() {}
-
-func (x *GetAppListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetAppListRequest.ProtoReflect.Descriptor instead.
-func (*GetAppListRequest) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *GetAppListRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *GetAppListRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
+//	message GetAppListRequest {
+//	 int32 page = 1;
+//	 int32 pageSize = 2;
+//
+// }
 type GetAppListReply struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	state         protoimpl.MessageState                `protogen:"open.v1"`
+	Code          int32                                 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                                `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Data          []*GetAppListReply_ApplicationVersion `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+	TraceId       string                                `protobuf:"bytes,4,opt,name=traceId,proto3" json:"traceId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetAppListReply) Reset() {
 	*x = GetAppListReply{}
-	mi := &file_v1_app_app_proto_msgTypes[1]
+	mi := &file_v1_app_app_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -96,7 +53,7 @@ func (x *GetAppListReply) String() string {
 func (*GetAppListReply) ProtoMessage() {}
 
 func (x *GetAppListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[1]
+	mi := &file_v1_app_app_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -109,7 +66,7 @@ func (x *GetAppListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAppListReply.ProtoReflect.Descriptor instead.
 func (*GetAppListReply) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{1}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GetAppListReply) GetCode() int32 {
@@ -126,17 +83,150 @@ func (x *GetAppListReply) GetMessage() string {
 	return ""
 }
 
+func (x *GetAppListReply) GetData() []*GetAppListReply_ApplicationVersion {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *GetAppListReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type GetAppVersionInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAppVersionInfoRequest) Reset() {
+	*x = GetAppVersionInfoRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppVersionInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppVersionInfoRequest) ProtoMessage() {}
+
+func (x *GetAppVersionInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppVersionInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetAppVersionInfoRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetAppVersionInfoRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+type GetAppVersionInfoReply struct {
+	state         protoimpl.MessageState                     `protogen:"open.v1"`
+	Code          int32                                      `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                                     `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Data          *GetAppVersionInfoReply_ApplicationVersion `protobuf:"bytes,3,opt,name=data,proto3,oneof" json:"data,omitempty"`
+	TraceId       string                                     `protobuf:"bytes,4,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAppVersionInfoReply) Reset() {
+	*x = GetAppVersionInfoReply{}
+	mi := &file_v1_app_app_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppVersionInfoReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppVersionInfoReply) ProtoMessage() {}
+
+func (x *GetAppVersionInfoReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppVersionInfoReply.ProtoReflect.Descriptor instead.
+func (*GetAppVersionInfoReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetAppVersionInfoReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetAppVersionInfoReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply) GetData() *GetAppVersionInfoReply_ApplicationVersion {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *GetAppVersionInfoReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type GetApplicationInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientId      *string                `protobuf:"bytes,1,opt,name=clientId,proto3,oneof" json:"clientId,omitempty"`
-	AppId         *string                `protobuf:"bytes,2,opt,name=appId,proto3,oneof" json:"appId,omitempty"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetApplicationInfoRequest) Reset() {
 	*x = GetApplicationInfoRequest{}
-	mi := &file_v1_app_app_proto_msgTypes[2]
+	mi := &file_v1_app_app_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +238,7 @@ func (x *GetApplicationInfoRequest) String() string {
 func (*GetApplicationInfoRequest) ProtoMessage() {}
 
 func (x *GetApplicationInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[2]
+	mi := &file_v1_app_app_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,19 +251,12 @@ func (x *GetApplicationInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApplicationInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetApplicationInfoRequest) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{2}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetApplicationInfoRequest) GetClientId() string {
-	if x != nil && x.ClientId != nil {
-		return *x.ClientId
-	}
-	return ""
-}
-
-func (x *GetApplicationInfoRequest) GetAppId() string {
-	if x != nil && x.AppId != nil {
-		return *x.AppId
+	if x != nil {
+		return x.ClientId
 	}
 	return ""
 }
@@ -190,7 +273,7 @@ type GetApplicationInfoReply struct {
 
 func (x *GetApplicationInfoReply) Reset() {
 	*x = GetApplicationInfoReply{}
-	mi := &file_v1_app_app_proto_msgTypes[3]
+	mi := &file_v1_app_app_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +285,7 @@ func (x *GetApplicationInfoReply) String() string {
 func (*GetApplicationInfoReply) ProtoMessage() {}
 
 func (x *GetApplicationInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[3]
+	mi := &file_v1_app_app_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,7 +298,7 @@ func (x *GetApplicationInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApplicationInfoReply.ProtoReflect.Descriptor instead.
 func (*GetApplicationInfoReply) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{3}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetApplicationInfoReply) GetCode() int32 {
@@ -255,7 +338,7 @@ type CreateAppRequest struct {
 
 func (x *CreateAppRequest) Reset() {
 	*x = CreateAppRequest{}
-	mi := &file_v1_app_app_proto_msgTypes[4]
+	mi := &file_v1_app_app_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +350,7 @@ func (x *CreateAppRequest) String() string {
 func (*CreateAppRequest) ProtoMessage() {}
 
 func (x *CreateAppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[4]
+	mi := &file_v1_app_app_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -280,7 +363,7 @@ func (x *CreateAppRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAppRequest.ProtoReflect.Descriptor instead.
 func (*CreateAppRequest) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{4}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateAppRequest) GetName() string {
@@ -302,7 +385,7 @@ type CreateAppReply struct {
 
 func (x *CreateAppReply) Reset() {
 	*x = CreateAppReply{}
-	mi := &file_v1_app_app_proto_msgTypes[5]
+	mi := &file_v1_app_app_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -314,7 +397,7 @@ func (x *CreateAppReply) String() string {
 func (*CreateAppReply) ProtoMessage() {}
 
 func (x *CreateAppReply) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[5]
+	mi := &file_v1_app_app_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -327,7 +410,7 @@ func (x *CreateAppReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAppReply.ProtoReflect.Descriptor instead.
 func (*CreateAppReply) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{5}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateAppReply) GetCode() int32 {
@@ -359,24 +442,22 @@ func (x *CreateAppReply) GetTraceId() string {
 }
 
 type CreateAppVersionRequest struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	ClientId      string                        `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
-	BasicScope    []string                      `protobuf:"bytes,2,rep,name=basicScope,proto3" json:"basicScope,omitempty"`
-	OptionalScope []string                      `protobuf:"bytes,3,rep,name=optionalScope,proto3" json:"optionalScope,omitempty"`
-	VersionName   string                        `protobuf:"bytes,4,opt,name=versionName,proto3" json:"versionName,omitempty"`
-	RedirectUris  []string                      `protobuf:"bytes,5,rep,name=redirectUris,proto3" json:"redirectUris,omitempty"`
-	DisplayName   string                        `protobuf:"bytes,6,opt,name=displayName,proto3" json:"displayName,omitempty"`
-	Description   string                        `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	Url           string                        `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
-	Icon          string                        `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
-	Rule          *CreateAppVersionRequest_Rule `protobuf:"bytes,10,opt,name=rule,proto3,oneof" json:"rule,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	BasicScope    []string               `protobuf:"bytes,2,rep,name=basicScope,proto3" json:"basicScope,omitempty"`
+	OptionalScope []string               `protobuf:"bytes,3,rep,name=optionalScope,proto3" json:"optionalScope,omitempty"`
+	Version       string                 `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,5,opt,name=displayName,proto3" json:"displayName,omitempty"`
+	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Url           string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`
+	Icon          string                 `protobuf:"bytes,8,opt,name=icon,proto3" json:"icon,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateAppVersionRequest) Reset() {
 	*x = CreateAppVersionRequest{}
-	mi := &file_v1_app_app_proto_msgTypes[6]
+	mi := &file_v1_app_app_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -388,7 +469,7 @@ func (x *CreateAppVersionRequest) String() string {
 func (*CreateAppVersionRequest) ProtoMessage() {}
 
 func (x *CreateAppVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[6]
+	mi := &file_v1_app_app_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -401,7 +482,7 @@ func (x *CreateAppVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAppVersionRequest.ProtoReflect.Descriptor instead.
 func (*CreateAppVersionRequest) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{6}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateAppVersionRequest) GetClientId() string {
@@ -425,18 +506,11 @@ func (x *CreateAppVersionRequest) GetOptionalScope() []string {
 	return nil
 }
 
-func (x *CreateAppVersionRequest) GetVersionName() string {
+func (x *CreateAppVersionRequest) GetVersion() string {
 	if x != nil {
-		return x.VersionName
+		return x.Version
 	}
 	return ""
-}
-
-func (x *CreateAppVersionRequest) GetRedirectUris() []string {
-	if x != nil {
-		return x.RedirectUris
-	}
-	return nil
 }
 
 func (x *CreateAppVersionRequest) GetDisplayName() string {
@@ -467,13 +541,6 @@ func (x *CreateAppVersionRequest) GetIcon() string {
 	return ""
 }
 
-func (x *CreateAppVersionRequest) GetRule() *CreateAppVersionRequest_Rule {
-	if x != nil {
-		return x.Rule
-	}
-	return nil
-}
-
 type CreateAppVersionReply struct {
 	state         protoimpl.MessageState                           `protogen:"open.v1"`
 	Code          int32                                            `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -486,7 +553,7 @@ type CreateAppVersionReply struct {
 
 func (x *CreateAppVersionReply) Reset() {
 	*x = CreateAppVersionReply{}
-	mi := &file_v1_app_app_proto_msgTypes[7]
+	mi := &file_v1_app_app_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -498,7 +565,7 @@ func (x *CreateAppVersionReply) String() string {
 func (*CreateAppVersionReply) ProtoMessage() {}
 
 func (x *CreateAppVersionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[7]
+	mi := &file_v1_app_app_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +578,7 @@ func (x *CreateAppVersionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAppVersionReply.ProtoReflect.Descriptor instead.
 func (*CreateAppVersionReply) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{7}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateAppVersionReply) GetCode() int32 {
@@ -542,15 +609,253 @@ func (x *CreateAppVersionReply) GetTraceId() string {
 	return ""
 }
 
-type GetAppListReply_ApplicationVersion struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+type UpdateAppRuleRequest struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	ClientId      string                     `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Rule          *UpdateAppRuleRequest_Rule `protobuf:"bytes,2,opt,name=rule,proto3" json:"rule,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *UpdateAppRuleRequest) Reset() {
+	*x = UpdateAppRuleRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppRuleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppRuleRequest) ProtoMessage() {}
+
+func (x *UpdateAppRuleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppRuleRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAppRuleRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateAppRuleRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *UpdateAppRuleRequest) GetRule() *UpdateAppRuleRequest_Rule {
+	if x != nil {
+		return x.Rule
+	}
+	return nil
+}
+
+type UpdateAppRuleReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppRuleReply) Reset() {
+	*x = UpdateAppRuleReply{}
+	mi := &file_v1_app_app_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppRuleReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppRuleReply) ProtoMessage() {}
+
+func (x *UpdateAppRuleReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppRuleReply.ProtoReflect.Descriptor instead.
+func (*UpdateAppRuleReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdateAppRuleReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdateAppRuleReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateAppRuleReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type UpdateAppRedirectUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	RedirectUri   []string               `protobuf:"bytes,2,rep,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppRedirectUriRequest) Reset() {
+	*x = UpdateAppRedirectUriRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppRedirectUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppRedirectUriRequest) ProtoMessage() {}
+
+func (x *UpdateAppRedirectUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppRedirectUriRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAppRedirectUriRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateAppRedirectUriRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *UpdateAppRedirectUriRequest) GetRedirectUri() []string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return nil
+}
+
+type UpdateAppRedirectUriReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppRedirectUriReply) Reset() {
+	*x = UpdateAppRedirectUriReply{}
+	mi := &file_v1_app_app_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppRedirectUriReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppRedirectUriReply) ProtoMessage() {}
+
+func (x *UpdateAppRedirectUriReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppRedirectUriReply.ProtoReflect.Descriptor instead.
+func (*UpdateAppRedirectUriReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UpdateAppRedirectUriReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdateAppRedirectUriReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateAppRedirectUriReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type GetAppListReply_ApplicationVersion struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	ClientId        string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	InternalVersion int32                  `protobuf:"varint,2,opt,name=internalVersion,proto3" json:"internalVersion,omitempty"`
+	Version         string                 `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	BasicScope      []string               `protobuf:"bytes,4,rep,name=basicScope,proto3" json:"basicScope,omitempty"`
+	OptionalScope   []string               `protobuf:"bytes,5,rep,name=optionalScope,proto3" json:"optionalScope,omitempty"`
+	DisplayName     string                 `protobuf:"bytes,6,opt,name=displayName,proto3" json:"displayName,omitempty"`
+	Description     string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
+	Icon            string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
+	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	Name            string                 `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
+	Admin           string                 `protobuf:"bytes,13,opt,name=admin,proto3" json:"admin,omitempty"`
+	Collaborators   []string               `protobuf:"bytes,14,rep,name=collaborators,proto3" json:"collaborators,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
 func (x *GetAppListReply_ApplicationVersion) Reset() {
 	*x = GetAppListReply_ApplicationVersion{}
-	mi := &file_v1_app_app_proto_msgTypes[8]
+	mi := &file_v1_app_app_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +867,7 @@ func (x *GetAppListReply_ApplicationVersion) String() string {
 func (*GetAppListReply_ApplicationVersion) ProtoMessage() {}
 
 func (x *GetAppListReply_ApplicationVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[8]
+	mi := &file_v1_app_app_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +880,221 @@ func (x *GetAppListReply_ApplicationVersion) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetAppListReply_ApplicationVersion.ProtoReflect.Descriptor instead.
 func (*GetAppListReply_ApplicationVersion) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{1, 0}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetInternalVersion() int32 {
+	if x != nil {
+		return x.InternalVersion
+	}
+	return 0
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetBasicScope() []string {
+	if x != nil {
+		return x.BasicScope
+	}
+	return nil
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetOptionalScope() []string {
+	if x != nil {
+		return x.OptionalScope
+	}
+	return nil
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetAdmin() string {
+	if x != nil {
+		return x.Admin
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetCollaborators() []string {
+	if x != nil {
+		return x.Collaborators
+	}
+	return nil
+}
+
+type GetAppVersionInfoReply_ApplicationVersion struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	ClientId        string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	InternalVersion int32                  `protobuf:"varint,2,opt,name=internalVersion,proto3" json:"internalVersion,omitempty"`
+	Version         string                 `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	BasicScope      []string               `protobuf:"bytes,4,rep,name=basicScope,proto3" json:"basicScope,omitempty"`
+	OptionalScope   []string               `protobuf:"bytes,5,rep,name=optionalScope,proto3" json:"optionalScope,omitempty"`
+	DisplayName     string                 `protobuf:"bytes,6,opt,name=displayName,proto3" json:"displayName,omitempty"`
+	Description     string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
+	Icon            string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
+	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"` // 这里没有返回 tester, 大且没用
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) Reset() {
+	*x = GetAppVersionInfoReply_ApplicationVersion{}
+	mi := &file_v1_app_app_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppVersionInfoReply_ApplicationVersion) ProtoMessage() {}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppVersionInfoReply_ApplicationVersion.ProtoReflect.Descriptor instead.
+func (*GetAppVersionInfoReply_ApplicationVersion) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{2, 0}
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetInternalVersion() int32 {
+	if x != nil {
+		return x.InternalVersion
+	}
+	return 0
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetBasicScope() []string {
+	if x != nil {
+		return x.BasicScope
+	}
+	return nil
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetOptionalScope() []string {
+	if x != nil {
+		return x.OptionalScope
+	}
+	return nil
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *GetAppVersionInfoReply_ApplicationVersion) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
 }
 
 type GetApplicationInfoReply_Application struct {
@@ -593,13 +1112,16 @@ type GetApplicationInfoReply_Application struct {
 	Collaborators   []string               `protobuf:"bytes,11,rep,name=collaborators,proto3" json:"collaborators,omitempty"`
 	NextVersion     int32                  `protobuf:"varint,12,opt,name=next_version,json=nextVersion,proto3" json:"next_version,omitempty"`
 	Id              string                 `protobuf:"bytes,13,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	DeletedAt       *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=deletedAt,proto3" json:"deletedAt,omitempty"`
+	RedirectUri     []string               `protobuf:"bytes,16,rep,name=redirectUri,proto3" json:"redirectUri,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetApplicationInfoReply_Application) Reset() {
 	*x = GetApplicationInfoReply_Application{}
-	mi := &file_v1_app_app_proto_msgTypes[9]
+	mi := &file_v1_app_app_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -611,7 +1133,7 @@ func (x *GetApplicationInfoReply_Application) String() string {
 func (*GetApplicationInfoReply_Application) ProtoMessage() {}
 
 func (x *GetApplicationInfoReply_Application) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[9]
+	mi := &file_v1_app_app_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -624,7 +1146,7 @@ func (x *GetApplicationInfoReply_Application) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetApplicationInfoReply_Application.ProtoReflect.Descriptor instead.
 func (*GetApplicationInfoReply_Application) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{3, 0}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *GetApplicationInfoReply_Application) GetClientId() string {
@@ -718,6 +1240,27 @@ func (x *GetApplicationInfoReply_Application) GetId() string {
 	return ""
 }
 
+func (x *GetApplicationInfoReply_Application) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetApplicationInfoReply_Application) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+func (x *GetApplicationInfoReply_Application) GetRedirectUri() []string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return nil
+}
+
 type CreateAppReply_CreateAppReplyData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
@@ -731,7 +1274,7 @@ type CreateAppReply_CreateAppReplyData struct {
 
 func (x *CreateAppReply_CreateAppReplyData) Reset() {
 	*x = CreateAppReply_CreateAppReplyData{}
-	mi := &file_v1_app_app_proto_msgTypes[10]
+	mi := &file_v1_app_app_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -743,7 +1286,7 @@ func (x *CreateAppReply_CreateAppReplyData) String() string {
 func (*CreateAppReply_CreateAppReplyData) ProtoMessage() {}
 
 func (x *CreateAppReply_CreateAppReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[10]
+	mi := &file_v1_app_app_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -756,7 +1299,7 @@ func (x *CreateAppReply_CreateAppReplyData) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CreateAppReply_CreateAppReplyData.ProtoReflect.Descriptor instead.
 func (*CreateAppReply_CreateAppReplyData) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{5, 0}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{6, 0}
 }
 
 func (x *CreateAppReply_CreateAppReplyData) GetClientId() string {
@@ -794,82 +1337,6 @@ func (x *CreateAppReply_CreateAppReplyData) GetId() string {
 	return ""
 }
 
-type CreateAppVersionRequest_Rule struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Operator      string                          `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
-	Rules         []*CreateAppVersionRequest_Rule `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
-	Field         *string                         `protobuf:"bytes,3,opt,name=Field,proto3,oneof" json:"Field,omitempty"`
-	DefaultField  *string                         `protobuf:"bytes,4,opt,name=DefaultField,proto3,oneof" json:"DefaultField,omitempty"`
-	Value         *string                         `protobuf:"bytes,5,opt,name=value,proto3,oneof" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateAppVersionRequest_Rule) Reset() {
-	*x = CreateAppVersionRequest_Rule{}
-	mi := &file_v1_app_app_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateAppVersionRequest_Rule) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateAppVersionRequest_Rule) ProtoMessage() {}
-
-func (x *CreateAppVersionRequest_Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateAppVersionRequest_Rule.ProtoReflect.Descriptor instead.
-func (*CreateAppVersionRequest_Rule) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{6, 0}
-}
-
-func (x *CreateAppVersionRequest_Rule) GetOperator() string {
-	if x != nil {
-		return x.Operator
-	}
-	return ""
-}
-
-func (x *CreateAppVersionRequest_Rule) GetRules() []*CreateAppVersionRequest_Rule {
-	if x != nil {
-		return x.Rules
-	}
-	return nil
-}
-
-func (x *CreateAppVersionRequest_Rule) GetField() string {
-	if x != nil && x.Field != nil {
-		return *x.Field
-	}
-	return ""
-}
-
-func (x *CreateAppVersionRequest_Rule) GetDefaultField() string {
-	if x != nil && x.DefaultField != nil {
-		return *x.DefaultField
-	}
-	return ""
-}
-
-func (x *CreateAppVersionRequest_Rule) GetValue() string {
-	if x != nil && x.Value != nil {
-		return *x.Value
-	}
-	return ""
-}
-
 type CreateAppVersionReply_CreateAppVersionReplyData struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	ClientId        string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
@@ -880,7 +1347,7 @@ type CreateAppVersionReply_CreateAppVersionReplyData struct {
 
 func (x *CreateAppVersionReply_CreateAppVersionReplyData) Reset() {
 	*x = CreateAppVersionReply_CreateAppVersionReplyData{}
-	mi := &file_v1_app_app_proto_msgTypes[12]
+	mi := &file_v1_app_app_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -892,7 +1359,7 @@ func (x *CreateAppVersionReply_CreateAppVersionReplyData) String() string {
 func (*CreateAppVersionReply_CreateAppVersionReplyData) ProtoMessage() {}
 
 func (x *CreateAppVersionReply_CreateAppVersionReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[12]
+	mi := &file_v1_app_app_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -905,7 +1372,7 @@ func (x *CreateAppVersionReply_CreateAppVersionReplyData) ProtoReflect() protore
 
 // Deprecated: Use CreateAppVersionReply_CreateAppVersionReplyData.ProtoReflect.Descriptor instead.
 func (*CreateAppVersionReply_CreateAppVersionReplyData) Descriptor() ([]byte, []int) {
-	return file_v1_app_app_proto_rawDescGZIP(), []int{7, 0}
+	return file_v1_app_app_proto_rawDescGZIP(), []int{8, 0}
 }
 
 func (x *CreateAppVersionReply_CreateAppVersionReplyData) GetClientId() string {
@@ -922,28 +1389,140 @@ func (x *CreateAppVersionReply_CreateAppVersionReplyData) GetInternalVersion() i
 	return 0
 }
 
+type UpdateAppRuleRequest_Rule struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Operator      string                       `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
+	Rules         []*UpdateAppRuleRequest_Rule `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
+	Field         *string                      `protobuf:"bytes,3,opt,name=Field,proto3,oneof" json:"Field,omitempty"`
+	DefaultField  *string                      `protobuf:"bytes,4,opt,name=DefaultField,proto3,oneof" json:"DefaultField,omitempty"`
+	Value         *string                      `protobuf:"bytes,5,opt,name=value,proto3,oneof" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppRuleRequest_Rule) Reset() {
+	*x = UpdateAppRuleRequest_Rule{}
+	mi := &file_v1_app_app_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppRuleRequest_Rule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppRuleRequest_Rule) ProtoMessage() {}
+
+func (x *UpdateAppRuleRequest_Rule) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppRuleRequest_Rule.ProtoReflect.Descriptor instead.
+func (*UpdateAppRuleRequest_Rule) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *UpdateAppRuleRequest_Rule) GetOperator() string {
+	if x != nil {
+		return x.Operator
+	}
+	return ""
+}
+
+func (x *UpdateAppRuleRequest_Rule) GetRules() []*UpdateAppRuleRequest_Rule {
+	if x != nil {
+		return x.Rules
+	}
+	return nil
+}
+
+func (x *UpdateAppRuleRequest_Rule) GetField() string {
+	if x != nil && x.Field != nil {
+		return *x.Field
+	}
+	return ""
+}
+
+func (x *UpdateAppRuleRequest_Rule) GetDefaultField() string {
+	if x != nil && x.DefaultField != nil {
+		return *x.DefaultField
+	}
+	return ""
+}
+
+func (x *UpdateAppRuleRequest_Rule) GetValue() string {
+	if x != nil && x.Value != nil {
+		return *x.Value
+	}
+	return ""
+}
+
 var File_v1_app_app_proto protoreflect.FileDescriptor
 
 const file_v1_app_app_proto_rawDesc = "" +
 	"\n" +
-	"\x10v1/app/app.proto\x12\x11app_center.v1.app\x1a\x1cgoogle/api/annotations.proto\"C\n" +
-	"\x11GetAppListRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1a\n" +
-	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\"U\n" +
+	"\x10v1/app/app.proto\x12\x11app_center.v1.app\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xed\x04\n" +
 	"\x0fGetAppListReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x1a\x14\n" +
-	"\x12ApplicationVersion\"n\n" +
-	"\x19GetApplicationInfoRequest\x12\x1f\n" +
-	"\bclientId\x18\x01 \x01(\tH\x00R\bclientId\x88\x01\x01\x12\x19\n" +
-	"\x05appId\x18\x02 \x01(\tH\x01R\x05appId\x88\x01\x01B\v\n" +
-	"\t_clientIdB\b\n" +
-	"\x06_appId\"\xe2\x04\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12I\n" +
+	"\x04data\x18\x03 \x03(\v25.app_center.v1.app.GetAppListReply.ApplicationVersionR\x04data\x12\x18\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xc6\x03\n" +
+	"\x12ApplicationVersion\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
+	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersion\x12\x18\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion\x12\x1e\n" +
+	"\n" +
+	"basicScope\x18\x04 \x03(\tR\n" +
+	"basicScope\x12$\n" +
+	"\roptionalScope\x18\x05 \x03(\tR\roptionalScope\x12 \n" +
+	"\vdisplayName\x18\x06 \x01(\tR\vdisplayName\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x10\n" +
+	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
+	"\x04icon\x18\t \x01(\tR\x04icon\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x128\n" +
+	"\tcreatedAt\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
+	"\x04name\x18\f \x01(\tR\x04name\x12\x14\n" +
+	"\x05admin\x18\r \x01(\tR\x05admin\x12$\n" +
+	"\rcollaborators\x18\x0e \x03(\tR\rcollaborators\"P\n" +
+	"\x18GetAppVersionInfoRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\"\xff\x03\n" +
+	"\x16GetAppVersionInfoReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12U\n" +
+	"\x04data\x18\x03 \x01(\v2<.app_center.v1.app.GetAppVersionInfoReply.ApplicationVersionH\x00R\x04data\x88\x01\x01\x12\x18\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xbc\x02\n" +
+	"\x12ApplicationVersion\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
+	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersion\x12\x18\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion\x12\x1e\n" +
+	"\n" +
+	"basicScope\x18\x04 \x03(\tR\n" +
+	"basicScope\x12$\n" +
+	"\roptionalScope\x18\x05 \x03(\tR\roptionalScope\x12 \n" +
+	"\vdisplayName\x18\x06 \x01(\tR\vdisplayName\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x10\n" +
+	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
+	"\x04icon\x18\t \x01(\tR\x04icon\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06statusB\a\n" +
+	"\x05_data\"7\n" +
+	"\x19GetApplicationInfoRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\"\xf8\x05\n" +
 	"\x17GetApplicationInfoReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12O\n" +
 	"\x04data\x18\x03 \x01(\v26.app_center.v1.app.GetApplicationInfoReply.ApplicationH\x00R\x04data\x88\x01\x01\x12\x18\n" +
-	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xa4\x03\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xba\x04\n" +
 	"\vApplication\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\"\n" +
 	"\fclientSecret\x18\x02 \x01(\tR\fclientSecret\x12$\n" +
@@ -958,7 +1537,10 @@ const file_v1_app_app_proto_rawDesc = "" +
 	" \x01(\tR\x05admin\x12$\n" +
 	"\rcollaborators\x18\v \x03(\tR\rcollaborators\x12!\n" +
 	"\fnext_version\x18\f \x01(\x05R\vnextVersion\x12\x0e\n" +
-	"\x02id\x18\r \x01(\tR\x02idB\a\n" +
+	"\x02id\x18\r \x01(\tR\x02id\x128\n" +
+	"\tcreatedAt\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
+	"\tdeletedAt\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12 \n" +
+	"\vredirectUri\x18\x10 \x03(\tR\vredirectUriB\a\n" +
 	"\x05_data\"&\n" +
 	"\x10CreateAppRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\xc1\x02\n" +
@@ -973,31 +1555,18 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
 	"\x05admin\x18\x04 \x01(\tR\x05admin\x12\x0e\n" +
 	"\x02id\x18\x05 \x01(\tR\x02idB\a\n" +
-	"\x05_data\"\xee\x04\n" +
+	"\x05_data\"\xff\x01\n" +
 	"\x17CreateAppVersionRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x1e\n" +
 	"\n" +
 	"basicScope\x18\x02 \x03(\tR\n" +
 	"basicScope\x12$\n" +
-	"\roptionalScope\x18\x03 \x03(\tR\roptionalScope\x12 \n" +
-	"\vversionName\x18\x04 \x01(\tR\vversionName\x12\"\n" +
-	"\fredirectUris\x18\x05 \x03(\tR\fredirectUris\x12 \n" +
-	"\vdisplayName\x18\x06 \x01(\tR\vdisplayName\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\x12\x10\n" +
-	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
-	"\x04icon\x18\t \x01(\tR\x04icon\x12H\n" +
-	"\x04rule\x18\n" +
-	" \x01(\v2/.app_center.v1.app.CreateAppVersionRequest.RuleH\x00R\x04rule\x88\x01\x01\x1a\xed\x01\n" +
-	"\x04Rule\x12\x1a\n" +
-	"\boperator\x18\x01 \x01(\tR\boperator\x12E\n" +
-	"\x05rules\x18\x02 \x03(\v2/.app_center.v1.app.CreateAppVersionRequest.RuleR\x05rules\x12\x19\n" +
-	"\x05Field\x18\x03 \x01(\tH\x00R\x05Field\x88\x01\x01\x12'\n" +
-	"\fDefaultField\x18\x04 \x01(\tH\x01R\fDefaultField\x88\x01\x01\x12\x19\n" +
-	"\x05value\x18\x05 \x01(\tH\x02R\x05value\x88\x01\x01B\b\n" +
-	"\x06_FieldB\x0f\n" +
-	"\r_DefaultFieldB\b\n" +
-	"\x06_valueB\a\n" +
-	"\x05_rule\"\xa8\x02\n" +
+	"\roptionalScope\x18\x03 \x03(\tR\roptionalScope\x12\x18\n" +
+	"\aversion\x18\x04 \x01(\tR\aversion\x12 \n" +
+	"\vdisplayName\x18\x05 \x01(\tR\vdisplayName\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x10\n" +
+	"\x03url\x18\a \x01(\tR\x03url\x12\x12\n" +
+	"\x04icon\x18\b \x01(\tR\x04icon\"\xa8\x02\n" +
 	"\x15CreateAppVersionReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12[\n" +
@@ -1006,13 +1575,39 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x19CreateAppVersionReplyData\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
 	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersionB\a\n" +
-	"\x05_data2\xec\x03\n" +
+	"\x05_data\"\xe1\x02\n" +
+	"\x14UpdateAppRuleRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12@\n" +
+	"\x04rule\x18\x02 \x01(\v2,.app_center.v1.app.UpdateAppRuleRequest.RuleR\x04rule\x1a\xea\x01\n" +
+	"\x04Rule\x12\x1a\n" +
+	"\boperator\x18\x01 \x01(\tR\boperator\x12B\n" +
+	"\x05rules\x18\x02 \x03(\v2,.app_center.v1.app.UpdateAppRuleRequest.RuleR\x05rules\x12\x19\n" +
+	"\x05Field\x18\x03 \x01(\tH\x00R\x05Field\x88\x01\x01\x12'\n" +
+	"\fDefaultField\x18\x04 \x01(\tH\x01R\fDefaultField\x88\x01\x01\x12\x19\n" +
+	"\x05value\x18\x05 \x01(\tH\x02R\x05value\x88\x01\x01B\b\n" +
+	"\x06_FieldB\x0f\n" +
+	"\r_DefaultFieldB\b\n" +
+	"\x06_value\"\\\n" +
+	"\x12UpdateAppRuleReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"[\n" +
+	"\x1bUpdateAppRedirectUriRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12 \n" +
+	"\vredirectUri\x18\x02 \x03(\tR\vredirectUri\"c\n" +
+	"\x19UpdateAppRedirectUriReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId2\x81\a\n" +
 	"\x03App\x12\x81\x01\n" +
-	"\x12getApplicationInfo\x12,.app_center.v1.app.GetApplicationInfoRequest\x1a*.app_center.v1.app.GetApplicationInfoReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/info\x12i\n" +
+	"\x12getApplicationInfo\x12,.app_center.v1.app.GetApplicationInfoRequest\x1a*.app_center.v1.app.GetApplicationInfoReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/info\x12\x86\x01\n" +
+	"\x11getAppVersionInfo\x12+.app_center.v1.app.GetAppVersionInfoRequest\x1a).app_center.v1.app.GetAppVersionInfoReply\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/app/version-info\x12[\n" +
 	"\n" +
-	"getAppList\x12$.app_center.v1.app.GetAppListRequest\x1a\".app_center.v1.app.GetAppListReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/list\x12k\n" +
+	"getAppList\x12\x16.google.protobuf.Empty\x1a\".app_center.v1.app.GetAppListReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/list\x12k\n" +
 	"\tcreateApp\x12#.app_center.v1.app.CreateAppRequest\x1a!.app_center.v1.app.CreateAppReply\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\v/app/create\x12\x88\x01\n" +
-	"\x10createAppVersion\x12*.app_center.v1.app.CreateAppVersionRequest\x1a(.app_center.v1.app.CreateAppVersionReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/create-versionB+Z)iwut-app-center/api/app_center/v1/app;appb\x06proto3"
+	"\x10createAppVersion\x12*.app_center.v1.app.CreateAppVersionRequest\x1a(.app_center.v1.app.CreateAppVersionReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/create-version\x12|\n" +
+	"\rupdateAppRule\x12'.app_center.v1.app.UpdateAppRuleRequest\x1a%.app_center.v1.app.UpdateAppRuleReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/app/update-rule\x12\x99\x01\n" +
+	"\x14updateAppRedirectUri\x12..app_center.v1.app.UpdateAppRedirectUriRequest\x1a,.app_center.v1.app.UpdateAppRedirectUriReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/app/update-redirect-uriB+Z)iwut-app-center/api/app_center/v1/app;appb\x06proto3"
 
 var (
 	file_v1_app_app_proto_rawDescOnce sync.Once
@@ -1026,41 +1621,60 @@ func file_v1_app_app_proto_rawDescGZIP() []byte {
 	return file_v1_app_app_proto_rawDescData
 }
 
-var file_v1_app_app_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_v1_app_app_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_v1_app_app_proto_goTypes = []any{
-	(*GetAppListRequest)(nil),                               // 0: app_center.v1.app.GetAppListRequest
-	(*GetAppListReply)(nil),                                 // 1: app_center.v1.app.GetAppListReply
-	(*GetApplicationInfoRequest)(nil),                       // 2: app_center.v1.app.GetApplicationInfoRequest
-	(*GetApplicationInfoReply)(nil),                         // 3: app_center.v1.app.GetApplicationInfoReply
-	(*CreateAppRequest)(nil),                                // 4: app_center.v1.app.CreateAppRequest
-	(*CreateAppReply)(nil),                                  // 5: app_center.v1.app.CreateAppReply
-	(*CreateAppVersionRequest)(nil),                         // 6: app_center.v1.app.CreateAppVersionRequest
-	(*CreateAppVersionReply)(nil),                           // 7: app_center.v1.app.CreateAppVersionReply
-	(*GetAppListReply_ApplicationVersion)(nil),              // 8: app_center.v1.app.GetAppListReply.ApplicationVersion
-	(*GetApplicationInfoReply_Application)(nil),             // 9: app_center.v1.app.GetApplicationInfoReply.Application
-	(*CreateAppReply_CreateAppReplyData)(nil),               // 10: app_center.v1.app.CreateAppReply.CreateAppReplyData
-	(*CreateAppVersionRequest_Rule)(nil),                    // 11: app_center.v1.app.CreateAppVersionRequest.Rule
-	(*CreateAppVersionReply_CreateAppVersionReplyData)(nil), // 12: app_center.v1.app.CreateAppVersionReply.CreateAppVersionReplyData
+	(*GetAppListReply)(nil),                                 // 0: app_center.v1.app.GetAppListReply
+	(*GetAppVersionInfoRequest)(nil),                        // 1: app_center.v1.app.GetAppVersionInfoRequest
+	(*GetAppVersionInfoReply)(nil),                          // 2: app_center.v1.app.GetAppVersionInfoReply
+	(*GetApplicationInfoRequest)(nil),                       // 3: app_center.v1.app.GetApplicationInfoRequest
+	(*GetApplicationInfoReply)(nil),                         // 4: app_center.v1.app.GetApplicationInfoReply
+	(*CreateAppRequest)(nil),                                // 5: app_center.v1.app.CreateAppRequest
+	(*CreateAppReply)(nil),                                  // 6: app_center.v1.app.CreateAppReply
+	(*CreateAppVersionRequest)(nil),                         // 7: app_center.v1.app.CreateAppVersionRequest
+	(*CreateAppVersionReply)(nil),                           // 8: app_center.v1.app.CreateAppVersionReply
+	(*UpdateAppRuleRequest)(nil),                            // 9: app_center.v1.app.UpdateAppRuleRequest
+	(*UpdateAppRuleReply)(nil),                              // 10: app_center.v1.app.UpdateAppRuleReply
+	(*UpdateAppRedirectUriRequest)(nil),                     // 11: app_center.v1.app.UpdateAppRedirectUriRequest
+	(*UpdateAppRedirectUriReply)(nil),                       // 12: app_center.v1.app.UpdateAppRedirectUriReply
+	(*GetAppListReply_ApplicationVersion)(nil),              // 13: app_center.v1.app.GetAppListReply.ApplicationVersion
+	(*GetAppVersionInfoReply_ApplicationVersion)(nil),       // 14: app_center.v1.app.GetAppVersionInfoReply.ApplicationVersion
+	(*GetApplicationInfoReply_Application)(nil),             // 15: app_center.v1.app.GetApplicationInfoReply.Application
+	(*CreateAppReply_CreateAppReplyData)(nil),               // 16: app_center.v1.app.CreateAppReply.CreateAppReplyData
+	(*CreateAppVersionReply_CreateAppVersionReplyData)(nil), // 17: app_center.v1.app.CreateAppVersionReply.CreateAppVersionReplyData
+	(*UpdateAppRuleRequest_Rule)(nil),                       // 18: app_center.v1.app.UpdateAppRuleRequest.Rule
+	(*timestamppb.Timestamp)(nil),                           // 19: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                                   // 20: google.protobuf.Empty
 }
 var file_v1_app_app_proto_depIdxs = []int32{
-	9,  // 0: app_center.v1.app.GetApplicationInfoReply.data:type_name -> app_center.v1.app.GetApplicationInfoReply.Application
-	10, // 1: app_center.v1.app.CreateAppReply.data:type_name -> app_center.v1.app.CreateAppReply.CreateAppReplyData
-	11, // 2: app_center.v1.app.CreateAppVersionRequest.rule:type_name -> app_center.v1.app.CreateAppVersionRequest.Rule
-	12, // 3: app_center.v1.app.CreateAppVersionReply.data:type_name -> app_center.v1.app.CreateAppVersionReply.CreateAppVersionReplyData
-	11, // 4: app_center.v1.app.CreateAppVersionRequest.Rule.rules:type_name -> app_center.v1.app.CreateAppVersionRequest.Rule
-	2,  // 5: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
-	0,  // 6: app_center.v1.app.App.getAppList:input_type -> app_center.v1.app.GetAppListRequest
-	4,  // 7: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
-	6,  // 8: app_center.v1.app.App.createAppVersion:input_type -> app_center.v1.app.CreateAppVersionRequest
-	3,  // 9: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
-	1,  // 10: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
-	5,  // 11: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
-	7,  // 12: app_center.v1.app.App.createAppVersion:output_type -> app_center.v1.app.CreateAppVersionReply
-	9,  // [9:13] is the sub-list for method output_type
-	5,  // [5:9] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	13, // 0: app_center.v1.app.GetAppListReply.data:type_name -> app_center.v1.app.GetAppListReply.ApplicationVersion
+	14, // 1: app_center.v1.app.GetAppVersionInfoReply.data:type_name -> app_center.v1.app.GetAppVersionInfoReply.ApplicationVersion
+	15, // 2: app_center.v1.app.GetApplicationInfoReply.data:type_name -> app_center.v1.app.GetApplicationInfoReply.Application
+	16, // 3: app_center.v1.app.CreateAppReply.data:type_name -> app_center.v1.app.CreateAppReply.CreateAppReplyData
+	17, // 4: app_center.v1.app.CreateAppVersionReply.data:type_name -> app_center.v1.app.CreateAppVersionReply.CreateAppVersionReplyData
+	18, // 5: app_center.v1.app.UpdateAppRuleRequest.rule:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
+	19, // 6: app_center.v1.app.GetAppListReply.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
+	19, // 7: app_center.v1.app.GetApplicationInfoReply.Application.createdAt:type_name -> google.protobuf.Timestamp
+	19, // 8: app_center.v1.app.GetApplicationInfoReply.Application.deletedAt:type_name -> google.protobuf.Timestamp
+	18, // 9: app_center.v1.app.UpdateAppRuleRequest.Rule.rules:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
+	3,  // 10: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
+	1,  // 11: app_center.v1.app.App.getAppVersionInfo:input_type -> app_center.v1.app.GetAppVersionInfoRequest
+	20, // 12: app_center.v1.app.App.getAppList:input_type -> google.protobuf.Empty
+	5,  // 13: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
+	7,  // 14: app_center.v1.app.App.createAppVersion:input_type -> app_center.v1.app.CreateAppVersionRequest
+	9,  // 15: app_center.v1.app.App.updateAppRule:input_type -> app_center.v1.app.UpdateAppRuleRequest
+	11, // 16: app_center.v1.app.App.updateAppRedirectUri:input_type -> app_center.v1.app.UpdateAppRedirectUriRequest
+	4,  // 17: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
+	2,  // 18: app_center.v1.app.App.getAppVersionInfo:output_type -> app_center.v1.app.GetAppVersionInfoReply
+	0,  // 19: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
+	6,  // 20: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
+	8,  // 21: app_center.v1.app.App.createAppVersion:output_type -> app_center.v1.app.CreateAppVersionReply
+	10, // 22: app_center.v1.app.App.updateAppRule:output_type -> app_center.v1.app.UpdateAppRuleReply
+	12, // 23: app_center.v1.app.App.updateAppRedirectUri:output_type -> app_center.v1.app.UpdateAppRedirectUriReply
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_v1_app_app_proto_init() }
@@ -1069,18 +1683,17 @@ func file_v1_app_app_proto_init() {
 		return
 	}
 	file_v1_app_app_proto_msgTypes[2].OneofWrappers = []any{}
-	file_v1_app_app_proto_msgTypes[3].OneofWrappers = []any{}
-	file_v1_app_app_proto_msgTypes[5].OneofWrappers = []any{}
+	file_v1_app_app_proto_msgTypes[4].OneofWrappers = []any{}
 	file_v1_app_app_proto_msgTypes[6].OneofWrappers = []any{}
-	file_v1_app_app_proto_msgTypes[7].OneofWrappers = []any{}
-	file_v1_app_app_proto_msgTypes[11].OneofWrappers = []any{}
+	file_v1_app_app_proto_msgTypes[8].OneofWrappers = []any{}
+	file_v1_app_app_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_app_app_proto_rawDesc), len(file_v1_app_app_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

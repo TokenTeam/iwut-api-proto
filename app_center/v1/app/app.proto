@@ -3,7 +3,8 @@ syntax = "proto3";
 package app_center.v1.app;
 
 import "google/api/annotations.proto";
-
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 option go_package = "iwut-app-center/api/app_center/v1/app;app";
 
 service App {
@@ -12,7 +13,12 @@ service App {
       get: "/app/info"
     };
   }
-  rpc getAppList (GetAppListRequest) returns (GetAppListReply) {
+  rpc getAppVersionInfo (GetAppVersionInfoRequest) returns (GetAppVersionInfoReply) {
+    option (google.api.http) = {
+      get: "/app/version-info"
+    };
+  }
+  rpc getAppList (google.protobuf.Empty) returns (GetAppListReply) {
     option (google.api.http) = {
       get: "/app/list"
     };
@@ -29,24 +35,75 @@ service App {
       body: "*"
     };
   }
+  rpc updateAppRule (UpdateAppRuleRequest) returns (UpdateAppRuleReply) {
+    option (google.api.http) = {
+      post: "/app/update-rule"
+      body: "*"
+    };
+  }
+  rpc updateAppRedirectUri (UpdateAppRedirectUriRequest) returns (UpdateAppRedirectUriReply) {
+    option (google.api.http) = {
+      post: "/app/update-redirect-uri"
+      body: "*"
+    };
+  }
 }
 
-message GetAppListRequest {
-  int32 page = 1;
-  int32 pageSize = 2;
-
-}
+//message GetAppListRequest {
+//  int32 page = 1;
+//  int32 pageSize = 2;
+//
+//}
 message GetAppListReply {
-  message ApplicationVersion {}
+  message ApplicationVersion {
+    string clientId = 1;
+    int32 internalVersion = 2;
+    string version = 3;
+    repeated string basicScope = 4;
+    repeated string optionalScope = 5;
+    string displayName = 6;
+    string description = 7;
+    string url = 8;
+    string icon = 9;
+    string status = 10;
+    google.protobuf.Timestamp createdAt = 11;
+    string name = 12;
+    string admin = 13;
+    repeated string collaborators = 14;
+  }
 
   int32 code = 1;
   string message = 2;
+  repeated ApplicationVersion data = 3;
+  string traceId = 4;
+}
 
+message GetAppVersionInfoRequest {
+  string clientId = 1;
+  int32 version = 2;
+}
+message GetAppVersionInfoReply {
+  message ApplicationVersion {
+    string clientId = 1;
+    int32 internalVersion = 2;
+    string version = 3;
+    repeated string basicScope = 4;
+    repeated string optionalScope = 5;
+    string displayName = 6;
+    string description = 7;
+    string url = 8;
+    string icon = 9;
+    string status = 10;
+    // 这里没有返回 tester, 大且没用
+  }
+  int32 code = 1;
+  string message = 2;
+  optional ApplicationVersion data = 3;
+  string traceId = 4;
 }
 
 message GetApplicationInfoRequest {
-  optional string clientId = 1;
-  optional string appId = 2;
+  string clientId = 1;
 }
 
 message GetApplicationInfoReply {
@@ -64,6 +121,9 @@ message GetApplicationInfoReply {
     repeated string collaborators = 11;
     int32 next_version = 12;
     string id = 13;
+    google.protobuf.Timestamp createdAt = 14;
+    google.protobuf.Timestamp deletedAt = 15;
+    repeated string redirectUri = 16;
   }
   int32 code = 1;
   string message = 2;
@@ -90,23 +150,14 @@ message CreateAppReply {
 }
 
 message CreateAppVersionRequest {
-  message Rule {
-    string operator = 1;
-    repeated Rule rules = 2;
-    optional string Field = 3;
-    optional string DefaultField = 4;
-    optional string value = 5;
-  }
   string clientId = 1;
   repeated string basicScope = 2;
   repeated string optionalScope = 3;
-  string versionName = 4;
-  repeated string redirectUris = 5;
-  string displayName = 6;
-  string description = 7;
-  string url = 8;
-  string icon = 9;
-  optional Rule rule = 10;
+  string version = 4;
+  string displayName = 5;
+  string description = 6;
+  string url = 7;
+  string icon = 8;
 }
 message CreateAppVersionReply {
   message CreateAppVersionReplyData {
@@ -117,4 +168,33 @@ message CreateAppVersionReply {
   string message = 2;
   optional CreateAppVersionReplyData data = 3;
   string traceId = 4;
+}
+
+message UpdateAppRuleRequest {
+  message Rule {
+    string operator = 1;
+    repeated Rule rules = 2;
+    optional string Field = 3;
+    optional string DefaultField = 4;
+    optional string value = 5;
+  }
+  string clientId = 1;
+  Rule rule = 2;
+}
+
+message UpdateAppRuleReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppRedirectUriRequest {
+  string clientId = 1;
+  repeated string redirectUri = 2;
+}
+
+message UpdateAppRedirectUriReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
 }
