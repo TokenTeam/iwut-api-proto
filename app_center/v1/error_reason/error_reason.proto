@@ -23,4 +23,5 @@ enum ErrorReason {
   INVITE_NOT_FOUND = 15;          // 邀请链接未找到
   CLIENT_VERSION_NOT_FOUNT = 16;  // 客户端版本未找到
   INVALID_RULE = 17;              // 无效的规则
+  VERSION_NOT_ALLOWED_FOR_THIS_USER = 18; // 该用户不允许使用这个版本
 }

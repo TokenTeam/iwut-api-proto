@@ -24,6 +24,7 @@ const OperationAppcreateApp = "/app_center.v1.app.App/createApp"
 const OperationAppcreateAppVersion = "/app_center.v1.app.App/createAppVersion"
 const OperationAppgetAppList = "/app_center.v1.app.App/getAppList"
 const OperationAppgetAppVersionInfo = "/app_center.v1.app.App/getAppVersionInfo"
+const OperationAppgetAppVersionInfoWithUserCheck = "/app_center.v1.app.App/getAppVersionInfoWithUserCheck"
 const OperationAppgetApplicationInfo = "/app_center.v1.app.App/getApplicationInfo"
 const OperationAppupdateAppRedirectUri = "/app_center.v1.app.App/updateAppRedirectUri"
 const OperationAppupdateAppRule = "/app_center.v1.app.App/updateAppRule"
@@ -33,6 +34,7 @@ type AppHTTPServer interface {
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error)
 	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
+	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
 	UpdateAppRedirectUri(context.Context, *UpdateAppRedirectUriRequest) (*UpdateAppRedirectUriReply, error)
 	UpdateAppRule(context.Context, *UpdateAppRuleRequest) (*UpdateAppRuleReply, error)
@@ -42,6 +44,7 @@ func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r := s.Route("/")
 	r.GET("/app/info", _App_GetApplicationInfo0_HTTP_Handler(srv))
 	r.GET("/app/version-info", _App_GetAppVersionInfo0_HTTP_Handler(srv))
+	r.POST("/app/version-info-with-user-check", _App_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv))
 	r.GET("/app/list", _App_GetAppList0_HTTP_Handler(srv))
 	r.POST("/app/create", _App_CreateApp0_HTTP_Handler(srv))
 	r.POST("/app/create-version", _App_CreateAppVersion0_HTTP_Handler(srv))
@@ -83,6 +86,28 @@ func _App_GetAppVersionInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Conte
 			return err
 		}
 		reply := out.(*GetAppVersionInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAppVersionInfoWithUserCheckRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppgetAppVersionInfoWithUserCheck)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAppVersionInfoWithUserCheck(ctx, req.(*GetAppVersionInfoWithUserCheckRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetAppVersionInfoWithUserCheckReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -199,6 +224,7 @@ type AppHTTPClient interface {
 	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
 	GetAppList(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetAppListReply, err error)
 	GetAppVersionInfo(ctx context.Context, req *GetAppVersionInfoRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoReply, err error)
+	GetAppVersionInfoWithUserCheck(ctx context.Context, req *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoWithUserCheckReply, err error)
 	GetApplicationInfo(ctx context.Context, req *GetApplicationInfoRequest, opts ...http.CallOption) (rsp *GetApplicationInfoReply, err error)
 	UpdateAppRedirectUri(ctx context.Context, req *UpdateAppRedirectUriRequest, opts ...http.CallOption) (rsp *UpdateAppRedirectUriReply, err error)
 	UpdateAppRule(ctx context.Context, req *UpdateAppRuleRequest, opts ...http.CallOption) (rsp *UpdateAppRuleReply, err error)
@@ -258,6 +284,19 @@ func (c *AppHTTPClientImpl) GetAppVersionInfo(ctx context.Context, in *GetAppVer
 	opts = append(opts, http.Operation(OperationAppgetAppVersionInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (*GetAppVersionInfoWithUserCheckReply, error) {
+	var out GetAppVersionInfoWithUserCheckReply
+	pattern := "/app/version-info-with-user-check"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppgetAppVersionInfoWithUserCheck))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

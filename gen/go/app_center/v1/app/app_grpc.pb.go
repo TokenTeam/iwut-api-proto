@@ -20,13 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	App_GetApplicationInfo_FullMethodName   = "/app_center.v1.app.App/getApplicationInfo"
-	App_GetAppVersionInfo_FullMethodName    = "/app_center.v1.app.App/getAppVersionInfo"
-	App_GetAppList_FullMethodName           = "/app_center.v1.app.App/getAppList"
-	App_CreateApp_FullMethodName            = "/app_center.v1.app.App/createApp"
-	App_CreateAppVersion_FullMethodName     = "/app_center.v1.app.App/createAppVersion"
-	App_UpdateAppRule_FullMethodName        = "/app_center.v1.app.App/updateAppRule"
-	App_UpdateAppRedirectUri_FullMethodName = "/app_center.v1.app.App/updateAppRedirectUri"
+	App_GetApplicationInfo_FullMethodName             = "/app_center.v1.app.App/getApplicationInfo"
+	App_GetAppVersionInfo_FullMethodName              = "/app_center.v1.app.App/getAppVersionInfo"
+	App_GetAppVersionInfoWithUserCheck_FullMethodName = "/app_center.v1.app.App/getAppVersionInfoWithUserCheck"
+	App_GetAppList_FullMethodName                     = "/app_center.v1.app.App/getAppList"
+	App_CreateApp_FullMethodName                      = "/app_center.v1.app.App/createApp"
+	App_CreateAppVersion_FullMethodName               = "/app_center.v1.app.App/createAppVersion"
+	App_UpdateAppRule_FullMethodName                  = "/app_center.v1.app.App/updateAppRule"
+	App_UpdateAppRedirectUri_FullMethodName           = "/app_center.v1.app.App/updateAppRedirectUri"
 )
 
 // AppClient is the client API for App service.
@@ -35,6 +36,7 @@ const (
 type AppClient interface {
 	GetApplicationInfo(ctx context.Context, in *GetApplicationInfoRequest, opts ...grpc.CallOption) (*GetApplicationInfoReply, error)
 	GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...grpc.CallOption) (*GetAppVersionInfoReply, error)
+	GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...grpc.CallOption) (*GetAppVersionInfoWithUserCheckReply, error)
 	GetAppList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAppListReply, error)
 	CreateApp(ctx context.Context, in *CreateAppRequest, opts ...grpc.CallOption) (*CreateAppReply, error)
 	CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error)
@@ -64,6 +66,16 @@ func (c *appClient) GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAppVersionInfoReply)
 	err := c.cc.Invoke(ctx, App_GetAppVersionInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...grpc.CallOption) (*GetAppVersionInfoWithUserCheckReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppVersionInfoWithUserCheckReply)
+	err := c.cc.Invoke(ctx, App_GetAppVersionInfoWithUserCheck_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +138,7 @@ func (c *appClient) UpdateAppRedirectUri(ctx context.Context, in *UpdateAppRedir
 type AppServer interface {
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
 	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
+	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 	GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error)
 	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
@@ -146,6 +159,9 @@ func (UnimplementedAppServer) GetApplicationInfo(context.Context, *GetApplicatio
 }
 func (UnimplementedAppServer) GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppVersionInfo not implemented")
+}
+func (UnimplementedAppServer) GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppVersionInfoWithUserCheck not implemented")
 }
 func (UnimplementedAppServer) GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppList not implemented")
@@ -215,6 +231,24 @@ func _App_GetAppVersionInfo_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AppServer).GetAppVersionInfo(ctx, req.(*GetAppVersionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_GetAppVersionInfoWithUserCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppVersionInfoWithUserCheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).GetAppVersionInfoWithUserCheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_GetAppVersionInfoWithUserCheck_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).GetAppVersionInfoWithUserCheck(ctx, req.(*GetAppVersionInfoWithUserCheckRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -323,6 +357,10 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getAppVersionInfo",
 			Handler:    _App_GetAppVersionInfo_Handler,
+		},
+		{
+			MethodName: "getAppVersionInfoWithUserCheck",
+			Handler:    _App_GetAppVersionInfoWithUserCheck_Handler,
 		},
 		{
 			MethodName: "getAppList",
