@@ -683,6 +683,7 @@ func (x *SetUserDeveloperIdReply) GetTraceId() string {
 type RevokeAuthorizationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -720,6 +721,13 @@ func (*RevokeAuthorizationRequest) Descriptor() ([]byte, []int) {
 func (x *RevokeAuthorizationRequest) GetClientId() string {
 	if x != nil {
 		return x.ClientId
+	}
+	return ""
+}
+
+func (x *RevokeAuthorizationRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -974,9 +982,10 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\x17SetUserDeveloperIdReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
-	"\atraceId\x18\x03 \x01(\tR\atraceId\"8\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"P\n" +
 	"\x1aRevokeAuthorizationRequest\x12\x1a\n" +
-	"\bclientId\x18\x01 \x01(\tR\bclientId\"u\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"u\n" +
 	"\x18RevokeAuthorizationReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x1e\n" +

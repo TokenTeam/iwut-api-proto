@@ -147,6 +147,7 @@ message SetUserDeveloperIdReply {
 
 message RevokeAuthorizationRequest {
   string clientId = 1;
+  string status = 2;
 }
 
 message RevokeAuthorizationReply {
