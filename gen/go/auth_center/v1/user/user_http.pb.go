@@ -22,6 +22,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserdeleteAccount = "/auth_center.v1.user.User/deleteAccount"
+const OperationUsergetClaims = "/auth_center.v1.user.User/getClaims"
 const OperationUsergetProfile = "/auth_center.v1.user.User/getProfile"
 const OperationUsergetProfileKeys = "/auth_center.v1.user.User/getProfileKeys"
 const OperationUserrevokeAuthorization = "/auth_center.v1.user.User/revokeAuthorization"
@@ -32,6 +33,7 @@ const OperationUserupdateUserConsent = "/auth_center.v1.user.User/updateUserCons
 
 type UserHTTPServer interface {
 	DeleteAccount(context.Context, *emptypb.Empty) (*DeleteAccountReply, error)
+	GetClaims(context.Context, *GetClaimsRequest) (*GetClaimsReply, error)
 	GetProfile(context.Context, *GetProfileRequest) (*GetProfileReply, error)
 	GetProfileKeys(context.Context, *emptypb.Empty) (*GetProfileKeysReply, error)
 	RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error)
@@ -48,6 +50,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.GET("/user/profile", _User_GetProfile0_HTTP_Handler(srv))
 	r.POST("/user/update-profile", _User_UpdateProfile0_HTTP_Handler(srv))
 	r.GET("/user/profile-keys", _User_GetProfileKeys0_HTTP_Handler(srv))
+	r.GET("/user/claims", _User_GetClaims0_HTTP_Handler(srv))
 	r.POST("/user/update-consent", _User_UpdateUserConsent0_HTTP_Handler(srv))
 	r.POST("/user/set-developer-id", _User_SetUserDeveloperId0_HTTP_Handler(srv))
 	r.POST("/user/revoke_authorization", _User_RevokeAuthorization0_HTTP_Handler(srv))
@@ -154,6 +157,25 @@ func _User_GetProfileKeys0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Contex
 	}
 }
 
+func _User_GetClaims0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetClaimsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUsergetClaims)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetClaims(ctx, req.(*GetClaimsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetClaimsReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _User_UpdateUserConsent0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateUserConsentRequest
@@ -222,6 +244,7 @@ func _User_RevokeAuthorization0_HTTP_Handler(srv UserHTTPServer) func(ctx http.C
 
 type UserHTTPClient interface {
 	DeleteAccount(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *DeleteAccountReply, err error)
+	GetClaims(ctx context.Context, req *GetClaimsRequest, opts ...http.CallOption) (rsp *GetClaimsReply, err error)
 	GetProfile(ctx context.Context, req *GetProfileRequest, opts ...http.CallOption) (rsp *GetProfileReply, err error)
 	GetProfileKeys(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetProfileKeysReply, err error)
 	RevokeAuthorization(ctx context.Context, req *RevokeAuthorizationRequest, opts ...http.CallOption) (rsp *RevokeAuthorizationReply, err error)
@@ -244,6 +267,19 @@ func (c *UserHTTPClientImpl) DeleteAccount(ctx context.Context, in *emptypb.Empt
 	pattern := "/user/delete-account"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserdeleteAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetClaims(ctx context.Context, in *GetClaimsRequest, opts ...http.CallOption) (*GetClaimsReply, error) {
+	var out GetClaimsReply
+	pattern := "/user/claims"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUsergetClaims))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

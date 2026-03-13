@@ -39,6 +39,12 @@ service User {
     };
   }
 
+  rpc getClaims (GetClaimsRequest) returns (GetClaimsReply) {
+    option (google.api.http) = {
+      get: "/user/claims"
+    };
+  }
+
   rpc updateUserConsent (UpdateUserConsentRequest) returns (UpdateUserConsentReply) {
     option (google.api.http) = {
       post: "/user/update-consent"
@@ -88,7 +94,7 @@ message GetProfileReply {
     string email = 2;
     google.protobuf.Timestamp createdAt = 3;
     google.protobuf.Timestamp updatedAt = 4;
-    map<string, string> attrs = 5;
+    google.protobuf.Struct attrs = 5;
   }
   int32 code = 1;
   string message = 2;
@@ -123,6 +129,17 @@ message GetProfileKeysReply {
   string traceId = 4;
 }
 
+message GetClaimsRequest {
+  optional string userId = 1;
+  repeated string keys = 2;
+}
+message GetClaimsReply {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Struct data = 3;
+  string traceId = 4;
+}
+
 message UpdateUserConsentRequest {
   string clientId = 1;
   int32 clientVersion = 2;
@@ -153,5 +170,5 @@ message RevokeAuthorizationRequest {
 message RevokeAuthorizationReply {
   int32 code = 1;
   string message = 2;
-  optional string trace_id = 3;
+  optional string traceId = 3;
 }

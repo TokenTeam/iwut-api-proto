@@ -26,6 +26,7 @@ const (
 	User_GetProfile_FullMethodName          = "/auth_center.v1.user.User/getProfile"
 	User_UpdateProfile_FullMethodName       = "/auth_center.v1.user.User/updateProfile"
 	User_GetProfileKeys_FullMethodName      = "/auth_center.v1.user.User/getProfileKeys"
+	User_GetClaims_FullMethodName           = "/auth_center.v1.user.User/getClaims"
 	User_UpdateUserConsent_FullMethodName   = "/auth_center.v1.user.User/updateUserConsent"
 	User_SetUserDeveloperId_FullMethodName  = "/auth_center.v1.user.User/setUserDeveloperId"
 	User_RevokeAuthorization_FullMethodName = "/auth_center.v1.user.User/revokeAuthorization"
@@ -40,6 +41,7 @@ type UserClient interface {
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileReply, error)
 	UpdateProfile(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*UpdateProfileReply, error)
 	GetProfileKeys(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileKeysReply, error)
+	GetClaims(ctx context.Context, in *GetClaimsRequest, opts ...grpc.CallOption) (*GetClaimsReply, error)
 	UpdateUserConsent(ctx context.Context, in *UpdateUserConsentRequest, opts ...grpc.CallOption) (*UpdateUserConsentReply, error)
 	SetUserDeveloperId(ctx context.Context, in *SetUserDeveloperIdRequest, opts ...grpc.CallOption) (*SetUserDeveloperIdReply, error)
 	RevokeAuthorization(ctx context.Context, in *RevokeAuthorizationRequest, opts ...grpc.CallOption) (*RevokeAuthorizationReply, error)
@@ -103,6 +105,16 @@ func (c *userClient) GetProfileKeys(ctx context.Context, in *emptypb.Empty, opts
 	return out, nil
 }
 
+func (c *userClient) GetClaims(ctx context.Context, in *GetClaimsRequest, opts ...grpc.CallOption) (*GetClaimsReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetClaimsReply)
+	err := c.cc.Invoke(ctx, User_GetClaims_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) UpdateUserConsent(ctx context.Context, in *UpdateUserConsentRequest, opts ...grpc.CallOption) (*UpdateUserConsentReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserConsentReply)
@@ -142,6 +154,7 @@ type UserServer interface {
 	GetProfile(context.Context, *GetProfileRequest) (*GetProfileReply, error)
 	UpdateProfile(context.Context, *structpb.Struct) (*UpdateProfileReply, error)
 	GetProfileKeys(context.Context, *emptypb.Empty) (*GetProfileKeysReply, error)
+	GetClaims(context.Context, *GetClaimsRequest) (*GetClaimsReply, error)
 	UpdateUserConsent(context.Context, *UpdateUserConsentRequest) (*UpdateUserConsentReply, error)
 	SetUserDeveloperId(context.Context, *SetUserDeveloperIdRequest) (*SetUserDeveloperIdReply, error)
 	RevokeAuthorization(context.Context, *RevokeAuthorizationRequest) (*RevokeAuthorizationReply, error)
@@ -169,6 +182,9 @@ func (UnimplementedUserServer) UpdateProfile(context.Context, *structpb.Struct) 
 }
 func (UnimplementedUserServer) GetProfileKeys(context.Context, *emptypb.Empty) (*GetProfileKeysReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProfileKeys not implemented")
+}
+func (UnimplementedUserServer) GetClaims(context.Context, *GetClaimsRequest) (*GetClaimsReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetClaims not implemented")
 }
 func (UnimplementedUserServer) UpdateUserConsent(context.Context, *UpdateUserConsentRequest) (*UpdateUserConsentReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateUserConsent not implemented")
@@ -290,6 +306,24 @@ func _User_GetProfileKeys_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetClaims_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClaimsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetClaims(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetClaims_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetClaims(ctx, req.(*GetClaimsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_UpdateUserConsent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserConsentRequest)
 	if err := dec(in); err != nil {
@@ -370,6 +404,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getProfileKeys",
 			Handler:    _User_GetProfileKeys_Handler,
+		},
+		{
+			MethodName: "getClaims",
+			Handler:    _User_GetClaims_Handler,
 		},
 		{
 			MethodName: "updateUserConsent",
