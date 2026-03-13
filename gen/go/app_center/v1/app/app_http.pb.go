@@ -21,35 +21,38 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationAppcreateApp = "/app_center.v1.app.App/createApp"
-const OperationAppcreateAppVersion = "/app_center.v1.app.App/createAppVersion"
 const OperationAppgetAppList = "/app_center.v1.app.App/getAppList"
-const OperationAppgetAppVersionInfo = "/app_center.v1.app.App/getAppVersionInfo"
-const OperationAppgetAppVersionInfoWithUserCheck = "/app_center.v1.app.App/getAppVersionInfoWithUserCheck"
 const OperationAppgetApplicationInfo = "/app_center.v1.app.App/getApplicationInfo"
+const OperationApprefreshAppSecret = "/app_center.v1.app.App/refreshAppSecret"
+const OperationAppupdateAppGreyPercentage = "/app_center.v1.app.App/updateAppGreyPercentage"
+const OperationAppupdateAppGreyShuffleCode = "/app_center.v1.app.App/updateAppGreyShuffleCode"
 const OperationAppupdateAppRedirectUri = "/app_center.v1.app.App/updateAppRedirectUri"
 const OperationAppupdateAppRule = "/app_center.v1.app.App/updateAppRule"
+const OperationAppupdateAppVersionStatus = "/app_center.v1.app.App/updateAppVersionStatus"
 
 type AppHTTPServer interface {
 	CreateApp(context.Context, *CreateAppRequest) (*CreateAppReply, error)
-	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	GetAppList(context.Context, *emptypb.Empty) (*GetAppListReply, error)
-	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
-	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 	GetApplicationInfo(context.Context, *GetApplicationInfoRequest) (*GetApplicationInfoReply, error)
+	RefreshAppSecret(context.Context, *RefreshAppSecretRequest) (*RefreshAppSecretReply, error)
+	UpdateAppGreyPercentage(context.Context, *UpdateAppGreyPercentageRequest) (*UpdateAppGreyPercentageReply, error)
+	UpdateAppGreyShuffleCode(context.Context, *UpdateAppGreyShuffleCodeRequest) (*UpdateAppGreyShuffleCodeReply, error)
 	UpdateAppRedirectUri(context.Context, *UpdateAppRedirectUriRequest) (*UpdateAppRedirectUriReply, error)
 	UpdateAppRule(context.Context, *UpdateAppRuleRequest) (*UpdateAppRuleReply, error)
+	UpdateAppVersionStatus(context.Context, *UpdateAppVersionStatusRequest) (*UpdateAppVersionStatusReply, error)
 }
 
 func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r := s.Route("/")
 	r.GET("/app/info", _App_GetApplicationInfo0_HTTP_Handler(srv))
-	r.GET("/app/version-info", _App_GetAppVersionInfo0_HTTP_Handler(srv))
-	r.POST("/app/version-info-with-user-check", _App_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv))
 	r.GET("/app/list", _App_GetAppList0_HTTP_Handler(srv))
 	r.POST("/app/create", _App_CreateApp0_HTTP_Handler(srv))
-	r.POST("/app/create-version", _App_CreateAppVersion0_HTTP_Handler(srv))
 	r.POST("/app/update-rule", _App_UpdateAppRule0_HTTP_Handler(srv))
 	r.POST("/app/update-redirect-uri", _App_UpdateAppRedirectUri0_HTTP_Handler(srv))
+	r.POST("/app/update-collaborators", _App_UpdateAppVersionStatus0_HTTP_Handler(srv))
+	r.POST("/app/refresh-secret", _App_RefreshAppSecret0_HTTP_Handler(srv))
+	r.POST("/app/update-grey-percentage", _App_UpdateAppGreyPercentage0_HTTP_Handler(srv))
+	r.POST("/app/update-grey-shuffle-code", _App_UpdateAppGreyShuffleCode0_HTTP_Handler(srv))
 }
 
 func _App_GetApplicationInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
@@ -67,47 +70,6 @@ func _App_GetApplicationInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Cont
 			return err
 		}
 		reply := out.(*GetApplicationInfoReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _App_GetAppVersionInfo0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetAppVersionInfoRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAppgetAppVersionInfo)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAppVersionInfo(ctx, req.(*GetAppVersionInfoRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetAppVersionInfoReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _App_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetAppVersionInfoWithUserCheckRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAppgetAppVersionInfoWithUserCheck)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAppVersionInfoWithUserCheck(ctx, req.(*GetAppVersionInfoWithUserCheckRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetAppVersionInfoWithUserCheckReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -149,28 +111,6 @@ func _App_CreateApp0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) erro
 			return err
 		}
 		reply := out.(*CreateAppReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _App_CreateAppVersion0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CreateAppVersionRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAppcreateAppVersion)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateAppVersion(ctx, req.(*CreateAppVersionRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CreateAppVersionReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -219,15 +159,104 @@ func _App_UpdateAppRedirectUri0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Co
 	}
 }
 
+func _App_UpdateAppVersionStatus0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionStatusRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppupdateAppVersionStatus)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionStatus(ctx, req.(*UpdateAppVersionStatusRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionStatusReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_RefreshAppSecret0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RefreshAppSecretRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApprefreshAppSecret)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RefreshAppSecret(ctx, req.(*RefreshAppSecretRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RefreshAppSecretReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_UpdateAppGreyPercentage0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppGreyPercentageRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppupdateAppGreyPercentage)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppGreyPercentage(ctx, req.(*UpdateAppGreyPercentageRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppGreyPercentageReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _App_UpdateAppGreyShuffleCode0_HTTP_Handler(srv AppHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppGreyShuffleCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppupdateAppGreyShuffleCode)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppGreyShuffleCode(ctx, req.(*UpdateAppGreyShuffleCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppGreyShuffleCodeReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AppHTTPClient interface {
 	CreateApp(ctx context.Context, req *CreateAppRequest, opts ...http.CallOption) (rsp *CreateAppReply, err error)
-	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
 	GetAppList(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *GetAppListReply, err error)
-	GetAppVersionInfo(ctx context.Context, req *GetAppVersionInfoRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoReply, err error)
-	GetAppVersionInfoWithUserCheck(ctx context.Context, req *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoWithUserCheckReply, err error)
 	GetApplicationInfo(ctx context.Context, req *GetApplicationInfoRequest, opts ...http.CallOption) (rsp *GetApplicationInfoReply, err error)
+	RefreshAppSecret(ctx context.Context, req *RefreshAppSecretRequest, opts ...http.CallOption) (rsp *RefreshAppSecretReply, err error)
+	UpdateAppGreyPercentage(ctx context.Context, req *UpdateAppGreyPercentageRequest, opts ...http.CallOption) (rsp *UpdateAppGreyPercentageReply, err error)
+	UpdateAppGreyShuffleCode(ctx context.Context, req *UpdateAppGreyShuffleCodeRequest, opts ...http.CallOption) (rsp *UpdateAppGreyShuffleCodeReply, err error)
 	UpdateAppRedirectUri(ctx context.Context, req *UpdateAppRedirectUriRequest, opts ...http.CallOption) (rsp *UpdateAppRedirectUriReply, err error)
 	UpdateAppRule(ctx context.Context, req *UpdateAppRuleRequest, opts ...http.CallOption) (rsp *UpdateAppRuleReply, err error)
+	UpdateAppVersionStatus(ctx context.Context, req *UpdateAppVersionStatusRequest, opts ...http.CallOption) (rsp *UpdateAppVersionStatusReply, err error)
 }
 
 type AppHTTPClientImpl struct {
@@ -251,19 +280,6 @@ func (c *AppHTTPClientImpl) CreateApp(ctx context.Context, in *CreateAppRequest,
 	return &out, nil
 }
 
-func (c *AppHTTPClientImpl) CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...http.CallOption) (*CreateAppVersionReply, error) {
-	var out CreateAppVersionReply
-	pattern := "/app/create-version"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationAppcreateAppVersion))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *AppHTTPClientImpl) GetAppList(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*GetAppListReply, error) {
 	var out GetAppListReply
 	pattern := "/app/list"
@@ -277,11 +293,11 @@ func (c *AppHTTPClientImpl) GetAppList(ctx context.Context, in *emptypb.Empty, o
 	return &out, nil
 }
 
-func (c *AppHTTPClientImpl) GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...http.CallOption) (*GetAppVersionInfoReply, error) {
-	var out GetAppVersionInfoReply
-	pattern := "/app/version-info"
+func (c *AppHTTPClientImpl) GetApplicationInfo(ctx context.Context, in *GetApplicationInfoRequest, opts ...http.CallOption) (*GetApplicationInfoReply, error) {
+	var out GetApplicationInfoReply
+	pattern := "/app/info"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationAppgetAppVersionInfo))
+	opts = append(opts, http.Operation(OperationAppgetApplicationInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -290,11 +306,11 @@ func (c *AppHTTPClientImpl) GetAppVersionInfo(ctx context.Context, in *GetAppVer
 	return &out, nil
 }
 
-func (c *AppHTTPClientImpl) GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (*GetAppVersionInfoWithUserCheckReply, error) {
-	var out GetAppVersionInfoWithUserCheckReply
-	pattern := "/app/version-info-with-user-check"
+func (c *AppHTTPClientImpl) RefreshAppSecret(ctx context.Context, in *RefreshAppSecretRequest, opts ...http.CallOption) (*RefreshAppSecretReply, error) {
+	var out RefreshAppSecretReply
+	pattern := "/app/refresh-secret"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationAppgetAppVersionInfoWithUserCheck))
+	opts = append(opts, http.Operation(OperationApprefreshAppSecret))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -303,13 +319,26 @@ func (c *AppHTTPClientImpl) GetAppVersionInfoWithUserCheck(ctx context.Context, 
 	return &out, nil
 }
 
-func (c *AppHTTPClientImpl) GetApplicationInfo(ctx context.Context, in *GetApplicationInfoRequest, opts ...http.CallOption) (*GetApplicationInfoReply, error) {
-	var out GetApplicationInfoReply
-	pattern := "/app/info"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationAppgetApplicationInfo))
+func (c *AppHTTPClientImpl) UpdateAppGreyPercentage(ctx context.Context, in *UpdateAppGreyPercentageRequest, opts ...http.CallOption) (*UpdateAppGreyPercentageReply, error) {
+	var out UpdateAppGreyPercentageReply
+	pattern := "/app/update-grey-percentage"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppupdateAppGreyPercentage))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) UpdateAppGreyShuffleCode(ctx context.Context, in *UpdateAppGreyShuffleCodeRequest, opts ...http.CallOption) (*UpdateAppGreyShuffleCodeReply, error) {
+	var out UpdateAppGreyShuffleCodeReply
+	pattern := "/app/update-grey-shuffle-code"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppupdateAppGreyShuffleCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -334,6 +363,19 @@ func (c *AppHTTPClientImpl) UpdateAppRule(ctx context.Context, in *UpdateAppRule
 	pattern := "/app/update-rule"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAppupdateAppRule))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppHTTPClientImpl) UpdateAppVersionStatus(ctx context.Context, in *UpdateAppVersionStatusRequest, opts ...http.CallOption) (*UpdateAppVersionStatusReply, error) {
+	var out UpdateAppVersionStatusReply
+	pattern := "/app/update-collaborators"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppupdateAppVersionStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

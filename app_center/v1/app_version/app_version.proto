@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package app_center.v1.app_version;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "iwut-app-center/api/app_center/v1/app_version;app_version";
+
+service AppVersion {
+  rpc getAppVersionInfo (GetAppVersionInfoRequest) returns (GetAppVersionInfoReply) {
+    option (google.api.http) = {
+      get: "/app/version-info"
+    };
+  }
+  rpc getAppVersionInfoWithUserCheck(GetAppVersionInfoWithUserCheckRequest) returns (GetAppVersionInfoWithUserCheckReply) {
+    option (google.api.http) = {
+      post: "/app/version-info-with-user-check"
+      body: "*"
+    };
+  }
+  rpc createAppVersion (CreateAppVersionRequest) returns (CreateAppVersionReply) {
+    option (google.api.http) = {
+      post: "/app/create-version"
+      body: "*"
+    };
+  }
+}
+message GetAppVersionInfoRequest {
+  string clientId = 1;
+  int32 version = 2;
+}
+
+message ApplicationVersion {
+  string clientId = 1;
+  int32 internalVersion = 2;
+  string version = 3;
+  repeated string basicScope = 4;
+  repeated string optionalScope = 5;
+  string displayName = 6;
+  string description = 7;
+  string url = 8;
+  string icon = 9;
+  string status = 10;
+  google.protobuf.Timestamp createdAt = 11;
+  google.protobuf.Timestamp deletedAt = 12;
+  // 这里没有返回 tester, 大且没用
+}
+
+message GetAppVersionInfoReply {
+  int32 code = 1;
+  string message = 2;
+  optional ApplicationVersion data = 3;
+  string traceId = 4;
+}
+
+message GetAppVersionInfoWithUserCheckRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string userId = 3;
+}
+
+message GetAppVersionInfoWithUserCheckReply {
+  message GetAppVersionInfoWithUserCheckReplyData {
+    ApplicationVersion appVersion = 1;
+    bool allowed = 2;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional GetAppVersionInfoWithUserCheckReplyData data = 3;
+  string traceId = 4;
+}
+
+message CreateAppVersionRequest {
+  string clientId = 1;
+  repeated string basicScope = 2;
+  repeated string optionalScope = 3;
+  string version = 4;
+  string displayName = 5;
+  string description = 6;
+  string url = 7;
+  string icon = 8;
+}
+message CreateAppVersionReply {
+  message CreateAppVersionReplyData {
+    string clientId = 1;
+    int32 internalVersion = 2;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional CreateAppVersionReplyData data = 3;
+  string traceId = 4;
+}

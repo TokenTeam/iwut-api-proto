@@ -43,6 +43,7 @@ const (
 	ErrorReason_CLIENT_VERSION_NOT_FOUNT          ErrorReason = 16 // 客户端版本未找到
 	ErrorReason_INVALID_RULE                      ErrorReason = 17 // 无效的规则
 	ErrorReason_VERSION_NOT_ALLOWED_FOR_THIS_USER ErrorReason = 18 // 该用户不允许使用这个版本
+	ErrorReason_INVALID_STATUS                    ErrorReason = 19 // 无效的状态
 )
 
 // Enum value maps for ErrorReason.
@@ -67,6 +68,7 @@ var (
 		16: "CLIENT_VERSION_NOT_FOUNT",
 		17: "INVALID_RULE",
 		18: "VERSION_NOT_ALLOWED_FOR_THIS_USER",
+		19: "INVALID_STATUS",
 	}
 	ErrorReason_value = map[string]int32{
 		"CLIENT_NOT_FOUND":                  0,
@@ -88,6 +90,7 @@ var (
 		"CLIENT_VERSION_NOT_FOUNT":          16,
 		"INVALID_RULE":                      17,
 		"VERSION_NOT_ALLOWED_FOR_THIS_USER": 18,
+		"INVALID_STATUS":                    19,
 	}
 )
 
@@ -122,7 +125,7 @@ var File_v1_error_reason_error_reason_proto protoreflect.FileDescriptor
 
 const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*\xc9\x03\n" +
+	"\"v1/error_reason/error_reason.proto\x12\rhelloworld.v1*\xdd\x03\n" +
 	"\vErrorReason\x12\x14\n" +
 	"\x10CLIENT_NOT_FOUND\x10\x00\x12\x11\n" +
 	"\rUNKNOWN_ERROR\x10\x01\x12\x1b\n" +
@@ -143,7 +146,8 @@ const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\x10INVITE_NOT_FOUND\x10\x0f\x12\x1c\n" +
 	"\x18CLIENT_VERSION_NOT_FOUNT\x10\x10\x12\x10\n" +
 	"\fINVALID_RULE\x10\x11\x12%\n" +
-	"!VERSION_NOT_ALLOWED_FOR_THIS_USER\x10\x12B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
+	"!VERSION_NOT_ALLOWED_FOR_THIS_USER\x10\x12\x12\x12\n" +
+	"\x0eINVALID_STATUS\x10\x13B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
 
 var (
 	file_v1_error_reason_error_reason_proto_rawDescOnce sync.Once

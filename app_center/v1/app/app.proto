@@ -13,17 +13,6 @@ service App {
       get: "/app/info"
     };
   }
-  rpc getAppVersionInfo (GetAppVersionInfoRequest) returns (GetAppVersionInfoReply) {
-    option (google.api.http) = {
-      get: "/app/version-info"
-    };
-  }
-  rpc getAppVersionInfoWithUserCheck(GetAppVersionInfoWithUserCheckRequest) returns (GetAppVersionInfoWithUserCheckReply) {
-    option (google.api.http) = {
-      post: "/app/version-info-with-user-check"
-      body: "*"
-    };
-  }
   rpc getAppList (google.protobuf.Empty) returns (GetAppListReply) {
     option (google.api.http) = {
       get: "/app/list"
@@ -32,12 +21,6 @@ service App {
   rpc createApp (CreateAppRequest) returns (CreateAppReply) {
     option (google.api.http) = {
       post: "/app/create"
-      body: "*"
-    };
-  }
-  rpc createAppVersion (CreateAppVersionRequest) returns (CreateAppVersionReply) {
-    option (google.api.http) = {
-      post: "/app/create-version"
       body: "*"
     };
   }
@@ -53,13 +36,32 @@ service App {
       body: "*"
     };
   }
+  rpc updateAppVersionStatus (UpdateAppVersionStatusRequest) returns (UpdateAppVersionStatusReply) {
+    option (google.api.http) = {
+      post: "/app/update-collaborators"
+      body: "*"
+    };
+  }
+  rpc refreshAppSecret (RefreshAppSecretRequest) returns (RefreshAppSecretReply) {
+    option (google.api.http) = {
+      post: "/app/refresh-secret"
+      body: "*"
+    };
+  }
+  rpc updateAppGreyPercentage (UpdateAppGreyPercentageRequest) returns (UpdateAppGreyPercentageReply) {
+    option (google.api.http) = {
+      post: "/app/update-grey-percentage"
+      body: "*"
+    };
+  }
+  rpc updateAppGreyShuffleCode (UpdateAppGreyShuffleCodeRequest) returns (UpdateAppGreyShuffleCodeReply) {
+    option (google.api.http) = {
+      post: "/app/update-grey-shuffle-code"
+      body: "*"
+    };
+  }
 }
 
-//message GetAppListRequest {
-//  int32 page = 1;
-//  int32 pageSize = 2;
-//
-//}
 message GetAppListReply {
   message ApplicationVersion {
     string clientId = 1;
@@ -81,48 +83,6 @@ message GetAppListReply {
   int32 code = 1;
   string message = 2;
   repeated ApplicationVersion data = 3;
-  string traceId = 4;
-}
-
-message GetAppVersionInfoRequest {
-  string clientId = 1;
-  int32 version = 2;
-}
-message ApplicationVersion {
-  string clientId = 1;
-  int32 internalVersion = 2;
-  string version = 3;
-  repeated string basicScope = 4;
-  repeated string optionalScope = 5;
-  string displayName = 6;
-  string description = 7;
-  string url = 8;
-  string icon = 9;
-  string status = 10;
-  google.protobuf.Timestamp createdAt = 11;
-  google.protobuf.Timestamp deletedAt = 12;
-  // 这里没有返回 tester, 大且没用
-}
-message GetAppVersionInfoReply {
-  int32 code = 1;
-  string message = 2;
-  optional ApplicationVersion data = 3;
-  string traceId = 4;
-}
-
-message GetAppVersionInfoWithUserCheckRequest {
-  string clientId = 1;
-  int32 version = 2;
-  string userId = 3;
-}
-message GetAppVersionInfoWithUserCheckReply {
-  message GetAppVersionInfoWithUserCheckReplyData {
-    ApplicationVersion appVersion = 1;
-    bool allowed = 2;
-  }
-  int32 code = 1;
-  string message = 2;
-  optional GetAppVersionInfoWithUserCheckReplyData data = 3;
   string traceId = 4;
 }
 
@@ -173,27 +133,6 @@ message CreateAppReply {
   string traceId = 4;
 }
 
-message CreateAppVersionRequest {
-  string clientId = 1;
-  repeated string basicScope = 2;
-  repeated string optionalScope = 3;
-  string version = 4;
-  string displayName = 5;
-  string description = 6;
-  string url = 7;
-  string icon = 8;
-}
-message CreateAppVersionReply {
-  message CreateAppVersionReplyData {
-    string clientId = 1;
-    int32 internalVersion = 2;
-  }
-  int32 code = 1;
-  string message = 2;
-  optional CreateAppVersionReplyData data = 3;
-  string traceId = 4;
-}
-
 message UpdateAppRuleRequest {
   message Rule {
     string operator = 1;
@@ -218,6 +157,49 @@ message UpdateAppRedirectUriRequest {
 }
 
 message UpdateAppRedirectUriReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionStatusRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string status = 3;
+}
+message UpdateAppVersionStatusReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message RefreshAppSecretRequest {
+  string clientId = 1;
+}
+message RefreshAppSecretReply {
+  message RefreshAppSecretReplyData {
+    string clientSecret = 1;
+  }
+  int32 code = 1;
+  string message = 2;
+  optional RefreshAppSecretReplyData data = 3;
+  string traceId = 4;
+}
+
+message UpdateAppGreyPercentageRequest {
+  string clientId = 1;
+  double greyPercentage = 2;
+}
+message UpdateAppGreyPercentageReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppGreyShuffleCodeRequest {
+  string clientId = 1;
+}
+message UpdateAppGreyShuffleCodeReply {
   int32 code = 1;
   string message = 2;
   string traceId = 3;
