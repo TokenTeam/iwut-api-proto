@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package auth_center.v1;
+
+option go_package = "iwut-auth-center/api/auth_center/v1;v1";
+
+enum ErrorReason {
+  USER_NOT_FOUND = 0;                    // 用户未找到
+  UNKNOWN_ERROR = 1;                     // 未知错误
+  USER_ALREADY_EXISTS = 2;               // 用户已存在
+  PERMISSION_DENIED = 3;                 // 权限不足
+  INVALID_CAPTCHA = 4;                   // 无效的验证码
+  USER_DELETED = 5;                      // 用户已被删除
+  CAPTCHA_REQUEST_TOO_FREQUENTLY = 6;    // 请求验证码过于频繁
+  OFFICIAL_INFO_MEMORY_LIMITATION_EXCEEDED = 7; // 官方信息内存限制超过
+  OAUTH2_INFO_MEMORY_LIMITATION_EXCEEDED = 8;   // OAuth2信息内存限制超过
+  INVALID_SCOPE = 9;                     // 无效的权限范围
+  INVALID_RESPONSE_TYPE = 10;            // 无效的响应类型
+  REDIRECT_URI_MISMATCH = 11;            // 重定向URI不匹配
+  USER_DENIED = 12;                      // 用户拒绝授权
+  INVALID_APPLICATION_VERSION_STATUS = 13; // 无效的应用版本状态
+  INVALID_KEY_NAME = 14;                 // 无效的键名
+  INVALID_APP_ID = 15;                   // 无效的应用ID
+  TOO_MANY_KEYS = 16;                    // 键数量超过限制
+  INVALID_STRUCTURE = 17;                // 无效的结构
+  INVALID_DEVELOPER_ID = 18;             // 无效的开发者ID
+  UPDATE_DEVELOPER_ID_TOO_FREQUENTLY = 19; // 更新开发者ID过于频繁
+  DEVELOPER_ID_ALREADY_EXIST = 20;       // 开发者ID已设置
+}
