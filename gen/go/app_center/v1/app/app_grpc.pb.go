@@ -29,6 +29,9 @@ const (
 	App_RefreshAppSecret_FullMethodName         = "/app_center.v1.app.App/refreshAppSecret"
 	App_UpdateAppGreyPercentage_FullMethodName  = "/app_center.v1.app.App/updateAppGreyPercentage"
 	App_UpdateAppGreyShuffleCode_FullMethodName = "/app_center.v1.app.App/updateAppGreyShuffleCode"
+	App_UpdateAppName_FullMethodName            = "/app_center.v1.app.App/updateAppName"
+	App_UpdateAppStatus_FullMethodName          = "/app_center.v1.app.App/updateAppStatus"
+	App_UpdateAppCollaborators_FullMethodName   = "/app_center.v1.app.App/updateAppCollaborators"
 )
 
 // AppClient is the client API for App service.
@@ -44,6 +47,9 @@ type AppClient interface {
 	RefreshAppSecret(ctx context.Context, in *RefreshAppSecretRequest, opts ...grpc.CallOption) (*RefreshAppSecretReply, error)
 	UpdateAppGreyPercentage(ctx context.Context, in *UpdateAppGreyPercentageRequest, opts ...grpc.CallOption) (*UpdateAppGreyPercentageReply, error)
 	UpdateAppGreyShuffleCode(ctx context.Context, in *UpdateAppGreyShuffleCodeRequest, opts ...grpc.CallOption) (*UpdateAppGreyShuffleCodeReply, error)
+	UpdateAppName(ctx context.Context, in *UpdateAppNameRequest, opts ...grpc.CallOption) (*UpdateAppNameReply, error)
+	UpdateAppStatus(ctx context.Context, in *UpdateAppStatusRequest, opts ...grpc.CallOption) (*UpdateAppStatusReply, error)
+	UpdateAppCollaborators(ctx context.Context, in *UpdateAppCollaboratorsRequest, opts ...grpc.CallOption) (*UpdateAppCollaboratorsReply, error)
 }
 
 type appClient struct {
@@ -144,6 +150,36 @@ func (c *appClient) UpdateAppGreyShuffleCode(ctx context.Context, in *UpdateAppG
 	return out, nil
 }
 
+func (c *appClient) UpdateAppName(ctx context.Context, in *UpdateAppNameRequest, opts ...grpc.CallOption) (*UpdateAppNameReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppNameReply)
+	err := c.cc.Invoke(ctx, App_UpdateAppName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) UpdateAppStatus(ctx context.Context, in *UpdateAppStatusRequest, opts ...grpc.CallOption) (*UpdateAppStatusReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppStatusReply)
+	err := c.cc.Invoke(ctx, App_UpdateAppStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appClient) UpdateAppCollaborators(ctx context.Context, in *UpdateAppCollaboratorsRequest, opts ...grpc.CallOption) (*UpdateAppCollaboratorsReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppCollaboratorsReply)
+	err := c.cc.Invoke(ctx, App_UpdateAppCollaborators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppServer is the server API for App service.
 // All implementations must embed UnimplementedAppServer
 // for forward compatibility.
@@ -157,6 +193,9 @@ type AppServer interface {
 	RefreshAppSecret(context.Context, *RefreshAppSecretRequest) (*RefreshAppSecretReply, error)
 	UpdateAppGreyPercentage(context.Context, *UpdateAppGreyPercentageRequest) (*UpdateAppGreyPercentageReply, error)
 	UpdateAppGreyShuffleCode(context.Context, *UpdateAppGreyShuffleCodeRequest) (*UpdateAppGreyShuffleCodeReply, error)
+	UpdateAppName(context.Context, *UpdateAppNameRequest) (*UpdateAppNameReply, error)
+	UpdateAppStatus(context.Context, *UpdateAppStatusRequest) (*UpdateAppStatusReply, error)
+	UpdateAppCollaborators(context.Context, *UpdateAppCollaboratorsRequest) (*UpdateAppCollaboratorsReply, error)
 	mustEmbedUnimplementedAppServer()
 }
 
@@ -193,6 +232,15 @@ func (UnimplementedAppServer) UpdateAppGreyPercentage(context.Context, *UpdateAp
 }
 func (UnimplementedAppServer) UpdateAppGreyShuffleCode(context.Context, *UpdateAppGreyShuffleCodeRequest) (*UpdateAppGreyShuffleCodeReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAppGreyShuffleCode not implemented")
+}
+func (UnimplementedAppServer) UpdateAppName(context.Context, *UpdateAppNameRequest) (*UpdateAppNameReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppName not implemented")
+}
+func (UnimplementedAppServer) UpdateAppStatus(context.Context, *UpdateAppStatusRequest) (*UpdateAppStatusReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppStatus not implemented")
+}
+func (UnimplementedAppServer) UpdateAppCollaborators(context.Context, *UpdateAppCollaboratorsRequest) (*UpdateAppCollaboratorsReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppCollaborators not implemented")
 }
 func (UnimplementedAppServer) mustEmbedUnimplementedAppServer() {}
 func (UnimplementedAppServer) testEmbeddedByValue()             {}
@@ -377,6 +425,60 @@ func _App_UpdateAppGreyShuffleCode_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _App_UpdateAppName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateAppName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_UpdateAppName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateAppName(ctx, req.(*UpdateAppNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_UpdateAppStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateAppStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_UpdateAppStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateAppStatus(ctx, req.(*UpdateAppStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _App_UpdateAppCollaborators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppCollaboratorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServer).UpdateAppCollaborators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: App_UpdateAppCollaborators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServer).UpdateAppCollaborators(ctx, req.(*UpdateAppCollaboratorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // App_ServiceDesc is the grpc.ServiceDesc for App service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -419,6 +521,18 @@ var App_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateAppGreyShuffleCode",
 			Handler:    _App_UpdateAppGreyShuffleCode_Handler,
+		},
+		{
+			MethodName: "updateAppName",
+			Handler:    _App_UpdateAppName_Handler,
+		},
+		{
+			MethodName: "updateAppStatus",
+			Handler:    _App_UpdateAppStatus_Handler,
+		},
+		{
+			MethodName: "updateAppCollaborators",
+			Handler:    _App_UpdateAppCollaborators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -24,6 +24,61 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type UpdateAppStatusRequest_AppStatus int32
+
+const (
+	UpdateAppStatusRequest_APP_STATUS_AUDITING   UpdateAppStatusRequest_AppStatus = 0
+	UpdateAppStatusRequest_APP_STATUS_DEVELOPING UpdateAppStatusRequest_AppStatus = 1
+	UpdateAppStatusRequest_APP_STATUS_PUBLISHED  UpdateAppStatusRequest_AppStatus = 2
+	UpdateAppStatusRequest_APP_STATUS_HIDDEN     UpdateAppStatusRequest_AppStatus = 3
+	UpdateAppStatusRequest_APP_STATUS_BANNED     UpdateAppStatusRequest_AppStatus = 4
+)
+
+// Enum value maps for UpdateAppStatusRequest_AppStatus.
+var (
+	UpdateAppStatusRequest_AppStatus_name = map[int32]string{
+		0: "APP_STATUS_AUDITING",
+		1: "APP_STATUS_DEVELOPING",
+		2: "APP_STATUS_PUBLISHED",
+		3: "APP_STATUS_HIDDEN",
+		4: "APP_STATUS_BANNED",
+	}
+	UpdateAppStatusRequest_AppStatus_value = map[string]int32{
+		"APP_STATUS_AUDITING":   0,
+		"APP_STATUS_DEVELOPING": 1,
+		"APP_STATUS_PUBLISHED":  2,
+		"APP_STATUS_HIDDEN":     3,
+		"APP_STATUS_BANNED":     4,
+	}
+)
+
+func (x UpdateAppStatusRequest_AppStatus) Enum() *UpdateAppStatusRequest_AppStatus {
+	p := new(UpdateAppStatusRequest_AppStatus)
+	*p = x
+	return p
+}
+
+func (x UpdateAppStatusRequest_AppStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UpdateAppStatusRequest_AppStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_v1_app_app_proto_enumTypes[0].Descriptor()
+}
+
+func (UpdateAppStatusRequest_AppStatus) Type() protoreflect.EnumType {
+	return &file_v1_app_app_proto_enumTypes[0]
+}
+
+func (x UpdateAppStatusRequest_AppStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UpdateAppStatusRequest_AppStatus.Descriptor instead.
+func (UpdateAppStatusRequest_AppStatus) EnumDescriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{19, 0}
+}
+
 type GetAppListReply struct {
 	state         protoimpl.MessageState                `protogen:"open.v1"`
 	Code          int32                                 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -988,6 +1043,342 @@ func (x *UpdateAppGreyShuffleCodeReply) GetTraceId() string {
 	return ""
 }
 
+type UpdateAppNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppNameRequest) Reset() {
+	*x = UpdateAppNameRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppNameRequest) ProtoMessage() {}
+
+func (x *UpdateAppNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppNameRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAppNameRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *UpdateAppNameRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *UpdateAppNameRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type UpdateAppNameReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppNameReply) Reset() {
+	*x = UpdateAppNameReply{}
+	mi := &file_v1_app_app_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppNameReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppNameReply) ProtoMessage() {}
+
+func (x *UpdateAppNameReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppNameReply.ProtoReflect.Descriptor instead.
+func (*UpdateAppNameReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UpdateAppNameReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdateAppNameReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateAppNameReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type UpdateAppStatusRequest struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	ClientId      string                           `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Status        UpdateAppStatusRequest_AppStatus `protobuf:"varint,2,opt,name=status,proto3,enum=app_center.v1.app.UpdateAppStatusRequest_AppStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppStatusRequest) Reset() {
+	*x = UpdateAppStatusRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppStatusRequest) ProtoMessage() {}
+
+func (x *UpdateAppStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppStatusRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAppStatusRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *UpdateAppStatusRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *UpdateAppStatusRequest) GetStatus() UpdateAppStatusRequest_AppStatus {
+	if x != nil {
+		return x.Status
+	}
+	return UpdateAppStatusRequest_APP_STATUS_AUDITING
+}
+
+type UpdateAppStatusReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppStatusReply) Reset() {
+	*x = UpdateAppStatusReply{}
+	mi := &file_v1_app_app_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppStatusReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppStatusReply) ProtoMessage() {}
+
+func (x *UpdateAppStatusReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppStatusReply.ProtoReflect.Descriptor instead.
+func (*UpdateAppStatusReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UpdateAppStatusReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdateAppStatusReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateAppStatusReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type UpdateAppCollaboratorsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Collaborators []string               `protobuf:"bytes,2,rep,name=collaborators,proto3" json:"collaborators,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppCollaboratorsRequest) Reset() {
+	*x = UpdateAppCollaboratorsRequest{}
+	mi := &file_v1_app_app_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppCollaboratorsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppCollaboratorsRequest) ProtoMessage() {}
+
+func (x *UpdateAppCollaboratorsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppCollaboratorsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAppCollaboratorsRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *UpdateAppCollaboratorsRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *UpdateAppCollaboratorsRequest) GetCollaborators() []string {
+	if x != nil {
+		return x.Collaborators
+	}
+	return nil
+}
+
+type UpdateAppCollaboratorsReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAppCollaboratorsReply) Reset() {
+	*x = UpdateAppCollaboratorsReply{}
+	mi := &file_v1_app_app_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAppCollaboratorsReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAppCollaboratorsReply) ProtoMessage() {}
+
+func (x *UpdateAppCollaboratorsReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_app_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAppCollaboratorsReply.ProtoReflect.Descriptor instead.
+func (*UpdateAppCollaboratorsReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_app_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UpdateAppCollaboratorsReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdateAppCollaboratorsReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateAppCollaboratorsReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type GetAppListReply_ApplicationVersion struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	ClientId        string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
@@ -1010,7 +1401,7 @@ type GetAppListReply_ApplicationVersion struct {
 
 func (x *GetAppListReply_ApplicationVersion) Reset() {
 	*x = GetAppListReply_ApplicationVersion{}
-	mi := &file_v1_app_app_proto_msgTypes[17]
+	mi := &file_v1_app_app_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1022,7 +1413,7 @@ func (x *GetAppListReply_ApplicationVersion) String() string {
 func (*GetAppListReply_ApplicationVersion) ProtoMessage() {}
 
 func (x *GetAppListReply_ApplicationVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[17]
+	mi := &file_v1_app_app_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1160,7 +1551,7 @@ type GetApplicationInfoReply_Application struct {
 
 func (x *GetApplicationInfoReply_Application) Reset() {
 	*x = GetApplicationInfoReply_Application{}
-	mi := &file_v1_app_app_proto_msgTypes[18]
+	mi := &file_v1_app_app_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1172,7 +1563,7 @@ func (x *GetApplicationInfoReply_Application) String() string {
 func (*GetApplicationInfoReply_Application) ProtoMessage() {}
 
 func (x *GetApplicationInfoReply_Application) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[18]
+	mi := &file_v1_app_app_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1313,7 +1704,7 @@ type CreateAppReply_CreateAppReplyData struct {
 
 func (x *CreateAppReply_CreateAppReplyData) Reset() {
 	*x = CreateAppReply_CreateAppReplyData{}
-	mi := &file_v1_app_app_proto_msgTypes[19]
+	mi := &file_v1_app_app_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1325,7 +1716,7 @@ func (x *CreateAppReply_CreateAppReplyData) String() string {
 func (*CreateAppReply_CreateAppReplyData) ProtoMessage() {}
 
 func (x *CreateAppReply_CreateAppReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[19]
+	mi := &file_v1_app_app_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1389,7 +1780,7 @@ type UpdateAppRuleRequest_Rule struct {
 
 func (x *UpdateAppRuleRequest_Rule) Reset() {
 	*x = UpdateAppRuleRequest_Rule{}
-	mi := &file_v1_app_app_proto_msgTypes[20]
+	mi := &file_v1_app_app_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1401,7 +1792,7 @@ func (x *UpdateAppRuleRequest_Rule) String() string {
 func (*UpdateAppRuleRequest_Rule) ProtoMessage() {}
 
 func (x *UpdateAppRuleRequest_Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[20]
+	mi := &file_v1_app_app_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1461,7 +1852,7 @@ type RefreshAppSecretReply_RefreshAppSecretReplyData struct {
 
 func (x *RefreshAppSecretReply_RefreshAppSecretReplyData) Reset() {
 	*x = RefreshAppSecretReply_RefreshAppSecretReplyData{}
-	mi := &file_v1_app_app_proto_msgTypes[21]
+	mi := &file_v1_app_app_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1473,7 +1864,7 @@ func (x *RefreshAppSecretReply_RefreshAppSecretReplyData) String() string {
 func (*RefreshAppSecretReply_RefreshAppSecretReplyData) ProtoMessage() {}
 
 func (x *RefreshAppSecretReply_RefreshAppSecretReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_app_proto_msgTypes[21]
+	mi := &file_v1_app_app_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1617,7 +2008,34 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x1dUpdateAppGreyShuffleCodeReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
-	"\atraceId\x18\x03 \x01(\tR\atraceId2\xf0\t\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"F\n" +
+	"\x14UpdateAppNameRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\\\n" +
+	"\x12UpdateAppNameReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"\x8b\x02\n" +
+	"\x16UpdateAppStatusRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12K\n" +
+	"\x06status\x18\x02 \x01(\x0e23.app_center.v1.app.UpdateAppStatusRequest.AppStatusR\x06status\"\x87\x01\n" +
+	"\tAppStatus\x12\x17\n" +
+	"\x13APP_STATUS_AUDITING\x10\x00\x12\x19\n" +
+	"\x15APP_STATUS_DEVELOPING\x10\x01\x12\x18\n" +
+	"\x14APP_STATUS_PUBLISHED\x10\x02\x12\x15\n" +
+	"\x11APP_STATUS_HIDDEN\x10\x03\x12\x15\n" +
+	"\x11APP_STATUS_BANNED\x10\x04\"^\n" +
+	"\x14UpdateAppStatusReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"a\n" +
+	"\x1dUpdateAppCollaboratorsRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12$\n" +
+	"\rcollaborators\x18\x02 \x03(\tR\rcollaborators\"e\n" +
+	"\x1bUpdateAppCollaboratorsReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId2\x98\r\n" +
 	"\x03App\x12\x81\x01\n" +
 	"\x12getApplicationInfo\x12,.app_center.v1.app.GetApplicationInfoRequest\x1a*.app_center.v1.app.GetApplicationInfoReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/info\x12[\n" +
 	"\n" +
@@ -1628,7 +2046,10 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x16updateAppVersionStatus\x120.app_center.v1.app.UpdateAppVersionStatusRequest\x1a..app_center.v1.app.UpdateAppVersionStatusReply\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/app/update-collaborators\x12\x88\x01\n" +
 	"\x10refreshAppSecret\x12*.app_center.v1.app.RefreshAppSecretRequest\x1a(.app_center.v1.app.RefreshAppSecretReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/refresh-secret\x12\xa5\x01\n" +
 	"\x17updateAppGreyPercentage\x121.app_center.v1.app.UpdateAppGreyPercentageRequest\x1a/.app_center.v1.app.UpdateAppGreyPercentageReply\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/app/update-grey-percentage\x12\xaa\x01\n" +
-	"\x18updateAppGreyShuffleCode\x122.app_center.v1.app.UpdateAppGreyShuffleCodeRequest\x1a0.app_center.v1.app.UpdateAppGreyShuffleCodeReply\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/app/update-grey-shuffle-codeB+Z)iwut-app-center/api/app_center/v1/app;appb\x06proto3"
+	"\x18updateAppGreyShuffleCode\x122.app_center.v1.app.UpdateAppGreyShuffleCodeRequest\x1a0.app_center.v1.app.UpdateAppGreyShuffleCodeReply\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/app/update-grey-shuffle-code\x12|\n" +
+	"\rupdateAppName\x12'.app_center.v1.app.UpdateAppNameRequest\x1a%.app_center.v1.app.UpdateAppNameReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/app/update-name\x12\x84\x01\n" +
+	"\x0fupdateAppStatus\x12).app_center.v1.app.UpdateAppStatusRequest\x1a'.app_center.v1.app.UpdateAppStatusReply\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/app/update-status\x12\xa0\x01\n" +
+	"\x16updateAppCollaborators\x120.app_center.v1.app.UpdateAppCollaboratorsRequest\x1a..app_center.v1.app.UpdateAppCollaboratorsReply\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/app/update-collaboratorsB+Z)iwut-app-center/api/app_center/v1/app;appb\x06proto3"
 
 var (
 	file_v1_app_app_proto_rawDescOnce sync.Once
@@ -1642,66 +2063,81 @@ func file_v1_app_app_proto_rawDescGZIP() []byte {
 	return file_v1_app_app_proto_rawDescData
 }
 
-var file_v1_app_app_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_v1_app_app_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_v1_app_app_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_v1_app_app_proto_goTypes = []any{
-	(*GetAppListReply)(nil),                                 // 0: app_center.v1.app.GetAppListReply
-	(*GetApplicationInfoRequest)(nil),                       // 1: app_center.v1.app.GetApplicationInfoRequest
-	(*GetApplicationInfoReply)(nil),                         // 2: app_center.v1.app.GetApplicationInfoReply
-	(*CreateAppRequest)(nil),                                // 3: app_center.v1.app.CreateAppRequest
-	(*CreateAppReply)(nil),                                  // 4: app_center.v1.app.CreateAppReply
-	(*UpdateAppRuleRequest)(nil),                            // 5: app_center.v1.app.UpdateAppRuleRequest
-	(*UpdateAppRuleReply)(nil),                              // 6: app_center.v1.app.UpdateAppRuleReply
-	(*UpdateAppRedirectUriRequest)(nil),                     // 7: app_center.v1.app.UpdateAppRedirectUriRequest
-	(*UpdateAppRedirectUriReply)(nil),                       // 8: app_center.v1.app.UpdateAppRedirectUriReply
-	(*UpdateAppVersionStatusRequest)(nil),                   // 9: app_center.v1.app.UpdateAppVersionStatusRequest
-	(*UpdateAppVersionStatusReply)(nil),                     // 10: app_center.v1.app.UpdateAppVersionStatusReply
-	(*RefreshAppSecretRequest)(nil),                         // 11: app_center.v1.app.RefreshAppSecretRequest
-	(*RefreshAppSecretReply)(nil),                           // 12: app_center.v1.app.RefreshAppSecretReply
-	(*UpdateAppGreyPercentageRequest)(nil),                  // 13: app_center.v1.app.UpdateAppGreyPercentageRequest
-	(*UpdateAppGreyPercentageReply)(nil),                    // 14: app_center.v1.app.UpdateAppGreyPercentageReply
-	(*UpdateAppGreyShuffleCodeRequest)(nil),                 // 15: app_center.v1.app.UpdateAppGreyShuffleCodeRequest
-	(*UpdateAppGreyShuffleCodeReply)(nil),                   // 16: app_center.v1.app.UpdateAppGreyShuffleCodeReply
-	(*GetAppListReply_ApplicationVersion)(nil),              // 17: app_center.v1.app.GetAppListReply.ApplicationVersion
-	(*GetApplicationInfoReply_Application)(nil),             // 18: app_center.v1.app.GetApplicationInfoReply.Application
-	(*CreateAppReply_CreateAppReplyData)(nil),               // 19: app_center.v1.app.CreateAppReply.CreateAppReplyData
-	(*UpdateAppRuleRequest_Rule)(nil),                       // 20: app_center.v1.app.UpdateAppRuleRequest.Rule
-	(*RefreshAppSecretReply_RefreshAppSecretReplyData)(nil), // 21: app_center.v1.app.RefreshAppSecretReply.RefreshAppSecretReplyData
-	(*timestamppb.Timestamp)(nil),                           // 22: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                                   // 23: google.protobuf.Empty
+	(UpdateAppStatusRequest_AppStatus)(0),                   // 0: app_center.v1.app.UpdateAppStatusRequest.AppStatus
+	(*GetAppListReply)(nil),                                 // 1: app_center.v1.app.GetAppListReply
+	(*GetApplicationInfoRequest)(nil),                       // 2: app_center.v1.app.GetApplicationInfoRequest
+	(*GetApplicationInfoReply)(nil),                         // 3: app_center.v1.app.GetApplicationInfoReply
+	(*CreateAppRequest)(nil),                                // 4: app_center.v1.app.CreateAppRequest
+	(*CreateAppReply)(nil),                                  // 5: app_center.v1.app.CreateAppReply
+	(*UpdateAppRuleRequest)(nil),                            // 6: app_center.v1.app.UpdateAppRuleRequest
+	(*UpdateAppRuleReply)(nil),                              // 7: app_center.v1.app.UpdateAppRuleReply
+	(*UpdateAppRedirectUriRequest)(nil),                     // 8: app_center.v1.app.UpdateAppRedirectUriRequest
+	(*UpdateAppRedirectUriReply)(nil),                       // 9: app_center.v1.app.UpdateAppRedirectUriReply
+	(*UpdateAppVersionStatusRequest)(nil),                   // 10: app_center.v1.app.UpdateAppVersionStatusRequest
+	(*UpdateAppVersionStatusReply)(nil),                     // 11: app_center.v1.app.UpdateAppVersionStatusReply
+	(*RefreshAppSecretRequest)(nil),                         // 12: app_center.v1.app.RefreshAppSecretRequest
+	(*RefreshAppSecretReply)(nil),                           // 13: app_center.v1.app.RefreshAppSecretReply
+	(*UpdateAppGreyPercentageRequest)(nil),                  // 14: app_center.v1.app.UpdateAppGreyPercentageRequest
+	(*UpdateAppGreyPercentageReply)(nil),                    // 15: app_center.v1.app.UpdateAppGreyPercentageReply
+	(*UpdateAppGreyShuffleCodeRequest)(nil),                 // 16: app_center.v1.app.UpdateAppGreyShuffleCodeRequest
+	(*UpdateAppGreyShuffleCodeReply)(nil),                   // 17: app_center.v1.app.UpdateAppGreyShuffleCodeReply
+	(*UpdateAppNameRequest)(nil),                            // 18: app_center.v1.app.UpdateAppNameRequest
+	(*UpdateAppNameReply)(nil),                              // 19: app_center.v1.app.UpdateAppNameReply
+	(*UpdateAppStatusRequest)(nil),                          // 20: app_center.v1.app.UpdateAppStatusRequest
+	(*UpdateAppStatusReply)(nil),                            // 21: app_center.v1.app.UpdateAppStatusReply
+	(*UpdateAppCollaboratorsRequest)(nil),                   // 22: app_center.v1.app.UpdateAppCollaboratorsRequest
+	(*UpdateAppCollaboratorsReply)(nil),                     // 23: app_center.v1.app.UpdateAppCollaboratorsReply
+	(*GetAppListReply_ApplicationVersion)(nil),              // 24: app_center.v1.app.GetAppListReply.ApplicationVersion
+	(*GetApplicationInfoReply_Application)(nil),             // 25: app_center.v1.app.GetApplicationInfoReply.Application
+	(*CreateAppReply_CreateAppReplyData)(nil),               // 26: app_center.v1.app.CreateAppReply.CreateAppReplyData
+	(*UpdateAppRuleRequest_Rule)(nil),                       // 27: app_center.v1.app.UpdateAppRuleRequest.Rule
+	(*RefreshAppSecretReply_RefreshAppSecretReplyData)(nil), // 28: app_center.v1.app.RefreshAppSecretReply.RefreshAppSecretReplyData
+	(*timestamppb.Timestamp)(nil),                           // 29: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                                   // 30: google.protobuf.Empty
 }
 var file_v1_app_app_proto_depIdxs = []int32{
-	17, // 0: app_center.v1.app.GetAppListReply.data:type_name -> app_center.v1.app.GetAppListReply.ApplicationVersion
-	18, // 1: app_center.v1.app.GetApplicationInfoReply.data:type_name -> app_center.v1.app.GetApplicationInfoReply.Application
-	19, // 2: app_center.v1.app.CreateAppReply.data:type_name -> app_center.v1.app.CreateAppReply.CreateAppReplyData
-	20, // 3: app_center.v1.app.UpdateAppRuleRequest.rule:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
-	21, // 4: app_center.v1.app.RefreshAppSecretReply.data:type_name -> app_center.v1.app.RefreshAppSecretReply.RefreshAppSecretReplyData
-	22, // 5: app_center.v1.app.GetAppListReply.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
-	22, // 6: app_center.v1.app.GetApplicationInfoReply.Application.createdAt:type_name -> google.protobuf.Timestamp
-	22, // 7: app_center.v1.app.GetApplicationInfoReply.Application.deletedAt:type_name -> google.protobuf.Timestamp
-	20, // 8: app_center.v1.app.UpdateAppRuleRequest.Rule.rules:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
-	1,  // 9: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
-	23, // 10: app_center.v1.app.App.getAppList:input_type -> google.protobuf.Empty
-	3,  // 11: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
-	5,  // 12: app_center.v1.app.App.updateAppRule:input_type -> app_center.v1.app.UpdateAppRuleRequest
-	7,  // 13: app_center.v1.app.App.updateAppRedirectUri:input_type -> app_center.v1.app.UpdateAppRedirectUriRequest
-	9,  // 14: app_center.v1.app.App.updateAppVersionStatus:input_type -> app_center.v1.app.UpdateAppVersionStatusRequest
-	11, // 15: app_center.v1.app.App.refreshAppSecret:input_type -> app_center.v1.app.RefreshAppSecretRequest
-	13, // 16: app_center.v1.app.App.updateAppGreyPercentage:input_type -> app_center.v1.app.UpdateAppGreyPercentageRequest
-	15, // 17: app_center.v1.app.App.updateAppGreyShuffleCode:input_type -> app_center.v1.app.UpdateAppGreyShuffleCodeRequest
-	2,  // 18: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
-	0,  // 19: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
-	4,  // 20: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
-	6,  // 21: app_center.v1.app.App.updateAppRule:output_type -> app_center.v1.app.UpdateAppRuleReply
-	8,  // 22: app_center.v1.app.App.updateAppRedirectUri:output_type -> app_center.v1.app.UpdateAppRedirectUriReply
-	10, // 23: app_center.v1.app.App.updateAppVersionStatus:output_type -> app_center.v1.app.UpdateAppVersionStatusReply
-	12, // 24: app_center.v1.app.App.refreshAppSecret:output_type -> app_center.v1.app.RefreshAppSecretReply
-	14, // 25: app_center.v1.app.App.updateAppGreyPercentage:output_type -> app_center.v1.app.UpdateAppGreyPercentageReply
-	16, // 26: app_center.v1.app.App.updateAppGreyShuffleCode:output_type -> app_center.v1.app.UpdateAppGreyShuffleCodeReply
-	18, // [18:27] is the sub-list for method output_type
-	9,  // [9:18] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	24, // 0: app_center.v1.app.GetAppListReply.data:type_name -> app_center.v1.app.GetAppListReply.ApplicationVersion
+	25, // 1: app_center.v1.app.GetApplicationInfoReply.data:type_name -> app_center.v1.app.GetApplicationInfoReply.Application
+	26, // 2: app_center.v1.app.CreateAppReply.data:type_name -> app_center.v1.app.CreateAppReply.CreateAppReplyData
+	27, // 3: app_center.v1.app.UpdateAppRuleRequest.rule:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
+	28, // 4: app_center.v1.app.RefreshAppSecretReply.data:type_name -> app_center.v1.app.RefreshAppSecretReply.RefreshAppSecretReplyData
+	0,  // 5: app_center.v1.app.UpdateAppStatusRequest.status:type_name -> app_center.v1.app.UpdateAppStatusRequest.AppStatus
+	29, // 6: app_center.v1.app.GetAppListReply.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
+	29, // 7: app_center.v1.app.GetApplicationInfoReply.Application.createdAt:type_name -> google.protobuf.Timestamp
+	29, // 8: app_center.v1.app.GetApplicationInfoReply.Application.deletedAt:type_name -> google.protobuf.Timestamp
+	27, // 9: app_center.v1.app.UpdateAppRuleRequest.Rule.rules:type_name -> app_center.v1.app.UpdateAppRuleRequest.Rule
+	2,  // 10: app_center.v1.app.App.getApplicationInfo:input_type -> app_center.v1.app.GetApplicationInfoRequest
+	30, // 11: app_center.v1.app.App.getAppList:input_type -> google.protobuf.Empty
+	4,  // 12: app_center.v1.app.App.createApp:input_type -> app_center.v1.app.CreateAppRequest
+	6,  // 13: app_center.v1.app.App.updateAppRule:input_type -> app_center.v1.app.UpdateAppRuleRequest
+	8,  // 14: app_center.v1.app.App.updateAppRedirectUri:input_type -> app_center.v1.app.UpdateAppRedirectUriRequest
+	10, // 15: app_center.v1.app.App.updateAppVersionStatus:input_type -> app_center.v1.app.UpdateAppVersionStatusRequest
+	12, // 16: app_center.v1.app.App.refreshAppSecret:input_type -> app_center.v1.app.RefreshAppSecretRequest
+	14, // 17: app_center.v1.app.App.updateAppGreyPercentage:input_type -> app_center.v1.app.UpdateAppGreyPercentageRequest
+	16, // 18: app_center.v1.app.App.updateAppGreyShuffleCode:input_type -> app_center.v1.app.UpdateAppGreyShuffleCodeRequest
+	18, // 19: app_center.v1.app.App.updateAppName:input_type -> app_center.v1.app.UpdateAppNameRequest
+	20, // 20: app_center.v1.app.App.updateAppStatus:input_type -> app_center.v1.app.UpdateAppStatusRequest
+	22, // 21: app_center.v1.app.App.updateAppCollaborators:input_type -> app_center.v1.app.UpdateAppCollaboratorsRequest
+	3,  // 22: app_center.v1.app.App.getApplicationInfo:output_type -> app_center.v1.app.GetApplicationInfoReply
+	1,  // 23: app_center.v1.app.App.getAppList:output_type -> app_center.v1.app.GetAppListReply
+	5,  // 24: app_center.v1.app.App.createApp:output_type -> app_center.v1.app.CreateAppReply
+	7,  // 25: app_center.v1.app.App.updateAppRule:output_type -> app_center.v1.app.UpdateAppRuleReply
+	9,  // 26: app_center.v1.app.App.updateAppRedirectUri:output_type -> app_center.v1.app.UpdateAppRedirectUriReply
+	11, // 27: app_center.v1.app.App.updateAppVersionStatus:output_type -> app_center.v1.app.UpdateAppVersionStatusReply
+	13, // 28: app_center.v1.app.App.refreshAppSecret:output_type -> app_center.v1.app.RefreshAppSecretReply
+	15, // 29: app_center.v1.app.App.updateAppGreyPercentage:output_type -> app_center.v1.app.UpdateAppGreyPercentageReply
+	17, // 30: app_center.v1.app.App.updateAppGreyShuffleCode:output_type -> app_center.v1.app.UpdateAppGreyShuffleCodeReply
+	19, // 31: app_center.v1.app.App.updateAppName:output_type -> app_center.v1.app.UpdateAppNameReply
+	21, // 32: app_center.v1.app.App.updateAppStatus:output_type -> app_center.v1.app.UpdateAppStatusReply
+	23, // 33: app_center.v1.app.App.updateAppCollaborators:output_type -> app_center.v1.app.UpdateAppCollaboratorsReply
+	22, // [22:34] is the sub-list for method output_type
+	10, // [10:22] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_v1_app_app_proto_init() }
@@ -1712,19 +2148,20 @@ func file_v1_app_app_proto_init() {
 	file_v1_app_app_proto_msgTypes[2].OneofWrappers = []any{}
 	file_v1_app_app_proto_msgTypes[4].OneofWrappers = []any{}
 	file_v1_app_app_proto_msgTypes[12].OneofWrappers = []any{}
-	file_v1_app_app_proto_msgTypes[20].OneofWrappers = []any{}
+	file_v1_app_app_proto_msgTypes[26].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_app_app_proto_rawDesc), len(file_v1_app_app_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   22,
+			NumEnums:      1,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_v1_app_app_proto_goTypes,
 		DependencyIndexes: file_v1_app_app_proto_depIdxs,
+		EnumInfos:         file_v1_app_app_proto_enumTypes,
 		MessageInfos:      file_v1_app_app_proto_msgTypes,
 	}.Build()
 	File_v1_app_app_proto = out.File

@@ -60,6 +60,24 @@ service App {
       body: "*"
     };
   }
+  rpc updateAppName (UpdateAppNameRequest) returns (UpdateAppNameReply) {
+    option (google.api.http) = {
+      post: "/app/update-name"
+      body: "*"
+    };
+  }
+  rpc updateAppStatus (UpdateAppStatusRequest) returns (UpdateAppStatusReply) {
+    option (google.api.http) = {
+      post: "/app/update-status"
+      body: "*"
+    };
+  }
+  rpc updateAppCollaborators (UpdateAppCollaboratorsRequest) returns (UpdateAppCollaboratorsReply) {
+    option (google.api.http) = {
+      post: "/app/update-collaborators"
+      body: "*"
+    };
+  }
 }
 
 message GetAppListReply {
@@ -200,6 +218,43 @@ message UpdateAppGreyShuffleCodeRequest {
   string clientId = 1;
 }
 message UpdateAppGreyShuffleCodeReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppNameRequest {
+  string clientId = 1;
+  string name = 2;
+}
+message UpdateAppNameReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppStatusRequest {
+  enum AppStatus {
+    APP_STATUS_AUDITING = 0;
+    APP_STATUS_DEVELOPING = 1;
+    APP_STATUS_PUBLISHED = 2;
+    APP_STATUS_HIDDEN = 3;
+    APP_STATUS_BANNED = 4;
+  }
+  string clientId = 1;
+  AppStatus status = 2;
+}
+message UpdateAppStatusReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppCollaboratorsRequest {
+  string clientId = 1;
+  repeated string collaborators = 2;
+}
+message UpdateAppCollaboratorsReply {
   int32 code = 1;
   string message = 2;
   string traceId = 3;
