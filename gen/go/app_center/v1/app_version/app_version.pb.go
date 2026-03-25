@@ -571,6 +571,118 @@ func (x *CreateAppVersionReply) GetTraceId() string {
 	return ""
 }
 
+type DeleteAppVersionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAppVersionRequest) Reset() {
+	*x = DeleteAppVersionRequest{}
+	mi := &file_v1_app_version_app_version_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAppVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAppVersionRequest) ProtoMessage() {}
+
+func (x *DeleteAppVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_version_app_version_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAppVersionRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAppVersionRequest) Descriptor() ([]byte, []int) {
+	return file_v1_app_version_app_version_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteAppVersionRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *DeleteAppVersionRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+type DeleteAppVersionReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAppVersionReply) Reset() {
+	*x = DeleteAppVersionReply{}
+	mi := &file_v1_app_version_app_version_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAppVersionReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAppVersionReply) ProtoMessage() {}
+
+func (x *DeleteAppVersionReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_app_version_app_version_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAppVersionReply.ProtoReflect.Descriptor instead.
+func (*DeleteAppVersionReply) Descriptor() ([]byte, []int) {
+	return file_v1_app_version_app_version_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DeleteAppVersionReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *DeleteAppVersionReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *DeleteAppVersionReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AppVersion    *ApplicationVersion    `protobuf:"bytes,1,opt,name=appVersion,proto3" json:"appVersion,omitempty"`
@@ -581,7 +693,7 @@ type GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData
 
 func (x *GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData) Reset() {
 	*x = GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData{}
-	mi := &file_v1_app_version_app_version_proto_msgTypes[7]
+	mi := &file_v1_app_version_app_version_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -593,7 +705,7 @@ func (x *GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReply
 func (*GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData) ProtoMessage() {}
 
 func (x *GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_version_app_version_proto_msgTypes[7]
+	mi := &file_v1_app_version_app_version_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -633,7 +745,7 @@ type CreateAppVersionReply_CreateAppVersionReplyData struct {
 
 func (x *CreateAppVersionReply_CreateAppVersionReplyData) Reset() {
 	*x = CreateAppVersionReply_CreateAppVersionReplyData{}
-	mi := &file_v1_app_version_app_version_proto_msgTypes[8]
+	mi := &file_v1_app_version_app_version_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -645,7 +757,7 @@ func (x *CreateAppVersionReply_CreateAppVersionReplyData) String() string {
 func (*CreateAppVersionReply_CreateAppVersionReplyData) ProtoMessage() {}
 
 func (x *CreateAppVersionReply_CreateAppVersionReplyData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_app_version_app_version_proto_msgTypes[8]
+	mi := &file_v1_app_version_app_version_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,12 +851,20 @@ const file_v1_app_version_app_version_proto_rawDesc = "" +
 	"\x19CreateAppVersionReplyData\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
 	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersionB\a\n" +
-	"\x05_data2\x93\x04\n" +
+	"\x05_data\"O\n" +
+	"\x17DeleteAppVersionRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\"_\n" +
+	"\x15DeleteAppVersionReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId2\xae\x05\n" +
 	"\n" +
 	"AppVersion\x12\x96\x01\n" +
 	"\x11getAppVersionInfo\x123.app_center.v1.app_version.GetAppVersionInfoRequest\x1a1.app_center.v1.app_version.GetAppVersionInfoReply\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/app/version-info\x12\xd0\x01\n" +
 	"\x1egetAppVersionInfoWithUserCheck\x12@.app_center.v1.app_version.GetAppVersionInfoWithUserCheckRequest\x1a>.app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply\",\x82\xd3\xe4\x93\x02&:\x01*\"!/app/version-info-with-user-check\x12\x98\x01\n" +
-	"\x10createAppVersion\x122.app_center.v1.app_version.CreateAppVersionRequest\x1a0.app_center.v1.app_version.CreateAppVersionReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/create-versionB;Z9iwut-app-center/api/app_center/v1/app_version;app_versionb\x06proto3"
+	"\x10createAppVersion\x122.app_center.v1.app_version.CreateAppVersionRequest\x1a0.app_center.v1.app_version.CreateAppVersionReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/create-version\x12\x98\x01\n" +
+	"\x10deleteAppVersion\x122.app_center.v1.app_version.DeleteAppVersionRequest\x1a0.app_center.v1.app_version.DeleteAppVersionReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/delete-versionB;Z9iwut-app-center/api/app_center/v1/app_version;app_versionb\x06proto3"
 
 var (
 	file_v1_app_version_app_version_proto_rawDescOnce sync.Once
@@ -758,7 +878,7 @@ func file_v1_app_version_app_version_proto_rawDescGZIP() []byte {
 	return file_v1_app_version_app_version_proto_rawDescData
 }
 
-var file_v1_app_version_app_version_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_v1_app_version_app_version_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_v1_app_version_app_version_proto_goTypes = []any{
 	(*GetAppVersionInfoRequest)(nil),              // 0: app_center.v1.app_version.GetAppVersionInfoRequest
 	(*ApplicationVersion)(nil),                    // 1: app_center.v1.app_version.ApplicationVersion
@@ -767,28 +887,32 @@ var file_v1_app_version_app_version_proto_goTypes = []any{
 	(*GetAppVersionInfoWithUserCheckReply)(nil),   // 4: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply
 	(*CreateAppVersionRequest)(nil),               // 5: app_center.v1.app_version.CreateAppVersionRequest
 	(*CreateAppVersionReply)(nil),                 // 6: app_center.v1.app_version.CreateAppVersionReply
-	(*GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData)(nil), // 7: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData
-	(*CreateAppVersionReply_CreateAppVersionReplyData)(nil),                             // 8: app_center.v1.app_version.CreateAppVersionReply.CreateAppVersionReplyData
-	(*timestamppb.Timestamp)(nil),                                                       // 9: google.protobuf.Timestamp
+	(*DeleteAppVersionRequest)(nil),               // 7: app_center.v1.app_version.DeleteAppVersionRequest
+	(*DeleteAppVersionReply)(nil),                 // 8: app_center.v1.app_version.DeleteAppVersionReply
+	(*GetAppVersionInfoWithUserCheckReply_GetAppVersionInfoWithUserCheckReplyData)(nil), // 9: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData
+	(*CreateAppVersionReply_CreateAppVersionReplyData)(nil),                             // 10: app_center.v1.app_version.CreateAppVersionReply.CreateAppVersionReplyData
+	(*timestamppb.Timestamp)(nil),                                                       // 11: google.protobuf.Timestamp
 }
 var file_v1_app_version_app_version_proto_depIdxs = []int32{
-	9, // 0: app_center.v1.app_version.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
-	9, // 1: app_center.v1.app_version.ApplicationVersion.deletedAt:type_name -> google.protobuf.Timestamp
-	1, // 2: app_center.v1.app_version.GetAppVersionInfoReply.data:type_name -> app_center.v1.app_version.ApplicationVersion
-	7, // 3: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.data:type_name -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData
-	8, // 4: app_center.v1.app_version.CreateAppVersionReply.data:type_name -> app_center.v1.app_version.CreateAppVersionReply.CreateAppVersionReplyData
-	1, // 5: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData.appVersion:type_name -> app_center.v1.app_version.ApplicationVersion
-	0, // 6: app_center.v1.app_version.AppVersion.getAppVersionInfo:input_type -> app_center.v1.app_version.GetAppVersionInfoRequest
-	3, // 7: app_center.v1.app_version.AppVersion.getAppVersionInfoWithUserCheck:input_type -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckRequest
-	5, // 8: app_center.v1.app_version.AppVersion.createAppVersion:input_type -> app_center.v1.app_version.CreateAppVersionRequest
-	2, // 9: app_center.v1.app_version.AppVersion.getAppVersionInfo:output_type -> app_center.v1.app_version.GetAppVersionInfoReply
-	4, // 10: app_center.v1.app_version.AppVersion.getAppVersionInfoWithUserCheck:output_type -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply
-	6, // 11: app_center.v1.app_version.AppVersion.createAppVersion:output_type -> app_center.v1.app_version.CreateAppVersionReply
-	9, // [9:12] is the sub-list for method output_type
-	6, // [6:9] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	11, // 0: app_center.v1.app_version.ApplicationVersion.createdAt:type_name -> google.protobuf.Timestamp
+	11, // 1: app_center.v1.app_version.ApplicationVersion.deletedAt:type_name -> google.protobuf.Timestamp
+	1,  // 2: app_center.v1.app_version.GetAppVersionInfoReply.data:type_name -> app_center.v1.app_version.ApplicationVersion
+	9,  // 3: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.data:type_name -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData
+	10, // 4: app_center.v1.app_version.CreateAppVersionReply.data:type_name -> app_center.v1.app_version.CreateAppVersionReply.CreateAppVersionReplyData
+	1,  // 5: app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply.GetAppVersionInfoWithUserCheckReplyData.appVersion:type_name -> app_center.v1.app_version.ApplicationVersion
+	0,  // 6: app_center.v1.app_version.AppVersion.getAppVersionInfo:input_type -> app_center.v1.app_version.GetAppVersionInfoRequest
+	3,  // 7: app_center.v1.app_version.AppVersion.getAppVersionInfoWithUserCheck:input_type -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckRequest
+	5,  // 8: app_center.v1.app_version.AppVersion.createAppVersion:input_type -> app_center.v1.app_version.CreateAppVersionRequest
+	7,  // 9: app_center.v1.app_version.AppVersion.deleteAppVersion:input_type -> app_center.v1.app_version.DeleteAppVersionRequest
+	2,  // 10: app_center.v1.app_version.AppVersion.getAppVersionInfo:output_type -> app_center.v1.app_version.GetAppVersionInfoReply
+	4,  // 11: app_center.v1.app_version.AppVersion.getAppVersionInfoWithUserCheck:output_type -> app_center.v1.app_version.GetAppVersionInfoWithUserCheckReply
+	6,  // 12: app_center.v1.app_version.AppVersion.createAppVersion:output_type -> app_center.v1.app_version.CreateAppVersionReply
+	8,  // 13: app_center.v1.app_version.AppVersion.deleteAppVersion:output_type -> app_center.v1.app_version.DeleteAppVersionReply
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_v1_app_version_app_version_proto_init() }
@@ -805,7 +929,7 @@ func file_v1_app_version_app_version_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_app_version_app_version_proto_rawDesc), len(file_v1_app_version_app_version_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

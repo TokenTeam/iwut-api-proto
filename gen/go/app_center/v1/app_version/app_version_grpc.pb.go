@@ -22,6 +22,7 @@ const (
 	AppVersion_GetAppVersionInfo_FullMethodName              = "/app_center.v1.app_version.AppVersion/getAppVersionInfo"
 	AppVersion_GetAppVersionInfoWithUserCheck_FullMethodName = "/app_center.v1.app_version.AppVersion/getAppVersionInfoWithUserCheck"
 	AppVersion_CreateAppVersion_FullMethodName               = "/app_center.v1.app_version.AppVersion/createAppVersion"
+	AppVersion_DeleteAppVersion_FullMethodName               = "/app_center.v1.app_version.AppVersion/deleteAppVersion"
 )
 
 // AppVersionClient is the client API for AppVersion service.
@@ -31,6 +32,7 @@ type AppVersionClient interface {
 	GetAppVersionInfo(ctx context.Context, in *GetAppVersionInfoRequest, opts ...grpc.CallOption) (*GetAppVersionInfoReply, error)
 	GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...grpc.CallOption) (*GetAppVersionInfoWithUserCheckReply, error)
 	CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error)
+	DeleteAppVersion(ctx context.Context, in *DeleteAppVersionRequest, opts ...grpc.CallOption) (*DeleteAppVersionReply, error)
 }
 
 type appVersionClient struct {
@@ -71,6 +73,16 @@ func (c *appVersionClient) CreateAppVersion(ctx context.Context, in *CreateAppVe
 	return out, nil
 }
 
+func (c *appVersionClient) DeleteAppVersion(ctx context.Context, in *DeleteAppVersionRequest, opts ...grpc.CallOption) (*DeleteAppVersionReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAppVersionReply)
+	err := c.cc.Invoke(ctx, AppVersion_DeleteAppVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppVersionServer is the server API for AppVersion service.
 // All implementations must embed UnimplementedAppVersionServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type AppVersionServer interface {
 	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
 	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
+	DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error)
 	mustEmbedUnimplementedAppVersionServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedAppVersionServer) GetAppVersionInfoWithUserCheck(context.Cont
 }
 func (UnimplementedAppVersionServer) CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateAppVersion not implemented")
+}
+func (UnimplementedAppVersionServer) DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAppVersion not implemented")
 }
 func (UnimplementedAppVersionServer) mustEmbedUnimplementedAppVersionServer() {}
 func (UnimplementedAppVersionServer) testEmbeddedByValue()                    {}
@@ -172,6 +188,24 @@ func _AppVersion_CreateAppVersion_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppVersion_DeleteAppVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAppVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).DeleteAppVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_DeleteAppVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).DeleteAppVersion(ctx, req.(*DeleteAppVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AppVersion_ServiceDesc is the grpc.ServiceDesc for AppVersion service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var AppVersion_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "createAppVersion",
 			Handler:    _AppVersion_CreateAppVersion_Handler,
+		},
+		{
+			MethodName: "deleteAppVersion",
+			Handler:    _AppVersion_DeleteAppVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

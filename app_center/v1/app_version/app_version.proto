@@ -24,6 +24,12 @@ service AppVersion {
       body: "*"
     };
   }
+  rpc deleteAppVersion (DeleteAppVersionRequest) returns (DeleteAppVersionReply) {
+    option (google.api.http) = {
+      post: "/app/delete-version"
+      body: "*"
+    };
+  }
 }
 message GetAppVersionInfoRequest {
   string clientId = 1;
@@ -89,4 +95,14 @@ message CreateAppVersionReply {
   string message = 2;
   optional CreateAppVersionReplyData data = 3;
   string traceId = 4;
+}
+
+message DeleteAppVersionRequest {
+  string clientId = 1;
+  int32 version = 2;
+}
+message DeleteAppVersionReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
 }

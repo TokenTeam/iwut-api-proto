@@ -20,11 +20,13 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationAppVersioncreateAppVersion = "/app_center.v1.app_version.AppVersion/createAppVersion"
+const OperationAppVersiondeleteAppVersion = "/app_center.v1.app_version.AppVersion/deleteAppVersion"
 const OperationAppVersiongetAppVersionInfo = "/app_center.v1.app_version.AppVersion/getAppVersionInfo"
 const OperationAppVersiongetAppVersionInfoWithUserCheck = "/app_center.v1.app_version.AppVersion/getAppVersionInfoWithUserCheck"
 
 type AppVersionHTTPServer interface {
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
+	DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error)
 	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
 	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 }
@@ -34,6 +36,7 @@ func RegisterAppVersionHTTPServer(s *http.Server, srv AppVersionHTTPServer) {
 	r.GET("/app/version-info", _AppVersion_GetAppVersionInfo0_HTTP_Handler(srv))
 	r.POST("/app/version-info-with-user-check", _AppVersion_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv))
 	r.POST("/app/create-version", _AppVersion_CreateAppVersion0_HTTP_Handler(srv))
+	r.POST("/app/delete-version", _AppVersion_DeleteAppVersion0_HTTP_Handler(srv))
 }
 
 func _AppVersion_GetAppVersionInfo0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
@@ -99,8 +102,31 @@ func _AppVersion_CreateAppVersion0_HTTP_Handler(srv AppVersionHTTPServer) func(c
 	}
 }
 
+func _AppVersion_DeleteAppVersion0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteAppVersionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersiondeleteAppVersion)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteAppVersion(ctx, req.(*DeleteAppVersionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteAppVersionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AppVersionHTTPClient interface {
 	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
+	DeleteAppVersion(ctx context.Context, req *DeleteAppVersionRequest, opts ...http.CallOption) (rsp *DeleteAppVersionReply, err error)
 	GetAppVersionInfo(ctx context.Context, req *GetAppVersionInfoRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoReply, err error)
 	GetAppVersionInfoWithUserCheck(ctx context.Context, req *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoWithUserCheckReply, err error)
 }
@@ -118,6 +144,19 @@ func (c *AppVersionHTTPClientImpl) CreateAppVersion(ctx context.Context, in *Cre
 	pattern := "/app/create-version"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAppVersioncreateAppVersion))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) DeleteAppVersion(ctx context.Context, in *DeleteAppVersionRequest, opts ...http.CallOption) (*DeleteAppVersionReply, error) {
+	var out DeleteAppVersionReply
+	pattern := "/app/delete-version"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersiondeleteAppVersion))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
