@@ -26,4 +26,5 @@ enum ErrorReason {
   INVALID_DEVELOPER_ID = 18;             // 无效的开发者ID
   UPDATE_DEVELOPER_ID_TOO_FREQUENTLY = 19; // 更新开发者ID过于频繁
   DEVELOPER_ID_ALREADY_EXIST = 20;       // 开发者ID已设置
+  USER_CONSENT_NOT_FOUND = 21;           // 用户授权信息未找到
 }

@@ -45,6 +45,7 @@ const (
 	ErrorReason_INVALID_DEVELOPER_ID                     ErrorReason = 18 // 无效的开发者ID
 	ErrorReason_UPDATE_DEVELOPER_ID_TOO_FREQUENTLY       ErrorReason = 19 // 更新开发者ID过于频繁
 	ErrorReason_DEVELOPER_ID_ALREADY_EXIST               ErrorReason = 20 // 开发者ID已设置
+	ErrorReason_USER_CONSENT_NOT_FOUND                   ErrorReason = 21 // 用户授权信息未找到
 )
 
 // Enum value maps for ErrorReason.
@@ -71,6 +72,7 @@ var (
 		18: "INVALID_DEVELOPER_ID",
 		19: "UPDATE_DEVELOPER_ID_TOO_FREQUENTLY",
 		20: "DEVELOPER_ID_ALREADY_EXIST",
+		21: "USER_CONSENT_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
 		"USER_NOT_FOUND":                           0,
@@ -94,6 +96,7 @@ var (
 		"INVALID_DEVELOPER_ID":                     18,
 		"UPDATE_DEVELOPER_ID_TOO_FREQUENTLY":       19,
 		"DEVELOPER_ID_ALREADY_EXIST":               20,
+		"USER_CONSENT_NOT_FOUND":                   21,
 	}
 )
 
@@ -128,7 +131,7 @@ var File_v1_error_reason_error_reason_proto protoreflect.FileDescriptor
 
 const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"v1/error_reason/error_reason.proto\x12\x0eauth_center.v1*\xc1\x04\n" +
+	"\"v1/error_reason/error_reason.proto\x12\x0eauth_center.v1*\xdd\x04\n" +
 	"\vErrorReason\x12\x12\n" +
 	"\x0eUSER_NOT_FOUND\x10\x00\x12\x11\n" +
 	"\rUNKNOWN_ERROR\x10\x01\x12\x17\n" +
@@ -151,7 +154,8 @@ const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\x11INVALID_STRUCTURE\x10\x11\x12\x18\n" +
 	"\x14INVALID_DEVELOPER_ID\x10\x12\x12&\n" +
 	"\"UPDATE_DEVELOPER_ID_TOO_FREQUENTLY\x10\x13\x12\x1e\n" +
-	"\x1aDEVELOPER_ID_ALREADY_EXIST\x10\x14B(Z&iwut-auth-center/api/auth_center/v1;v1b\x06proto3"
+	"\x1aDEVELOPER_ID_ALREADY_EXIST\x10\x14\x12\x1a\n" +
+	"\x16USER_CONSENT_NOT_FOUND\x10\x15B(Z&iwut-auth-center/api/auth_center/v1;v1b\x06proto3"
 
 var (
 	file_v1_error_reason_error_reason_proto_rawDescOnce sync.Once
