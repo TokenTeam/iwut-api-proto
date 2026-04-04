@@ -27,4 +27,5 @@ enum ErrorReason {
   INVALID_STATUS = 19;                          // 无效的状态
   INVALID_APP_NAME = 20;                        // 无效的应用名称
   ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED = 21;  // 只有已下架的版本可以被删除
+  INVALID_KEY_NAME = 22;                        // 无效的键名
 }

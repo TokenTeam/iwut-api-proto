@@ -46,6 +46,7 @@ const (
 	ErrorReason_INVALID_STATUS                         ErrorReason = 19 // 无效的状态
 	ErrorReason_INVALID_APP_NAME                       ErrorReason = 20 // 无效的应用名称
 	ErrorReason_ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED ErrorReason = 21 // 只有已下架的版本可以被删除
+	ErrorReason_INVALID_KEY_NAME                       ErrorReason = 22 // 无效的键名
 )
 
 // Enum value maps for ErrorReason.
@@ -73,6 +74,7 @@ var (
 		19: "INVALID_STATUS",
 		20: "INVALID_APP_NAME",
 		21: "ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED",
+		22: "INVALID_KEY_NAME",
 	}
 	ErrorReason_value = map[string]int32{
 		"CLIENT_NOT_FOUND":                       0,
@@ -97,6 +99,7 @@ var (
 		"INVALID_STATUS":                         19,
 		"INVALID_APP_NAME":                       20,
 		"ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED": 21,
+		"INVALID_KEY_NAME":                       22,
 	}
 )
 
@@ -131,7 +134,7 @@ var File_v1_error_reason_error_reason_proto protoreflect.FileDescriptor
 
 const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"v1/error_reason/error_reason.proto\x12\rapp_center.v1*\x9f\x04\n" +
+	"\"v1/error_reason/error_reason.proto\x12\rapp_center.v1*\xb5\x04\n" +
 	"\vErrorReason\x12\x14\n" +
 	"\x10CLIENT_NOT_FOUND\x10\x00\x12\x11\n" +
 	"\rUNKNOWN_ERROR\x10\x01\x12\x1b\n" +
@@ -155,7 +158,8 @@ const file_v1_error_reason_error_reason_proto_rawDesc = "" +
 	"!VERSION_NOT_ALLOWED_FOR_THIS_USER\x10\x12\x12\x12\n" +
 	"\x0eINVALID_STATUS\x10\x13\x12\x14\n" +
 	"\x10INVALID_APP_NAME\x10\x14\x12*\n" +
-	"&ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED\x10\x15B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
+	"&ONLY_DEACTIVATE_VERSION_CAN_BE_DELETED\x10\x15\x12\x14\n" +
+	"\x10INVALID_KEY_NAME\x10\x16B&Z$iwut-app-center/api/app_center/v1;v1b\x06proto3"
 
 var (
 	file_v1_error_reason_error_reason_proto_rawDescOnce sync.Once
