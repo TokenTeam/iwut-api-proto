@@ -1390,11 +1390,13 @@ type GetAppListReply_ApplicationVersion struct {
 	Description     string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
 	Icon            string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
-	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	Name            string                 `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
-	Admin           string                 `protobuf:"bytes,13,opt,name=admin,proto3" json:"admin,omitempty"`
-	Collaborators   []string               `protobuf:"bytes,14,rep,name=collaborators,proto3" json:"collaborators,omitempty"`
+	Color           string                 `protobuf:"bytes,10,opt,name=color,proto3" json:"color,omitempty"`
+	Status          string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	Label           string                 `protobuf:"bytes,12,opt,name=label,proto3" json:"label,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	Name            string                 `protobuf:"bytes,14,opt,name=name,proto3" json:"name,omitempty"`
+	Admin           string                 `protobuf:"bytes,15,opt,name=admin,proto3" json:"admin,omitempty"`
+	Collaborators   []string               `protobuf:"bytes,16,rep,name=collaborators,proto3" json:"collaborators,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1492,9 +1494,23 @@ func (x *GetAppListReply_ApplicationVersion) GetIcon() string {
 	return ""
 }
 
+func (x *GetAppListReply_ApplicationVersion) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
 func (x *GetAppListReply_ApplicationVersion) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *GetAppListReply_ApplicationVersion) GetLabel() string {
+	if x != nil {
+		return x.Label
 	}
 	return ""
 }
@@ -1891,12 +1907,12 @@ var File_v1_app_app_proto protoreflect.FileDescriptor
 
 const file_v1_app_app_proto_rawDesc = "" +
 	"\n" +
-	"\x10v1/app/app.proto\x12\x11app_center.v1.app\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xed\x04\n" +
+	"\x10v1/app/app.proto\x12\x11app_center.v1.app\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x99\x05\n" +
 	"\x0fGetAppListReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12I\n" +
 	"\x04data\x18\x03 \x03(\v25.app_center.v1.app.GetAppListReply.ApplicationVersionR\x04data\x12\x18\n" +
-	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xc6\x03\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a\xf2\x03\n" +
 	"\x12ApplicationVersion\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
 	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersion\x12\x18\n" +
@@ -1908,13 +1924,15 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\vdisplayName\x18\x06 \x01(\tR\vdisplayName\x12 \n" +
 	"\vdescription\x18\a \x01(\tR\vdescription\x12\x10\n" +
 	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
-	"\x04icon\x18\t \x01(\tR\x04icon\x12\x16\n" +
-	"\x06status\x18\n" +
-	" \x01(\tR\x06status\x128\n" +
-	"\tcreatedAt\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04name\x18\f \x01(\tR\x04name\x12\x14\n" +
-	"\x05admin\x18\r \x01(\tR\x05admin\x12$\n" +
-	"\rcollaborators\x18\x0e \x03(\tR\rcollaborators\"7\n" +
+	"\x04icon\x18\t \x01(\tR\x04icon\x12\x14\n" +
+	"\x05color\x18\n" +
+	" \x01(\tR\x05color\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x14\n" +
+	"\x05label\x18\f \x01(\tR\x05label\x128\n" +
+	"\tcreatedAt\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
+	"\x04name\x18\x0e \x01(\tR\x04name\x12\x14\n" +
+	"\x05admin\x18\x0f \x01(\tR\x05admin\x12$\n" +
+	"\rcollaborators\x18\x10 \x03(\tR\rcollaborators\"7\n" +
 	"\x19GetApplicationInfoRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\"\xf8\x05\n" +
 	"\x17GetApplicationInfoReply\x12\x12\n" +

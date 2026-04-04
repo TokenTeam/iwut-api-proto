@@ -88,9 +88,12 @@ type ApplicationVersion struct {
 	Icon            string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`
 	Status          string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	DeletedAt       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=deletedAt,proto3" json:"deletedAt,omitempty"` // 这里没有返回 tester, 大且没用
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	DeletedAt       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=deletedAt,proto3" json:"deletedAt,omitempty"`
+	// 这里没有返回 tester, 大且没用
+	Color         string `protobuf:"bytes,13,opt,name=color,proto3" json:"color,omitempty"`
+	Label         string `protobuf:"bytes,14,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ApplicationVersion) Reset() {
@@ -205,6 +208,20 @@ func (x *ApplicationVersion) GetDeletedAt() *timestamppb.Timestamp {
 		return x.DeletedAt
 	}
 	return nil
+}
+
+func (x *ApplicationVersion) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+func (x *ApplicationVersion) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
 }
 
 type GetAppVersionInfoReply struct {
@@ -413,6 +430,8 @@ type CreateAppVersionRequest struct {
 	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	Url           string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`
 	Icon          string                 `protobuf:"bytes,8,opt,name=icon,proto3" json:"icon,omitempty"`
+	Color         string                 `protobuf:"bytes,9,opt,name=color,proto3" json:"color,omitempty"`
+	Label         string                 `protobuf:"bytes,10,opt,name=label,proto3" json:"label,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -499,6 +518,20 @@ func (x *CreateAppVersionRequest) GetUrl() string {
 func (x *CreateAppVersionRequest) GetIcon() string {
 	if x != nil {
 		return x.Icon
+	}
+	return ""
+}
+
+func (x *CreateAppVersionRequest) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+func (x *CreateAppVersionRequest) GetLabel() string {
+	if x != nil {
+		return x.Label
 	}
 	return ""
 }
@@ -794,7 +827,7 @@ const file_v1_app_version_app_version_proto_rawDesc = "" +
 	" v1/app_version/app_version.proto\x12\x19app_center.v1.app_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"P\n" +
 	"\x18GetAppVersionInfoRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\x05R\aversion\"\xb0\x03\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\"\xdc\x03\n" +
 	"\x12ApplicationVersion\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12(\n" +
 	"\x0finternalVersion\x18\x02 \x01(\x05R\x0finternalVersion\x12\x18\n" +
@@ -810,7 +843,9 @@ const file_v1_app_version_app_version_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x128\n" +
 	"\tcreatedAt\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
-	"\tdeletedAt\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xb1\x01\n" +
+	"\tdeletedAt\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12\x14\n" +
+	"\x05color\x18\r \x01(\tR\x05color\x12\x14\n" +
+	"\x05label\x18\x0e \x01(\tR\x05label\"\xb1\x01\n" +
 	"\x16GetAppVersionInfoReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12F\n" +
@@ -831,7 +866,7 @@ const file_v1_app_version_app_version_proto_rawDesc = "" +
 	"appVersion\x18\x01 \x01(\v2-.app_center.v1.app_version.ApplicationVersionR\n" +
 	"appVersion\x12\x18\n" +
 	"\aallowed\x18\x02 \x01(\bR\aallowedB\a\n" +
-	"\x05_data\"\xff\x01\n" +
+	"\x05_data\"\xab\x02\n" +
 	"\x17CreateAppVersionRequest\x12\x1a\n" +
 	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x1e\n" +
 	"\n" +
@@ -842,7 +877,10 @@ const file_v1_app_version_app_version_proto_rawDesc = "" +
 	"\vdisplayName\x18\x05 \x01(\tR\vdisplayName\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x10\n" +
 	"\x03url\x18\a \x01(\tR\x03url\x12\x12\n" +
-	"\x04icon\x18\b \x01(\tR\x04icon\"\xb0\x02\n" +
+	"\x04icon\x18\b \x01(\tR\x04icon\x12\x14\n" +
+	"\x05color\x18\t \x01(\tR\x05color\x12\x14\n" +
+	"\x05label\x18\n" +
+	" \x01(\tR\x05label\"\xb0\x02\n" +
 	"\x15CreateAppVersionReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12c\n" +

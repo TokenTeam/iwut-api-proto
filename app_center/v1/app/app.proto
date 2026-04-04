@@ -91,11 +91,13 @@ message GetAppListReply {
     string description = 7;
     string url = 8;
     string icon = 9;
-    string status = 10;
-    google.protobuf.Timestamp createdAt = 11;
-    string name = 12;
-    string admin = 13;
-    repeated string collaborators = 14;
+    string color = 10;
+    string status = 11;
+    string label = 12;
+    google.protobuf.Timestamp createdAt = 13;
+    string name = 14;
+    string admin = 15;
+    repeated string collaborators = 16;
   }
 
   int32 code = 1;

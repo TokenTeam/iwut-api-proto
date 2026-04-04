@@ -50,6 +50,8 @@ message ApplicationVersion {
   google.protobuf.Timestamp createdAt = 11;
   google.protobuf.Timestamp deletedAt = 12;
   // 这里没有返回 tester, 大且没用
+  string color = 13;
+  string label = 14;
 }
 
 message GetAppVersionInfoReply {
@@ -85,6 +87,8 @@ message CreateAppVersionRequest {
   string description = 6;
   string url = 7;
   string icon = 8;
+  string color = 9;
+  string label = 10;
 }
 message CreateAppVersionReply {
   message CreateAppVersionReplyData {
