@@ -38,7 +38,7 @@ service App {
   }
   rpc updateAppVersionStatus (UpdateAppVersionStatusRequest) returns (UpdateAppVersionStatusReply) {
     option (google.api.http) = {
-      post: "/app/update-collaborators"
+      post: "/app/update-version-status"
       body: "*"
     };
   }

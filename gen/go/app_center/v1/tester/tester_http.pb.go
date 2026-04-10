@@ -21,16 +21,22 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationTesteraddTester = "/app_center.v1.tester.Tester/addTester"
 const OperationTestergetTestLink = "/app_center.v1.tester.Tester/getTestLink"
+const OperationTesterlistTesters = "/app_center.v1.tester.Tester/listTesters"
+const OperationTesterremoveTester = "/app_center.v1.tester.Tester/removeTester"
 
 type TesterHTTPServer interface {
 	AddTester(context.Context, *AddTesterRequest) (*AddTesterReply, error)
 	GetTestLink(context.Context, *GetTestLinkRequest) (*GetTestLinkReply, error)
+	ListTesters(context.Context, *ListTestersRequest) (*ListTestersReply, error)
+	RemoveTester(context.Context, *RemoveTesterRequest) (*RemoveTesterReply, error)
 }
 
 func RegisterTesterHTTPServer(s *http.Server, srv TesterHTTPServer) {
 	r := s.Route("/")
 	r.GET("/tester/test-link", _Tester_GetTestLink0_HTTP_Handler(srv))
 	r.GET("/tester/add", _Tester_AddTester0_HTTP_Handler(srv))
+	r.POST("/tester/remove", _Tester_RemoveTester0_HTTP_Handler(srv))
+	r.GET("/tester/list", _Tester_ListTesters0_HTTP_Handler(srv))
 }
 
 func _Tester_GetTestLink0_HTTP_Handler(srv TesterHTTPServer) func(ctx http.Context) error {
@@ -71,9 +77,52 @@ func _Tester_AddTester0_HTTP_Handler(srv TesterHTTPServer) func(ctx http.Context
 	}
 }
 
+func _Tester_RemoveTester0_HTTP_Handler(srv TesterHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RemoveTesterRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationTesterremoveTester)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RemoveTester(ctx, req.(*RemoveTesterRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RemoveTesterReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Tester_ListTesters0_HTTP_Handler(srv TesterHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListTestersRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationTesterlistTesters)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListTesters(ctx, req.(*ListTestersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListTestersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type TesterHTTPClient interface {
 	AddTester(ctx context.Context, req *AddTesterRequest, opts ...http.CallOption) (rsp *AddTesterReply, err error)
 	GetTestLink(ctx context.Context, req *GetTestLinkRequest, opts ...http.CallOption) (rsp *GetTestLinkReply, err error)
+	ListTesters(ctx context.Context, req *ListTestersRequest, opts ...http.CallOption) (rsp *ListTestersReply, err error)
+	RemoveTester(ctx context.Context, req *RemoveTesterRequest, opts ...http.CallOption) (rsp *RemoveTesterReply, err error)
 }
 
 type TesterHTTPClientImpl struct {
@@ -104,6 +153,32 @@ func (c *TesterHTTPClientImpl) GetTestLink(ctx context.Context, in *GetTestLinkR
 	opts = append(opts, http.Operation(OperationTestergetTestLink))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *TesterHTTPClientImpl) ListTesters(ctx context.Context, in *ListTestersRequest, opts ...http.CallOption) (*ListTestersReply, error) {
+	var out ListTestersReply
+	pattern := "/tester/list"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationTesterlistTesters))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *TesterHTTPClientImpl) RemoveTester(ctx context.Context, in *RemoveTesterRequest, opts ...http.CallOption) (*RemoveTesterReply, error) {
+	var out RemoveTesterReply
+	pattern := "/tester/remove"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationTesterremoveTester))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

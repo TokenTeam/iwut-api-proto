@@ -30,6 +30,36 @@ service AppVersion {
       body: "*"
     };
   }
+  rpc updateAppVersionDisplayName (UpdateAppVersionDisplayNameRequest) returns (UpdateAppVersionDisplayNameReply) {
+    option (google.api.http) = {
+      post: "/app/update-version-display-name"
+      body: "*"
+    };
+  }
+  rpc updateAppVersionDescription (UpdateAppVersionDescriptionRequest) returns (UpdateAppVersionDescriptionReply) {
+    option (google.api.http) = {
+      post: "/app/update-version-description"
+      body: "*"
+    };
+  }
+  rpc updateAppVersionUrl (UpdateAppVersionUrlRequest) returns (UpdateAppVersionUrlReply) {
+    option (google.api.http) = {
+      post: "/app/update-version-url"
+      body: "*"
+    };
+  }
+  rpc updateAppVersionIcon (UpdateAppVersionIconRequest) returns (UpdateAppVersionIconReply) {
+    option (google.api.http) = {
+      post: "/app/update-version-icon"
+      body: "*"
+    };
+  }
+  rpc updateAppVersionVersion (UpdateAppVersionVersionRequest) returns (UpdateAppVersionVersionReply) {
+    option (google.api.http) = {
+      post: "/app/update-version-version"
+      body: "*"
+    };
+  }
 }
 message GetAppVersionInfoRequest {
   string clientId = 1;
@@ -106,6 +136,61 @@ message DeleteAppVersionRequest {
   int32 version = 2;
 }
 message DeleteAppVersionReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionDisplayNameRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string displayName = 3;
+}
+message UpdateAppVersionDisplayNameReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionDescriptionRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string description = 3;
+}
+message UpdateAppVersionDescriptionReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionUrlRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string url = 3;
+}
+message UpdateAppVersionUrlReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionIconRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string icon = 3;
+}
+message UpdateAppVersionIconReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message UpdateAppVersionVersionRequest {
+  string clientId = 1;
+  int32 internalVersion = 2;
+  string version = 3;
+}
+message UpdateAppVersionVersionReply {
   int32 code = 1;
   string message = 2;
   string traceId = 3;

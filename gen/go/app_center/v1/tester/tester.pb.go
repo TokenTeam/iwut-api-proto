@@ -254,6 +254,246 @@ func (x *AddTesterReply) GetTraceId() string {
 	return ""
 }
 
+type RemoveTesterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	UserId        string                 `protobuf:"bytes,3,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveTesterRequest) Reset() {
+	*x = RemoveTesterRequest{}
+	mi := &file_v1_tester_tester_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveTesterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveTesterRequest) ProtoMessage() {}
+
+func (x *RemoveTesterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_tester_tester_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveTesterRequest.ProtoReflect.Descriptor instead.
+func (*RemoveTesterRequest) Descriptor() ([]byte, []int) {
+	return file_v1_tester_tester_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RemoveTesterRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *RemoveTesterRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+func (x *RemoveTesterRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type RemoveTesterReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	TraceId       string                 `protobuf:"bytes,3,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveTesterReply) Reset() {
+	*x = RemoveTesterReply{}
+	mi := &file_v1_tester_tester_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveTesterReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveTesterReply) ProtoMessage() {}
+
+func (x *RemoveTesterReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_tester_tester_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveTesterReply.ProtoReflect.Descriptor instead.
+func (*RemoveTesterReply) Descriptor() ([]byte, []int) {
+	return file_v1_tester_tester_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RemoveTesterReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *RemoveTesterReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *RemoveTesterReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type ListTestersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTestersRequest) Reset() {
+	*x = ListTestersRequest{}
+	mi := &file_v1_tester_tester_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTestersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTestersRequest) ProtoMessage() {}
+
+func (x *ListTestersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_tester_tester_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTestersRequest.ProtoReflect.Descriptor instead.
+func (*ListTestersRequest) Descriptor() ([]byte, []int) {
+	return file_v1_tester_tester_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListTestersRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *ListTestersRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+type ListTestersReply struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Code          int32                          `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                         `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Data          []*ListTestersReply_TesterInfo `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+	TraceId       string                         `protobuf:"bytes,4,opt,name=traceId,proto3" json:"traceId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTestersReply) Reset() {
+	*x = ListTestersReply{}
+	mi := &file_v1_tester_tester_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTestersReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTestersReply) ProtoMessage() {}
+
+func (x *ListTestersReply) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_tester_tester_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTestersReply.ProtoReflect.Descriptor instead.
+func (*ListTestersReply) Descriptor() ([]byte, []int) {
+	return file_v1_tester_tester_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListTestersReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ListTestersReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ListTestersReply) GetData() []*ListTestersReply_TesterInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ListTestersReply) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type GetTestLinkReply_GetTaskLinkData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TestLink      string                 `protobuf:"bytes,1,opt,name=testLink,proto3" json:"testLink,omitempty"`
@@ -263,7 +503,7 @@ type GetTestLinkReply_GetTaskLinkData struct {
 
 func (x *GetTestLinkReply_GetTaskLinkData) Reset() {
 	*x = GetTestLinkReply_GetTaskLinkData{}
-	mi := &file_v1_tester_tester_proto_msgTypes[4]
+	mi := &file_v1_tester_tester_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +515,7 @@ func (x *GetTestLinkReply_GetTaskLinkData) String() string {
 func (*GetTestLinkReply_GetTaskLinkData) ProtoMessage() {}
 
 func (x *GetTestLinkReply_GetTaskLinkData) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_tester_tester_proto_msgTypes[4]
+	mi := &file_v1_tester_tester_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -294,6 +534,58 @@ func (*GetTestLinkReply_GetTaskLinkData) Descriptor() ([]byte, []int) {
 func (x *GetTestLinkReply_GetTaskLinkData) GetTestLink() string {
 	if x != nil {
 		return x.TestLink
+	}
+	return ""
+}
+
+type ListTestersReply_TesterInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTestersReply_TesterInfo) Reset() {
+	*x = ListTestersReply_TesterInfo{}
+	mi := &file_v1_tester_tester_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTestersReply_TesterInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTestersReply_TesterInfo) ProtoMessage() {}
+
+func (x *ListTestersReply_TesterInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_tester_tester_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTestersReply_TesterInfo.ProtoReflect.Descriptor instead.
+func (*ListTestersReply_TesterInfo) Descriptor() ([]byte, []int) {
+	return file_v1_tester_tester_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *ListTestersReply_TesterInfo) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ListTestersReply_TesterInfo) GetUsername() string {
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
@@ -322,10 +614,32 @@ const file_v1_tester_tester_proto_rawDesc = "" +
 	"\x0eAddTesterReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
-	"\atraceId\x18\x03 \x01(\tR\atraceId2\xf4\x01\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"c\n" +
+	"\x13RemoveTesterRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\x12\x16\n" +
+	"\x06userId\x18\x03 \x01(\tR\x06userId\"[\n" +
+	"\x11RemoveTesterReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId\"J\n" +
+	"\x12ListTestersRequest\x12\x1a\n" +
+	"\bclientId\x18\x01 \x01(\tR\bclientId\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\"\xe3\x01\n" +
+	"\x10ListTestersReply\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12E\n" +
+	"\x04data\x18\x03 \x03(\v21.app_center.v1.tester.ListTestersReply.TesterInfoR\x04data\x12\x18\n" +
+	"\atraceId\x18\x04 \x01(\tR\atraceId\x1a@\n" +
+	"\n" +
+	"TesterInfo\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername2\xea\x03\n" +
 	"\x06Tester\x12z\n" +
 	"\vgetTestLink\x12(.app_center.v1.tester.GetTestLinkRequest\x1a&.app_center.v1.tester.GetTestLinkReply\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/tester/test-link\x12n\n" +
-	"\taddTester\x12&.app_center.v1.tester.AddTesterRequest\x1a$.app_center.v1.tester.AddTesterReply\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/tester/addB1Z/iwut-app-center/api/app_center/v1/tester;testerb\x06proto3"
+	"\taddTester\x12&.app_center.v1.tester.AddTesterRequest\x1a$.app_center.v1.tester.AddTesterReply\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/tester/add\x12}\n" +
+	"\fremoveTester\x12).app_center.v1.tester.RemoveTesterRequest\x1a'.app_center.v1.tester.RemoveTesterReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/tester/remove\x12u\n" +
+	"\vlistTesters\x12(.app_center.v1.tester.ListTestersRequest\x1a&.app_center.v1.tester.ListTestersReply\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/tester/listB1Z/iwut-app-center/api/app_center/v1/tester;testerb\x06proto3"
 
 var (
 	file_v1_tester_tester_proto_rawDescOnce sync.Once
@@ -339,25 +653,35 @@ func file_v1_tester_tester_proto_rawDescGZIP() []byte {
 	return file_v1_tester_tester_proto_rawDescData
 }
 
-var file_v1_tester_tester_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_v1_tester_tester_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_v1_tester_tester_proto_goTypes = []any{
 	(*GetTestLinkRequest)(nil),               // 0: app_center.v1.tester.GetTestLinkRequest
 	(*GetTestLinkReply)(nil),                 // 1: app_center.v1.tester.GetTestLinkReply
 	(*AddTesterRequest)(nil),                 // 2: app_center.v1.tester.AddTesterRequest
 	(*AddTesterReply)(nil),                   // 3: app_center.v1.tester.AddTesterReply
-	(*GetTestLinkReply_GetTaskLinkData)(nil), // 4: app_center.v1.tester.GetTestLinkReply.GetTaskLinkData
+	(*RemoveTesterRequest)(nil),              // 4: app_center.v1.tester.RemoveTesterRequest
+	(*RemoveTesterReply)(nil),                // 5: app_center.v1.tester.RemoveTesterReply
+	(*ListTestersRequest)(nil),               // 6: app_center.v1.tester.ListTestersRequest
+	(*ListTestersReply)(nil),                 // 7: app_center.v1.tester.ListTestersReply
+	(*GetTestLinkReply_GetTaskLinkData)(nil), // 8: app_center.v1.tester.GetTestLinkReply.GetTaskLinkData
+	(*ListTestersReply_TesterInfo)(nil),      // 9: app_center.v1.tester.ListTestersReply.TesterInfo
 }
 var file_v1_tester_tester_proto_depIdxs = []int32{
-	4, // 0: app_center.v1.tester.GetTestLinkReply.data:type_name -> app_center.v1.tester.GetTestLinkReply.GetTaskLinkData
-	0, // 1: app_center.v1.tester.Tester.getTestLink:input_type -> app_center.v1.tester.GetTestLinkRequest
-	2, // 2: app_center.v1.tester.Tester.addTester:input_type -> app_center.v1.tester.AddTesterRequest
-	1, // 3: app_center.v1.tester.Tester.getTestLink:output_type -> app_center.v1.tester.GetTestLinkReply
-	3, // 4: app_center.v1.tester.Tester.addTester:output_type -> app_center.v1.tester.AddTesterReply
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	8, // 0: app_center.v1.tester.GetTestLinkReply.data:type_name -> app_center.v1.tester.GetTestLinkReply.GetTaskLinkData
+	9, // 1: app_center.v1.tester.ListTestersReply.data:type_name -> app_center.v1.tester.ListTestersReply.TesterInfo
+	0, // 2: app_center.v1.tester.Tester.getTestLink:input_type -> app_center.v1.tester.GetTestLinkRequest
+	2, // 3: app_center.v1.tester.Tester.addTester:input_type -> app_center.v1.tester.AddTesterRequest
+	4, // 4: app_center.v1.tester.Tester.removeTester:input_type -> app_center.v1.tester.RemoveTesterRequest
+	6, // 5: app_center.v1.tester.Tester.listTesters:input_type -> app_center.v1.tester.ListTestersRequest
+	1, // 6: app_center.v1.tester.Tester.getTestLink:output_type -> app_center.v1.tester.GetTestLinkReply
+	3, // 7: app_center.v1.tester.Tester.addTester:output_type -> app_center.v1.tester.AddTesterReply
+	5, // 8: app_center.v1.tester.Tester.removeTester:output_type -> app_center.v1.tester.RemoveTesterReply
+	7, // 9: app_center.v1.tester.Tester.listTesters:output_type -> app_center.v1.tester.ListTestersReply
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_v1_tester_tester_proto_init() }
@@ -372,7 +696,7 @@ func file_v1_tester_tester_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_tester_tester_proto_rawDesc), len(file_v1_tester_tester_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

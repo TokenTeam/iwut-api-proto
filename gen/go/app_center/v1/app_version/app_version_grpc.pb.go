@@ -23,6 +23,11 @@ const (
 	AppVersion_GetAppVersionInfoWithUserCheck_FullMethodName = "/app_center.v1.app_version.AppVersion/getAppVersionInfoWithUserCheck"
 	AppVersion_CreateAppVersion_FullMethodName               = "/app_center.v1.app_version.AppVersion/createAppVersion"
 	AppVersion_DeleteAppVersion_FullMethodName               = "/app_center.v1.app_version.AppVersion/deleteAppVersion"
+	AppVersion_UpdateAppVersionDisplayName_FullMethodName    = "/app_center.v1.app_version.AppVersion/updateAppVersionDisplayName"
+	AppVersion_UpdateAppVersionDescription_FullMethodName    = "/app_center.v1.app_version.AppVersion/updateAppVersionDescription"
+	AppVersion_UpdateAppVersionUrl_FullMethodName            = "/app_center.v1.app_version.AppVersion/updateAppVersionUrl"
+	AppVersion_UpdateAppVersionIcon_FullMethodName           = "/app_center.v1.app_version.AppVersion/updateAppVersionIcon"
+	AppVersion_UpdateAppVersionVersion_FullMethodName        = "/app_center.v1.app_version.AppVersion/updateAppVersionVersion"
 )
 
 // AppVersionClient is the client API for AppVersion service.
@@ -33,6 +38,11 @@ type AppVersionClient interface {
 	GetAppVersionInfoWithUserCheck(ctx context.Context, in *GetAppVersionInfoWithUserCheckRequest, opts ...grpc.CallOption) (*GetAppVersionInfoWithUserCheckReply, error)
 	CreateAppVersion(ctx context.Context, in *CreateAppVersionRequest, opts ...grpc.CallOption) (*CreateAppVersionReply, error)
 	DeleteAppVersion(ctx context.Context, in *DeleteAppVersionRequest, opts ...grpc.CallOption) (*DeleteAppVersionReply, error)
+	UpdateAppVersionDisplayName(ctx context.Context, in *UpdateAppVersionDisplayNameRequest, opts ...grpc.CallOption) (*UpdateAppVersionDisplayNameReply, error)
+	UpdateAppVersionDescription(ctx context.Context, in *UpdateAppVersionDescriptionRequest, opts ...grpc.CallOption) (*UpdateAppVersionDescriptionReply, error)
+	UpdateAppVersionUrl(ctx context.Context, in *UpdateAppVersionUrlRequest, opts ...grpc.CallOption) (*UpdateAppVersionUrlReply, error)
+	UpdateAppVersionIcon(ctx context.Context, in *UpdateAppVersionIconRequest, opts ...grpc.CallOption) (*UpdateAppVersionIconReply, error)
+	UpdateAppVersionVersion(ctx context.Context, in *UpdateAppVersionVersionRequest, opts ...grpc.CallOption) (*UpdateAppVersionVersionReply, error)
 }
 
 type appVersionClient struct {
@@ -83,6 +93,56 @@ func (c *appVersionClient) DeleteAppVersion(ctx context.Context, in *DeleteAppVe
 	return out, nil
 }
 
+func (c *appVersionClient) UpdateAppVersionDisplayName(ctx context.Context, in *UpdateAppVersionDisplayNameRequest, opts ...grpc.CallOption) (*UpdateAppVersionDisplayNameReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppVersionDisplayNameReply)
+	err := c.cc.Invoke(ctx, AppVersion_UpdateAppVersionDisplayName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appVersionClient) UpdateAppVersionDescription(ctx context.Context, in *UpdateAppVersionDescriptionRequest, opts ...grpc.CallOption) (*UpdateAppVersionDescriptionReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppVersionDescriptionReply)
+	err := c.cc.Invoke(ctx, AppVersion_UpdateAppVersionDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appVersionClient) UpdateAppVersionUrl(ctx context.Context, in *UpdateAppVersionUrlRequest, opts ...grpc.CallOption) (*UpdateAppVersionUrlReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppVersionUrlReply)
+	err := c.cc.Invoke(ctx, AppVersion_UpdateAppVersionUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appVersionClient) UpdateAppVersionIcon(ctx context.Context, in *UpdateAppVersionIconRequest, opts ...grpc.CallOption) (*UpdateAppVersionIconReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppVersionIconReply)
+	err := c.cc.Invoke(ctx, AppVersion_UpdateAppVersionIcon_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appVersionClient) UpdateAppVersionVersion(ctx context.Context, in *UpdateAppVersionVersionRequest, opts ...grpc.CallOption) (*UpdateAppVersionVersionReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAppVersionVersionReply)
+	err := c.cc.Invoke(ctx, AppVersion_UpdateAppVersionVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppVersionServer is the server API for AppVersion service.
 // All implementations must embed UnimplementedAppVersionServer
 // for forward compatibility.
@@ -91,6 +151,11 @@ type AppVersionServer interface {
 	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error)
+	UpdateAppVersionDisplayName(context.Context, *UpdateAppVersionDisplayNameRequest) (*UpdateAppVersionDisplayNameReply, error)
+	UpdateAppVersionDescription(context.Context, *UpdateAppVersionDescriptionRequest) (*UpdateAppVersionDescriptionReply, error)
+	UpdateAppVersionUrl(context.Context, *UpdateAppVersionUrlRequest) (*UpdateAppVersionUrlReply, error)
+	UpdateAppVersionIcon(context.Context, *UpdateAppVersionIconRequest) (*UpdateAppVersionIconReply, error)
+	UpdateAppVersionVersion(context.Context, *UpdateAppVersionVersionRequest) (*UpdateAppVersionVersionReply, error)
 	mustEmbedUnimplementedAppVersionServer()
 }
 
@@ -112,6 +177,21 @@ func (UnimplementedAppVersionServer) CreateAppVersion(context.Context, *CreateAp
 }
 func (UnimplementedAppVersionServer) DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAppVersion not implemented")
+}
+func (UnimplementedAppVersionServer) UpdateAppVersionDisplayName(context.Context, *UpdateAppVersionDisplayNameRequest) (*UpdateAppVersionDisplayNameReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppVersionDisplayName not implemented")
+}
+func (UnimplementedAppVersionServer) UpdateAppVersionDescription(context.Context, *UpdateAppVersionDescriptionRequest) (*UpdateAppVersionDescriptionReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppVersionDescription not implemented")
+}
+func (UnimplementedAppVersionServer) UpdateAppVersionUrl(context.Context, *UpdateAppVersionUrlRequest) (*UpdateAppVersionUrlReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppVersionUrl not implemented")
+}
+func (UnimplementedAppVersionServer) UpdateAppVersionIcon(context.Context, *UpdateAppVersionIconRequest) (*UpdateAppVersionIconReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppVersionIcon not implemented")
+}
+func (UnimplementedAppVersionServer) UpdateAppVersionVersion(context.Context, *UpdateAppVersionVersionRequest) (*UpdateAppVersionVersionReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAppVersionVersion not implemented")
 }
 func (UnimplementedAppVersionServer) mustEmbedUnimplementedAppVersionServer() {}
 func (UnimplementedAppVersionServer) testEmbeddedByValue()                    {}
@@ -206,6 +286,96 @@ func _AppVersion_DeleteAppVersion_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppVersion_UpdateAppVersionDisplayName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppVersionDisplayNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).UpdateAppVersionDisplayName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_UpdateAppVersionDisplayName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).UpdateAppVersionDisplayName(ctx, req.(*UpdateAppVersionDisplayNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppVersion_UpdateAppVersionDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppVersionDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).UpdateAppVersionDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_UpdateAppVersionDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).UpdateAppVersionDescription(ctx, req.(*UpdateAppVersionDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppVersion_UpdateAppVersionUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppVersionUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).UpdateAppVersionUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_UpdateAppVersionUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).UpdateAppVersionUrl(ctx, req.(*UpdateAppVersionUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppVersion_UpdateAppVersionIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppVersionIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).UpdateAppVersionIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_UpdateAppVersionIcon_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).UpdateAppVersionIcon(ctx, req.(*UpdateAppVersionIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppVersion_UpdateAppVersionVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAppVersionVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppVersionServer).UpdateAppVersionVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppVersion_UpdateAppVersionVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppVersionServer).UpdateAppVersionVersion(ctx, req.(*UpdateAppVersionVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AppVersion_ServiceDesc is the grpc.ServiceDesc for AppVersion service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +398,26 @@ var AppVersion_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "deleteAppVersion",
 			Handler:    _AppVersion_DeleteAppVersion_Handler,
+		},
+		{
+			MethodName: "updateAppVersionDisplayName",
+			Handler:    _AppVersion_UpdateAppVersionDisplayName_Handler,
+		},
+		{
+			MethodName: "updateAppVersionDescription",
+			Handler:    _AppVersion_UpdateAppVersionDescription_Handler,
+		},
+		{
+			MethodName: "updateAppVersionUrl",
+			Handler:    _AppVersion_UpdateAppVersionUrl_Handler,
+		},
+		{
+			MethodName: "updateAppVersionIcon",
+			Handler:    _AppVersion_UpdateAppVersionIcon_Handler,
+		},
+		{
+			MethodName: "updateAppVersionVersion",
+			Handler:    _AppVersion_UpdateAppVersionVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

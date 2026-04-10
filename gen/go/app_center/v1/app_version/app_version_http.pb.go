@@ -23,12 +23,22 @@ const OperationAppVersioncreateAppVersion = "/app_center.v1.app_version.AppVersi
 const OperationAppVersiondeleteAppVersion = "/app_center.v1.app_version.AppVersion/deleteAppVersion"
 const OperationAppVersiongetAppVersionInfo = "/app_center.v1.app_version.AppVersion/getAppVersionInfo"
 const OperationAppVersiongetAppVersionInfoWithUserCheck = "/app_center.v1.app_version.AppVersion/getAppVersionInfoWithUserCheck"
+const OperationAppVersionupdateAppVersionDescription = "/app_center.v1.app_version.AppVersion/updateAppVersionDescription"
+const OperationAppVersionupdateAppVersionDisplayName = "/app_center.v1.app_version.AppVersion/updateAppVersionDisplayName"
+const OperationAppVersionupdateAppVersionIcon = "/app_center.v1.app_version.AppVersion/updateAppVersionIcon"
+const OperationAppVersionupdateAppVersionUrl = "/app_center.v1.app_version.AppVersion/updateAppVersionUrl"
+const OperationAppVersionupdateAppVersionVersion = "/app_center.v1.app_version.AppVersion/updateAppVersionVersion"
 
 type AppVersionHTTPServer interface {
 	CreateAppVersion(context.Context, *CreateAppVersionRequest) (*CreateAppVersionReply, error)
 	DeleteAppVersion(context.Context, *DeleteAppVersionRequest) (*DeleteAppVersionReply, error)
 	GetAppVersionInfo(context.Context, *GetAppVersionInfoRequest) (*GetAppVersionInfoReply, error)
 	GetAppVersionInfoWithUserCheck(context.Context, *GetAppVersionInfoWithUserCheckRequest) (*GetAppVersionInfoWithUserCheckReply, error)
+	UpdateAppVersionDescription(context.Context, *UpdateAppVersionDescriptionRequest) (*UpdateAppVersionDescriptionReply, error)
+	UpdateAppVersionDisplayName(context.Context, *UpdateAppVersionDisplayNameRequest) (*UpdateAppVersionDisplayNameReply, error)
+	UpdateAppVersionIcon(context.Context, *UpdateAppVersionIconRequest) (*UpdateAppVersionIconReply, error)
+	UpdateAppVersionUrl(context.Context, *UpdateAppVersionUrlRequest) (*UpdateAppVersionUrlReply, error)
+	UpdateAppVersionVersion(context.Context, *UpdateAppVersionVersionRequest) (*UpdateAppVersionVersionReply, error)
 }
 
 func RegisterAppVersionHTTPServer(s *http.Server, srv AppVersionHTTPServer) {
@@ -37,6 +47,11 @@ func RegisterAppVersionHTTPServer(s *http.Server, srv AppVersionHTTPServer) {
 	r.POST("/app/version-info-with-user-check", _AppVersion_GetAppVersionInfoWithUserCheck0_HTTP_Handler(srv))
 	r.POST("/app/create-version", _AppVersion_CreateAppVersion0_HTTP_Handler(srv))
 	r.POST("/app/delete-version", _AppVersion_DeleteAppVersion0_HTTP_Handler(srv))
+	r.POST("/app/update-version-display-name", _AppVersion_UpdateAppVersionDisplayName0_HTTP_Handler(srv))
+	r.POST("/app/update-version-description", _AppVersion_UpdateAppVersionDescription0_HTTP_Handler(srv))
+	r.POST("/app/update-version-url", _AppVersion_UpdateAppVersionUrl0_HTTP_Handler(srv))
+	r.POST("/app/update-version-icon", _AppVersion_UpdateAppVersionIcon0_HTTP_Handler(srv))
+	r.POST("/app/update-version-version", _AppVersion_UpdateAppVersionVersion0_HTTP_Handler(srv))
 }
 
 func _AppVersion_GetAppVersionInfo0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
@@ -124,11 +139,126 @@ func _AppVersion_DeleteAppVersion0_HTTP_Handler(srv AppVersionHTTPServer) func(c
 	}
 }
 
+func _AppVersion_UpdateAppVersionDisplayName0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionDisplayNameRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersionupdateAppVersionDisplayName)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionDisplayName(ctx, req.(*UpdateAppVersionDisplayNameRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionDisplayNameReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _AppVersion_UpdateAppVersionDescription0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionDescriptionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersionupdateAppVersionDescription)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionDescription(ctx, req.(*UpdateAppVersionDescriptionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionDescriptionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _AppVersion_UpdateAppVersionUrl0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionUrlRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersionupdateAppVersionUrl)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionUrl(ctx, req.(*UpdateAppVersionUrlRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionUrlReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _AppVersion_UpdateAppVersionIcon0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionIconRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersionupdateAppVersionIcon)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionIcon(ctx, req.(*UpdateAppVersionIconRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionIconReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _AppVersion_UpdateAppVersionVersion0_HTTP_Handler(srv AppVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAppVersionVersionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAppVersionupdateAppVersionVersion)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAppVersionVersion(ctx, req.(*UpdateAppVersionVersionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAppVersionVersionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AppVersionHTTPClient interface {
 	CreateAppVersion(ctx context.Context, req *CreateAppVersionRequest, opts ...http.CallOption) (rsp *CreateAppVersionReply, err error)
 	DeleteAppVersion(ctx context.Context, req *DeleteAppVersionRequest, opts ...http.CallOption) (rsp *DeleteAppVersionReply, err error)
 	GetAppVersionInfo(ctx context.Context, req *GetAppVersionInfoRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoReply, err error)
 	GetAppVersionInfoWithUserCheck(ctx context.Context, req *GetAppVersionInfoWithUserCheckRequest, opts ...http.CallOption) (rsp *GetAppVersionInfoWithUserCheckReply, err error)
+	UpdateAppVersionDescription(ctx context.Context, req *UpdateAppVersionDescriptionRequest, opts ...http.CallOption) (rsp *UpdateAppVersionDescriptionReply, err error)
+	UpdateAppVersionDisplayName(ctx context.Context, req *UpdateAppVersionDisplayNameRequest, opts ...http.CallOption) (rsp *UpdateAppVersionDisplayNameReply, err error)
+	UpdateAppVersionIcon(ctx context.Context, req *UpdateAppVersionIconRequest, opts ...http.CallOption) (rsp *UpdateAppVersionIconReply, err error)
+	UpdateAppVersionUrl(ctx context.Context, req *UpdateAppVersionUrlRequest, opts ...http.CallOption) (rsp *UpdateAppVersionUrlReply, err error)
+	UpdateAppVersionVersion(ctx context.Context, req *UpdateAppVersionVersionRequest, opts ...http.CallOption) (rsp *UpdateAppVersionVersionReply, err error)
 }
 
 type AppVersionHTTPClientImpl struct {
@@ -183,6 +313,71 @@ func (c *AppVersionHTTPClientImpl) GetAppVersionInfoWithUserCheck(ctx context.Co
 	pattern := "/app/version-info-with-user-check"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAppVersiongetAppVersionInfoWithUserCheck))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) UpdateAppVersionDescription(ctx context.Context, in *UpdateAppVersionDescriptionRequest, opts ...http.CallOption) (*UpdateAppVersionDescriptionReply, error) {
+	var out UpdateAppVersionDescriptionReply
+	pattern := "/app/update-version-description"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersionupdateAppVersionDescription))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) UpdateAppVersionDisplayName(ctx context.Context, in *UpdateAppVersionDisplayNameRequest, opts ...http.CallOption) (*UpdateAppVersionDisplayNameReply, error) {
+	var out UpdateAppVersionDisplayNameReply
+	pattern := "/app/update-version-display-name"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersionupdateAppVersionDisplayName))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) UpdateAppVersionIcon(ctx context.Context, in *UpdateAppVersionIconRequest, opts ...http.CallOption) (*UpdateAppVersionIconReply, error) {
+	var out UpdateAppVersionIconReply
+	pattern := "/app/update-version-icon"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersionupdateAppVersionIcon))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) UpdateAppVersionUrl(ctx context.Context, in *UpdateAppVersionUrlRequest, opts ...http.CallOption) (*UpdateAppVersionUrlReply, error) {
+	var out UpdateAppVersionUrlReply
+	pattern := "/app/update-version-url"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersionupdateAppVersionUrl))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AppVersionHTTPClientImpl) UpdateAppVersionVersion(ctx context.Context, in *UpdateAppVersionVersionRequest, opts ...http.CallOption) (*UpdateAppVersionVersionReply, error) {
+	var out UpdateAppVersionVersionReply
+	pattern := "/app/update-version-version"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAppVersionupdateAppVersionVersion))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

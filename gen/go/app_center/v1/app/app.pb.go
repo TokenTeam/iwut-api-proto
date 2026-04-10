@@ -2053,15 +2053,15 @@ const file_v1_app_app_proto_rawDesc = "" +
 	"\x1bUpdateAppCollaboratorsReply\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
-	"\atraceId\x18\x03 \x01(\tR\atraceId2\x98\r\n" +
+	"\atraceId\x18\x03 \x01(\tR\atraceId2\x99\r\n" +
 	"\x03App\x12\x81\x01\n" +
 	"\x12getApplicationInfo\x12,.app_center.v1.app.GetApplicationInfoRequest\x1a*.app_center.v1.app.GetApplicationInfoReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/info\x12[\n" +
 	"\n" +
 	"getAppList\x12\x16.google.protobuf.Empty\x1a\".app_center.v1.app.GetAppListReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/app/list\x12k\n" +
 	"\tcreateApp\x12#.app_center.v1.app.CreateAppRequest\x1a!.app_center.v1.app.CreateAppReply\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\v/app/create\x12|\n" +
 	"\rupdateAppRule\x12'.app_center.v1.app.UpdateAppRuleRequest\x1a%.app_center.v1.app.UpdateAppRuleReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/app/update-rule\x12\x99\x01\n" +
-	"\x14updateAppRedirectUri\x12..app_center.v1.app.UpdateAppRedirectUriRequest\x1a,.app_center.v1.app.UpdateAppRedirectUriReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/app/update-redirect-uri\x12\xa0\x01\n" +
-	"\x16updateAppVersionStatus\x120.app_center.v1.app.UpdateAppVersionStatusRequest\x1a..app_center.v1.app.UpdateAppVersionStatusReply\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/app/update-collaborators\x12\x88\x01\n" +
+	"\x14updateAppRedirectUri\x12..app_center.v1.app.UpdateAppRedirectUriRequest\x1a,.app_center.v1.app.UpdateAppRedirectUriReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/app/update-redirect-uri\x12\xa1\x01\n" +
+	"\x16updateAppVersionStatus\x120.app_center.v1.app.UpdateAppVersionStatusRequest\x1a..app_center.v1.app.UpdateAppVersionStatusReply\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/app/update-version-status\x12\x88\x01\n" +
 	"\x10refreshAppSecret\x12*.app_center.v1.app.RefreshAppSecretRequest\x1a(.app_center.v1.app.RefreshAppSecretReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/app/refresh-secret\x12\xa5\x01\n" +
 	"\x17updateAppGreyPercentage\x121.app_center.v1.app.UpdateAppGreyPercentageRequest\x1a/.app_center.v1.app.UpdateAppGreyPercentageReply\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/app/update-grey-percentage\x12\xaa\x01\n" +
 	"\x18updateAppGreyShuffleCode\x122.app_center.v1.app.UpdateAppGreyShuffleCodeRequest\x1a0.app_center.v1.app.UpdateAppGreyShuffleCodeReply\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/app/update-grey-shuffle-code\x12|\n" +

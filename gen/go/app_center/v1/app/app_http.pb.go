@@ -55,7 +55,7 @@ func RegisterAppHTTPServer(s *http.Server, srv AppHTTPServer) {
 	r.POST("/app/create", _App_CreateApp0_HTTP_Handler(srv))
 	r.POST("/app/update-rule", _App_UpdateAppRule0_HTTP_Handler(srv))
 	r.POST("/app/update-redirect-uri", _App_UpdateAppRedirectUri0_HTTP_Handler(srv))
-	r.POST("/app/update-collaborators", _App_UpdateAppVersionStatus0_HTTP_Handler(srv))
+	r.POST("/app/update-version-status", _App_UpdateAppVersionStatus0_HTTP_Handler(srv))
 	r.POST("/app/refresh-secret", _App_RefreshAppSecret0_HTTP_Handler(srv))
 	r.POST("/app/update-grey-percentage", _App_UpdateAppGreyPercentage0_HTTP_Handler(srv))
 	r.POST("/app/update-grey-shuffle-code", _App_UpdateAppGreyShuffleCode0_HTTP_Handler(srv))
@@ -490,7 +490,7 @@ func (c *AppHTTPClientImpl) UpdateAppStatus(ctx context.Context, in *UpdateAppSt
 
 func (c *AppHTTPClientImpl) UpdateAppVersionStatus(ctx context.Context, in *UpdateAppVersionStatusRequest, opts ...http.CallOption) (*UpdateAppVersionStatusReply, error) {
 	var out UpdateAppVersionStatusReply
-	pattern := "/app/update-collaborators"
+	pattern := "/app/update-version-status"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAppupdateAppVersionStatus))
 	opts = append(opts, http.PathTemplate(pattern))

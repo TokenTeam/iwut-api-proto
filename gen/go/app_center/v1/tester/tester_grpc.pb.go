@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Tester_GetTestLink_FullMethodName = "/app_center.v1.tester.Tester/getTestLink"
-	Tester_AddTester_FullMethodName   = "/app_center.v1.tester.Tester/addTester"
+	Tester_GetTestLink_FullMethodName  = "/app_center.v1.tester.Tester/getTestLink"
+	Tester_AddTester_FullMethodName    = "/app_center.v1.tester.Tester/addTester"
+	Tester_RemoveTester_FullMethodName = "/app_center.v1.tester.Tester/removeTester"
+	Tester_ListTesters_FullMethodName  = "/app_center.v1.tester.Tester/listTesters"
 )
 
 // TesterClient is the client API for Tester service.
@@ -29,6 +31,8 @@ const (
 type TesterClient interface {
 	GetTestLink(ctx context.Context, in *GetTestLinkRequest, opts ...grpc.CallOption) (*GetTestLinkReply, error)
 	AddTester(ctx context.Context, in *AddTesterRequest, opts ...grpc.CallOption) (*AddTesterReply, error)
+	RemoveTester(ctx context.Context, in *RemoveTesterRequest, opts ...grpc.CallOption) (*RemoveTesterReply, error)
+	ListTesters(ctx context.Context, in *ListTestersRequest, opts ...grpc.CallOption) (*ListTestersReply, error)
 }
 
 type testerClient struct {
@@ -59,12 +63,34 @@ func (c *testerClient) AddTester(ctx context.Context, in *AddTesterRequest, opts
 	return out, nil
 }
 
+func (c *testerClient) RemoveTester(ctx context.Context, in *RemoveTesterRequest, opts ...grpc.CallOption) (*RemoveTesterReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveTesterReply)
+	err := c.cc.Invoke(ctx, Tester_RemoveTester_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testerClient) ListTesters(ctx context.Context, in *ListTestersRequest, opts ...grpc.CallOption) (*ListTestersReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTestersReply)
+	err := c.cc.Invoke(ctx, Tester_ListTesters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TesterServer is the server API for Tester service.
 // All implementations must embed UnimplementedTesterServer
 // for forward compatibility.
 type TesterServer interface {
 	GetTestLink(context.Context, *GetTestLinkRequest) (*GetTestLinkReply, error)
 	AddTester(context.Context, *AddTesterRequest) (*AddTesterReply, error)
+	RemoveTester(context.Context, *RemoveTesterRequest) (*RemoveTesterReply, error)
+	ListTesters(context.Context, *ListTestersRequest) (*ListTestersReply, error)
 	mustEmbedUnimplementedTesterServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedTesterServer) GetTestLink(context.Context, *GetTestLinkReques
 }
 func (UnimplementedTesterServer) AddTester(context.Context, *AddTesterRequest) (*AddTesterReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddTester not implemented")
+}
+func (UnimplementedTesterServer) RemoveTester(context.Context, *RemoveTesterRequest) (*RemoveTesterReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveTester not implemented")
+}
+func (UnimplementedTesterServer) ListTesters(context.Context, *ListTestersRequest) (*ListTestersReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListTesters not implemented")
 }
 func (UnimplementedTesterServer) mustEmbedUnimplementedTesterServer() {}
 func (UnimplementedTesterServer) testEmbeddedByValue()                {}
@@ -138,6 +170,42 @@ func _Tester_AddTester_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Tester_RemoveTester_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveTesterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TesterServer).RemoveTester(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Tester_RemoveTester_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TesterServer).RemoveTester(ctx, req.(*RemoveTesterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Tester_ListTesters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTestersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TesterServer).ListTesters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Tester_ListTesters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TesterServer).ListTesters(ctx, req.(*ListTestersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Tester_ServiceDesc is the grpc.ServiceDesc for Tester service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var Tester_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "addTester",
 			Handler:    _Tester_AddTester_Handler,
+		},
+		{
+			MethodName: "removeTester",
+			Handler:    _Tester_RemoveTester_Handler,
+		},
+		{
+			MethodName: "listTesters",
+			Handler:    _Tester_ListTesters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -16,6 +16,17 @@ service Tester {
       get: "/tester/add"
     };
   }
+  rpc removeTester (RemoveTesterRequest) returns (RemoveTesterReply) {
+    option (google.api.http) = {
+      post: "/tester/remove"
+      body: "*"
+    };
+  }
+  rpc listTesters (ListTestersRequest) returns (ListTestersReply) {
+    option (google.api.http) = {
+      get: "/tester/list"
+    };
+  }
 }
 message GetTestLinkRequest {
   string clientId = 1;
@@ -41,4 +52,30 @@ message AddTesterReply {
   int32 code = 1;
   string message = 2;
   string traceId = 3;
+}
+
+message RemoveTesterRequest {
+  string clientId = 1;
+  int32 version = 2;
+  string userId = 3;
+}
+message RemoveTesterReply {
+  int32 code = 1;
+  string message = 2;
+  string traceId = 3;
+}
+
+message ListTestersRequest {
+  string clientId = 1;
+  int32 version = 2;
+}
+message ListTestersReply {
+  message TesterInfo {
+    string userId = 1;
+    string username = 2;
+  }
+  int32 code = 1;
+  string message = 2;
+  repeated TesterInfo data = 3;
+  string traceId = 4;
 }
