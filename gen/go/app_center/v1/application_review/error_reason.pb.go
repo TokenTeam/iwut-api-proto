@@ -38,6 +38,11 @@ const (
 	ErrorReason_ERROR_REASON_INVALID_APPLICATION_SCOPE             ErrorReason = 11
 	ErrorReason_ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE             ErrorReason = 12
 	ErrorReason_ERROR_REASON_INTERNAL                              ErrorReason = 13
+	ErrorReason_ERROR_REASON_APPLICATION_REVIEW_NOT_FOUND          ErrorReason = 14
+	ErrorReason_ERROR_REASON_APPLICATION_REVIEW_NOT_LATEST         ErrorReason = 15
+	ErrorReason_ERROR_REASON_APPLICATION_REVIEW_ALREADY_RESTORED   ErrorReason = 16
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_REJECTED      ErrorReason = 17
+	ErrorReason_ERROR_REASON_APPLICATION_REVIEW_STATE_INCONSISTENT ErrorReason = 18
 )
 
 // Enum value maps for ErrorReason.
@@ -57,6 +62,11 @@ var (
 		11: "ERROR_REASON_INVALID_APPLICATION_SCOPE",
 		12: "ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE",
 		13: "ERROR_REASON_INTERNAL",
+		14: "ERROR_REASON_APPLICATION_REVIEW_NOT_FOUND",
+		15: "ERROR_REASON_APPLICATION_REVIEW_NOT_LATEST",
+		16: "ERROR_REASON_APPLICATION_REVIEW_ALREADY_RESTORED",
+		17: "ERROR_REASON_APPLICATION_VERSION_NOT_REJECTED",
+		18: "ERROR_REASON_APPLICATION_REVIEW_STATE_INCONSISTENT",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                           0,
@@ -73,6 +83,11 @@ var (
 		"ERROR_REASON_INVALID_APPLICATION_SCOPE":             11,
 		"ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE":             12,
 		"ERROR_REASON_INTERNAL":                              13,
+		"ERROR_REASON_APPLICATION_REVIEW_NOT_FOUND":          14,
+		"ERROR_REASON_APPLICATION_REVIEW_NOT_LATEST":         15,
+		"ERROR_REASON_APPLICATION_REVIEW_ALREADY_RESTORED":   16,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_REJECTED":      17,
+		"ERROR_REASON_APPLICATION_REVIEW_STATE_INCONSISTENT": 18,
 	}
 )
 
@@ -107,7 +122,7 @@ var File_app_center_v1_application_review_error_reason_proto protoreflect.FileDe
 
 const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\x90\x05\n" +
+	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\x90\a\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -123,7 +138,12 @@ const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	"\x12*\n" +
 	"&ERROR_REASON_INVALID_APPLICATION_SCOPE\x10\v\x12*\n" +
 	"&ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE\x10\f\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\rBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\r\x12-\n" +
+	")ERROR_REASON_APPLICATION_REVIEW_NOT_FOUND\x10\x0e\x12.\n" +
+	"*ERROR_REASON_APPLICATION_REVIEW_NOT_LATEST\x10\x0f\x124\n" +
+	"0ERROR_REASON_APPLICATION_REVIEW_ALREADY_RESTORED\x10\x10\x121\n" +
+	"-ERROR_REASON_APPLICATION_VERSION_NOT_REJECTED\x10\x11\x126\n" +
+	"2ERROR_REASON_APPLICATION_REVIEW_STATE_INCONSISTENT\x10\x12BOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_error_reason_proto_rawDescOnce sync.Once

@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ApplicationReview_SubmitApplicationVersionReview_FullMethodName = "/app_center.v1.application_review.ApplicationReview/SubmitApplicationVersionReview"
+	ApplicationReview_SubmitApplicationVersionReview_FullMethodName           = "/app_center.v1.application_review.ApplicationReview/SubmitApplicationVersionReview"
+	ApplicationReview_RestoreRejectedApplicationVersionToDraft_FullMethodName = "/app_center.v1.application_review.ApplicationReview/RestoreRejectedApplicationVersionToDraft"
 )
 
 // ApplicationReviewClient is the client API for ApplicationReview service.
@@ -29,6 +30,7 @@ const (
 // ApplicationReview exposes commands on immutable review attempts.
 type ApplicationReviewClient interface {
 	SubmitApplicationVersionReview(ctx context.Context, in *SubmitApplicationVersionReviewRequest, opts ...grpc.CallOption) (*SubmitApplicationVersionReviewResponse, error)
+	RestoreRejectedApplicationVersionToDraft(ctx context.Context, in *RestoreRejectedApplicationVersionToDraftRequest, opts ...grpc.CallOption) (*RestoreRejectedApplicationVersionToDraftResponse, error)
 }
 
 type applicationReviewClient struct {
@@ -49,6 +51,16 @@ func (c *applicationReviewClient) SubmitApplicationVersionReview(ctx context.Con
 	return out, nil
 }
 
+func (c *applicationReviewClient) RestoreRejectedApplicationVersionToDraft(ctx context.Context, in *RestoreRejectedApplicationVersionToDraftRequest, opts ...grpc.CallOption) (*RestoreRejectedApplicationVersionToDraftResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestoreRejectedApplicationVersionToDraftResponse)
+	err := c.cc.Invoke(ctx, ApplicationReview_RestoreRejectedApplicationVersionToDraft_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationReviewServer is the server API for ApplicationReview service.
 // All implementations must embed UnimplementedApplicationReviewServer
 // for forward compatibility.
@@ -56,6 +68,7 @@ func (c *applicationReviewClient) SubmitApplicationVersionReview(ctx context.Con
 // ApplicationReview exposes commands on immutable review attempts.
 type ApplicationReviewServer interface {
 	SubmitApplicationVersionReview(context.Context, *SubmitApplicationVersionReviewRequest) (*SubmitApplicationVersionReviewResponse, error)
+	RestoreRejectedApplicationVersionToDraft(context.Context, *RestoreRejectedApplicationVersionToDraftRequest) (*RestoreRejectedApplicationVersionToDraftResponse, error)
 	mustEmbedUnimplementedApplicationReviewServer()
 }
 
@@ -68,6 +81,9 @@ type UnimplementedApplicationReviewServer struct{}
 
 func (UnimplementedApplicationReviewServer) SubmitApplicationVersionReview(context.Context, *SubmitApplicationVersionReviewRequest) (*SubmitApplicationVersionReviewResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubmitApplicationVersionReview not implemented")
+}
+func (UnimplementedApplicationReviewServer) RestoreRejectedApplicationVersionToDraft(context.Context, *RestoreRejectedApplicationVersionToDraftRequest) (*RestoreRejectedApplicationVersionToDraftResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreRejectedApplicationVersionToDraft not implemented")
 }
 func (UnimplementedApplicationReviewServer) mustEmbedUnimplementedApplicationReviewServer() {}
 func (UnimplementedApplicationReviewServer) testEmbeddedByValue()                           {}
@@ -108,6 +124,24 @@ func _ApplicationReview_SubmitApplicationVersionReview_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationReview_RestoreRejectedApplicationVersionToDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreRejectedApplicationVersionToDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationReviewServer).RestoreRejectedApplicationVersionToDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationReview_RestoreRejectedApplicationVersionToDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationReviewServer).RestoreRejectedApplicationVersionToDraft(ctx, req.(*RestoreRejectedApplicationVersionToDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationReview_ServiceDesc is the grpc.ServiceDesc for ApplicationReview service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -118,6 +152,10 @@ var ApplicationReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitApplicationVersionReview",
 			Handler:    _ApplicationReview_SubmitApplicationVersionReview_Handler,
+		},
+		{
+			MethodName: "RestoreRejectedApplicationVersionToDraft",
+			Handler:    _ApplicationReview_RestoreRejectedApplicationVersionToDraft_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

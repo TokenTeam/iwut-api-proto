@@ -19,15 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationReviewRestoreRejectedApplicationVersionToDraft = "/app_center.v1.application_review.ApplicationReview/RestoreRejectedApplicationVersionToDraft"
 const OperationApplicationReviewSubmitApplicationVersionReview = "/app_center.v1.application_review.ApplicationReview/SubmitApplicationVersionReview"
 
 type ApplicationReviewHTTPServer interface {
+	RestoreRejectedApplicationVersionToDraft(context.Context, *RestoreRejectedApplicationVersionToDraftRequest) (*RestoreRejectedApplicationVersionToDraftResponse, error)
 	SubmitApplicationVersionReview(context.Context, *SubmitApplicationVersionReviewRequest) (*SubmitApplicationVersionReviewResponse, error)
 }
 
 func RegisterApplicationReviewHTTPServer(s *http.Server, srv ApplicationReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/applications/{application_id}/versions/{version_id}/reviews", _ApplicationReview_SubmitApplicationVersionReview0_HTTP_Handler(srv))
+	r.POST("/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration", _ApplicationReview_RestoreRejectedApplicationVersionToDraft0_HTTP_Handler(srv))
 }
 
 func _ApplicationReview_SubmitApplicationVersionReview0_HTTP_Handler(srv ApplicationReviewHTTPServer) func(ctx http.Context) error {
@@ -55,7 +58,33 @@ func _ApplicationReview_SubmitApplicationVersionReview0_HTTP_Handler(srv Applica
 	}
 }
 
+func _ApplicationReview_RestoreRejectedApplicationVersionToDraft0_HTTP_Handler(srv ApplicationReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RestoreRejectedApplicationVersionToDraftRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationReviewRestoreRejectedApplicationVersionToDraft)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RestoreRejectedApplicationVersionToDraft(ctx, req.(*RestoreRejectedApplicationVersionToDraftRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RestoreRejectedApplicationVersionToDraftResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationReviewHTTPClient interface {
+	RestoreRejectedApplicationVersionToDraft(ctx context.Context, req *RestoreRejectedApplicationVersionToDraftRequest, opts ...http.CallOption) (rsp *RestoreRejectedApplicationVersionToDraftResponse, err error)
 	SubmitApplicationVersionReview(ctx context.Context, req *SubmitApplicationVersionReviewRequest, opts ...http.CallOption) (rsp *SubmitApplicationVersionReviewResponse, err error)
 }
 
@@ -65,6 +94,19 @@ type ApplicationReviewHTTPClientImpl struct {
 
 func NewApplicationReviewHTTPClient(client *http.Client) ApplicationReviewHTTPClient {
 	return &ApplicationReviewHTTPClientImpl{client}
+}
+
+func (c *ApplicationReviewHTTPClientImpl) RestoreRejectedApplicationVersionToDraft(ctx context.Context, in *RestoreRejectedApplicationVersionToDraftRequest, opts ...http.CallOption) (*RestoreRejectedApplicationVersionToDraftResponse, error) {
+	var out RestoreRejectedApplicationVersionToDraftResponse
+	pattern := "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationReviewRestoreRejectedApplicationVersionToDraft))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApplicationReviewHTTPClientImpl) SubmitApplicationVersionReview(ctx context.Context, in *SubmitApplicationVersionReviewRequest, opts ...http.CallOption) (*SubmitApplicationVersionReviewResponse, error) {

@@ -16,6 +16,13 @@ service ApplicationReview {
       body: "command"
     };
   }
+  rpc RestoreRejectedApplicationVersionToDraft(RestoreRejectedApplicationVersionToDraftRequest)
+      returns (RestoreRejectedApplicationVersionToDraftResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration"
+      body: "command"
+    };
+  }
 }
 
 message SubmitApplicationVersionReviewRequest {
@@ -46,6 +53,40 @@ message ApplicationReviewResource {
   string preflight_policy_version = 9;
   string submitted_by = 10;
   google.protobuf.Timestamp submitted_at = 11;
+  ApplicationReviewDraftRestoration draft_restoration = 12;
+}
+
+message RestoreRejectedApplicationVersionToDraftRequest {
+  string application_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  RestoreRejectedApplicationVersionToDraftCommand command = 4;
+}
+
+// The body contains only the optimistic concurrency input. Identity, final
+// status and restoration audit are server-owned.
+message RestoreRejectedApplicationVersionToDraftCommand {
+  int64 expected_version_revision = 1;
+}
+
+message RestoreRejectedApplicationVersionToDraftResponse {
+  ApplicationReviewResource review = 1;
+  RestoredApplicationVersion version = 2;
+}
+
+message ApplicationReviewDraftRestoration {
+  string restored_by = 1;
+  google.protobuf.Timestamp restored_at = 2;
+  int64 result_version_revision = 3;
+}
+
+message RestoredApplicationVersion {
+  string application_id = 1;
+  string version_id = 2;
+  string review_status = 3;
+  int64 revision = 4;
+  string updated_by = 5;
+  google.protobuf.Timestamp updated_at = 6;
 }
 
 message ApplicationVersionReviewSnapshot {
