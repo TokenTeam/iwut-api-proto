@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package auth_center.v1.developer_status;
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/developer_status;developerstatus";
+
+// DeveloperStatusDirectory exposes the smallest Auth-owned status projection
+// needed by explicitly authorised internal services. It is native gRPC only.
+service DeveloperStatusDirectory {
+  rpc BatchGetDeveloperStatuses(BatchGetDeveloperStatusesRequest)
+      returns (BatchGetDeveloperStatusesResponse);
+}
+
+message BatchGetDeveloperStatusesRequest {
+  repeated string auth_ids = 1;
+}
+
+message BatchGetDeveloperStatusesResponse {
+  repeated DeveloperStatusEntry entries = 1;
+}
+
+message DeveloperStatusEntry {
+  string auth_id = 1;
+  DeveloperStatus developer_status = 2;
+}
+
+enum DeveloperStatus {
+  DEVELOPER_STATUS_UNSPECIFIED = 0;
+  DEVELOPER_STATUS_PENDING = 1;
+  DEVELOPER_STATUS_APPROVED = 2;
+  DEVELOPER_STATUS_REJECTED = 3;
+  DEVELOPER_STATUS_SUSPENDED = 4;
+}

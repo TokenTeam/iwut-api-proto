@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth_center.v1.developer_status;
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/developer_status;developerstatus";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_SERVICE_IDENTITY_REQUIRED = 1;
+  ERROR_REASON_INVALID_SERVICE_IDENTITY = 2;
+  ERROR_REASON_DEVELOPER_STATUS_READ_FORBIDDEN = 3;
+  ERROR_REASON_INVALID_DEVELOPER_STATUS_QUERY = 4;
+  ERROR_REASON_DEVELOPER_STATUS_NOT_FOUND = 5;
+  ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE = 6;
+  ERROR_REASON_INTERNAL = 7;
+}

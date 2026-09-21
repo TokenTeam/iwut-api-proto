@@ -27,6 +27,8 @@ PROTO_FILES := \
 	app_center/v1/application_review/error_reason.proto \
 	app_center/v1/application_version/application_version.proto \
 	app_center/v1/application_version/error_reason.proto \
+	auth_center/v1/developer_status/developer_status.proto \
+	auth_center/v1/developer_status/error_reason.proto \
 	auth_center/v1/scope_catalog/scope_catalog.proto \
 	auth_center/v1/scope_catalog/error_reason.proto
 
@@ -42,6 +44,7 @@ GENERATED_DIRS := \
 	app_center/v1/application \
 	app_center/v1/application_review \
 	app_center/v1/application_version \
+	auth_center/v1/developer_status \
 	auth_center/v1/scope_catalog
 
 .PHONY: proto-gen
