@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package app_center.v1.application_version;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_version;applicationversion";
+
+// ApplicationVersion exposes the resource-oriented commands for application
+// versions. v1 initially contains only UC-APP-002 creation.
+service ApplicationVersion {
+  rpc CreateApplicationVersion(CreateApplicationVersionRequest)
+      returns (CreateApplicationVersionResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions"
+      body: "*"
+    };
+  }
+}
+
+message CreateApplicationVersionRequest {
+  // HTTP obtains application_id from the resource path. Native gRPC callers
+  // carry the same value in this field.
+  string application_id = 1;
+  string version_label = 2;
+  string launch_url = 3;
+  int32 rpc_api_min_version = 4;
+  int32 rpc_api_max_version_exclusive = 5;
+  repeated string required_capabilities = 6;
+  repeated string required_scopes = 7;
+  repeated string optional_scopes = 8;
+}
+
+message CreateApplicationVersionResponse {
+  string version_id = 1;
+  string application_id = 2;
+  int32 sequence = 3;
+  string version_label = 4;
+  string launch_url = 5;
+  int32 rpc_api_min_version = 6;
+  int32 rpc_api_max_version_exclusive = 7;
+  repeated string required_capabilities = 8;
+  repeated string required_scopes = 9;
+  repeated string optional_scopes = 10;
+  string review_status = 11;
+  string created_by = 12;
+  google.protobuf.Timestamp created_at = 13;
+  int64 revision = 14;
+  string updated_by = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
