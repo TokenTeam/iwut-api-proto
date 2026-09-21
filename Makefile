@@ -23,6 +23,8 @@ GEN_OUT := gen/go
 PROTO_FILES := \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
+	app_center/v1/application_review/application_review.proto \
+	app_center/v1/application_review/error_reason.proto \
 	app_center/v1/application_version/application_version.proto \
 	app_center/v1/application_version/error_reason.proto \
 	auth_center/v1/scope_catalog/scope_catalog.proto \
@@ -31,11 +33,14 @@ PROTO_FILES := \
 HTTP_PROTO_FILES := \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
+	app_center/v1/application_review/application_review.proto \
+	app_center/v1/application_review/error_reason.proto \
 	app_center/v1/application_version/application_version.proto \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
 	app_center/v1/application \
+	app_center/v1/application_review \
 	app_center/v1/application_version \
 	auth_center/v1/scope_catalog
 

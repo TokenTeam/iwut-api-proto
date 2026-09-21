@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package app_center.v1.application_review;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_review;applicationreview";
+
+// ApplicationReview exposes commands on immutable review attempts.
+service ApplicationReview {
+  rpc SubmitApplicationVersionReview(SubmitApplicationVersionReviewRequest)
+      returns (SubmitApplicationVersionReviewResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions/{version_id}/reviews"
+      body: "command"
+    };
+  }
+}
+
+message SubmitApplicationVersionReviewRequest {
+  string application_id = 1;
+  string version_id = 2;
+  SubmitApplicationVersionReviewCommand command = 3;
+}
+
+// The HTTP body deliberately contains only the optimistic concurrency input.
+message SubmitApplicationVersionReviewCommand {
+  int64 expected_revision = 1;
+}
+
+message SubmitApplicationVersionReviewResponse {
+  ApplicationReviewResource review = 1;
+  SubmittedApplicationVersion version = 2;
+}
+
+message ApplicationReviewResource {
+  string review_id = 1;
+  string application_id = 2;
+  string version_id = 3;
+  int32 attempt = 4;
+  int64 source_version_revision = 5;
+  string status = 6;
+  ApplicationVersionReviewSnapshot snapshot = 7;
+  int64 scope_catalog_revision = 8;
+  string preflight_policy_version = 9;
+  string submitted_by = 10;
+  google.protobuf.Timestamp submitted_at = 11;
+}
+
+message ApplicationVersionReviewSnapshot {
+  string version_label = 1;
+  string launch_url = 2;
+  int32 rpc_api_min_version = 3;
+  int32 rpc_api_max_version_exclusive = 4;
+  repeated string required_capabilities = 5;
+  repeated string required_scopes = 6;
+  repeated string optional_scopes = 7;
+}
+
+message SubmittedApplicationVersion {
+  string application_id = 1;
+  string version_id = 2;
+  string review_status = 3;
+  int64 revision = 4;
+  string updated_by = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
