@@ -23,6 +23,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ReviewDecisionAction int32
+
+const (
+	ReviewDecisionAction_REVIEW_DECISION_ACTION_UNSPECIFIED ReviewDecisionAction = 0
+	ReviewDecisionAction_APPROVE                            ReviewDecisionAction = 1
+	ReviewDecisionAction_REJECT                             ReviewDecisionAction = 2
+)
+
+// Enum value maps for ReviewDecisionAction.
+var (
+	ReviewDecisionAction_name = map[int32]string{
+		0: "REVIEW_DECISION_ACTION_UNSPECIFIED",
+		1: "APPROVE",
+		2: "REJECT",
+	}
+	ReviewDecisionAction_value = map[string]int32{
+		"REVIEW_DECISION_ACTION_UNSPECIFIED": 0,
+		"APPROVE":                            1,
+		"REJECT":                             2,
+	}
+)
+
+func (x ReviewDecisionAction) Enum() *ReviewDecisionAction {
+	p := new(ReviewDecisionAction)
+	*p = x
+	return p
+}
+
+func (x ReviewDecisionAction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ReviewDecisionAction) Descriptor() protoreflect.EnumDescriptor {
+	return file_app_center_v1_application_review_application_review_proto_enumTypes[0].Descriptor()
+}
+
+func (ReviewDecisionAction) Type() protoreflect.EnumType {
+	return &file_app_center_v1_application_review_application_review_proto_enumTypes[0]
+}
+
+func (x ReviewDecisionAction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ReviewDecisionAction.Descriptor instead.
+func (ReviewDecisionAction) EnumDescriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{0}
+}
+
 type SubmitApplicationVersionReviewRequest struct {
 	state         protoimpl.MessageState                 `protogen:"open.v1"`
 	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
@@ -194,6 +243,7 @@ type ApplicationReviewResource struct {
 	SubmittedBy            string                             `protobuf:"bytes,10,opt,name=submitted_by,json=submittedBy,proto3" json:"submitted_by,omitempty"`
 	SubmittedAt            *timestamppb.Timestamp             `protobuf:"bytes,11,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"`
 	DraftRestoration       *ApplicationReviewDraftRestoration `protobuf:"bytes,12,opt,name=draft_restoration,json=draftRestoration,proto3" json:"draft_restoration,omitempty"`
+	Decision               *ApplicationReviewDecision         `protobuf:"bytes,13,opt,name=decision,proto3" json:"decision,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -312,6 +362,429 @@ func (x *ApplicationReviewResource) GetDraftRestoration() *ApplicationReviewDraf
 	return nil
 }
 
+func (x *ApplicationReviewResource) GetDecision() *ApplicationReviewDecision {
+	if x != nil {
+		return x.Decision
+	}
+	return nil
+}
+
+type DecideApplicationVersionReviewRequest struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionId     string                                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ReviewId      string                                 `protobuf:"bytes,3,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	Command       *DecideApplicationVersionReviewCommand `protobuf:"bytes,4,opt,name=command,proto3" json:"command,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DecideApplicationVersionReviewRequest) Reset() {
+	*x = DecideApplicationVersionReviewRequest{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationVersionReviewRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationVersionReviewRequest) ProtoMessage() {}
+
+func (x *DecideApplicationVersionReviewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationVersionReviewRequest.ProtoReflect.Descriptor instead.
+func (*DecideApplicationVersionReviewRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DecideApplicationVersionReviewRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *DecideApplicationVersionReviewRequest) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *DecideApplicationVersionReviewRequest) GetReviewId() string {
+	if x != nil {
+		return x.ReviewId
+	}
+	return ""
+}
+
+func (x *DecideApplicationVersionReviewRequest) GetCommand() *DecideApplicationVersionReviewCommand {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+type DecideApplicationVersionReviewCommand struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Outcome               ReviewDecisionAction   `protobuf:"varint,1,opt,name=outcome,proto3,enum=app_center.v1.application_review.ReviewDecisionAction" json:"outcome,omitempty"`
+	ExpectedPolicyVersion string                 `protobuf:"bytes,2,opt,name=expected_policy_version,json=expectedPolicyVersion,proto3" json:"expected_policy_version,omitempty"`
+	ConfirmedCheckIds     []string               `protobuf:"bytes,3,rep,name=confirmed_check_ids,json=confirmedCheckIds,proto3" json:"confirmed_check_ids,omitempty"`
+	Reason                *string                `protobuf:"bytes,4,opt,name=reason,proto3,oneof" json:"reason,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DecideApplicationVersionReviewCommand) Reset() {
+	*x = DecideApplicationVersionReviewCommand{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationVersionReviewCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationVersionReviewCommand) ProtoMessage() {}
+
+func (x *DecideApplicationVersionReviewCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationVersionReviewCommand.ProtoReflect.Descriptor instead.
+func (*DecideApplicationVersionReviewCommand) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DecideApplicationVersionReviewCommand) GetOutcome() ReviewDecisionAction {
+	if x != nil {
+		return x.Outcome
+	}
+	return ReviewDecisionAction_REVIEW_DECISION_ACTION_UNSPECIFIED
+}
+
+func (x *DecideApplicationVersionReviewCommand) GetExpectedPolicyVersion() string {
+	if x != nil {
+		return x.ExpectedPolicyVersion
+	}
+	return ""
+}
+
+func (x *DecideApplicationVersionReviewCommand) GetConfirmedCheckIds() []string {
+	if x != nil {
+		return x.ConfirmedCheckIds
+	}
+	return nil
+}
+
+func (x *DecideApplicationVersionReviewCommand) GetReason() string {
+	if x != nil && x.Reason != nil {
+		return *x.Reason
+	}
+	return ""
+}
+
+type DecideApplicationVersionReviewResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Review        *ApplicationReviewResource `protobuf:"bytes,1,opt,name=review,proto3" json:"review,omitempty"`
+	Version       *DecidedApplicationVersion `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DecideApplicationVersionReviewResponse) Reset() {
+	*x = DecideApplicationVersionReviewResponse{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationVersionReviewResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationVersionReviewResponse) ProtoMessage() {}
+
+func (x *DecideApplicationVersionReviewResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationVersionReviewResponse.ProtoReflect.Descriptor instead.
+func (*DecideApplicationVersionReviewResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DecideApplicationVersionReviewResponse) GetReview() *ApplicationReviewResource {
+	if x != nil {
+		return x.Review
+	}
+	return nil
+}
+
+func (x *DecideApplicationVersionReviewResponse) GetVersion() *DecidedApplicationVersion {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type ApplicationReviewDecision struct {
+	state               protoimpl.MessageState               `protogen:"open.v1"`
+	Outcome             string                               `protobuf:"bytes,1,opt,name=outcome,proto3" json:"outcome,omitempty"`
+	ReviewPolicyVersion string                               `protobuf:"bytes,2,opt,name=review_policy_version,json=reviewPolicyVersion,proto3" json:"review_policy_version,omitempty"`
+	ConfirmedCheckIds   []string                             `protobuf:"bytes,3,rep,name=confirmed_check_ids,json=confirmedCheckIds,proto3" json:"confirmed_check_ids,omitempty"`
+	Reason              *string                              `protobuf:"bytes,4,opt,name=reason,proto3,oneof" json:"reason,omitempty"`
+	DecidedBy           string                               `protobuf:"bytes,5,opt,name=decided_by,json=decidedBy,proto3" json:"decided_by,omitempty"`
+	DecidedAt           *timestamppb.Timestamp               `protobuf:"bytes,6,opt,name=decided_at,json=decidedAt,proto3" json:"decided_at,omitempty"`
+	ApprovalValidation  *ApplicationReviewApprovalValidation `protobuf:"bytes,7,opt,name=approval_validation,json=approvalValidation,proto3" json:"approval_validation,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ApplicationReviewDecision) Reset() {
+	*x = ApplicationReviewDecision{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplicationReviewDecision) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplicationReviewDecision) ProtoMessage() {}
+
+func (x *ApplicationReviewDecision) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplicationReviewDecision.ProtoReflect.Descriptor instead.
+func (*ApplicationReviewDecision) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ApplicationReviewDecision) GetOutcome() string {
+	if x != nil {
+		return x.Outcome
+	}
+	return ""
+}
+
+func (x *ApplicationReviewDecision) GetReviewPolicyVersion() string {
+	if x != nil {
+		return x.ReviewPolicyVersion
+	}
+	return ""
+}
+
+func (x *ApplicationReviewDecision) GetConfirmedCheckIds() []string {
+	if x != nil {
+		return x.ConfirmedCheckIds
+	}
+	return nil
+}
+
+func (x *ApplicationReviewDecision) GetReason() string {
+	if x != nil && x.Reason != nil {
+		return *x.Reason
+	}
+	return ""
+}
+
+func (x *ApplicationReviewDecision) GetDecidedBy() string {
+	if x != nil {
+		return x.DecidedBy
+	}
+	return ""
+}
+
+func (x *ApplicationReviewDecision) GetDecidedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DecidedAt
+	}
+	return nil
+}
+
+func (x *ApplicationReviewDecision) GetApprovalValidation() *ApplicationReviewApprovalValidation {
+	if x != nil {
+		return x.ApprovalValidation
+	}
+	return nil
+}
+
+type ApplicationReviewApprovalValidation struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	ScopeCatalogRevision   int64                  `protobuf:"varint,1,opt,name=scope_catalog_revision,json=scopeCatalogRevision,proto3" json:"scope_catalog_revision,omitempty"`
+	PreflightPolicyVersion string                 `protobuf:"bytes,2,opt,name=preflight_policy_version,json=preflightPolicyVersion,proto3" json:"preflight_policy_version,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ApplicationReviewApprovalValidation) Reset() {
+	*x = ApplicationReviewApprovalValidation{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplicationReviewApprovalValidation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplicationReviewApprovalValidation) ProtoMessage() {}
+
+func (x *ApplicationReviewApprovalValidation) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplicationReviewApprovalValidation.ProtoReflect.Descriptor instead.
+func (*ApplicationReviewApprovalValidation) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ApplicationReviewApprovalValidation) GetScopeCatalogRevision() int64 {
+	if x != nil {
+		return x.ScopeCatalogRevision
+	}
+	return 0
+}
+
+func (x *ApplicationReviewApprovalValidation) GetPreflightPolicyVersion() string {
+	if x != nil {
+		return x.PreflightPolicyVersion
+	}
+	return ""
+}
+
+type DecidedApplicationVersion struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ReviewStatus  string                 `protobuf:"bytes,3,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	Revision      int64                  `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
+	UpdatedBy     string                 `protobuf:"bytes,5,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DecidedApplicationVersion) Reset() {
+	*x = DecidedApplicationVersion{}
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecidedApplicationVersion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecidedApplicationVersion) ProtoMessage() {}
+
+func (x *DecidedApplicationVersion) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecidedApplicationVersion.ProtoReflect.Descriptor instead.
+func (*DecidedApplicationVersion) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DecidedApplicationVersion) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *DecidedApplicationVersion) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *DecidedApplicationVersion) GetReviewStatus() string {
+	if x != nil {
+		return x.ReviewStatus
+	}
+	return ""
+}
+
+func (x *DecidedApplicationVersion) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *DecidedApplicationVersion) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *DecidedApplicationVersion) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 type RestoreRejectedApplicationVersionToDraftRequest struct {
 	state         protoimpl.MessageState                           `protogen:"open.v1"`
 	ApplicationId string                                           `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
@@ -324,7 +797,7 @@ type RestoreRejectedApplicationVersionToDraftRequest struct {
 
 func (x *RestoreRejectedApplicationVersionToDraftRequest) Reset() {
 	*x = RestoreRejectedApplicationVersionToDraftRequest{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[4]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -336,7 +809,7 @@ func (x *RestoreRejectedApplicationVersionToDraftRequest) String() string {
 func (*RestoreRejectedApplicationVersionToDraftRequest) ProtoMessage() {}
 
 func (x *RestoreRejectedApplicationVersionToDraftRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[4]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +822,7 @@ func (x *RestoreRejectedApplicationVersionToDraftRequest) ProtoReflect() protore
 
 // Deprecated: Use RestoreRejectedApplicationVersionToDraftRequest.ProtoReflect.Descriptor instead.
 func (*RestoreRejectedApplicationVersionToDraftRequest) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{4}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RestoreRejectedApplicationVersionToDraftRequest) GetApplicationId() string {
@@ -391,7 +864,7 @@ type RestoreRejectedApplicationVersionToDraftCommand struct {
 
 func (x *RestoreRejectedApplicationVersionToDraftCommand) Reset() {
 	*x = RestoreRejectedApplicationVersionToDraftCommand{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[5]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -403,7 +876,7 @@ func (x *RestoreRejectedApplicationVersionToDraftCommand) String() string {
 func (*RestoreRejectedApplicationVersionToDraftCommand) ProtoMessage() {}
 
 func (x *RestoreRejectedApplicationVersionToDraftCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[5]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +889,7 @@ func (x *RestoreRejectedApplicationVersionToDraftCommand) ProtoReflect() protore
 
 // Deprecated: Use RestoreRejectedApplicationVersionToDraftCommand.ProtoReflect.Descriptor instead.
 func (*RestoreRejectedApplicationVersionToDraftCommand) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{5}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RestoreRejectedApplicationVersionToDraftCommand) GetExpectedVersionRevision() int64 {
@@ -436,7 +909,7 @@ type RestoreRejectedApplicationVersionToDraftResponse struct {
 
 func (x *RestoreRejectedApplicationVersionToDraftResponse) Reset() {
 	*x = RestoreRejectedApplicationVersionToDraftResponse{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[6]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -448,7 +921,7 @@ func (x *RestoreRejectedApplicationVersionToDraftResponse) String() string {
 func (*RestoreRejectedApplicationVersionToDraftResponse) ProtoMessage() {}
 
 func (x *RestoreRejectedApplicationVersionToDraftResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[6]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +934,7 @@ func (x *RestoreRejectedApplicationVersionToDraftResponse) ProtoReflect() protor
 
 // Deprecated: Use RestoreRejectedApplicationVersionToDraftResponse.ProtoReflect.Descriptor instead.
 func (*RestoreRejectedApplicationVersionToDraftResponse) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{6}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RestoreRejectedApplicationVersionToDraftResponse) GetReview() *ApplicationReviewResource {
@@ -489,7 +962,7 @@ type ApplicationReviewDraftRestoration struct {
 
 func (x *ApplicationReviewDraftRestoration) Reset() {
 	*x = ApplicationReviewDraftRestoration{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[7]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -501,7 +974,7 @@ func (x *ApplicationReviewDraftRestoration) String() string {
 func (*ApplicationReviewDraftRestoration) ProtoMessage() {}
 
 func (x *ApplicationReviewDraftRestoration) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[7]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -514,7 +987,7 @@ func (x *ApplicationReviewDraftRestoration) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ApplicationReviewDraftRestoration.ProtoReflect.Descriptor instead.
 func (*ApplicationReviewDraftRestoration) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{7}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ApplicationReviewDraftRestoration) GetRestoredBy() string {
@@ -552,7 +1025,7 @@ type RestoredApplicationVersion struct {
 
 func (x *RestoredApplicationVersion) Reset() {
 	*x = RestoredApplicationVersion{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +1037,7 @@ func (x *RestoredApplicationVersion) String() string {
 func (*RestoredApplicationVersion) ProtoMessage() {}
 
 func (x *RestoredApplicationVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +1050,7 @@ func (x *RestoredApplicationVersion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoredApplicationVersion.ProtoReflect.Descriptor instead.
 func (*RestoredApplicationVersion) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{8}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RestoredApplicationVersion) GetApplicationId() string {
@@ -637,7 +1110,7 @@ type ApplicationVersionReviewSnapshot struct {
 
 func (x *ApplicationVersionReviewSnapshot) Reset() {
 	*x = ApplicationVersionReviewSnapshot{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -649,7 +1122,7 @@ func (x *ApplicationVersionReviewSnapshot) String() string {
 func (*ApplicationVersionReviewSnapshot) ProtoMessage() {}
 
 func (x *ApplicationVersionReviewSnapshot) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -662,7 +1135,7 @@ func (x *ApplicationVersionReviewSnapshot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationVersionReviewSnapshot.ProtoReflect.Descriptor instead.
 func (*ApplicationVersionReviewSnapshot) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{9}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ApplicationVersionReviewSnapshot) GetVersionLabel() string {
@@ -728,7 +1201,7 @@ type SubmittedApplicationVersion struct {
 
 func (x *SubmittedApplicationVersion) Reset() {
 	*x = SubmittedApplicationVersion{}
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[10]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -740,7 +1213,7 @@ func (x *SubmittedApplicationVersion) String() string {
 func (*SubmittedApplicationVersion) ProtoMessage() {}
 
 func (x *SubmittedApplicationVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[10]
+	mi := &file_app_center_v1_application_review_application_review_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -753,7 +1226,7 @@ func (x *SubmittedApplicationVersion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmittedApplicationVersion.ProtoReflect.Descriptor instead.
 func (*SubmittedApplicationVersion) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{10}
+	return file_app_center_v1_application_review_application_review_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SubmittedApplicationVersion) GetApplicationId() string {
@@ -812,7 +1285,7 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\x11expected_revision\x18\x01 \x01(\x03R\x10expectedRevision\"\xd6\x01\n" +
 	"&SubmitApplicationVersionReviewResponse\x12S\n" +
 	"\x06review\x18\x01 \x01(\v2;.app_center.v1.application_review.ApplicationReviewResourceR\x06review\x12W\n" +
-	"\aversion\x18\x02 \x01(\v2=.app_center.v1.application_review.SubmittedApplicationVersionR\aversion\"\x8c\x05\n" +
+	"\aversion\x18\x02 \x01(\v2=.app_center.v1.application_review.SubmittedApplicationVersionR\aversion\"\xe5\x05\n" +
 	"\x19ApplicationReviewResource\x12\x1b\n" +
 	"\treview_id\x18\x01 \x01(\tR\breviewId\x12%\n" +
 	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\x1d\n" +
@@ -827,7 +1300,47 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\fsubmitted_by\x18\n" +
 	" \x01(\tR\vsubmittedBy\x12=\n" +
 	"\fsubmitted_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\x12p\n" +
-	"\x11draft_restoration\x18\f \x01(\v2C.app_center.v1.application_review.ApplicationReviewDraftRestorationR\x10draftRestoration\"\x81\x02\n" +
+	"\x11draft_restoration\x18\f \x01(\v2C.app_center.v1.application_review.ApplicationReviewDraftRestorationR\x10draftRestoration\x12W\n" +
+	"\bdecision\x18\r \x01(\v2;.app_center.v1.application_review.ApplicationReviewDecisionR\bdecision\"\xed\x01\n" +
+	"%DecideApplicationVersionReviewRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12\x1b\n" +
+	"\treview_id\x18\x03 \x01(\tR\breviewId\x12a\n" +
+	"\acommand\x18\x04 \x01(\v2G.app_center.v1.application_review.DecideApplicationVersionReviewCommandR\acommand\"\x89\x02\n" +
+	"%DecideApplicationVersionReviewCommand\x12P\n" +
+	"\aoutcome\x18\x01 \x01(\x0e26.app_center.v1.application_review.ReviewDecisionActionR\aoutcome\x126\n" +
+	"\x17expected_policy_version\x18\x02 \x01(\tR\x15expectedPolicyVersion\x12.\n" +
+	"\x13confirmed_check_ids\x18\x03 \x03(\tR\x11confirmedCheckIds\x12\x1b\n" +
+	"\x06reason\x18\x04 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
+	"\a_reason\"\xd4\x01\n" +
+	"&DecideApplicationVersionReviewResponse\x12S\n" +
+	"\x06review\x18\x01 \x01(\v2;.app_center.v1.application_review.ApplicationReviewResourceR\x06review\x12U\n" +
+	"\aversion\x18\x02 \x01(\v2;.app_center.v1.application_review.DecidedApplicationVersionR\aversion\"\x93\x03\n" +
+	"\x19ApplicationReviewDecision\x12\x18\n" +
+	"\aoutcome\x18\x01 \x01(\tR\aoutcome\x122\n" +
+	"\x15review_policy_version\x18\x02 \x01(\tR\x13reviewPolicyVersion\x12.\n" +
+	"\x13confirmed_check_ids\x18\x03 \x03(\tR\x11confirmedCheckIds\x12\x1b\n" +
+	"\x06reason\x18\x04 \x01(\tH\x00R\x06reason\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"decided_by\x18\x05 \x01(\tR\tdecidedBy\x129\n" +
+	"\n" +
+	"decided_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tdecidedAt\x12v\n" +
+	"\x13approval_validation\x18\a \x01(\v2E.app_center.v1.application_review.ApplicationReviewApprovalValidationR\x12approvalValidationB\t\n" +
+	"\a_reason\"\x95\x01\n" +
+	"#ApplicationReviewApprovalValidation\x124\n" +
+	"\x16scope_catalog_revision\x18\x01 \x01(\x03R\x14scopeCatalogRevision\x128\n" +
+	"\x18preflight_policy_version\x18\x02 \x01(\tR\x16preflightPolicyVersion\"\xfc\x01\n" +
+	"\x19DecidedApplicationVersion\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12#\n" +
+	"\rreview_status\x18\x03 \x01(\tR\freviewStatus\x12\x1a\n" +
+	"\brevision\x18\x04 \x01(\x03R\brevision\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\x05 \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x81\x02\n" +
 	"/RestoreRejectedApplicationVersionToDraftRequest\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
 	"\n" +
@@ -873,10 +1386,16 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\n" +
 	"updated_by\x18\x05 \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xdf\x04\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt*W\n" +
+	"\x14ReviewDecisionAction\x12&\n" +
+	"\"REVIEW_DECISION_ACTION_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aAPPROVE\x10\x01\x12\n" +
+	"\n" +
+	"\x06REJECT\x10\x022\xfc\x06\n" +
 	"\x11ApplicationReview\x12\x85\x02\n" +
 	"\x1eSubmitApplicationVersionReview\x12G.app_center.v1.application_review.SubmitApplicationVersionReviewRequest\x1aH.app_center.v1.application_review.SubmitApplicationVersionReviewResponse\"P\x82\xd3\xe4\x93\x02J:\acommand\"?/v1/applications/{application_id}/versions/{version_id}/reviews\x12\xc1\x02\n" +
-	"(RestoreRejectedApplicationVersionToDraft\x12Q.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest\x1aR.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse\"n\x82\xd3\xe4\x93\x02h:\acommand\"]/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restorationBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	"(RestoreRejectedApplicationVersionToDraft\x12Q.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest\x1aR.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse\"n\x82\xd3\xe4\x93\x02h:\acommand\"]/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration\x12\x9a\x02\n" +
+	"\x1eDecideApplicationVersionReview\x12G.app_center.v1.application_review.DecideApplicationVersionReviewRequest\x1aH.app_center.v1.application_review.DecideApplicationVersionReviewResponse\"e\x82\xd3\xe4\x93\x02_:\acommand\"T/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decisionBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_application_review_proto_rawDescOnce sync.Once
@@ -890,43 +1409,61 @@ func file_app_center_v1_application_review_application_review_proto_rawDescGZIP(
 	return file_app_center_v1_application_review_application_review_proto_rawDescData
 }
 
-var file_app_center_v1_application_review_application_review_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_app_center_v1_application_review_application_review_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_app_center_v1_application_review_application_review_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_app_center_v1_application_review_application_review_proto_goTypes = []any{
-	(*SubmitApplicationVersionReviewRequest)(nil),            // 0: app_center.v1.application_review.SubmitApplicationVersionReviewRequest
-	(*SubmitApplicationVersionReviewCommand)(nil),            // 1: app_center.v1.application_review.SubmitApplicationVersionReviewCommand
-	(*SubmitApplicationVersionReviewResponse)(nil),           // 2: app_center.v1.application_review.SubmitApplicationVersionReviewResponse
-	(*ApplicationReviewResource)(nil),                        // 3: app_center.v1.application_review.ApplicationReviewResource
-	(*RestoreRejectedApplicationVersionToDraftRequest)(nil),  // 4: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
-	(*RestoreRejectedApplicationVersionToDraftCommand)(nil),  // 5: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftCommand
-	(*RestoreRejectedApplicationVersionToDraftResponse)(nil), // 6: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
-	(*ApplicationReviewDraftRestoration)(nil),                // 7: app_center.v1.application_review.ApplicationReviewDraftRestoration
-	(*RestoredApplicationVersion)(nil),                       // 8: app_center.v1.application_review.RestoredApplicationVersion
-	(*ApplicationVersionReviewSnapshot)(nil),                 // 9: app_center.v1.application_review.ApplicationVersionReviewSnapshot
-	(*SubmittedApplicationVersion)(nil),                      // 10: app_center.v1.application_review.SubmittedApplicationVersion
-	(*timestamppb.Timestamp)(nil),                            // 11: google.protobuf.Timestamp
+	(ReviewDecisionAction)(0),                                // 0: app_center.v1.application_review.ReviewDecisionAction
+	(*SubmitApplicationVersionReviewRequest)(nil),            // 1: app_center.v1.application_review.SubmitApplicationVersionReviewRequest
+	(*SubmitApplicationVersionReviewCommand)(nil),            // 2: app_center.v1.application_review.SubmitApplicationVersionReviewCommand
+	(*SubmitApplicationVersionReviewResponse)(nil),           // 3: app_center.v1.application_review.SubmitApplicationVersionReviewResponse
+	(*ApplicationReviewResource)(nil),                        // 4: app_center.v1.application_review.ApplicationReviewResource
+	(*DecideApplicationVersionReviewRequest)(nil),            // 5: app_center.v1.application_review.DecideApplicationVersionReviewRequest
+	(*DecideApplicationVersionReviewCommand)(nil),            // 6: app_center.v1.application_review.DecideApplicationVersionReviewCommand
+	(*DecideApplicationVersionReviewResponse)(nil),           // 7: app_center.v1.application_review.DecideApplicationVersionReviewResponse
+	(*ApplicationReviewDecision)(nil),                        // 8: app_center.v1.application_review.ApplicationReviewDecision
+	(*ApplicationReviewApprovalValidation)(nil),              // 9: app_center.v1.application_review.ApplicationReviewApprovalValidation
+	(*DecidedApplicationVersion)(nil),                        // 10: app_center.v1.application_review.DecidedApplicationVersion
+	(*RestoreRejectedApplicationVersionToDraftRequest)(nil),  // 11: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
+	(*RestoreRejectedApplicationVersionToDraftCommand)(nil),  // 12: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftCommand
+	(*RestoreRejectedApplicationVersionToDraftResponse)(nil), // 13: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
+	(*ApplicationReviewDraftRestoration)(nil),                // 14: app_center.v1.application_review.ApplicationReviewDraftRestoration
+	(*RestoredApplicationVersion)(nil),                       // 15: app_center.v1.application_review.RestoredApplicationVersion
+	(*ApplicationVersionReviewSnapshot)(nil),                 // 16: app_center.v1.application_review.ApplicationVersionReviewSnapshot
+	(*SubmittedApplicationVersion)(nil),                      // 17: app_center.v1.application_review.SubmittedApplicationVersion
+	(*timestamppb.Timestamp)(nil),                            // 18: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_review_application_review_proto_depIdxs = []int32{
-	1,  // 0: app_center.v1.application_review.SubmitApplicationVersionReviewRequest.command:type_name -> app_center.v1.application_review.SubmitApplicationVersionReviewCommand
-	3,  // 1: app_center.v1.application_review.SubmitApplicationVersionReviewResponse.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
-	10, // 2: app_center.v1.application_review.SubmitApplicationVersionReviewResponse.version:type_name -> app_center.v1.application_review.SubmittedApplicationVersion
-	9,  // 3: app_center.v1.application_review.ApplicationReviewResource.snapshot:type_name -> app_center.v1.application_review.ApplicationVersionReviewSnapshot
-	11, // 4: app_center.v1.application_review.ApplicationReviewResource.submitted_at:type_name -> google.protobuf.Timestamp
-	7,  // 5: app_center.v1.application_review.ApplicationReviewResource.draft_restoration:type_name -> app_center.v1.application_review.ApplicationReviewDraftRestoration
-	5,  // 6: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest.command:type_name -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftCommand
-	3,  // 7: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
-	8,  // 8: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse.version:type_name -> app_center.v1.application_review.RestoredApplicationVersion
-	11, // 9: app_center.v1.application_review.ApplicationReviewDraftRestoration.restored_at:type_name -> google.protobuf.Timestamp
-	11, // 10: app_center.v1.application_review.RestoredApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
-	11, // 11: app_center.v1.application_review.SubmittedApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
-	0,  // 12: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:input_type -> app_center.v1.application_review.SubmitApplicationVersionReviewRequest
-	4,  // 13: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:input_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
-	2,  // 14: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:output_type -> app_center.v1.application_review.SubmitApplicationVersionReviewResponse
-	6,  // 15: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:output_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
-	14, // [14:16] is the sub-list for method output_type
-	12, // [12:14] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	2,  // 0: app_center.v1.application_review.SubmitApplicationVersionReviewRequest.command:type_name -> app_center.v1.application_review.SubmitApplicationVersionReviewCommand
+	4,  // 1: app_center.v1.application_review.SubmitApplicationVersionReviewResponse.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
+	17, // 2: app_center.v1.application_review.SubmitApplicationVersionReviewResponse.version:type_name -> app_center.v1.application_review.SubmittedApplicationVersion
+	16, // 3: app_center.v1.application_review.ApplicationReviewResource.snapshot:type_name -> app_center.v1.application_review.ApplicationVersionReviewSnapshot
+	18, // 4: app_center.v1.application_review.ApplicationReviewResource.submitted_at:type_name -> google.protobuf.Timestamp
+	14, // 5: app_center.v1.application_review.ApplicationReviewResource.draft_restoration:type_name -> app_center.v1.application_review.ApplicationReviewDraftRestoration
+	8,  // 6: app_center.v1.application_review.ApplicationReviewResource.decision:type_name -> app_center.v1.application_review.ApplicationReviewDecision
+	6,  // 7: app_center.v1.application_review.DecideApplicationVersionReviewRequest.command:type_name -> app_center.v1.application_review.DecideApplicationVersionReviewCommand
+	0,  // 8: app_center.v1.application_review.DecideApplicationVersionReviewCommand.outcome:type_name -> app_center.v1.application_review.ReviewDecisionAction
+	4,  // 9: app_center.v1.application_review.DecideApplicationVersionReviewResponse.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
+	10, // 10: app_center.v1.application_review.DecideApplicationVersionReviewResponse.version:type_name -> app_center.v1.application_review.DecidedApplicationVersion
+	18, // 11: app_center.v1.application_review.ApplicationReviewDecision.decided_at:type_name -> google.protobuf.Timestamp
+	9,  // 12: app_center.v1.application_review.ApplicationReviewDecision.approval_validation:type_name -> app_center.v1.application_review.ApplicationReviewApprovalValidation
+	18, // 13: app_center.v1.application_review.DecidedApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
+	12, // 14: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest.command:type_name -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftCommand
+	4,  // 15: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
+	15, // 16: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse.version:type_name -> app_center.v1.application_review.RestoredApplicationVersion
+	18, // 17: app_center.v1.application_review.ApplicationReviewDraftRestoration.restored_at:type_name -> google.protobuf.Timestamp
+	18, // 18: app_center.v1.application_review.RestoredApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
+	18, // 19: app_center.v1.application_review.SubmittedApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 20: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:input_type -> app_center.v1.application_review.SubmitApplicationVersionReviewRequest
+	11, // 21: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:input_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
+	5,  // 22: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:input_type -> app_center.v1.application_review.DecideApplicationVersionReviewRequest
+	3,  // 23: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:output_type -> app_center.v1.application_review.SubmitApplicationVersionReviewResponse
+	13, // 24: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:output_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
+	7,  // 25: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:output_type -> app_center.v1.application_review.DecideApplicationVersionReviewResponse
+	23, // [23:26] is the sub-list for method output_type
+	20, // [20:23] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_review_application_review_proto_init() }
@@ -934,18 +1471,21 @@ func file_app_center_v1_application_review_application_review_proto_init() {
 	if File_app_center_v1_application_review_application_review_proto != nil {
 		return
 	}
+	file_app_center_v1_application_review_application_review_proto_msgTypes[5].OneofWrappers = []any{}
+	file_app_center_v1_application_review_application_review_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_review_application_review_proto_rawDesc), len(file_app_center_v1_application_review_application_review_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   11,
+			NumEnums:      1,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_app_center_v1_application_review_application_review_proto_goTypes,
 		DependencyIndexes: file_app_center_v1_application_review_application_review_proto_depIdxs,
+		EnumInfos:         file_app_center_v1_application_review_application_review_proto_enumTypes,
 		MessageInfos:      file_app_center_v1_application_review_application_review_proto_msgTypes,
 	}.Build()
 	File_app_center_v1_application_review_application_review_proto = out.File

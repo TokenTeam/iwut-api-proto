@@ -23,6 +23,13 @@ service ApplicationReview {
       body: "command"
     };
   }
+  rpc DecideApplicationVersionReview(DecideApplicationVersionReviewRequest)
+      returns (DecideApplicationVersionReviewResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decision"
+      body: "command"
+    };
+  }
 }
 
 message SubmitApplicationVersionReviewRequest {
@@ -54,6 +61,56 @@ message ApplicationReviewResource {
   string submitted_by = 10;
   google.protobuf.Timestamp submitted_at = 11;
   ApplicationReviewDraftRestoration draft_restoration = 12;
+  ApplicationReviewDecision decision = 13;
+}
+
+message DecideApplicationVersionReviewRequest {
+  string application_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  DecideApplicationVersionReviewCommand command = 4;
+}
+
+message DecideApplicationVersionReviewCommand {
+  ReviewDecisionAction outcome = 1;
+  string expected_policy_version = 2;
+  repeated string confirmed_check_ids = 3;
+  optional string reason = 4;
+}
+
+enum ReviewDecisionAction {
+  REVIEW_DECISION_ACTION_UNSPECIFIED = 0;
+  APPROVE = 1;
+  REJECT = 2;
+}
+
+message DecideApplicationVersionReviewResponse {
+  ApplicationReviewResource review = 1;
+  DecidedApplicationVersion version = 2;
+}
+
+message ApplicationReviewDecision {
+  string outcome = 1;
+  string review_policy_version = 2;
+  repeated string confirmed_check_ids = 3;
+  optional string reason = 4;
+  string decided_by = 5;
+  google.protobuf.Timestamp decided_at = 6;
+  ApplicationReviewApprovalValidation approval_validation = 7;
+}
+
+message ApplicationReviewApprovalValidation {
+  int64 scope_catalog_revision = 1;
+  string preflight_policy_version = 2;
+}
+
+message DecidedApplicationVersion {
+  string application_id = 1;
+  string version_id = 2;
+  string review_status = 3;
+  int64 revision = 4;
+  string updated_by = 5;
+  google.protobuf.Timestamp updated_at = 6;
 }
 
 message RestoreRejectedApplicationVersionToDraftRequest {

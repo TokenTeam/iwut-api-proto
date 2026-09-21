@@ -19,10 +19,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationReviewDecideApplicationVersionReview = "/app_center.v1.application_review.ApplicationReview/DecideApplicationVersionReview"
 const OperationApplicationReviewRestoreRejectedApplicationVersionToDraft = "/app_center.v1.application_review.ApplicationReview/RestoreRejectedApplicationVersionToDraft"
 const OperationApplicationReviewSubmitApplicationVersionReview = "/app_center.v1.application_review.ApplicationReview/SubmitApplicationVersionReview"
 
 type ApplicationReviewHTTPServer interface {
+	DecideApplicationVersionReview(context.Context, *DecideApplicationVersionReviewRequest) (*DecideApplicationVersionReviewResponse, error)
 	RestoreRejectedApplicationVersionToDraft(context.Context, *RestoreRejectedApplicationVersionToDraftRequest) (*RestoreRejectedApplicationVersionToDraftResponse, error)
 	SubmitApplicationVersionReview(context.Context, *SubmitApplicationVersionReviewRequest) (*SubmitApplicationVersionReviewResponse, error)
 }
@@ -31,6 +33,7 @@ func RegisterApplicationReviewHTTPServer(s *http.Server, srv ApplicationReviewHT
 	r := s.Route("/")
 	r.POST("/v1/applications/{application_id}/versions/{version_id}/reviews", _ApplicationReview_SubmitApplicationVersionReview0_HTTP_Handler(srv))
 	r.POST("/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration", _ApplicationReview_RestoreRejectedApplicationVersionToDraft0_HTTP_Handler(srv))
+	r.POST("/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decision", _ApplicationReview_DecideApplicationVersionReview0_HTTP_Handler(srv))
 }
 
 func _ApplicationReview_SubmitApplicationVersionReview0_HTTP_Handler(srv ApplicationReviewHTTPServer) func(ctx http.Context) error {
@@ -83,7 +86,33 @@ func _ApplicationReview_RestoreRejectedApplicationVersionToDraft0_HTTP_Handler(s
 	}
 }
 
+func _ApplicationReview_DecideApplicationVersionReview0_HTTP_Handler(srv ApplicationReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DecideApplicationVersionReviewRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationReviewDecideApplicationVersionReview)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DecideApplicationVersionReview(ctx, req.(*DecideApplicationVersionReviewRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DecideApplicationVersionReviewResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationReviewHTTPClient interface {
+	DecideApplicationVersionReview(ctx context.Context, req *DecideApplicationVersionReviewRequest, opts ...http.CallOption) (rsp *DecideApplicationVersionReviewResponse, err error)
 	RestoreRejectedApplicationVersionToDraft(ctx context.Context, req *RestoreRejectedApplicationVersionToDraftRequest, opts ...http.CallOption) (rsp *RestoreRejectedApplicationVersionToDraftResponse, err error)
 	SubmitApplicationVersionReview(ctx context.Context, req *SubmitApplicationVersionReviewRequest, opts ...http.CallOption) (rsp *SubmitApplicationVersionReviewResponse, err error)
 }
@@ -94,6 +123,19 @@ type ApplicationReviewHTTPClientImpl struct {
 
 func NewApplicationReviewHTTPClient(client *http.Client) ApplicationReviewHTTPClient {
 	return &ApplicationReviewHTTPClientImpl{client}
+}
+
+func (c *ApplicationReviewHTTPClientImpl) DecideApplicationVersionReview(ctx context.Context, in *DecideApplicationVersionReviewRequest, opts ...http.CallOption) (*DecideApplicationVersionReviewResponse, error) {
+	var out DecideApplicationVersionReviewResponse
+	pattern := "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decision"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationReviewDecideApplicationVersionReview))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApplicationReviewHTTPClientImpl) RestoreRejectedApplicationVersionToDraft(ctx context.Context, in *RestoreRejectedApplicationVersionToDraftRequest, opts ...http.CallOption) (*RestoreRejectedApplicationVersionToDraftResponse, error) {
