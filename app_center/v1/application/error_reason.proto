@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package app_center.v1.application;
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/application;application";
+
+// ErrorReason is the stable machine-readable reason carried on transport
+// errors, aligned with the protocol-independent business codes of ADR-005. A
+// client branches on these values, never on message text. UNSPECIFIED is the
+// proto3 zero value and is never emitted by the server.
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_INVALID_APPLICATION_NAME = 1;
+  ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED = 2;
+  ERROR_REASON_INVALID_DEVELOPER_IDENTITY = 3;
+  ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED = 4;
+  ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS = 5;
+  ERROR_REASON_APPLICATION_QUOTA_EXCEEDED = 6;
+  ERROR_REASON_INTERNAL = 7;
+}

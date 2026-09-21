@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package app_center.v1.application;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/application;application";
+
+// Application exposes the formal App Center v1 application commands. It is the
+// first v1 capability: only CreateApplication is defined, matching UC-APP-001.
+service Application {
+  // CreateApplication creates one Application owned by the authenticated,
+  // approved developer. Identity is never part of the request body.
+  rpc CreateApplication(CreateApplicationRequest) returns (CreateApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications"
+      body: "*"
+    };
+  }
+}
+
+// CreateApplicationRequest carries only the caller-supplied business field. The
+// administrator and audit fields are derived from trusted identity and the
+// server clock; they are intentionally absent so a body cannot override them.
+message CreateApplicationRequest {
+  // name is the technical application name. Server validation owns length and
+  // character rules, and case-insensitive uniqueness per administrator.
+  string name = 1;
+}
+
+// CreateApplicationResponse contains the four business fields of a newly
+// created Application. Persistence-only fields such as nameKey or sequence
+// counters are never exposed here.
+message CreateApplicationResponse {
+  string id = 1;
+  string name = 2;
+  string admin_id = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
