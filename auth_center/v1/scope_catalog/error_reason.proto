@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package auth_center.v1.scope_catalog;
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/scope_catalog;scopecatalog";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_SERVICE_IDENTITY_REQUIRED = 1;
+  ERROR_REASON_INVALID_SERVICE_IDENTITY = 2;
+  ERROR_REASON_SCOPE_CATALOG_READ_FORBIDDEN = 3;
+  ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE = 4;
+  ERROR_REASON_INTERNAL = 5;
+}
+

@@ -20,20 +20,29 @@ PROTO_ROOT := .
 THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
-PKG_DIR := app_center/v1/application
-GENERATED_DIR := $(GEN_OUT)/$(PKG_DIR)
-
 PROTO_FILES := \
 	app_center/v1/application/application.proto \
+	app_center/v1/application/error_reason.proto \
+	auth_center/v1/scope_catalog/scope_catalog.proto \
+	auth_center/v1/scope_catalog/error_reason.proto
+
+HTTP_PROTO_FILES := \
+	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto
+
+GENERATED_DIRS := \
+	app_center/v1/application \
+	auth_center/v1/scope_catalog
 
 .PHONY: proto-gen
 proto-gen:
 	$(PROTOC) -I $(PROTO_ROOT) -I $(THIRD_PARTY) \
 		--go_out=paths=source_relative:$(GEN_OUT) \
 		--go-grpc_out=paths=source_relative:$(GEN_OUT) \
-		--go-http_out=paths=source_relative:$(GEN_OUT) \
 		$(PROTO_FILES)
+	$(PROTOC) -I $(PROTO_ROOT) -I $(THIRD_PARTY) \
+		--go-http_out=paths=source_relative:$(GEN_OUT) \
+		$(HTTP_PROTO_FILES)
 
 .PHONY: proto-tools
 proto-tools:
@@ -46,7 +55,7 @@ proto-tools:
 	@echo "protoc-gen-go-grpc:  $$($(PROTOC_GEN_GO_GRPC) --version)"
 	@echo "protoc-gen-go-http:  $$($(PROTOC_GEN_GO_HTTP) --version)"
 
-# proto-check regenerates the two Proto files into a throwaway directory with
+# proto-check regenerates the managed Proto files into a throwaway directory with
 # the same arguments as proto-gen and requires the committed output to match
 # byte-for-byte. Because generated headers embed the protoc/plugin versions,
 # this also fails when the installed toolchain differs from the committed one.
@@ -58,12 +67,18 @@ proto-check: proto-tools
 	$(PROTOC) -I $(PROTO_ROOT) -I $(THIRD_PARTY) \
 		--go_out=paths=source_relative:$$tmp \
 		--go-grpc_out=paths=source_relative:$$tmp \
-		--go-http_out=paths=source_relative:$$tmp \
 		$(PROTO_FILES) || exit 1; \
-	if ! diff -ru "$(GENERATED_DIR)" "$$tmp/$(PKG_DIR)"; then \
+	$(PROTOC) -I $(PROTO_ROOT) -I $(THIRD_PARTY) \
+		--go-http_out=paths=source_relative:$$tmp \
+		$(HTTP_PROTO_FILES) || exit 1; \
+	failed=0; \
+	for dir in $(GENERATED_DIRS); do \
+		if ! diff -ru "$(GEN_OUT)/$$dir" "$$tmp/$$dir"; then failed=1; fi; \
+	done; \
+	if [ "$$failed" -ne 0 ]; then \
 		echo ""; \
-		echo "proto-check FAILED: generated code drifted from $(GENERATED_DIR)."; \
+		echo "proto-check FAILED: generated code drifted from one or more managed packages."; \
 		echo "Run 'make proto-gen' and commit the regenerated files."; \
 		exit 1; \
 	fi; \
-	echo "proto-check OK: $(PKG_DIR) matches $(PROTO_FILES)"
+	echo "proto-check OK: managed generated packages match $(PROTO_FILES)"

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package auth_center.v1.scope_catalog;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/scope_catalog;scopecatalog";
+
+// ScopeCatalog exposes Auth Center's complete authoritative scope snapshot to
+// explicitly authorised internal services. v1 is native gRPC only: it has no
+// Gateway route or google.api.http annotation.
+service ScopeCatalog {
+  rpc GetScopeCatalogSnapshot(GetScopeCatalogSnapshotRequest)
+      returns (GetScopeCatalogSnapshotResponse);
+}
+
+// The full snapshot query has no business input. Caller identity belongs to
+// transport metadata and must never be accepted as a message field.
+message GetScopeCatalogSnapshotRequest {}
+
+message GetScopeCatalogSnapshotResponse {
+  int64 revision = 1;
+  google.protobuf.Timestamp generated_at = 2;
+  repeated ScopeDefinition scopes = 3;
+}
+
+// ScopeDefinition is the deliberately minimal cross-service projection. Auth
+// owns all richer metadata and the final user authorisation decision.
+message ScopeDefinition {
+  string name = 1;
+  bool requestable = 2;
+}
+
