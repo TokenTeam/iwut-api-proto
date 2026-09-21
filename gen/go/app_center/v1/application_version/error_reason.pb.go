@@ -39,6 +39,10 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS ErrorReason = 12
 	ErrorReason_ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE                ErrorReason = 13
 	ErrorReason_ERROR_REASON_INTERNAL                                 ErrorReason = 14
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED    ErrorReason = 15
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_FOUND            ErrorReason = 16
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT            ErrorReason = 17
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT    ErrorReason = 18
 )
 
 // Enum value maps for ErrorReason.
@@ -59,6 +63,10 @@ var (
 		12: "ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS",
 		13: "ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE",
 		14: "ERROR_REASON_INTERNAL",
+		15: "ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED",
+		16: "ERROR_REASON_APPLICATION_VERSION_NOT_FOUND",
+		17: "ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT",
+		18: "ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                              0,
@@ -76,6 +84,10 @@ var (
 		"ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS": 12,
 		"ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE":                13,
 		"ERROR_REASON_INTERNAL":                                 14,
+		"ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED":    15,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_FOUND":            16,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT":            17,
+		"ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT":    18,
 	}
 )
 
@@ -110,7 +122,7 @@ var File_app_center_v1_application_version_error_reason_proto protoreflect.FileD
 
 const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\x8f\x05\n" +
+	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\xdf\x06\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x01\x12&\n" +
@@ -127,7 +139,11 @@ const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"'ERROR_REASON_APPLICATION_ADMIN_REQUIRED\x10\v\x129\n" +
 	"5ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS\x10\f\x12*\n" +
 	"&ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE\x10\r\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\x0eBQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\x0e\x126\n" +
+	"2ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED\x10\x0f\x12.\n" +
+	"*ERROR_REASON_APPLICATION_VERSION_NOT_FOUND\x10\x10\x12.\n" +
+	"*ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT\x10\x11\x126\n" +
+	"2ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT\x10\x12BQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_error_reason_proto_rawDescOnce sync.Once

@@ -289,6 +289,332 @@ func (x *CreateApplicationVersionResponse) GetUpdatedAt() *timestamppb.Timestamp
 	return nil
 }
 
+type UpdateApplicationVersionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	// Native gRPC callers provide expected_revision. HTTP callers use If-Match;
+	// body targets replacement so JSON cannot override this protocol field.
+	ExpectedRevision int64                               `protobuf:"varint,3,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	Replacement      *DraftApplicationVersionReplacement `protobuf:"bytes,4,opt,name=replacement,proto3" json:"replacement,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpdateApplicationVersionRequest) Reset() {
+	*x = UpdateApplicationVersionRequest{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateApplicationVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateApplicationVersionRequest) ProtoMessage() {}
+
+func (x *UpdateApplicationVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateApplicationVersionRequest.ProtoReflect.Descriptor instead.
+func (*UpdateApplicationVersionRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateApplicationVersionRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionRequest) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionRequest) GetExpectedRevision() int64 {
+	if x != nil {
+		return x.ExpectedRevision
+	}
+	return 0
+}
+
+func (x *UpdateApplicationVersionRequest) GetReplacement() *DraftApplicationVersionReplacement {
+	if x != nil {
+		return x.Replacement
+	}
+	return nil
+}
+
+type DraftApplicationVersionReplacement struct {
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	VersionLabel              string                 `protobuf:"bytes,1,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                 `protobuf:"bytes,2,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                  `protobuf:"varint,3,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,4,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string               `protobuf:"bytes,5,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string               `protobuf:"bytes,6,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string               `protobuf:"bytes,7,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *DraftApplicationVersionReplacement) Reset() {
+	*x = DraftApplicationVersionReplacement{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DraftApplicationVersionReplacement) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DraftApplicationVersionReplacement) ProtoMessage() {}
+
+func (x *DraftApplicationVersionReplacement) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DraftApplicationVersionReplacement.ProtoReflect.Descriptor instead.
+func (*DraftApplicationVersionReplacement) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DraftApplicationVersionReplacement) GetVersionLabel() string {
+	if x != nil {
+		return x.VersionLabel
+	}
+	return ""
+}
+
+func (x *DraftApplicationVersionReplacement) GetLaunchUrl() string {
+	if x != nil {
+		return x.LaunchUrl
+	}
+	return ""
+}
+
+func (x *DraftApplicationVersionReplacement) GetRpcApiMinVersion() int32 {
+	if x != nil {
+		return x.RpcApiMinVersion
+	}
+	return 0
+}
+
+func (x *DraftApplicationVersionReplacement) GetRpcApiMaxVersionExclusive() int32 {
+	if x != nil {
+		return x.RpcApiMaxVersionExclusive
+	}
+	return 0
+}
+
+func (x *DraftApplicationVersionReplacement) GetRequiredCapabilities() []string {
+	if x != nil {
+		return x.RequiredCapabilities
+	}
+	return nil
+}
+
+func (x *DraftApplicationVersionReplacement) GetRequiredScopes() []string {
+	if x != nil {
+		return x.RequiredScopes
+	}
+	return nil
+}
+
+func (x *DraftApplicationVersionReplacement) GetOptionalScopes() []string {
+	if x != nil {
+		return x.OptionalScopes
+	}
+	return nil
+}
+
+type UpdateApplicationVersionResponse struct {
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	VersionId                 string                 `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ApplicationId             string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Sequence                  int32                  `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	VersionLabel              string                 `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                 `protobuf:"bytes,5,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                  `protobuf:"varint,6,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,7,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string               `protobuf:"bytes,8,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string               `protobuf:"bytes,9,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string               `protobuf:"bytes,10,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	ReviewStatus              string                 `protobuf:"bytes,11,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	CreatedBy                 string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt                 *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Revision                  int64                  `protobuf:"varint,14,opt,name=revision,proto3" json:"revision,omitempty"`
+	UpdatedBy                 string                 `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	UpdatedAt                 *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *UpdateApplicationVersionResponse) Reset() {
+	*x = UpdateApplicationVersionResponse{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateApplicationVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateApplicationVersionResponse) ProtoMessage() {}
+
+func (x *UpdateApplicationVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateApplicationVersionResponse.ProtoReflect.Descriptor instead.
+func (*UpdateApplicationVersionResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdateApplicationVersionResponse) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetSequence() int32 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *UpdateApplicationVersionResponse) GetVersionLabel() string {
+	if x != nil {
+		return x.VersionLabel
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetLaunchUrl() string {
+	if x != nil {
+		return x.LaunchUrl
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetRpcApiMinVersion() int32 {
+	if x != nil {
+		return x.RpcApiMinVersion
+	}
+	return 0
+}
+
+func (x *UpdateApplicationVersionResponse) GetRpcApiMaxVersionExclusive() int32 {
+	if x != nil {
+		return x.RpcApiMaxVersionExclusive
+	}
+	return 0
+}
+
+func (x *UpdateApplicationVersionResponse) GetRequiredCapabilities() []string {
+	if x != nil {
+		return x.RequiredCapabilities
+	}
+	return nil
+}
+
+func (x *UpdateApplicationVersionResponse) GetRequiredScopes() []string {
+	if x != nil {
+		return x.RequiredScopes
+	}
+	return nil
+}
+
+func (x *UpdateApplicationVersionResponse) GetOptionalScopes() []string {
+	if x != nil {
+		return x.OptionalScopes
+	}
+	return nil
+}
+
+func (x *UpdateApplicationVersionResponse) GetReviewStatus() string {
+	if x != nil {
+		return x.ReviewStatus
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *UpdateApplicationVersionResponse) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *UpdateApplicationVersionResponse) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *UpdateApplicationVersionResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 var File_app_center_v1_application_version_application_version_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_version_application_version_proto_rawDesc = "" +
@@ -327,9 +653,49 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\n" +
 	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xf1\x01\n" +
+	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xfd\x01\n" +
+	"\x1fUpdateApplicationVersionRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12+\n" +
+	"\x11expected_revision\x18\x03 \x01(\x03R\x10expectedRevision\x12g\n" +
+	"\vreplacement\x18\x04 \x01(\v2E.app_center.v1.application_version.DraftApplicationVersionReplacementR\vreplacement\"\xe0\x02\n" +
+	"\"DraftApplicationVersionReplacement\x12#\n" +
+	"\rversion_label\x18\x01 \x01(\tR\fversionLabel\x12\x1d\n" +
+	"\n" +
+	"launch_url\x18\x02 \x01(\tR\tlaunchUrl\x12-\n" +
+	"\x13rpc_api_min_version\x18\x03 \x01(\x05R\x10rpcApiMinVersion\x12@\n" +
+	"\x1drpc_api_max_version_exclusive\x18\x04 \x01(\x05R\x19rpcApiMaxVersionExclusive\x123\n" +
+	"\x15required_capabilities\x18\x05 \x03(\tR\x14requiredCapabilities\x12'\n" +
+	"\x0frequired_scopes\x18\x06 \x03(\tR\x0erequiredScopes\x12'\n" +
+	"\x0foptional_scopes\x18\a \x03(\tR\x0eoptionalScopes\"\xb5\x05\n" +
+	" UpdateApplicationVersionResponse\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x01 \x01(\tR\tversionId\x12%\n" +
+	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\x1a\n" +
+	"\bsequence\x18\x03 \x01(\x05R\bsequence\x12#\n" +
+	"\rversion_label\x18\x04 \x01(\tR\fversionLabel\x12\x1d\n" +
+	"\n" +
+	"launch_url\x18\x05 \x01(\tR\tlaunchUrl\x12-\n" +
+	"\x13rpc_api_min_version\x18\x06 \x01(\x05R\x10rpcApiMinVersion\x12@\n" +
+	"\x1drpc_api_max_version_exclusive\x18\a \x01(\x05R\x19rpcApiMaxVersionExclusive\x123\n" +
+	"\x15required_capabilities\x18\b \x03(\tR\x14requiredCapabilities\x12'\n" +
+	"\x0frequired_scopes\x18\t \x03(\tR\x0erequiredScopes\x12'\n" +
+	"\x0foptional_scopes\x18\n" +
+	" \x03(\tR\x0eoptionalScopes\x12#\n" +
+	"\rreview_status\x18\v \x01(\tR\freviewStatus\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1a\n" +
+	"\brevision\x18\x0e \x01(\x03R\brevision\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xe5\x03\n" +
 	"\x12ApplicationVersion\x12\xda\x01\n" +
-	"\x18CreateApplicationVersion\x12B.app_center.v1.application_version.CreateApplicationVersionRequest\x1aC.app_center.v1.application_version.CreateApplicationVersionResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/applications/{application_id}/versionsBQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"\x18CreateApplicationVersion\x12B.app_center.v1.application_version.CreateApplicationVersionRequest\x1aC.app_center.v1.application_version.CreateApplicationVersionResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/applications/{application_id}/versions\x12\xf1\x01\n" +
+	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}BQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_application_version_proto_rawDescOnce sync.Once
@@ -343,22 +709,30 @@ func file_app_center_v1_application_version_application_version_proto_rawDescGZI
 	return file_app_center_v1_application_version_application_version_proto_rawDescData
 }
 
-var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_app_center_v1_application_version_application_version_proto_goTypes = []any{
-	(*CreateApplicationVersionRequest)(nil),  // 0: app_center.v1.application_version.CreateApplicationVersionRequest
-	(*CreateApplicationVersionResponse)(nil), // 1: app_center.v1.application_version.CreateApplicationVersionResponse
-	(*timestamppb.Timestamp)(nil),            // 2: google.protobuf.Timestamp
+	(*CreateApplicationVersionRequest)(nil),    // 0: app_center.v1.application_version.CreateApplicationVersionRequest
+	(*CreateApplicationVersionResponse)(nil),   // 1: app_center.v1.application_version.CreateApplicationVersionResponse
+	(*UpdateApplicationVersionRequest)(nil),    // 2: app_center.v1.application_version.UpdateApplicationVersionRequest
+	(*DraftApplicationVersionReplacement)(nil), // 3: app_center.v1.application_version.DraftApplicationVersionReplacement
+	(*UpdateApplicationVersionResponse)(nil),   // 4: app_center.v1.application_version.UpdateApplicationVersionResponse
+	(*timestamppb.Timestamp)(nil),              // 5: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_version_application_version_proto_depIdxs = []int32{
-	2, // 0: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
-	2, // 1: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	0, // 2: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
-	1, // 3: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	5, // 1: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	3, // 2: app_center.v1.application_version.UpdateApplicationVersionRequest.replacement:type_name -> app_center.v1.application_version.DraftApplicationVersionReplacement
+	5, // 3: app_center.v1.application_version.UpdateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	5, // 4: app_center.v1.application_version.UpdateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	0, // 5: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
+	2, // 6: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:input_type -> app_center.v1.application_version.UpdateApplicationVersionRequest
+	1, // 7: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
+	4, // 8: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:output_type -> app_center.v1.application_version.UpdateApplicationVersionResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_version_application_version_proto_init() }
@@ -372,7 +746,7 @@ func file_app_center_v1_application_version_application_version_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_version_application_version_proto_rawDesc), len(file_app_center_v1_application_version_application_version_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

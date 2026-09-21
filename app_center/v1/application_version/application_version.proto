@@ -7,14 +7,20 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_version;applicationversion";
 
-// ApplicationVersion exposes the resource-oriented commands for application
-// versions. v1 initially contains only UC-APP-002 creation.
+// ApplicationVersion exposes resource-oriented version commands.
 service ApplicationVersion {
   rpc CreateApplicationVersion(CreateApplicationVersionRequest)
       returns (CreateApplicationVersionResponse) {
     option (google.api.http) = {
       post: "/v1/applications/{application_id}/versions"
       body: "*"
+    };
+  }
+  rpc UpdateApplicationVersion(UpdateApplicationVersionRequest)
+      returns (UpdateApplicationVersionResponse) {
+    option (google.api.http) = {
+      put: "/v1/applications/{application_id}/versions/{version_id}"
+      body: "replacement"
     };
   }
 }
@@ -33,6 +39,44 @@ message CreateApplicationVersionRequest {
 }
 
 message CreateApplicationVersionResponse {
+  string version_id = 1;
+  string application_id = 2;
+  int32 sequence = 3;
+  string version_label = 4;
+  string launch_url = 5;
+  int32 rpc_api_min_version = 6;
+  int32 rpc_api_max_version_exclusive = 7;
+  repeated string required_capabilities = 8;
+  repeated string required_scopes = 9;
+  repeated string optional_scopes = 10;
+  string review_status = 11;
+  string created_by = 12;
+  google.protobuf.Timestamp created_at = 13;
+  int64 revision = 14;
+  string updated_by = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+message UpdateApplicationVersionRequest {
+  string application_id = 1;
+  string version_id = 2;
+  // Native gRPC callers provide expected_revision. HTTP callers use If-Match;
+  // body targets replacement so JSON cannot override this protocol field.
+  int64 expected_revision = 3;
+  DraftApplicationVersionReplacement replacement = 4;
+}
+
+message DraftApplicationVersionReplacement {
+  string version_label = 1;
+  string launch_url = 2;
+  int32 rpc_api_min_version = 3;
+  int32 rpc_api_max_version_exclusive = 4;
+  repeated string required_capabilities = 5;
+  repeated string required_scopes = 6;
+  repeated string optional_scopes = 7;
+}
+
+message UpdateApplicationVersionResponse {
   string version_id = 1;
   string application_id = 2;
   int32 sequence = 3;

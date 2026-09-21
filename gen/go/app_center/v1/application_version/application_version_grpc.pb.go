@@ -20,16 +20,17 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ApplicationVersion_CreateApplicationVersion_FullMethodName = "/app_center.v1.application_version.ApplicationVersion/CreateApplicationVersion"
+	ApplicationVersion_UpdateApplicationVersion_FullMethodName = "/app_center.v1.application_version.ApplicationVersion/UpdateApplicationVersion"
 )
 
 // ApplicationVersionClient is the client API for ApplicationVersion service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// ApplicationVersion exposes the resource-oriented commands for application
-// versions. v1 initially contains only UC-APP-002 creation.
+// ApplicationVersion exposes resource-oriented version commands.
 type ApplicationVersionClient interface {
 	CreateApplicationVersion(ctx context.Context, in *CreateApplicationVersionRequest, opts ...grpc.CallOption) (*CreateApplicationVersionResponse, error)
+	UpdateApplicationVersion(ctx context.Context, in *UpdateApplicationVersionRequest, opts ...grpc.CallOption) (*UpdateApplicationVersionResponse, error)
 }
 
 type applicationVersionClient struct {
@@ -50,14 +51,24 @@ func (c *applicationVersionClient) CreateApplicationVersion(ctx context.Context,
 	return out, nil
 }
 
+func (c *applicationVersionClient) UpdateApplicationVersion(ctx context.Context, in *UpdateApplicationVersionRequest, opts ...grpc.CallOption) (*UpdateApplicationVersionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateApplicationVersionResponse)
+	err := c.cc.Invoke(ctx, ApplicationVersion_UpdateApplicationVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationVersionServer is the server API for ApplicationVersion service.
 // All implementations must embed UnimplementedApplicationVersionServer
 // for forward compatibility.
 //
-// ApplicationVersion exposes the resource-oriented commands for application
-// versions. v1 initially contains only UC-APP-002 creation.
+// ApplicationVersion exposes resource-oriented version commands.
 type ApplicationVersionServer interface {
 	CreateApplicationVersion(context.Context, *CreateApplicationVersionRequest) (*CreateApplicationVersionResponse, error)
+	UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error)
 	mustEmbedUnimplementedApplicationVersionServer()
 }
 
@@ -70,6 +81,9 @@ type UnimplementedApplicationVersionServer struct{}
 
 func (UnimplementedApplicationVersionServer) CreateApplicationVersion(context.Context, *CreateApplicationVersionRequest) (*CreateApplicationVersionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateApplicationVersion not implemented")
+}
+func (UnimplementedApplicationVersionServer) UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateApplicationVersion not implemented")
 }
 func (UnimplementedApplicationVersionServer) mustEmbedUnimplementedApplicationVersionServer() {}
 func (UnimplementedApplicationVersionServer) testEmbeddedByValue()                            {}
@@ -110,6 +124,24 @@ func _ApplicationVersion_CreateApplicationVersion_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationVersion_UpdateApplicationVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateApplicationVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationVersionServer).UpdateApplicationVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationVersion_UpdateApplicationVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationVersionServer).UpdateApplicationVersion(ctx, req.(*UpdateApplicationVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationVersion_ServiceDesc is the grpc.ServiceDesc for ApplicationVersion service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -120,6 +152,10 @@ var ApplicationVersion_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateApplicationVersion",
 			Handler:    _ApplicationVersion_CreateApplicationVersion_Handler,
+		},
+		{
+			MethodName: "UpdateApplicationVersion",
+			Handler:    _ApplicationVersion_UpdateApplicationVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

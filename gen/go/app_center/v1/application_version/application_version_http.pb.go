@@ -20,14 +20,17 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationApplicationVersionCreateApplicationVersion = "/app_center.v1.application_version.ApplicationVersion/CreateApplicationVersion"
+const OperationApplicationVersionUpdateApplicationVersion = "/app_center.v1.application_version.ApplicationVersion/UpdateApplicationVersion"
 
 type ApplicationVersionHTTPServer interface {
 	CreateApplicationVersion(context.Context, *CreateApplicationVersionRequest) (*CreateApplicationVersionResponse, error)
+	UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error)
 }
 
 func RegisterApplicationVersionHTTPServer(s *http.Server, srv ApplicationVersionHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/applications/{application_id}/versions", _ApplicationVersion_CreateApplicationVersion0_HTTP_Handler(srv))
+	r.PUT("/v1/applications/{application_id}/versions/{version_id}", _ApplicationVersion_UpdateApplicationVersion0_HTTP_Handler(srv))
 }
 
 func _ApplicationVersion_CreateApplicationVersion0_HTTP_Handler(srv ApplicationVersionHTTPServer) func(ctx http.Context) error {
@@ -55,8 +58,34 @@ func _ApplicationVersion_CreateApplicationVersion0_HTTP_Handler(srv ApplicationV
 	}
 }
 
+func _ApplicationVersion_UpdateApplicationVersion0_HTTP_Handler(srv ApplicationVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateApplicationVersionRequest
+		if err := ctx.Bind(&in.Replacement); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationVersionUpdateApplicationVersion)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateApplicationVersion(ctx, req.(*UpdateApplicationVersionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateApplicationVersionResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationVersionHTTPClient interface {
 	CreateApplicationVersion(ctx context.Context, req *CreateApplicationVersionRequest, opts ...http.CallOption) (rsp *CreateApplicationVersionResponse, err error)
+	UpdateApplicationVersion(ctx context.Context, req *UpdateApplicationVersionRequest, opts ...http.CallOption) (rsp *UpdateApplicationVersionResponse, err error)
 }
 
 type ApplicationVersionHTTPClientImpl struct {
@@ -74,6 +103,19 @@ func (c *ApplicationVersionHTTPClientImpl) CreateApplicationVersion(ctx context.
 	opts = append(opts, http.Operation(OperationApplicationVersionCreateApplicationVersion))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationVersionHTTPClientImpl) UpdateApplicationVersion(ctx context.Context, in *UpdateApplicationVersionRequest, opts ...http.CallOption) (*UpdateApplicationVersionResponse, error) {
+	var out UpdateApplicationVersionResponse
+	pattern := "/v1/applications/{application_id}/versions/{version_id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationVersionUpdateApplicationVersion))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in.Replacement, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
