@@ -1,0 +1,24 @@
+syntax = "proto3";
+package auth_center.v1.user_profile;
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/user_profile;userprofile";
+import "google/protobuf/timestamp.proto";
+
+// Native gRPC. Every method requires trusted-identity-v1 for iwut-auth-center.
+service UserProfileService {
+ rpc EditOwnProfile(EditOwnProfileRequest) returns (EditOwnProfileResponse);
+ rpc GetOwnProfile(GetOwnProfileRequest) returns (OwnUserProfileSnapshot);
+ rpc GetProfileEditingSchema(GetProfileEditingSchemaRequest) returns (ProfileEditingSchema);
+}
+message ProfileValue {
+ oneof value { string string_value=1; int32 integer_value=2; bool boolean_value=3; string date_value=4; }
+}
+message ProfileFieldAssignment { string key=1; ProfileValue value=2; }
+message EditOwnProfileRequest { optional int64 expected_revision=1; repeated ProfileFieldAssignment set=2; repeated string remove=3; }
+message EditOwnProfileResponse { bool changed=1; OwnUserProfileSnapshot profile=2; }
+message OwnUserProfileSnapshot { repeated ProfileFieldAssignment entries=1; int64 revision=2; google.protobuf.Timestamp updated_at=3; }
+message GetOwnProfileRequest {}
+message GetProfileEditingSchemaRequest {}
+message ProfileFieldDefinition { string key=1; string label=2; string description=3; string value_type=4; ProfileFieldConstraints constraints=5; }
+message ProfileFieldConstraints { optional int64 min_length=1; optional int64 max_length=2; optional int32 minimum=3; optional int32 maximum=4; }
+message ProfileEditingLimits { uint32 max_operations=1; uint32 max_fields=2; uint32 max_profile_bytes=3; uint32 max_command_bytes=4; uint32 max_message_bytes=5; }
+message ProfileEditingSchema { repeated ProfileFieldDefinition definitions=1; ProfileEditingLimits limits=2; }
