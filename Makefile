@@ -27,6 +27,7 @@ PROTO_FILES := \
 	app_center/v1/application_publication/error_reason.proto \
 	app_center/v1/tester_join_link/tester_join_link.proto \
 	app_center/v1/tester_join_link/error_reason.proto \
+	auth_center/v1/authentication/authentication.proto \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
 	app_center/v1/application_review/application_review.proto \
@@ -58,6 +59,7 @@ GENERATED_DIRS := \
 	app_center/v1/tester_membership \
 	app_center/v1/tester_join_link \
 	app_center/v1/application_publication \
+	auth_center/v1/authentication \
 	app_center/v1/application \
 	app_center/v1/application_review \
 	app_center/v1/application_version \

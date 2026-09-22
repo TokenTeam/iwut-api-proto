@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package auth_center.v1.authentication;
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/authentication;authentication";
+
+// Native Auth entry points. Authentication is selected by exact full method
+// according to platform/contracts/auth-device-session-v1.md.
+service AuthenticationService {
+  rpc BeginUserRegistration(BeginUserRegistrationRequest) returns (AuthenticationChallenge);
+  rpc CompleteUserRegistration(CompleteUserRegistrationRequest) returns (UserRegistrationResult);
+  rpc BeginDeviceLogin(BeginDeviceLoginRequest) returns (AuthenticationChallenge);
+  rpc CompleteDeviceLogin(CompleteDeviceLoginRequest) returns (SessionEstablished);
+  rpc RevokeCurrentSession(RevokeCurrentSessionRequest) returns (SessionRevoked);
+  rpc RevokeOwnCredential(RevokeOwnCredentialRequest) returns (CredentialRevoked);
+}
+
+message CredentialRegistrationProposal {
+  string protocol_version = 1;
+  bytes public_key = 2;
+}
+message StudentAssociationDeclaration {
+  string scheme_version = 1;
+  bytes association_token = 2;
+}
+message BeginUserRegistrationRequest {
+  CredentialRegistrationProposal credential_proposal = 1;
+  StudentAssociationDeclaration association = 2;
+}
+message AuthenticationChallenge {
+  string operation_id = 1;
+  bytes challenge = 2;
+  string protocol_version = 3;
+  int64 expires_at_unix_ms = 4;
+  bytes signing_payload = 5;
+}
+message CredentialProof { bytes signature = 1; }
+message CompleteUserRegistrationRequest {
+  string operation_id = 1;
+  CredentialProof proof = 2;
+}
+message UserRegistrationResult {
+  string auth_id = 1;
+  string credential_id = 2;
+  SessionEstablished session = 3;
+}
+message BeginDeviceLoginRequest {
+  oneof credential_locator {
+    string credential_id = 1;
+    bytes public_key_fingerprint = 2;
+  }
+}
+message CompleteDeviceLoginRequest {
+  string operation_id = 1;
+  CredentialProof proof = 2;
+}
+message SessionEstablished {
+  string auth_id = 1;
+  string session_id = 2;
+  string session_token = 3;
+  int64 expires_at_unix_ms = 4;
+  string credential_id = 5;
+}
+// The token is exclusively in x-iwut-session metadata, never in this message.
+message RevokeCurrentSessionRequest {}
+message SessionRevoked {}
+message RevokeOwnCredentialRequest { string credential_id = 1; }
+message CredentialRevoked {}
