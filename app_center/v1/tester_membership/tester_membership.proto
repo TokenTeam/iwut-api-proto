@@ -1,0 +1,39 @@
+syntax = "proto3";
+package app_center.v1.tester_membership;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembership";
+
+service TesterMembership {
+  rpc JoinApplicationAsTester(JoinApplicationAsTesterRequest) returns (JoinApplicationAsTesterResponse) {
+    option (google.api.http) = {
+      post: "/v1/tester-join-links/{join_link_id}/memberships"
+      body: "command"
+    };
+  }
+}
+message JoinApplicationAsTesterRequest {
+  string join_link_id = 1;
+  JoinApplicationAsTesterCommand command = 2;
+}
+message JoinApplicationAsTesterCommand {
+  // Sensitive bearer credential. Never log this request.
+  string secret = 1;
+}
+message JoinApplicationAsTesterResponse {
+  bool joined = 1;
+  TesterMembershipResource membership = 2;
+  TesterCapacity capacity = 3;
+}
+message TesterMembershipResource {
+  string membership_id = 1;
+  string application_id = 2;
+  string tester_auth_id = 3;
+  string status = 4;
+  string joined_via_join_link_id = 5;
+  google.protobuf.Timestamp joined_at = 6;
+}
+message TesterCapacity {
+  int32 active_tester_count = 1;
+  int32 tester_limit = 2;
+}

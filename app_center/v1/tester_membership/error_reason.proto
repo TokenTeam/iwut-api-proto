@@ -1,0 +1,13 @@
+syntax = "proto3";
+package app_center.v1.tester_membership;
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembership";
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_AUTHENTICATED_USER_REQUIRED = 1;
+  ERROR_REASON_INVALID_AUTHENTICATED_USER = 2;
+  ERROR_REASON_INVALID_TESTER_JOIN_LINK_ID = 3;
+  ERROR_REASON_INVALID_TESTER_JOIN_SECRET = 4;
+  ERROR_REASON_TESTER_JOIN_LINK_INVALID = 5;
+  ERROR_REASON_APPLICATION_TESTER_LIMIT_REACHED = 6;
+  ERROR_REASON_INTERNAL = 7;
+}

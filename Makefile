@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/tester_membership/tester_membership.proto \
+	app_center/v1/tester_membership/error_reason.proto \
 	app_center/v1/application_publication/application_publication.proto \
 	app_center/v1/application_publication/error_reason.proto \
 	app_center/v1/tester_join_link/tester_join_link.proto \
@@ -39,6 +41,8 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	app_center/v1/tester_membership/tester_membership.proto \
+	app_center/v1/tester_membership/error_reason.proto \
 	app_center/v1/application_publication/application_publication.proto \
 	app_center/v1/application_publication/error_reason.proto \
 	app_center/v1/tester_join_link/tester_join_link.proto \
@@ -51,6 +55,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/tester_membership \
 	app_center/v1/tester_join_link \
 	app_center/v1/application_publication \
 	app_center/v1/application \
