@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package app_center.v1.tester_join_link;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlink";
+
+service TesterJoinLink {
+  rpc CreateOrRotateTesterJoinLink(CreateOrRotateTesterJoinLinkRequest)
+      returns (CreateOrRotateTesterJoinLinkResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/tester-join-links"
+      body: "command"
+    };
+  }
+}
+
+message CreateOrRotateTesterJoinLinkRequest {
+  string application_id = 1;
+  CreateOrRotateTesterJoinLinkCommand command = 2;
+}
+
+message CreateOrRotateTesterJoinLinkCommand {
+  optional string expected_active_join_link_id = 1;
+}
+
+message CreateOrRotateTesterJoinLinkResponse {
+  TesterJoinLinkResource join_link = 1;
+  optional string replaced_join_link_id = 2;
+  // Sensitive, one-time credential. Never log this response or cache it.
+  string join_url = 3;
+}
+
+// Public metadata deliberately excludes the stored token hash.
+message TesterJoinLinkResource {
+  string join_link_id = 1;
+  string application_id = 2;
+  string status = 3;
+  string created_by = 4;
+  google.protobuf.Timestamp created_at = 5;
+}

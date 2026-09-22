@@ -23,6 +23,8 @@ GEN_OUT := gen/go
 PROTO_FILES := \
 	app_center/v1/application_publication/application_publication.proto \
 	app_center/v1/application_publication/error_reason.proto \
+	app_center/v1/tester_join_link/tester_join_link.proto \
+	app_center/v1/tester_join_link/error_reason.proto \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
 	app_center/v1/application_review/application_review.proto \
@@ -39,6 +41,8 @@ PROTO_FILES := \
 HTTP_PROTO_FILES := \
 	app_center/v1/application_publication/application_publication.proto \
 	app_center/v1/application_publication/error_reason.proto \
+	app_center/v1/tester_join_link/tester_join_link.proto \
+	app_center/v1/tester_join_link/error_reason.proto \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
 	app_center/v1/application_review/application_review.proto \
@@ -47,6 +51,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/tester_join_link \
 	app_center/v1/application_publication \
 	app_center/v1/application \
 	app_center/v1/application_review \
