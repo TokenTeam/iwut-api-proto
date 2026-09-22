@@ -30,7 +30,9 @@ PROTO_FILES := \
 	auth_center/v1/developer_status/developer_status.proto \
 	auth_center/v1/developer_status/error_reason.proto \
 	auth_center/v1/scope_catalog/scope_catalog.proto \
-	auth_center/v1/scope_catalog/error_reason.proto
+	auth_center/v1/scope_catalog/error_reason.proto \
+	auth_center/v1/system_principal/system_principal.proto \
+	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
 	app_center/v1/application/application.proto \
@@ -45,7 +47,8 @@ GENERATED_DIRS := \
 	app_center/v1/application_review \
 	app_center/v1/application_version \
 	auth_center/v1/developer_status \
-	auth_center/v1/scope_catalog
+	auth_center/v1/scope_catalog \
+	auth_center/v1/system_principal
 
 .PHONY: proto-gen
 proto-gen:

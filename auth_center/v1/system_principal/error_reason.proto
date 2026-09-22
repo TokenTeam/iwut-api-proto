@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth_center.v1.system_principal;
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/system_principal;systemprincipal";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_SERVICE_IDENTITY_REQUIRED = 1;
+  ERROR_REASON_INVALID_SERVICE_IDENTITY = 2;
+  ERROR_REASON_SYSTEM_PRINCIPAL_READ_FORBIDDEN = 3;
+  ERROR_REASON_INVALID_SYSTEM_PRINCIPAL_PURPOSE = 4;
+  ERROR_REASON_SYSTEM_PRINCIPAL_NOT_FOUND = 5;
+  ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE = 6;
+  ERROR_REASON_INTERNAL = 7;
+}

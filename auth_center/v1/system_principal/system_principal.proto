@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package auth_center.v1.system_principal;
+
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/system_principal;systemprincipal";
+
+// SystemPrincipalDirectory resolves stable, non-login audit actors for an
+// explicitly authorised internal service. It is native gRPC only.
+service SystemPrincipalDirectory {
+  rpc ResolveSystemPrincipal(ResolveSystemPrincipalRequest)
+      returns (ResolveSystemPrincipalResponse);
+}
+
+message ResolveSystemPrincipalRequest {
+  SystemPrincipalPurpose purpose = 1;
+}
+
+message ResolveSystemPrincipalResponse {
+  string auth_id = 1;
+  SystemPrincipalPurpose purpose = 2;
+}
+
+enum SystemPrincipalPurpose {
+  SYSTEM_PRINCIPAL_PURPOSE_UNSPECIFIED = 0;
+  SYSTEM_PRINCIPAL_PURPOSE_APP_CENTER_REVIEW_AUTO_REJECTION = 1;
+}

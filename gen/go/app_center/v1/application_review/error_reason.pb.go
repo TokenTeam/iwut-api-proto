@@ -55,6 +55,7 @@ const (
 	ErrorReason_ERROR_REASON_INVALID_APPLICATION_REVIEW_CHECKS         ErrorReason = 28
 	ErrorReason_ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON         ErrorReason = 29
 	ErrorReason_ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE              ErrorReason = 30
+	ErrorReason_ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE              ErrorReason = 31
 )
 
 // Enum value maps for ErrorReason.
@@ -91,6 +92,7 @@ var (
 		28: "ERROR_REASON_INVALID_APPLICATION_REVIEW_CHECKS",
 		29: "ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON",
 		30: "ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE",
+		31: "ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                               0,
@@ -124,6 +126,7 @@ var (
 		"ERROR_REASON_INVALID_APPLICATION_REVIEW_CHECKS":         28,
 		"ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON":         29,
 		"ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE":              30,
+		"ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE":              31,
 	}
 )
 
@@ -158,7 +161,7 @@ var File_app_center_v1_application_review_error_reason_proto protoreflect.FileDe
 
 const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\x84\f\n" +
+	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\xb3\f\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -191,7 +194,8 @@ const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	"1ERROR_REASON_APPLICATION_REVIEW_CHECKS_INCOMPLETE\x10\x1b\x122\n" +
 	".ERROR_REASON_INVALID_APPLICATION_REVIEW_CHECKS\x10\x1c\x122\n" +
 	".ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON\x10\x1d\x12-\n" +
-	")ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE\x10\x1eBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	")ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE\x10\x1e\x12-\n" +
+	")ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE\x10\x1fBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_error_reason_proto_rawDescOnce sync.Once
