@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package app_center.v1.application_publication;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_publication;applicationpublication";
+
+service ApplicationPublication {
+  rpc PlaceApprovedVersionInTestSlot(PlaceApprovedVersionInTestSlotRequest)
+      returns (PlaceApprovedVersionInTestSlotResponse) {
+    option (google.api.http) = {
+      put: "/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot"
+      body: "command"
+    };
+  }
+}
+
+message PlaceApprovedVersionInTestSlotRequest {
+  string application_id = 1;
+  int32 rpc_api_major = 2;
+  PlaceApprovedVersionInTestSlotCommand command = 3;
+}
+
+message PlaceApprovedVersionInTestSlotCommand {
+  string version_id = 1;
+  optional int64 expected_publication_revision = 2;
+}
+
+message PlaceApprovedVersionInTestSlotResponse {
+  bool changed = 1;
+  ApplicationPublicationResource publication = 2;
+  ApplicationPublicationHistoryResource history = 3;
+}
+
+message ApplicationPublicationResource {
+  string publication_id = 1;
+  string application_id = 2;
+  int32 rpc_api_major = 3;
+  string test_version_id = 4;
+  int64 revision = 5;
+  string created_by = 6;
+  google.protobuf.Timestamp created_at = 7;
+  string updated_by = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message ApplicationPublicationHistoryResource {
+  string history_id = 1;
+  string publication_id = 2;
+  string application_id = 3;
+  int32 rpc_api_major = 4;
+  int64 publication_revision = 5;
+  string action = 6;
+  optional string previous_version_id = 7;
+  string new_version_id = 8;
+  string approved_review_id = 9;
+  int64 scope_catalog_revision = 10;
+  string preflight_policy_version = 11;
+  string changed_by = 12;
+  google.protobuf.Timestamp changed_at = 13;
+}
