@@ -23,6 +23,127 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Removal targets an exact membership episode; identity and audit are server-owned.
+type RemoveApplicationTesterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	MembershipId  string                 `protobuf:"bytes,2,opt,name=membership_id,json=membershipId,proto3" json:"membership_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveApplicationTesterRequest) Reset() {
+	*x = RemoveApplicationTesterRequest{}
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveApplicationTesterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveApplicationTesterRequest) ProtoMessage() {}
+
+func (x *RemoveApplicationTesterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveApplicationTesterRequest.ProtoReflect.Descriptor instead.
+func (*RemoveApplicationTesterRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RemoveApplicationTesterRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *RemoveApplicationTesterRequest) GetMembershipId() string {
+	if x != nil {
+		return x.MembershipId
+	}
+	return ""
+}
+
+type RemoveApplicationTesterResponse struct {
+	state                protoimpl.MessageState    `protogen:"open.v1"`
+	Removed              bool                      `protobuf:"varint,1,opt,name=removed,proto3" json:"removed,omitempty"`
+	Membership           *TesterMembershipResource `protobuf:"bytes,2,opt,name=membership,proto3" json:"membership,omitempty"`
+	Capacity             *TesterCapacity           `protobuf:"bytes,3,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	ActiveJoinLinkExists bool                      `protobuf:"varint,4,opt,name=active_join_link_exists,json=activeJoinLinkExists,proto3" json:"active_join_link_exists,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *RemoveApplicationTesterResponse) Reset() {
+	*x = RemoveApplicationTesterResponse{}
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveApplicationTesterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveApplicationTesterResponse) ProtoMessage() {}
+
+func (x *RemoveApplicationTesterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveApplicationTesterResponse.ProtoReflect.Descriptor instead.
+func (*RemoveApplicationTesterResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RemoveApplicationTesterResponse) GetRemoved() bool {
+	if x != nil {
+		return x.Removed
+	}
+	return false
+}
+
+func (x *RemoveApplicationTesterResponse) GetMembership() *TesterMembershipResource {
+	if x != nil {
+		return x.Membership
+	}
+	return nil
+}
+
+func (x *RemoveApplicationTesterResponse) GetCapacity() *TesterCapacity {
+	if x != nil {
+		return x.Capacity
+	}
+	return nil
+}
+
+func (x *RemoveApplicationTesterResponse) GetActiveJoinLinkExists() bool {
+	if x != nil {
+		return x.ActiveJoinLinkExists
+	}
+	return false
+}
+
 type JoinApplicationAsTesterRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
 	JoinLinkId    string                          `protobuf:"bytes,1,opt,name=join_link_id,json=joinLinkId,proto3" json:"join_link_id,omitempty"`
@@ -33,7 +154,7 @@ type JoinApplicationAsTesterRequest struct {
 
 func (x *JoinApplicationAsTesterRequest) Reset() {
 	*x = JoinApplicationAsTesterRequest{}
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[0]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +166,7 @@ func (x *JoinApplicationAsTesterRequest) String() string {
 func (*JoinApplicationAsTesterRequest) ProtoMessage() {}
 
 func (x *JoinApplicationAsTesterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[0]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +179,7 @@ func (x *JoinApplicationAsTesterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinApplicationAsTesterRequest.ProtoReflect.Descriptor instead.
 func (*JoinApplicationAsTesterRequest) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{0}
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *JoinApplicationAsTesterRequest) GetJoinLinkId() string {
@@ -85,7 +206,7 @@ type JoinApplicationAsTesterCommand struct {
 
 func (x *JoinApplicationAsTesterCommand) Reset() {
 	*x = JoinApplicationAsTesterCommand{}
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[1]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -97,7 +218,7 @@ func (x *JoinApplicationAsTesterCommand) String() string {
 func (*JoinApplicationAsTesterCommand) ProtoMessage() {}
 
 func (x *JoinApplicationAsTesterCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[1]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -110,7 +231,7 @@ func (x *JoinApplicationAsTesterCommand) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinApplicationAsTesterCommand.ProtoReflect.Descriptor instead.
 func (*JoinApplicationAsTesterCommand) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{1}
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *JoinApplicationAsTesterCommand) GetSecret() string {
@@ -131,7 +252,7 @@ type JoinApplicationAsTesterResponse struct {
 
 func (x *JoinApplicationAsTesterResponse) Reset() {
 	*x = JoinApplicationAsTesterResponse{}
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[2]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -143,7 +264,7 @@ func (x *JoinApplicationAsTesterResponse) String() string {
 func (*JoinApplicationAsTesterResponse) ProtoMessage() {}
 
 func (x *JoinApplicationAsTesterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[2]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -156,7 +277,7 @@ func (x *JoinApplicationAsTesterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinApplicationAsTesterResponse.ProtoReflect.Descriptor instead.
 func (*JoinApplicationAsTesterResponse) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{2}
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *JoinApplicationAsTesterResponse) GetJoined() bool {
@@ -188,13 +309,15 @@ type TesterMembershipResource struct {
 	Status              string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	JoinedViaJoinLinkId string                 `protobuf:"bytes,5,opt,name=joined_via_join_link_id,json=joinedViaJoinLinkId,proto3" json:"joined_via_join_link_id,omitempty"`
 	JoinedAt            *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=joined_at,json=joinedAt,proto3" json:"joined_at,omitempty"`
+	RemovedBy           *string                `protobuf:"bytes,7,opt,name=removed_by,json=removedBy,proto3,oneof" json:"removed_by,omitempty"`
+	RemovedAt           *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=removed_at,json=removedAt,proto3" json:"removed_at,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *TesterMembershipResource) Reset() {
 	*x = TesterMembershipResource{}
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[3]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -206,7 +329,7 @@ func (x *TesterMembershipResource) String() string {
 func (*TesterMembershipResource) ProtoMessage() {}
 
 func (x *TesterMembershipResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[3]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -219,7 +342,7 @@ func (x *TesterMembershipResource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TesterMembershipResource.ProtoReflect.Descriptor instead.
 func (*TesterMembershipResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{3}
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TesterMembershipResource) GetMembershipId() string {
@@ -264,6 +387,20 @@ func (x *TesterMembershipResource) GetJoinedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *TesterMembershipResource) GetRemovedBy() string {
+	if x != nil && x.RemovedBy != nil {
+		return *x.RemovedBy
+	}
+	return ""
+}
+
+func (x *TesterMembershipResource) GetRemovedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RemovedAt
+	}
+	return nil
+}
+
 type TesterCapacity struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	ActiveTesterCount int32                  `protobuf:"varint,1,opt,name=active_tester_count,json=activeTesterCount,proto3" json:"active_tester_count,omitempty"`
@@ -274,7 +411,7 @@ type TesterCapacity struct {
 
 func (x *TesterCapacity) Reset() {
 	*x = TesterCapacity{}
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[4]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -286,7 +423,7 @@ func (x *TesterCapacity) String() string {
 func (*TesterCapacity) ProtoMessage() {}
 
 func (x *TesterCapacity) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[4]
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -299,7 +436,7 @@ func (x *TesterCapacity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TesterCapacity.ProtoReflect.Descriptor instead.
 func (*TesterCapacity) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{4}
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TesterCapacity) GetActiveTesterCount() int32 {
@@ -320,7 +457,17 @@ var File_app_center_v1_tester_membership_tester_membership_proto protoreflect.Fi
 
 const file_app_center_v1_tester_membership_tester_membership_proto_rawDesc = "" +
 	"\n" +
-	"7app_center/v1/tester_membership/tester_membership.proto\x12\x1fapp_center.v1.tester_membership\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x01\n" +
+	"7app_center/v1/tester_membership/tester_membership.proto\x12\x1fapp_center.v1.tester_membership\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"l\n" +
+	"\x1eRemoveApplicationTesterRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12#\n" +
+	"\rmembership_id\x18\x02 \x01(\tR\fmembershipId\"\x9a\x02\n" +
+	"\x1fRemoveApplicationTesterResponse\x12\x18\n" +
+	"\aremoved\x18\x01 \x01(\bR\aremoved\x12Y\n" +
+	"\n" +
+	"membership\x18\x02 \x01(\v29.app_center.v1.tester_membership.TesterMembershipResourceR\n" +
+	"membership\x12K\n" +
+	"\bcapacity\x18\x03 \x01(\v2/.app_center.v1.tester_membership.TesterCapacityR\bcapacity\x125\n" +
+	"\x17active_join_link_exists\x18\x04 \x01(\bR\x14activeJoinLinkExists\"\x9d\x01\n" +
 	"\x1eJoinApplicationAsTesterRequest\x12 \n" +
 	"\fjoin_link_id\x18\x01 \x01(\tR\n" +
 	"joinLinkId\x12Y\n" +
@@ -332,18 +479,24 @@ const file_app_center_v1_tester_membership_tester_membership_proto_rawDesc = "" 
 	"\n" +
 	"membership\x18\x02 \x01(\v29.app_center.v1.tester_membership.TesterMembershipResourceR\n" +
 	"membership\x12K\n" +
-	"\bcapacity\x18\x03 \x01(\v2/.app_center.v1.tester_membership.TesterCapacityR\bcapacity\"\x93\x02\n" +
+	"\bcapacity\x18\x03 \x01(\v2/.app_center.v1.tester_membership.TesterCapacityR\bcapacity\"\x81\x03\n" +
 	"\x18TesterMembershipResource\x12#\n" +
 	"\rmembership_id\x18\x01 \x01(\tR\fmembershipId\x12%\n" +
 	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12$\n" +
 	"\x0etester_auth_id\x18\x03 \x01(\tR\ftesterAuthId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x124\n" +
 	"\x17joined_via_join_link_id\x18\x05 \x01(\tR\x13joinedViaJoinLinkId\x127\n" +
-	"\tjoined_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\bjoinedAt\"c\n" +
+	"\tjoined_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\bjoinedAt\x12\"\n" +
+	"\n" +
+	"removed_by\x18\a \x01(\tH\x00R\tremovedBy\x88\x01\x01\x129\n" +
+	"\n" +
+	"removed_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tremovedAtB\r\n" +
+	"\v_removed_by\"c\n" +
 	"\x0eTesterCapacity\x12.\n" +
 	"\x13active_tester_count\x18\x01 \x01(\x05R\x11activeTesterCount\x12!\n" +
-	"\ftester_limit\x18\x02 \x01(\x05R\vtesterLimit2\xf4\x01\n" +
-	"\x10TesterMembership\x12\xdf\x01\n" +
+	"\ftester_limit\x18\x02 \x01(\x05R\vtesterLimit2\xe1\x03\n" +
+	"\x10TesterMembership\x12\xea\x01\n" +
+	"\x17RemoveApplicationTester\x12?.app_center.v1.tester_membership.RemoveApplicationTesterRequest\x1a@.app_center.v1.tester_membership.RemoveApplicationTesterResponse\"L\x82\xd3\xe4\x93\x02F*D/v1/applications/{application_id}/tester-memberships/{membership_id}\x12\xdf\x01\n" +
 	"\x17JoinApplicationAsTester\x12?.app_center.v1.tester_membership.JoinApplicationAsTesterRequest\x1a@.app_center.v1.tester_membership.JoinApplicationAsTesterResponse\"A\x82\xd3\xe4\x93\x02;:\acommand\"0/v1/tester-join-links/{join_link_id}/membershipsBMZKiwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
 
 var (
@@ -358,27 +511,34 @@ func file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP() 
 	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescData
 }
 
-var file_app_center_v1_tester_membership_tester_membership_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_app_center_v1_tester_membership_tester_membership_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_app_center_v1_tester_membership_tester_membership_proto_goTypes = []any{
-	(*JoinApplicationAsTesterRequest)(nil),  // 0: app_center.v1.tester_membership.JoinApplicationAsTesterRequest
-	(*JoinApplicationAsTesterCommand)(nil),  // 1: app_center.v1.tester_membership.JoinApplicationAsTesterCommand
-	(*JoinApplicationAsTesterResponse)(nil), // 2: app_center.v1.tester_membership.JoinApplicationAsTesterResponse
-	(*TesterMembershipResource)(nil),        // 3: app_center.v1.tester_membership.TesterMembershipResource
-	(*TesterCapacity)(nil),                  // 4: app_center.v1.tester_membership.TesterCapacity
-	(*timestamppb.Timestamp)(nil),           // 5: google.protobuf.Timestamp
+	(*RemoveApplicationTesterRequest)(nil),  // 0: app_center.v1.tester_membership.RemoveApplicationTesterRequest
+	(*RemoveApplicationTesterResponse)(nil), // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse
+	(*JoinApplicationAsTesterRequest)(nil),  // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest
+	(*JoinApplicationAsTesterCommand)(nil),  // 3: app_center.v1.tester_membership.JoinApplicationAsTesterCommand
+	(*JoinApplicationAsTesterResponse)(nil), // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse
+	(*TesterMembershipResource)(nil),        // 5: app_center.v1.tester_membership.TesterMembershipResource
+	(*TesterCapacity)(nil),                  // 6: app_center.v1.tester_membership.TesterCapacity
+	(*timestamppb.Timestamp)(nil),           // 7: google.protobuf.Timestamp
 }
 var file_app_center_v1_tester_membership_tester_membership_proto_depIdxs = []int32{
-	1, // 0: app_center.v1.tester_membership.JoinApplicationAsTesterRequest.command:type_name -> app_center.v1.tester_membership.JoinApplicationAsTesterCommand
-	3, // 1: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
-	4, // 2: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
-	5, // 3: app_center.v1.tester_membership.TesterMembershipResource.joined_at:type_name -> google.protobuf.Timestamp
-	0, // 4: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:input_type -> app_center.v1.tester_membership.JoinApplicationAsTesterRequest
-	2, // 5: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:output_type -> app_center.v1.tester_membership.JoinApplicationAsTesterResponse
-	5, // [5:6] is the sub-list for method output_type
-	4, // [4:5] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 0: app_center.v1.tester_membership.RemoveApplicationTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
+	6, // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
+	3, // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest.command:type_name -> app_center.v1.tester_membership.JoinApplicationAsTesterCommand
+	5, // 3: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
+	6, // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
+	7, // 5: app_center.v1.tester_membership.TesterMembershipResource.joined_at:type_name -> google.protobuf.Timestamp
+	7, // 6: app_center.v1.tester_membership.TesterMembershipResource.removed_at:type_name -> google.protobuf.Timestamp
+	0, // 7: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:input_type -> app_center.v1.tester_membership.RemoveApplicationTesterRequest
+	2, // 8: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:input_type -> app_center.v1.tester_membership.JoinApplicationAsTesterRequest
+	1, // 9: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:output_type -> app_center.v1.tester_membership.RemoveApplicationTesterResponse
+	4, // 10: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:output_type -> app_center.v1.tester_membership.JoinApplicationAsTesterResponse
+	9, // [9:11] is the sub-list for method output_type
+	7, // [7:9] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_tester_membership_tester_membership_proto_init() }
@@ -386,13 +546,14 @@ func file_app_center_v1_tester_membership_tester_membership_proto_init() {
 	if File_app_center_v1_tester_membership_tester_membership_proto != nil {
 		return
 	}
+	file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_tester_membership_tester_membership_proto_rawDesc), len(file_app_center_v1_tester_membership_tester_membership_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
