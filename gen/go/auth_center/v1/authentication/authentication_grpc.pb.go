@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Native Auth entry points. Authentication is selected by exact full method
+// Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.
 type AuthenticationServiceClient interface {
 	BeginUserRegistration(ctx context.Context, in *BeginUserRegistrationRequest, opts ...grpc.CallOption) (*AuthenticationChallenge, error)
@@ -114,7 +114,7 @@ func (c *authenticationServiceClient) RevokeOwnCredential(ctx context.Context, i
 // All implementations must embed UnimplementedAuthenticationServiceServer
 // for forward compatibility.
 //
-// Native Auth entry points. Authentication is selected by exact full method
+// Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.
 type AuthenticationServiceServer interface {
 	BeginUserRegistration(context.Context, *BeginUserRegistrationRequest) (*AuthenticationChallenge, error)

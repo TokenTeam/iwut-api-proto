@@ -50,6 +50,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_publication/error_reason.proto \
 	app_center/v1/tester_join_link/tester_join_link.proto \
 	app_center/v1/tester_join_link/error_reason.proto \
+	auth_center/v1/authentication/authentication.proto \
+	auth_center/v1/user_profile/user_profile.proto \
 	app_center/v1/application/application.proto \
 	app_center/v1/application/error_reason.proto \
 	app_center/v1/application_review/application_review.proto \

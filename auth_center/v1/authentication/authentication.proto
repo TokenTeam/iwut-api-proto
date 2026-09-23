@@ -1,17 +1,47 @@
 syntax = "proto3";
 
 package auth_center.v1.authentication;
+
+import "google/api/annotations.proto";
 option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/authentication;authentication";
 
-// Native Auth entry points. Authentication is selected by exact full method
+// Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.
 service AuthenticationService {
-  rpc BeginUserRegistration(BeginUserRegistrationRequest) returns (AuthenticationChallenge);
-  rpc CompleteUserRegistration(CompleteUserRegistrationRequest) returns (UserRegistrationResult);
-  rpc BeginDeviceLogin(BeginDeviceLoginRequest) returns (AuthenticationChallenge);
-  rpc CompleteDeviceLogin(CompleteDeviceLoginRequest) returns (SessionEstablished);
-  rpc RevokeCurrentSession(RevokeCurrentSessionRequest) returns (SessionRevoked);
-  rpc RevokeOwnCredential(RevokeOwnCredentialRequest) returns (CredentialRevoked);
+  rpc BeginUserRegistration(BeginUserRegistrationRequest) returns (AuthenticationChallenge) {
+    option (google.api.http) = {
+      post: "/v1/registrations"
+      body: "*"
+    };
+  }
+  rpc CompleteUserRegistration(CompleteUserRegistrationRequest) returns (UserRegistrationResult) {
+    option (google.api.http) = {
+      post: "/v1/registrations/{operation_id}/completion"
+      body: "*"
+    };
+  }
+  rpc BeginDeviceLogin(BeginDeviceLoginRequest) returns (AuthenticationChallenge) {
+    option (google.api.http) = {
+      post: "/v1/device-logins"
+      body: "*"
+    };
+  }
+  rpc CompleteDeviceLogin(CompleteDeviceLoginRequest) returns (SessionEstablished) {
+    option (google.api.http) = {
+      post: "/v1/device-logins/{operation_id}/completion"
+      body: "*"
+    };
+  }
+  rpc RevokeCurrentSession(RevokeCurrentSessionRequest) returns (SessionRevoked) {
+    option (google.api.http) = {
+      delete: "/v1/sessions/current"
+    };
+  }
+  rpc RevokeOwnCredential(RevokeOwnCredentialRequest) returns (CredentialRevoked) {
+    option (google.api.http) = {
+      delete: "/v1/users/me/credentials/{credential_id}"
+    };
+  }
 }
 
 message CredentialRegistrationProposal {
@@ -60,7 +90,7 @@ message SessionEstablished {
   int64 expires_at_unix_ms = 4;
   string credential_id = 5;
 }
-// The token is exclusively in x-iwut-session metadata, never in this message.
+// The token is exclusively in x-iwut-session header/metadata, never in this message.
 message RevokeCurrentSessionRequest {}
 message SessionRevoked {}
 message RevokeOwnCredentialRequest { string credential_id = 1; }

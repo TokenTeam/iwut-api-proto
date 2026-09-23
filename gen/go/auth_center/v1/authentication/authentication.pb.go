@@ -7,6 +7,7 @@
 package authentication
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -619,7 +620,7 @@ func (x *SessionEstablished) GetCredentialId() string {
 	return ""
 }
 
-// The token is exclusively in x-iwut-session metadata, never in this message.
+// The token is exclusively in x-iwut-session header/metadata, never in this message.
 type RevokeCurrentSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -776,7 +777,7 @@ var File_auth_center_v1_authentication_authentication_proto protoreflect.FileDes
 
 const file_auth_center_v1_authentication_authentication_proto_rawDesc = "" +
 	"\n" +
-	"2auth_center/v1/authentication/authentication.proto\x12\x1dauth_center.v1.authentication\"j\n" +
+	"2auth_center/v1/authentication/authentication.proto\x12\x1dauth_center.v1.authentication\x1a\x1cgoogle/api/annotations.proto\"j\n" +
 	"\x1eCredentialRegistrationProposal\x12)\n" +
 	"\x10protocol_version\x18\x01 \x01(\tR\x0fprotocolVersion\x12\x1d\n" +
 	"\n" +
@@ -820,14 +821,14 @@ const file_auth_center_v1_authentication_authentication_proto_rawDesc = "" +
 	"\x0eSessionRevoked\"A\n" +
 	"\x1aRevokeOwnCredentialRequest\x12#\n" +
 	"\rcredential_id\x18\x01 \x01(\tR\fcredentialId\"\x13\n" +
-	"\x11CredentialRevoked2\xce\x06\n" +
-	"\x15AuthenticationService\x12\x8c\x01\n" +
-	"\x15BeginUserRegistration\x12;.auth_center.v1.authentication.BeginUserRegistrationRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\x12\x91\x01\n" +
-	"\x18CompleteUserRegistration\x12>.auth_center.v1.authentication.CompleteUserRegistrationRequest\x1a5.auth_center.v1.authentication.UserRegistrationResult\x12\x82\x01\n" +
-	"\x10BeginDeviceLogin\x126.auth_center.v1.authentication.BeginDeviceLoginRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\x12\x83\x01\n" +
-	"\x13CompleteDeviceLogin\x129.auth_center.v1.authentication.CompleteDeviceLoginRequest\x1a1.auth_center.v1.authentication.SessionEstablished\x12\x81\x01\n" +
-	"\x14RevokeCurrentSession\x12:.auth_center.v1.authentication.RevokeCurrentSessionRequest\x1a-.auth_center.v1.authentication.SessionRevoked\x12\x82\x01\n" +
-	"\x13RevokeOwnCredential\x129.auth_center.v1.authentication.RevokeOwnCredentialRequest\x1a0.auth_center.v1.authentication.CredentialRevokedBJZHiwut-auth-center/api/gen/go/auth_center/v1/authentication;authenticationb\x06proto3"
+	"\x11CredentialRevoked2\xca\b\n" +
+	"\x15AuthenticationService\x12\xaa\x01\n" +
+	"\x15BeginUserRegistration\x12;.auth_center.v1.authentication.BeginUserRegistrationRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/registrations\x12\xc9\x01\n" +
+	"\x18CompleteUserRegistration\x12>.auth_center.v1.authentication.CompleteUserRegistrationRequest\x1a5.auth_center.v1.authentication.UserRegistrationResult\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/registrations/{operation_id}/completion\x12\xa0\x01\n" +
+	"\x10BeginDeviceLogin\x126.auth_center.v1.authentication.BeginDeviceLoginRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/device-logins\x12\xbb\x01\n" +
+	"\x13CompleteDeviceLogin\x129.auth_center.v1.authentication.CompleteDeviceLoginRequest\x1a1.auth_center.v1.authentication.SessionEstablished\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/device-logins/{operation_id}/completion\x12\x9f\x01\n" +
+	"\x14RevokeCurrentSession\x12:.auth_center.v1.authentication.RevokeCurrentSessionRequest\x1a-.auth_center.v1.authentication.SessionRevoked\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/v1/sessions/current\x12\xb4\x01\n" +
+	"\x13RevokeOwnCredential\x129.auth_center.v1.authentication.RevokeOwnCredentialRequest\x1a0.auth_center.v1.authentication.CredentialRevoked\"0\x82\xd3\xe4\x93\x02**(/v1/users/me/credentials/{credential_id}BJZHiwut-auth-center/api/gen/go/auth_center/v1/authentication;authenticationb\x06proto3"
 
 var (
 	file_auth_center_v1_authentication_authentication_proto_rawDescOnce sync.Once

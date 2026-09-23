@@ -7,6 +7,7 @@
 package userprofile
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -708,7 +709,7 @@ var File_auth_center_v1_user_profile_user_profile_proto protoreflect.FileDescrip
 
 const file_auth_center_v1_user_profile_user_profile_proto_rawDesc = "" +
 	"\n" +
-	".auth_center/v1/user_profile/user_profile.proto\x12\x1bauth_center.v1.user_profile\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x01\n" +
+	".auth_center/v1/user_profile/user_profile.proto\x12\x1bauth_center.v1.user_profile\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x01\n" +
 	"\fProfileValue\x12#\n" +
 	"\fstring_value\x18\x01 \x01(\tH\x00R\vstringValue\x12%\n" +
 	"\rinteger_value\x18\x02 \x01(\x05H\x00R\fintegerValue\x12%\n" +
@@ -763,11 +764,11 @@ const file_auth_center_v1_user_profile_user_profile_proto_rawDesc = "" +
 	"\x11max_message_bytes\x18\x05 \x01(\rR\x0fmaxMessageBytes\"\xb8\x01\n" +
 	"\x14ProfileEditingSchema\x12U\n" +
 	"\vdefinitions\x18\x01 \x03(\v23.auth_center.v1.user_profile.ProfileFieldDefinitionR\vdefinitions\x12I\n" +
-	"\x06limits\x18\x02 \x01(\v21.auth_center.v1.user_profile.ProfileEditingLimitsR\x06limits2\x94\x03\n" +
-	"\x12UserProfileService\x12y\n" +
-	"\x0eEditOwnProfile\x122.auth_center.v1.user_profile.EditOwnProfileRequest\x1a3.auth_center.v1.user_profile.EditOwnProfileResponse\x12w\n" +
-	"\rGetOwnProfile\x121.auth_center.v1.user_profile.GetOwnProfileRequest\x1a3.auth_center.v1.user_profile.OwnUserProfileSnapshot\x12\x89\x01\n" +
-	"\x17GetProfileEditingSchema\x12;.auth_center.v1.user_profile.GetProfileEditingSchemaRequest\x1a1.auth_center.v1.user_profile.ProfileEditingSchemaBEZCiwut-auth-center/api/gen/go/auth_center/v1/user_profile;userprofileb\x06proto3"
+	"\x06limits\x18\x02 \x01(\v21.auth_center.v1.user_profile.ProfileEditingLimitsR\x06limits2\xf6\x03\n" +
+	"\x12UserProfileService\x12\x9a\x01\n" +
+	"\x0eEditOwnProfile\x122.auth_center.v1.user_profile.EditOwnProfileRequest\x1a3.auth_center.v1.user_profile.EditOwnProfileResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/v1/users/me/profile\x12\x95\x01\n" +
+	"\rGetOwnProfile\x121.auth_center.v1.user_profile.GetOwnProfileRequest\x1a3.auth_center.v1.user_profile.OwnUserProfileSnapshot\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/users/me/profile\x12\xaa\x01\n" +
+	"\x17GetProfileEditingSchema\x12;.auth_center.v1.user_profile.GetProfileEditingSchemaRequest\x1a1.auth_center.v1.user_profile.ProfileEditingSchema\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v1/user-profile-schemaBEZCiwut-auth-center/api/gen/go/auth_center/v1/user_profile;userprofileb\x06proto3"
 
 var (
 	file_auth_center_v1_user_profile_user_profile_proto_rawDescOnce sync.Once

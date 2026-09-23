@@ -28,7 +28,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Native gRPC. Every method requires trusted-identity-v1 for iwut-auth-center.
+// Every method requires trusted-identity-v1 for iwut-auth-center. Gateway strips
+// /auth-center before forwarding HTTP requests to these service-local paths.
 type UserProfileServiceClient interface {
 	EditOwnProfile(ctx context.Context, in *EditOwnProfileRequest, opts ...grpc.CallOption) (*EditOwnProfileResponse, error)
 	GetOwnProfile(ctx context.Context, in *GetOwnProfileRequest, opts ...grpc.CallOption) (*OwnUserProfileSnapshot, error)
@@ -77,7 +78,8 @@ func (c *userProfileServiceClient) GetProfileEditingSchema(ctx context.Context, 
 // All implementations must embed UnimplementedUserProfileServiceServer
 // for forward compatibility.
 //
-// Native gRPC. Every method requires trusted-identity-v1 for iwut-auth-center.
+// Every method requires trusted-identity-v1 for iwut-auth-center. Gateway strips
+// /auth-center before forwarding HTTP requests to these service-local paths.
 type UserProfileServiceServer interface {
 	EditOwnProfile(context.Context, *EditOwnProfileRequest) (*EditOwnProfileResponse, error)
 	GetOwnProfile(context.Context, *GetOwnProfileRequest) (*OwnUserProfileSnapshot, error)
