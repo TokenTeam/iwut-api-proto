@@ -1,0 +1,10 @@
+syntax = "proto3";
+package auth_center.v1.user_identity;
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/user_identity;user_identity";
+// Internal service only: requires registered service JWS, auth.identity.issue,
+// caller audience allowlist, and exactly one x-iwut-session metadata value.
+service UserIdentityService {
+ rpc IssueUserIdentityFromSession(IssueUserIdentityFromSessionRequest) returns (IssuedUserIdentity);
+}
+message IssueUserIdentityFromSessionRequest { string audience = 1; }
+message IssuedUserIdentity { string identity_jws = 1; int64 expires_at_unix_seconds = 2; }
