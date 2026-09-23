@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	TesterJoinLink_RevokeTesterJoinLink_FullMethodName         = "/app_center.v1.tester_join_link.TesterJoinLink/RevokeTesterJoinLink"
 	TesterJoinLink_CreateOrRotateTesterJoinLink_FullMethodName = "/app_center.v1.tester_join_link.TesterJoinLink/CreateOrRotateTesterJoinLink"
 )
 
@@ -26,6 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TesterJoinLinkClient interface {
+	RevokeTesterJoinLink(ctx context.Context, in *RevokeTesterJoinLinkRequest, opts ...grpc.CallOption) (*RevokeTesterJoinLinkResponse, error)
 	CreateOrRotateTesterJoinLink(ctx context.Context, in *CreateOrRotateTesterJoinLinkRequest, opts ...grpc.CallOption) (*CreateOrRotateTesterJoinLinkResponse, error)
 }
 
@@ -35,6 +37,16 @@ type testerJoinLinkClient struct {
 
 func NewTesterJoinLinkClient(cc grpc.ClientConnInterface) TesterJoinLinkClient {
 	return &testerJoinLinkClient{cc}
+}
+
+func (c *testerJoinLinkClient) RevokeTesterJoinLink(ctx context.Context, in *RevokeTesterJoinLinkRequest, opts ...grpc.CallOption) (*RevokeTesterJoinLinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RevokeTesterJoinLinkResponse)
+	err := c.cc.Invoke(ctx, TesterJoinLink_RevokeTesterJoinLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *testerJoinLinkClient) CreateOrRotateTesterJoinLink(ctx context.Context, in *CreateOrRotateTesterJoinLinkRequest, opts ...grpc.CallOption) (*CreateOrRotateTesterJoinLinkResponse, error) {
@@ -51,6 +63,7 @@ func (c *testerJoinLinkClient) CreateOrRotateTesterJoinLink(ctx context.Context,
 // All implementations must embed UnimplementedTesterJoinLinkServer
 // for forward compatibility.
 type TesterJoinLinkServer interface {
+	RevokeTesterJoinLink(context.Context, *RevokeTesterJoinLinkRequest) (*RevokeTesterJoinLinkResponse, error)
 	CreateOrRotateTesterJoinLink(context.Context, *CreateOrRotateTesterJoinLinkRequest) (*CreateOrRotateTesterJoinLinkResponse, error)
 	mustEmbedUnimplementedTesterJoinLinkServer()
 }
@@ -62,6 +75,9 @@ type TesterJoinLinkServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTesterJoinLinkServer struct{}
 
+func (UnimplementedTesterJoinLinkServer) RevokeTesterJoinLink(context.Context, *RevokeTesterJoinLinkRequest) (*RevokeTesterJoinLinkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RevokeTesterJoinLink not implemented")
+}
 func (UnimplementedTesterJoinLinkServer) CreateOrRotateTesterJoinLink(context.Context, *CreateOrRotateTesterJoinLinkRequest) (*CreateOrRotateTesterJoinLinkResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOrRotateTesterJoinLink not implemented")
 }
@@ -84,6 +100,24 @@ func RegisterTesterJoinLinkServer(s grpc.ServiceRegistrar, srv TesterJoinLinkSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&TesterJoinLink_ServiceDesc, srv)
+}
+
+func _TesterJoinLink_RevokeTesterJoinLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeTesterJoinLinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TesterJoinLinkServer).RevokeTesterJoinLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TesterJoinLink_RevokeTesterJoinLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TesterJoinLinkServer).RevokeTesterJoinLink(ctx, req.(*RevokeTesterJoinLinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _TesterJoinLink_CreateOrRotateTesterJoinLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -111,6 +145,10 @@ var TesterJoinLink_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "app_center.v1.tester_join_link.TesterJoinLink",
 	HandlerType: (*TesterJoinLinkServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "RevokeTesterJoinLink",
+			Handler:    _TesterJoinLink_RevokeTesterJoinLink_Handler,
+		},
 		{
 			MethodName: "CreateOrRotateTesterJoinLink",
 			Handler:    _TesterJoinLink_CreateOrRotateTesterJoinLink_Handler,

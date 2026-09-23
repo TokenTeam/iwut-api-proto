@@ -24,18 +24,20 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_ERROR_REASON_UNSPECIFIED                                 ErrorReason = 0
-	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                 ErrorReason = 1
-	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                  ErrorReason = 2
-	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                 ErrorReason = 3
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                      ErrorReason = 4
-	ErrorReason_ERROR_REASON_INVALID_TESTER_JOIN_LINK_ID                 ErrorReason = 5
-	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                       ErrorReason = 6
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                  ErrorReason = 7
-	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_ALREADY_EXISTS ErrorReason = 8
-	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND      ErrorReason = 9
-	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED        ErrorReason = 10
-	ErrorReason_ERROR_REASON_INTERNAL                                    ErrorReason = 11
+	ErrorReason_ERROR_REASON_UNSPECIFIED                                     ErrorReason = 0
+	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                     ErrorReason = 1
+	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                      ErrorReason = 2
+	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                     ErrorReason = 3
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                          ErrorReason = 4
+	ErrorReason_ERROR_REASON_INVALID_TESTER_JOIN_LINK_ID                     ErrorReason = 5
+	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                           ErrorReason = 6
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                      ErrorReason = 7
+	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_ALREADY_EXISTS     ErrorReason = 8
+	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND          ErrorReason = 9
+	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED            ErrorReason = 10
+	ErrorReason_ERROR_REASON_INTERNAL                                        ErrorReason = 11
+	ErrorReason_ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_STATE_INCONSISTENT ErrorReason = 12
+	ErrorReason_ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST         ErrorReason = 13
 )
 
 // Enum value maps for ErrorReason.
@@ -53,20 +55,24 @@ var (
 		9:  "ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND",
 		10: "ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED",
 		11: "ERROR_REASON_INTERNAL",
+		12: "ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_STATE_INCONSISTENT",
+		13: "ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST",
 	}
 	ErrorReason_value = map[string]int32{
-		"ERROR_REASON_UNSPECIFIED":                                 0,
-		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                 1,
-		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                  2,
-		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                 3,
-		"ERROR_REASON_INVALID_APPLICATION_ID":                      4,
-		"ERROR_REASON_INVALID_TESTER_JOIN_LINK_ID":                 5,
-		"ERROR_REASON_APPLICATION_NOT_FOUND":                       6,
-		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                  7,
-		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_ALREADY_EXISTS": 8,
-		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND":      9,
-		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED":        10,
-		"ERROR_REASON_INTERNAL":                                    11,
+		"ERROR_REASON_UNSPECIFIED":                                     0,
+		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                     1,
+		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                      2,
+		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                     3,
+		"ERROR_REASON_INVALID_APPLICATION_ID":                          4,
+		"ERROR_REASON_INVALID_TESTER_JOIN_LINK_ID":                     5,
+		"ERROR_REASON_APPLICATION_NOT_FOUND":                           6,
+		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                      7,
+		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_ALREADY_EXISTS":     8,
+		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND":          9,
+		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED":            10,
+		"ERROR_REASON_INTERNAL":                                        11,
+		"ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_STATE_INCONSISTENT": 12,
+		"ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST":         13,
 	}
 )
 
@@ -101,7 +107,7 @@ var File_app_center_v1_tester_join_link_error_reason_proto protoreflect.FileDesc
 
 const file_app_center_v1_tester_join_link_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"1app_center/v1/tester_join_link/error_reason.proto\x12\x1eapp_center.v1.tester_join_link*\xa9\x04\n" +
+	"1app_center/v1/tester_join_link/error_reason.proto\x12\x1eapp_center.v1.tester_join_link*\xa5\x05\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -115,7 +121,9 @@ const file_app_center_v1_tester_join_link_error_reason_proto_rawDesc = "" +
 	"3ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_NOT_FOUND\x10\t\x125\n" +
 	"1ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_CHANGED\x10\n" +
 	"\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\vBJZHiwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\v\x12@\n" +
+	"<ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_STATE_INCONSISTENT\x10\f\x128\n" +
+	"4ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST\x10\rBJZHiwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
 
 var (
 	file_app_center_v1_tester_join_link_error_reason_proto_rawDescOnce sync.Once

@@ -20,14 +20,39 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationTesterJoinLinkCreateOrRotateTesterJoinLink = "/app_center.v1.tester_join_link.TesterJoinLink/CreateOrRotateTesterJoinLink"
+const OperationTesterJoinLinkRevokeTesterJoinLink = "/app_center.v1.tester_join_link.TesterJoinLink/RevokeTesterJoinLink"
 
 type TesterJoinLinkHTTPServer interface {
 	CreateOrRotateTesterJoinLink(context.Context, *CreateOrRotateTesterJoinLinkRequest) (*CreateOrRotateTesterJoinLinkResponse, error)
+	RevokeTesterJoinLink(context.Context, *RevokeTesterJoinLinkRequest) (*RevokeTesterJoinLinkResponse, error)
 }
 
 func RegisterTesterJoinLinkHTTPServer(s *http.Server, srv TesterJoinLinkHTTPServer) {
 	r := s.Route("/")
+	r.DELETE("/v1/applications/{application_id}/tester-join-links/{join_link_id}", _TesterJoinLink_RevokeTesterJoinLink0_HTTP_Handler(srv))
 	r.POST("/v1/applications/{application_id}/tester-join-links", _TesterJoinLink_CreateOrRotateTesterJoinLink0_HTTP_Handler(srv))
+}
+
+func _TesterJoinLink_RevokeTesterJoinLink0_HTTP_Handler(srv TesterJoinLinkHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RevokeTesterJoinLinkRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationTesterJoinLinkRevokeTesterJoinLink)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RevokeTesterJoinLink(ctx, req.(*RevokeTesterJoinLinkRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RevokeTesterJoinLinkResponse)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _TesterJoinLink_CreateOrRotateTesterJoinLink0_HTTP_Handler(srv TesterJoinLinkHTTPServer) func(ctx http.Context) error {
@@ -57,6 +82,7 @@ func _TesterJoinLink_CreateOrRotateTesterJoinLink0_HTTP_Handler(srv TesterJoinLi
 
 type TesterJoinLinkHTTPClient interface {
 	CreateOrRotateTesterJoinLink(ctx context.Context, req *CreateOrRotateTesterJoinLinkRequest, opts ...http.CallOption) (rsp *CreateOrRotateTesterJoinLinkResponse, err error)
+	RevokeTesterJoinLink(ctx context.Context, req *RevokeTesterJoinLinkRequest, opts ...http.CallOption) (rsp *RevokeTesterJoinLinkResponse, err error)
 }
 
 type TesterJoinLinkHTTPClientImpl struct {
@@ -74,6 +100,19 @@ func (c *TesterJoinLinkHTTPClientImpl) CreateOrRotateTesterJoinLink(ctx context.
 	opts = append(opts, http.Operation(OperationTesterJoinLinkCreateOrRotateTesterJoinLink))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *TesterJoinLinkHTTPClientImpl) RevokeTesterJoinLink(ctx context.Context, in *RevokeTesterJoinLinkRequest, opts ...http.CallOption) (*RevokeTesterJoinLinkResponse, error) {
+	var out RevokeTesterJoinLinkResponse
+	pattern := "/v1/applications/{application_id}/tester-join-links/{join_link_id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationTesterJoinLinkRevokeTesterJoinLink))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

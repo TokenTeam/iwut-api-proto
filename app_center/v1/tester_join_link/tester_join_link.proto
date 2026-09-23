@@ -8,6 +8,11 @@ import "google/protobuf/timestamp.proto";
 option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlink";
 
 service TesterJoinLink {
+  rpc RevokeTesterJoinLink(RevokeTesterJoinLinkRequest) returns (RevokeTesterJoinLinkResponse) {
+    option (google.api.http) = {
+      delete: "/v1/applications/{application_id}/tester-join-links/{join_link_id}"
+    };
+  }
   rpc CreateOrRotateTesterJoinLink(CreateOrRotateTesterJoinLinkRequest)
       returns (CreateOrRotateTesterJoinLinkResponse) {
     option (google.api.http) = {
@@ -40,4 +45,26 @@ message TesterJoinLinkResource {
   string status = 3;
   string created_by = 4;
   google.protobuf.Timestamp created_at = 5;
+}
+
+// Revocation targets an exact link; identity, status and audit are server-owned.
+message RevokeTesterJoinLinkRequest {
+  string application_id = 1;
+  string join_link_id = 2;
+}
+message RevokeTesterJoinLinkResponse {
+  bool revoked = 1;
+  TesterJoinLinkRevocationResource join_link = 2;
+}
+// Public audit only: never includes the credential or its hash.
+message TesterJoinLinkRevocationResource {
+  string join_link_id = 1;
+  string application_id = 2;
+  string status = 3;
+  string created_by = 4;
+  google.protobuf.Timestamp created_at = 5;
+  optional string revoked_by = 6;
+  google.protobuf.Timestamp revoked_at = 7;
+  optional string revocation_reason = 8;
+  optional string replaced_by_join_link_id = 9;
 }

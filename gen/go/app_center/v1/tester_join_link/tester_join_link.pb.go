@@ -257,6 +257,220 @@ func (x *TesterJoinLinkResource) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// Revocation targets an exact link; identity, status and audit are server-owned.
+type RevokeTesterJoinLinkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	JoinLinkId    string                 `protobuf:"bytes,2,opt,name=join_link_id,json=joinLinkId,proto3" json:"join_link_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RevokeTesterJoinLinkRequest) Reset() {
+	*x = RevokeTesterJoinLinkRequest{}
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RevokeTesterJoinLinkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RevokeTesterJoinLinkRequest) ProtoMessage() {}
+
+func (x *RevokeTesterJoinLinkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RevokeTesterJoinLinkRequest.ProtoReflect.Descriptor instead.
+func (*RevokeTesterJoinLinkRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RevokeTesterJoinLinkRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *RevokeTesterJoinLinkRequest) GetJoinLinkId() string {
+	if x != nil {
+		return x.JoinLinkId
+	}
+	return ""
+}
+
+type RevokeTesterJoinLinkResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Revoked       bool                              `protobuf:"varint,1,opt,name=revoked,proto3" json:"revoked,omitempty"`
+	JoinLink      *TesterJoinLinkRevocationResource `protobuf:"bytes,2,opt,name=join_link,json=joinLink,proto3" json:"join_link,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RevokeTesterJoinLinkResponse) Reset() {
+	*x = RevokeTesterJoinLinkResponse{}
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RevokeTesterJoinLinkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RevokeTesterJoinLinkResponse) ProtoMessage() {}
+
+func (x *RevokeTesterJoinLinkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RevokeTesterJoinLinkResponse.ProtoReflect.Descriptor instead.
+func (*RevokeTesterJoinLinkResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RevokeTesterJoinLinkResponse) GetRevoked() bool {
+	if x != nil {
+		return x.Revoked
+	}
+	return false
+}
+
+func (x *RevokeTesterJoinLinkResponse) GetJoinLink() *TesterJoinLinkRevocationResource {
+	if x != nil {
+		return x.JoinLink
+	}
+	return nil
+}
+
+// Public audit only: never includes the credential or its hash.
+type TesterJoinLinkRevocationResource struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	JoinLinkId           string                 `protobuf:"bytes,1,opt,name=join_link_id,json=joinLinkId,proto3" json:"join_link_id,omitempty"`
+	ApplicationId        string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Status               string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy            string                 `protobuf:"bytes,4,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	RevokedBy            *string                `protobuf:"bytes,6,opt,name=revoked_by,json=revokedBy,proto3,oneof" json:"revoked_by,omitempty"`
+	RevokedAt            *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=revoked_at,json=revokedAt,proto3" json:"revoked_at,omitempty"`
+	RevocationReason     *string                `protobuf:"bytes,8,opt,name=revocation_reason,json=revocationReason,proto3,oneof" json:"revocation_reason,omitempty"`
+	ReplacedByJoinLinkId *string                `protobuf:"bytes,9,opt,name=replaced_by_join_link_id,json=replacedByJoinLinkId,proto3,oneof" json:"replaced_by_join_link_id,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *TesterJoinLinkRevocationResource) Reset() {
+	*x = TesterJoinLinkRevocationResource{}
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TesterJoinLinkRevocationResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TesterJoinLinkRevocationResource) ProtoMessage() {}
+
+func (x *TesterJoinLinkRevocationResource) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TesterJoinLinkRevocationResource.ProtoReflect.Descriptor instead.
+func (*TesterJoinLinkRevocationResource) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TesterJoinLinkRevocationResource) GetJoinLinkId() string {
+	if x != nil {
+		return x.JoinLinkId
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *TesterJoinLinkRevocationResource) GetRevokedBy() string {
+	if x != nil && x.RevokedBy != nil {
+		return *x.RevokedBy
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetRevokedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RevokedAt
+	}
+	return nil
+}
+
+func (x *TesterJoinLinkRevocationResource) GetRevocationReason() string {
+	if x != nil && x.RevocationReason != nil {
+		return *x.RevocationReason
+	}
+	return ""
+}
+
+func (x *TesterJoinLinkRevocationResource) GetReplacedByJoinLinkId() string {
+	if x != nil && x.ReplacedByJoinLinkId != nil {
+		return *x.ReplacedByJoinLinkId
+	}
+	return ""
+}
+
 var File_app_center_v1_tester_join_link_tester_join_link_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_tester_join_link_tester_join_link_proto_rawDesc = "" +
@@ -281,8 +495,34 @@ const file_app_center_v1_tester_join_link_tester_join_link_proto_rawDesc = "" +
 	"\n" +
 	"created_by\x18\x04 \x01(\tR\tcreatedBy\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\x82\x02\n" +
-	"\x0eTesterJoinLink\x12\xef\x01\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"f\n" +
+	"\x1bRevokeTesterJoinLinkRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12 \n" +
+	"\fjoin_link_id\x18\x02 \x01(\tR\n" +
+	"joinLinkId\"\x97\x01\n" +
+	"\x1cRevokeTesterJoinLinkResponse\x12\x18\n" +
+	"\arevoked\x18\x01 \x01(\bR\arevoked\x12]\n" +
+	"\tjoin_link\x18\x02 \x01(\v2@.app_center.v1.tester_join_link.TesterJoinLinkRevocationResourceR\bjoinLink\"\xed\x03\n" +
+	" TesterJoinLinkRevocationResource\x12 \n" +
+	"\fjoin_link_id\x18\x01 \x01(\tR\n" +
+	"joinLinkId\x12%\n" +
+	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\x04 \x01(\tR\tcreatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\"\n" +
+	"\n" +
+	"revoked_by\x18\x06 \x01(\tH\x00R\trevokedBy\x88\x01\x01\x129\n" +
+	"\n" +
+	"revoked_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\trevokedAt\x120\n" +
+	"\x11revocation_reason\x18\b \x01(\tH\x01R\x10revocationReason\x88\x01\x01\x12;\n" +
+	"\x18replaced_by_join_link_id\x18\t \x01(\tH\x02R\x14replacedByJoinLinkId\x88\x01\x01B\r\n" +
+	"\v_revoked_byB\x14\n" +
+	"\x12_revocation_reasonB\x1b\n" +
+	"\x19_replaced_by_join_link_id2\xe2\x03\n" +
+	"\x0eTesterJoinLink\x12\xdd\x01\n" +
+	"\x14RevokeTesterJoinLink\x12;.app_center.v1.tester_join_link.RevokeTesterJoinLinkRequest\x1a<.app_center.v1.tester_join_link.RevokeTesterJoinLinkResponse\"J\x82\xd3\xe4\x93\x02D*B/v1/applications/{application_id}/tester-join-links/{join_link_id}\x12\xef\x01\n" +
 	"\x1cCreateOrRotateTesterJoinLink\x12C.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest\x1aD.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse\"D\x82\xd3\xe4\x93\x02>:\acommand\"3/v1/applications/{application_id}/tester-join-linksBJZHiwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
 
 var (
@@ -297,25 +537,33 @@ func file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescGZIP() []
 	return file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescData
 }
 
-var file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_app_center_v1_tester_join_link_tester_join_link_proto_goTypes = []any{
 	(*CreateOrRotateTesterJoinLinkRequest)(nil),  // 0: app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest
 	(*CreateOrRotateTesterJoinLinkCommand)(nil),  // 1: app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkCommand
 	(*CreateOrRotateTesterJoinLinkResponse)(nil), // 2: app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse
 	(*TesterJoinLinkResource)(nil),               // 3: app_center.v1.tester_join_link.TesterJoinLinkResource
-	(*timestamppb.Timestamp)(nil),                // 4: google.protobuf.Timestamp
+	(*RevokeTesterJoinLinkRequest)(nil),          // 4: app_center.v1.tester_join_link.RevokeTesterJoinLinkRequest
+	(*RevokeTesterJoinLinkResponse)(nil),         // 5: app_center.v1.tester_join_link.RevokeTesterJoinLinkResponse
+	(*TesterJoinLinkRevocationResource)(nil),     // 6: app_center.v1.tester_join_link.TesterJoinLinkRevocationResource
+	(*timestamppb.Timestamp)(nil),                // 7: google.protobuf.Timestamp
 }
 var file_app_center_v1_tester_join_link_tester_join_link_proto_depIdxs = []int32{
 	1, // 0: app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest.command:type_name -> app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkCommand
 	3, // 1: app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse.join_link:type_name -> app_center.v1.tester_join_link.TesterJoinLinkResource
-	4, // 2: app_center.v1.tester_join_link.TesterJoinLinkResource.created_at:type_name -> google.protobuf.Timestamp
-	0, // 3: app_center.v1.tester_join_link.TesterJoinLink.CreateOrRotateTesterJoinLink:input_type -> app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest
-	2, // 4: app_center.v1.tester_join_link.TesterJoinLink.CreateOrRotateTesterJoinLink:output_type -> app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7, // 2: app_center.v1.tester_join_link.TesterJoinLinkResource.created_at:type_name -> google.protobuf.Timestamp
+	6, // 3: app_center.v1.tester_join_link.RevokeTesterJoinLinkResponse.join_link:type_name -> app_center.v1.tester_join_link.TesterJoinLinkRevocationResource
+	7, // 4: app_center.v1.tester_join_link.TesterJoinLinkRevocationResource.created_at:type_name -> google.protobuf.Timestamp
+	7, // 5: app_center.v1.tester_join_link.TesterJoinLinkRevocationResource.revoked_at:type_name -> google.protobuf.Timestamp
+	4, // 6: app_center.v1.tester_join_link.TesterJoinLink.RevokeTesterJoinLink:input_type -> app_center.v1.tester_join_link.RevokeTesterJoinLinkRequest
+	0, // 7: app_center.v1.tester_join_link.TesterJoinLink.CreateOrRotateTesterJoinLink:input_type -> app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest
+	5, // 8: app_center.v1.tester_join_link.TesterJoinLink.RevokeTesterJoinLink:output_type -> app_center.v1.tester_join_link.RevokeTesterJoinLinkResponse
+	2, // 9: app_center.v1.tester_join_link.TesterJoinLink.CreateOrRotateTesterJoinLink:output_type -> app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_tester_join_link_tester_join_link_proto_init() }
@@ -325,13 +573,14 @@ func file_app_center_v1_tester_join_link_tester_join_link_proto_init() {
 	}
 	file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[1].OneofWrappers = []any{}
 	file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[2].OneofWrappers = []any{}
+	file_app_center_v1_tester_join_link_tester_join_link_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_tester_join_link_tester_join_link_proto_rawDesc), len(file_app_center_v1_tester_join_link_tester_join_link_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
