@@ -5,7 +5,7 @@ package app_center.v1.application;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/application;application";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;application";
 
 // Application exposes the formal App Center v1 application commands. It is the
 // first v1 capability: only CreateApplication is defined, matching UC-APP-001.

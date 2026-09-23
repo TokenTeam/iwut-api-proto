@@ -195,7 +195,7 @@ const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	".ERROR_REASON_INVALID_APPLICATION_REVIEW_CHECKS\x10\x1c\x122\n" +
 	".ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON\x10\x1d\x12-\n" +
 	")ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE\x10\x1e\x12-\n" +
-	")ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE\x10\x1fBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	")ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE\x10\x1fB_Z]github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_error_reason_proto_rawDescOnce sync.Once

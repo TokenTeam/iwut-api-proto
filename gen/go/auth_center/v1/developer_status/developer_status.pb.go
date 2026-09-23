@@ -235,7 +235,7 @@ const file_auth_center_v1_developer_status_developer_status_proto_rawDesc = "" +
 	"\x19DEVELOPER_STATUS_REJECTED\x10\x03\x12\x1e\n" +
 	"\x1aDEVELOPER_STATUS_SUSPENDED\x10\x042\xbf\x01\n" +
 	"\x18DeveloperStatusDirectory\x12\xa2\x01\n" +
-	"\x19BatchGetDeveloperStatuses\x12A.auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest\x1aB.auth_center.v1.developer_status.BatchGetDeveloperStatusesResponseBMZKiwut-auth-center/api/gen/go/auth_center/v1/developer_status;developerstatusb\x06proto3"
+	"\x19BatchGetDeveloperStatuses\x12A.auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest\x1aB.auth_center.v1.developer_status.BatchGetDeveloperStatusesResponseB\\ZZgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_status;developerstatusb\x06proto3"
 
 var (
 	file_auth_center_v1_developer_status_developer_status_proto_rawDescOnce sync.Once

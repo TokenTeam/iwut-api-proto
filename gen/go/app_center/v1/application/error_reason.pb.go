@@ -102,7 +102,7 @@ const file_app_center_v1_application_error_reason_proto_rawDesc = "" +
 	"(ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED\x10\x04\x120\n" +
 	",ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS\x10\x05\x12+\n" +
 	"'ERROR_REASON_APPLICATION_QUOTA_EXCEEDED\x10\x06\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\aBBZ@iwut-app-center/api/gen/go/app_center/v1/application;applicationb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\aBRZPgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;applicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_error_reason_proto_rawDescOnce sync.Once

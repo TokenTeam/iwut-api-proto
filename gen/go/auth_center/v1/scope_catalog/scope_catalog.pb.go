@@ -188,7 +188,7 @@ const file_auth_center_v1_scope_catalog_scope_catalog_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vrequestable\x18\x02 \x01(\bR\vrequestable2\xa7\x01\n" +
 	"\fScopeCatalog\x12\x96\x01\n" +
-	"\x17GetScopeCatalogSnapshot\x12<.auth_center.v1.scope_catalog.GetScopeCatalogSnapshotRequest\x1a=.auth_center.v1.scope_catalog.GetScopeCatalogSnapshotResponseBGZEiwut-auth-center/api/gen/go/auth_center/v1/scope_catalog;scopecatalogb\x06proto3"
+	"\x17GetScopeCatalogSnapshot\x12<.auth_center.v1.scope_catalog.GetScopeCatalogSnapshotRequest\x1a=.auth_center.v1.scope_catalog.GetScopeCatalogSnapshotResponseBVZTgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/scope_catalog;scopecatalogb\x06proto3"
 
 var (
 	file_auth_center_v1_scope_catalog_scope_catalog_proto_rawDescOnce sync.Once

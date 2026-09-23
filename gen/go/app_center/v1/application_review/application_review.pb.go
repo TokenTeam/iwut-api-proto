@@ -1395,7 +1395,7 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\x11ApplicationReview\x12\x85\x02\n" +
 	"\x1eSubmitApplicationVersionReview\x12G.app_center.v1.application_review.SubmitApplicationVersionReviewRequest\x1aH.app_center.v1.application_review.SubmitApplicationVersionReviewResponse\"P\x82\xd3\xe4\x93\x02J:\acommand\"?/v1/applications/{application_id}/versions/{version_id}/reviews\x12\xc1\x02\n" +
 	"(RestoreRejectedApplicationVersionToDraft\x12Q.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest\x1aR.app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse\"n\x82\xd3\xe4\x93\x02h:\acommand\"]/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/draft-restoration\x12\x9a\x02\n" +
-	"\x1eDecideApplicationVersionReview\x12G.app_center.v1.application_review.DecideApplicationVersionReviewRequest\x1aH.app_center.v1.application_review.DecideApplicationVersionReviewResponse\"e\x82\xd3\xe4\x93\x02_:\acommand\"T/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decisionBOZMiwut-app-center/api/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	"\x1eDecideApplicationVersionReview\x12G.app_center.v1.application_review.DecideApplicationVersionReviewRequest\x1aH.app_center.v1.application_review.DecideApplicationVersionReviewResponse\"e\x82\xd3\xe4\x93\x02_:\acommand\"T/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/decisionB_Z]github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_application_review_proto_rawDescOnce sync.Once

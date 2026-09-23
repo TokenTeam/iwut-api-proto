@@ -135,7 +135,7 @@ const file_app_center_v1_tester_membership_error_reason_proto_rawDesc = "" +
 	"'ERROR_REASON_APPLICATION_ADMIN_REQUIRED\x10\r\x128\n" +
 	"4ERROR_REASON_APPLICATION_TESTER_MEMBERSHIP_NOT_FOUND\x10\x0e\x126\n" +
 	"2ERROR_REASON_APPLICATION_TESTER_STATE_INCONSISTENT\x10\x0f\x12.\n" +
-	"*ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST\x10\x10BMZKiwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
+	"*ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST\x10\x10B]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
 
 var (
 	file_app_center_v1_tester_membership_error_reason_proto_rawDescOnce sync.Once

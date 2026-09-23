@@ -523,7 +523,7 @@ const file_app_center_v1_tester_join_link_tester_join_link_proto_rawDesc = "" +
 	"\x19_replaced_by_join_link_id2\xe2\x03\n" +
 	"\x0eTesterJoinLink\x12\xdd\x01\n" +
 	"\x14RevokeTesterJoinLink\x12;.app_center.v1.tester_join_link.RevokeTesterJoinLinkRequest\x1a<.app_center.v1.tester_join_link.RevokeTesterJoinLinkResponse\"J\x82\xd3\xe4\x93\x02D*B/v1/applications/{application_id}/tester-join-links/{join_link_id}\x12\xef\x01\n" +
-	"\x1cCreateOrRotateTesterJoinLink\x12C.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest\x1aD.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse\"D\x82\xd3\xe4\x93\x02>:\acommand\"3/v1/applications/{application_id}/tester-join-linksBJZHiwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
+	"\x1cCreateOrRotateTesterJoinLink\x12C.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkRequest\x1aD.app_center.v1.tester_join_link.CreateOrRotateTesterJoinLinkResponse\"D\x82\xd3\xe4\x93\x02>:\acommand\"3/v1/applications/{application_id}/tester-join-linksBZZXgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
 
 var (
 	file_app_center_v1_tester_join_link_tester_join_link_proto_rawDescOnce sync.Once

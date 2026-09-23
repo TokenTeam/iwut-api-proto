@@ -495,7 +495,7 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"changed_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tchangedAtB\x16\n" +
 	"\x14_previous_version_id2\xb3\x02\n" +
 	"\x16ApplicationPublication\x12\x98\x02\n" +
-	"\x1ePlaceApprovedVersionInTestSlot\x12L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest\x1aM.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse\"Y\x82\xd3\xe4\x93\x02S:\acommand\x1aH/v1/applications/{application_id}/publications/{rpc_api_major}/test-slotBYZWiwut-app-center/api/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"\x1ePlaceApprovedVersionInTestSlot\x12L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest\x1aM.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse\"Y\x82\xd3\xe4\x93\x02S:\acommand\x1aH/v1/applications/{application_id}/publications/{rpc_api_major}/test-slotBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_application_publication_proto_rawDescOnce sync.Once

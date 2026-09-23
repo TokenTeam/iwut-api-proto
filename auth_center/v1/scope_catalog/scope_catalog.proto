@@ -4,7 +4,7 @@ package auth_center.v1.scope_catalog;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/scope_catalog;scopecatalog";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/scope_catalog;scopecatalog";
 
 // ScopeCatalog exposes Auth Center's complete authoritative scope snapshot to
 // explicitly authorised internal services. v1 is native gRPC only: it has no

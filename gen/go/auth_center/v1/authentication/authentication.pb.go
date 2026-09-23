@@ -828,7 +828,7 @@ const file_auth_center_v1_authentication_authentication_proto_rawDesc = "" +
 	"\x10BeginDeviceLogin\x126.auth_center.v1.authentication.BeginDeviceLoginRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/device-logins\x12\xbb\x01\n" +
 	"\x13CompleteDeviceLogin\x129.auth_center.v1.authentication.CompleteDeviceLoginRequest\x1a1.auth_center.v1.authentication.SessionEstablished\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/device-logins/{operation_id}/completion\x12\x9f\x01\n" +
 	"\x14RevokeCurrentSession\x12:.auth_center.v1.authentication.RevokeCurrentSessionRequest\x1a-.auth_center.v1.authentication.SessionRevoked\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/v1/sessions/current\x12\xb4\x01\n" +
-	"\x13RevokeOwnCredential\x129.auth_center.v1.authentication.RevokeOwnCredentialRequest\x1a0.auth_center.v1.authentication.CredentialRevoked\"0\x82\xd3\xe4\x93\x02**(/v1/users/me/credentials/{credential_id}BJZHiwut-auth-center/api/gen/go/auth_center/v1/authentication;authenticationb\x06proto3"
+	"\x13RevokeOwnCredential\x129.auth_center.v1.authentication.RevokeOwnCredentialRequest\x1a0.auth_center.v1.authentication.CredentialRevoked\"0\x82\xd3\xe4\x93\x02**(/v1/users/me/credentials/{credential_id}BYZWgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/authentication;authenticationb\x06proto3"
 
 var (
 	file_auth_center_v1_authentication_authentication_proto_rawDescOnce sync.Once

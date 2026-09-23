@@ -5,7 +5,7 @@ package auth_center.v1.user_profile;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/user_profile;userprofile";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/user_profile;userprofile";
 
 // Every method requires trusted-identity-v1 for iwut-auth-center. Gateway strips
 // /auth-center before forwarding HTTP requests to these service-local paths.

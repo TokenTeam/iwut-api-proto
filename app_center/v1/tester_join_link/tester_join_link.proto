@@ -5,7 +5,7 @@ package app_center.v1.tester_join_link;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlink";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_join_link;testerjoinlink";
 
 service TesterJoinLink {
   rpc RevokeTesterJoinLink(RevokeTesterJoinLinkRequest) returns (RevokeTesterJoinLinkResponse) {

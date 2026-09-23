@@ -3,7 +3,7 @@ syntax = "proto3";
 package auth_center.v1.authentication;
 
 import "google/api/annotations.proto";
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/authentication;authentication";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/authentication;authentication";
 
 // Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.

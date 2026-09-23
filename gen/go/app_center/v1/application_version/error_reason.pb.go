@@ -143,7 +143,7 @@ const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"2ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED\x10\x0f\x12.\n" +
 	"*ERROR_REASON_APPLICATION_VERSION_NOT_FOUND\x10\x10\x12.\n" +
 	"*ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT\x10\x11\x126\n" +
-	"2ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT\x10\x12BQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"2ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT\x10\x12BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_error_reason_proto_rawDescOnce sync.Once

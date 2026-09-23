@@ -768,7 +768,7 @@ const file_auth_center_v1_user_profile_user_profile_proto_rawDesc = "" +
 	"\x12UserProfileService\x12\x9a\x01\n" +
 	"\x0eEditOwnProfile\x122.auth_center.v1.user_profile.EditOwnProfileRequest\x1a3.auth_center.v1.user_profile.EditOwnProfileResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/v1/users/me/profile\x12\x95\x01\n" +
 	"\rGetOwnProfile\x121.auth_center.v1.user_profile.GetOwnProfileRequest\x1a3.auth_center.v1.user_profile.OwnUserProfileSnapshot\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/users/me/profile\x12\xaa\x01\n" +
-	"\x17GetProfileEditingSchema\x12;.auth_center.v1.user_profile.GetProfileEditingSchemaRequest\x1a1.auth_center.v1.user_profile.ProfileEditingSchema\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v1/user-profile-schemaBEZCiwut-auth-center/api/gen/go/auth_center/v1/user_profile;userprofileb\x06proto3"
+	"\x17GetProfileEditingSchema\x12;.auth_center.v1.user_profile.GetProfileEditingSchemaRequest\x1a1.auth_center.v1.user_profile.ProfileEditingSchema\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v1/user-profile-schemaBTZRgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/user_profile;userprofileb\x06proto3"
 
 var (
 	file_auth_center_v1_user_profile_user_profile_proto_rawDescOnce sync.Once

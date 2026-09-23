@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package app_center.v1.application;
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/application;application";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;application";
 
 // ErrorReason is the stable machine-readable reason carried on transport
 // errors, aligned with the protocol-independent business codes of ADR-005. A

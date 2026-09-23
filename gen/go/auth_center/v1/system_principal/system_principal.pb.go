@@ -177,7 +177,7 @@ const file_auth_center_v1_system_principal_system_principal_proto_rawDesc = "" +
 	"$SYSTEM_PRINCIPAL_PURPOSE_UNSPECIFIED\x10\x00\x12=\n" +
 	"9SYSTEM_PRINCIPAL_PURPOSE_APP_CENTER_REVIEW_AUTO_REJECTION\x10\x012\xb6\x01\n" +
 	"\x18SystemPrincipalDirectory\x12\x99\x01\n" +
-	"\x16ResolveSystemPrincipal\x12>.auth_center.v1.system_principal.ResolveSystemPrincipalRequest\x1a?.auth_center.v1.system_principal.ResolveSystemPrincipalResponseBMZKiwut-auth-center/api/gen/go/auth_center/v1/system_principal;systemprincipalb\x06proto3"
+	"\x16ResolveSystemPrincipal\x12>.auth_center.v1.system_principal.ResolveSystemPrincipalRequest\x1a?.auth_center.v1.system_principal.ResolveSystemPrincipalResponseB\\ZZgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/system_principal;systemprincipalb\x06proto3"
 
 var (
 	file_auth_center_v1_system_principal_system_principal_proto_rawDescOnce sync.Once

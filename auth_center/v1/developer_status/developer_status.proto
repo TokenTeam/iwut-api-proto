@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth_center.v1.developer_status;
 
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/developer_status;developerstatus";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_status;developerstatus";
 
 // DeveloperStatusDirectory exposes the smallest Auth-owned status projection
 // needed by explicitly authorised internal services. It is native gRPC only.

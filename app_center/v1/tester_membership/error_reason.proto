@@ -1,6 +1,6 @@
 syntax = "proto3";
 package app_center.v1.tester_membership;
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembership";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembership";
 enum ErrorReason {
   ERROR_REASON_UNSPECIFIED = 0;
   ERROR_REASON_AUTHENTICATED_USER_REQUIRED = 1;

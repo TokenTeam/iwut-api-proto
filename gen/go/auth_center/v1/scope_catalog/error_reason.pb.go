@@ -90,7 +90,7 @@ const file_auth_center_v1_scope_catalog_error_reason_proto_rawDesc = "" +
 	"%ERROR_REASON_INVALID_SERVICE_IDENTITY\x10\x02\x12-\n" +
 	")ERROR_REASON_SCOPE_CATALOG_READ_FORBIDDEN\x10\x03\x12*\n" +
 	"&ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE\x10\x04\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\x05BGZEiwut-auth-center/api/gen/go/auth_center/v1/scope_catalog;scopecatalogb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\x05BVZTgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/scope_catalog;scopecatalogb\x06proto3"
 
 var (
 	file_auth_center_v1_scope_catalog_error_reason_proto_rawDescOnce sync.Once

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth_center.v1.system_principal;
 
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/system_principal;systemprincipal";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/system_principal;systemprincipal";
 
 // SystemPrincipalDirectory resolves stable, non-login audit actors for an
 // explicitly authorised internal service. It is native gRPC only.

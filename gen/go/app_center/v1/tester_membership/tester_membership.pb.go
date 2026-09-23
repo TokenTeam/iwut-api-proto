@@ -497,7 +497,7 @@ const file_app_center_v1_tester_membership_tester_membership_proto_rawDesc = "" 
 	"\ftester_limit\x18\x02 \x01(\x05R\vtesterLimit2\xe1\x03\n" +
 	"\x10TesterMembership\x12\xea\x01\n" +
 	"\x17RemoveApplicationTester\x12?.app_center.v1.tester_membership.RemoveApplicationTesterRequest\x1a@.app_center.v1.tester_membership.RemoveApplicationTesterResponse\"L\x82\xd3\xe4\x93\x02F*D/v1/applications/{application_id}/tester-memberships/{membership_id}\x12\xdf\x01\n" +
-	"\x17JoinApplicationAsTester\x12?.app_center.v1.tester_membership.JoinApplicationAsTesterRequest\x1a@.app_center.v1.tester_membership.JoinApplicationAsTesterResponse\"A\x82\xd3\xe4\x93\x02;:\acommand\"0/v1/tester-join-links/{join_link_id}/membershipsBMZKiwut-app-center/api/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
+	"\x17JoinApplicationAsTester\x12?.app_center.v1.tester_membership.JoinApplicationAsTesterRequest\x1a@.app_center.v1.tester_membership.JoinApplicationAsTesterResponse\"A\x82\xd3\xe4\x93\x02;:\acommand\"0/v1/tester-join-links/{join_link_id}/membershipsB]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
 
 var (
 	file_app_center_v1_tester_membership_tester_membership_proto_rawDescOnce sync.Once

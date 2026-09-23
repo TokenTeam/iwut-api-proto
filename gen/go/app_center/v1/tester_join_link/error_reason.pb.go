@@ -123,7 +123,7 @@ const file_app_center_v1_tester_join_link_error_reason_proto_rawDesc = "" +
 	"\x12\x19\n" +
 	"\x15ERROR_REASON_INTERNAL\x10\v\x12@\n" +
 	"<ERROR_REASON_APPLICATION_TESTER_JOIN_LINK_STATE_INCONSISTENT\x10\f\x128\n" +
-	"4ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST\x10\rBJZHiwut-app-center/api/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
+	"4ERROR_REASON_INVALID_REVOKE_TESTER_JOIN_LINK_REQUEST\x10\rBZZXgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_join_link;testerjoinlinkb\x06proto3"
 
 var (
 	file_app_center_v1_tester_join_link_error_reason_proto_rawDescOnce sync.Once

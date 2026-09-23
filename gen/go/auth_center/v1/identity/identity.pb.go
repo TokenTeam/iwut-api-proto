@@ -128,7 +128,7 @@ const file_auth_center_v1_identity_identity_proto_rawDesc = "" +
 	"\fidentity_jws\x18\x01 \x01(\tR\videntityJws\x125\n" +
 	"\x17expires_at_unix_seconds\x18\x02 \x01(\x03R\x14expiresAtUnixSeconds2\xa1\x01\n" +
 	"\x13UserIdentityService\x12\x89\x01\n" +
-	"\x1cIssueUserIdentityFromSession\x12<.auth_center.v1.identity.IssueUserIdentityFromSessionRequest\x1a+.auth_center.v1.identity.IssuedUserIdentityB>Z<iwut-auth-center/api/gen/go/auth_center/v1/identity;identityb\x06proto3"
+	"\x1cIssueUserIdentityFromSession\x12<.auth_center.v1.identity.IssueUserIdentityFromSessionRequest\x1a+.auth_center.v1.identity.IssuedUserIdentityBMZKgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/identity;identityb\x06proto3"
 
 var (
 	file_auth_center_v1_identity_identity_proto_rawDescOnce sync.Once

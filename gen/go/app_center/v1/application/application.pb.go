@@ -157,7 +157,7 @@ const file_app_center_v1_application_application_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xab\x01\n" +
 	"\vApplication\x12\x9b\x01\n" +
-	"\x11CreateApplication\x123.app_center.v1.application.CreateApplicationRequest\x1a4.app_center.v1.application.CreateApplicationResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/applicationsBBZ@iwut-app-center/api/gen/go/app_center/v1/application;applicationb\x06proto3"
+	"\x11CreateApplication\x123.app_center.v1.application.CreateApplicationRequest\x1a4.app_center.v1.application.CreateApplicationResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/applicationsBRZPgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;applicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_application_proto_rawDescOnce sync.Once

@@ -695,7 +695,7 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xe5\x03\n" +
 	"\x12ApplicationVersion\x12\xda\x01\n" +
 	"\x18CreateApplicationVersion\x12B.app_center.v1.application_version.CreateApplicationVersionRequest\x1aC.app_center.v1.application_version.CreateApplicationVersionResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/applications/{application_id}/versions\x12\xf1\x01\n" +
-	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}BQZOiwut-app-center/api/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_application_version_proto_rawDescOnce sync.Once

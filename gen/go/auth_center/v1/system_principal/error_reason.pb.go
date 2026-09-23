@@ -98,7 +98,7 @@ const file_auth_center_v1_system_principal_error_reason_proto_rawDesc = "" +
 	"-ERROR_REASON_INVALID_SYSTEM_PRINCIPAL_PURPOSE\x10\x04\x12+\n" +
 	"'ERROR_REASON_SYSTEM_PRINCIPAL_NOT_FOUND\x10\x05\x12-\n" +
 	")ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE\x10\x06\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\aBMZKiwut-auth-center/api/gen/go/auth_center/v1/system_principal;systemprincipalb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\aB\\ZZgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/system_principal;systemprincipalb\x06proto3"
 
 var (
 	file_auth_center_v1_system_principal_error_reason_proto_rawDescOnce sync.Once

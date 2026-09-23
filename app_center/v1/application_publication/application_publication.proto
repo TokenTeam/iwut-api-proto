@@ -5,7 +5,7 @@ package app_center.v1.application_publication;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_publication;applicationpublication";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublication";
 
 service ApplicationPublication {
   rpc PlaceApprovedVersionInTestSlot(PlaceApprovedVersionInTestSlotRequest)

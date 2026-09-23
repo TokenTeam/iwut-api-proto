@@ -5,7 +5,7 @@ package app_center.v1.application_review;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_review;applicationreview";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreview";
 
 // ApplicationReview exposes commands on immutable review attempts.
 service ApplicationReview {

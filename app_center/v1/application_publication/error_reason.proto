@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package app_center.v1.application_publication;
 
-option go_package = "iwut-app-center/api/gen/go/app_center/v1/application_publication;applicationpublication";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublication";
 
 enum ErrorReason {
   ERROR_REASON_UNSPECIFIED = 0;

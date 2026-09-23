@@ -147,7 +147,7 @@ const file_app_center_v1_application_publication_error_reason_proto_rawDesc = ""
 	"&ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE\x10\x10\x126\n" +
 	"2ERROR_REASON_APPLICATION_LAUNCH_URL_NOT_REVIEWABLE\x10\x11\x122\n" +
 	".ERROR_REASON_LAUNCH_URL_INSPECTION_UNAVAILABLE\x10\x12\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\x13BYZWiwut-app-center/api/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\x13BiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_error_reason_proto_rawDescOnce sync.Once
