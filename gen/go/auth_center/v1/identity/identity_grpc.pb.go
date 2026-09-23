@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             v3.21.12
-// source: auth_center/v1/user_identity/user_identity.proto
+// source: auth_center/v1/identity/identity.proto
 
-package user_identity
+package identity
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserIdentityService_IssueUserIdentityFromSession_FullMethodName = "/auth_center.v1.user_identity.UserIdentityService/IssueUserIdentityFromSession"
+	UserIdentityService_IssueUserIdentityFromSession_FullMethodName = "/auth_center.v1.identity.UserIdentityService/IssueUserIdentityFromSession"
 )
 
 // UserIdentityServiceClient is the client API for UserIdentityService service.
@@ -114,7 +114,7 @@ func _UserIdentityService_IssueUserIdentityFromSession_Handler(srv interface{}, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserIdentityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth_center.v1.user_identity.UserIdentityService",
+	ServiceName: "auth_center.v1.identity.UserIdentityService",
 	HandlerType: (*UserIdentityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -123,5 +123,5 @@ var UserIdentityService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth_center/v1/user_identity/user_identity.proto",
+	Metadata: "auth_center/v1/identity/identity.proto",
 }

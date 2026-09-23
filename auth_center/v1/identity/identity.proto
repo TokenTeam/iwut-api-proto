@@ -1,6 +1,6 @@
 syntax = "proto3";
-package auth_center.v1.user_identity;
-option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/user_identity;user_identity";
+package auth_center.v1.identity;
+option go_package = "iwut-auth-center/api/gen/go/auth_center/v1/identity;identity";
 // Internal service only: requires registered service JWS, auth.identity.issue,
 // caller audience allowlist, and exactly one x-iwut-session metadata value.
 service UserIdentityService {

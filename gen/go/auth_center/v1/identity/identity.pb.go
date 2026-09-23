@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.12
-// source: auth_center/v1/user_identity/user_identity.proto
+// source: auth_center/v1/identity/identity.proto
 
-package user_identity
+package identity
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -30,7 +30,7 @@ type IssueUserIdentityFromSessionRequest struct {
 
 func (x *IssueUserIdentityFromSessionRequest) Reset() {
 	*x = IssueUserIdentityFromSessionRequest{}
-	mi := &file_auth_center_v1_user_identity_user_identity_proto_msgTypes[0]
+	mi := &file_auth_center_v1_identity_identity_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +42,7 @@ func (x *IssueUserIdentityFromSessionRequest) String() string {
 func (*IssueUserIdentityFromSessionRequest) ProtoMessage() {}
 
 func (x *IssueUserIdentityFromSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_identity_user_identity_proto_msgTypes[0]
+	mi := &file_auth_center_v1_identity_identity_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +55,7 @@ func (x *IssueUserIdentityFromSessionRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IssueUserIdentityFromSessionRequest.ProtoReflect.Descriptor instead.
 func (*IssueUserIdentityFromSessionRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_identity_user_identity_proto_rawDescGZIP(), []int{0}
+	return file_auth_center_v1_identity_identity_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *IssueUserIdentityFromSessionRequest) GetAudience() string {
@@ -75,7 +75,7 @@ type IssuedUserIdentity struct {
 
 func (x *IssuedUserIdentity) Reset() {
 	*x = IssuedUserIdentity{}
-	mi := &file_auth_center_v1_user_identity_user_identity_proto_msgTypes[1]
+	mi := &file_auth_center_v1_identity_identity_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +87,7 @@ func (x *IssuedUserIdentity) String() string {
 func (*IssuedUserIdentity) ProtoMessage() {}
 
 func (x *IssuedUserIdentity) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_identity_user_identity_proto_msgTypes[1]
+	mi := &file_auth_center_v1_identity_identity_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +100,7 @@ func (x *IssuedUserIdentity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IssuedUserIdentity.ProtoReflect.Descriptor instead.
 func (*IssuedUserIdentity) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_identity_user_identity_proto_rawDescGZIP(), []int{1}
+	return file_auth_center_v1_identity_identity_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *IssuedUserIdentity) GetIdentityJws() string {
@@ -117,39 +117,39 @@ func (x *IssuedUserIdentity) GetExpiresAtUnixSeconds() int64 {
 	return 0
 }
 
-var File_auth_center_v1_user_identity_user_identity_proto protoreflect.FileDescriptor
+var File_auth_center_v1_identity_identity_proto protoreflect.FileDescriptor
 
-const file_auth_center_v1_user_identity_user_identity_proto_rawDesc = "" +
+const file_auth_center_v1_identity_identity_proto_rawDesc = "" +
 	"\n" +
-	"0auth_center/v1/user_identity/user_identity.proto\x12\x1cauth_center.v1.user_identity\"A\n" +
+	"&auth_center/v1/identity/identity.proto\x12\x17auth_center.v1.identity\"A\n" +
 	"#IssueUserIdentityFromSessionRequest\x12\x1a\n" +
 	"\baudience\x18\x01 \x01(\tR\baudience\"n\n" +
 	"\x12IssuedUserIdentity\x12!\n" +
 	"\fidentity_jws\x18\x01 \x01(\tR\videntityJws\x125\n" +
-	"\x17expires_at_unix_seconds\x18\x02 \x01(\x03R\x14expiresAtUnixSeconds2\xab\x01\n" +
-	"\x13UserIdentityService\x12\x93\x01\n" +
-	"\x1cIssueUserIdentityFromSession\x12A.auth_center.v1.user_identity.IssueUserIdentityFromSessionRequest\x1a0.auth_center.v1.user_identity.IssuedUserIdentityBHZFiwut-auth-center/api/gen/go/auth_center/v1/user_identity;user_identityb\x06proto3"
+	"\x17expires_at_unix_seconds\x18\x02 \x01(\x03R\x14expiresAtUnixSeconds2\xa1\x01\n" +
+	"\x13UserIdentityService\x12\x89\x01\n" +
+	"\x1cIssueUserIdentityFromSession\x12<.auth_center.v1.identity.IssueUserIdentityFromSessionRequest\x1a+.auth_center.v1.identity.IssuedUserIdentityB>Z<iwut-auth-center/api/gen/go/auth_center/v1/identity;identityb\x06proto3"
 
 var (
-	file_auth_center_v1_user_identity_user_identity_proto_rawDescOnce sync.Once
-	file_auth_center_v1_user_identity_user_identity_proto_rawDescData []byte
+	file_auth_center_v1_identity_identity_proto_rawDescOnce sync.Once
+	file_auth_center_v1_identity_identity_proto_rawDescData []byte
 )
 
-func file_auth_center_v1_user_identity_user_identity_proto_rawDescGZIP() []byte {
-	file_auth_center_v1_user_identity_user_identity_proto_rawDescOnce.Do(func() {
-		file_auth_center_v1_user_identity_user_identity_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_auth_center_v1_user_identity_user_identity_proto_rawDesc), len(file_auth_center_v1_user_identity_user_identity_proto_rawDesc)))
+func file_auth_center_v1_identity_identity_proto_rawDescGZIP() []byte {
+	file_auth_center_v1_identity_identity_proto_rawDescOnce.Do(func() {
+		file_auth_center_v1_identity_identity_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_auth_center_v1_identity_identity_proto_rawDesc), len(file_auth_center_v1_identity_identity_proto_rawDesc)))
 	})
-	return file_auth_center_v1_user_identity_user_identity_proto_rawDescData
+	return file_auth_center_v1_identity_identity_proto_rawDescData
 }
 
-var file_auth_center_v1_user_identity_user_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_auth_center_v1_user_identity_user_identity_proto_goTypes = []any{
-	(*IssueUserIdentityFromSessionRequest)(nil), // 0: auth_center.v1.user_identity.IssueUserIdentityFromSessionRequest
-	(*IssuedUserIdentity)(nil),                  // 1: auth_center.v1.user_identity.IssuedUserIdentity
+var file_auth_center_v1_identity_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_auth_center_v1_identity_identity_proto_goTypes = []any{
+	(*IssueUserIdentityFromSessionRequest)(nil), // 0: auth_center.v1.identity.IssueUserIdentityFromSessionRequest
+	(*IssuedUserIdentity)(nil),                  // 1: auth_center.v1.identity.IssuedUserIdentity
 }
-var file_auth_center_v1_user_identity_user_identity_proto_depIdxs = []int32{
-	0, // 0: auth_center.v1.user_identity.UserIdentityService.IssueUserIdentityFromSession:input_type -> auth_center.v1.user_identity.IssueUserIdentityFromSessionRequest
-	1, // 1: auth_center.v1.user_identity.UserIdentityService.IssueUserIdentityFromSession:output_type -> auth_center.v1.user_identity.IssuedUserIdentity
+var file_auth_center_v1_identity_identity_proto_depIdxs = []int32{
+	0, // 0: auth_center.v1.identity.UserIdentityService.IssueUserIdentityFromSession:input_type -> auth_center.v1.identity.IssueUserIdentityFromSessionRequest
+	1, // 1: auth_center.v1.identity.UserIdentityService.IssueUserIdentityFromSession:output_type -> auth_center.v1.identity.IssuedUserIdentity
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -157,26 +157,26 @@ var file_auth_center_v1_user_identity_user_identity_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_auth_center_v1_user_identity_user_identity_proto_init() }
-func file_auth_center_v1_user_identity_user_identity_proto_init() {
-	if File_auth_center_v1_user_identity_user_identity_proto != nil {
+func init() { file_auth_center_v1_identity_identity_proto_init() }
+func file_auth_center_v1_identity_identity_proto_init() {
+	if File_auth_center_v1_identity_identity_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_user_identity_user_identity_proto_rawDesc), len(file_auth_center_v1_user_identity_user_identity_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_identity_identity_proto_rawDesc), len(file_auth_center_v1_identity_identity_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_auth_center_v1_user_identity_user_identity_proto_goTypes,
-		DependencyIndexes: file_auth_center_v1_user_identity_user_identity_proto_depIdxs,
-		MessageInfos:      file_auth_center_v1_user_identity_user_identity_proto_msgTypes,
+		GoTypes:           file_auth_center_v1_identity_identity_proto_goTypes,
+		DependencyIndexes: file_auth_center_v1_identity_identity_proto_depIdxs,
+		MessageInfos:      file_auth_center_v1_identity_identity_proto_msgTypes,
 	}.Build()
-	File_auth_center_v1_user_identity_user_identity_proto = out.File
-	file_auth_center_v1_user_identity_user_identity_proto_goTypes = nil
-	file_auth_center_v1_user_identity_user_identity_proto_depIdxs = nil
+	File_auth_center_v1_identity_identity_proto = out.File
+	file_auth_center_v1_identity_identity_proto_goTypes = nil
+	file_auth_center_v1_identity_identity_proto_depIdxs = nil
 }
