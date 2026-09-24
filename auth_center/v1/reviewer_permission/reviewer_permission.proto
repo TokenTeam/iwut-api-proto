@@ -1,0 +1,31 @@
+syntax = "proto3";
+package auth_center.v1.reviewer_permission;
+import "google/api/annotations.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/reviewer_permission;reviewerpermission";
+
+// Requires a verified Auth-audience user identity with auth.reviewer.manage.
+service ReviewerPermissionService {
+  rpc ManageReviewerPermission(ManageReviewerPermissionRequest) returns (ReviewerPermission) {
+    option (google.api.http) = { put: "/v1/users/{subject_auth_id}/reviewer-permission" body: "*" };
+  }
+  rpc GetReviewerPermission(GetReviewerPermissionRequest) returns (ReviewerPermission) {
+    option (google.api.http) = { get: "/v1/users/{subject_auth_id}/reviewer-permission" };
+  }
+}
+enum ReviewerPermissionAction {
+  REVIEWER_PERMISSION_ACTION_UNSPECIFIED = 0;
+  REVIEWER_PERMISSION_ACTION_GRANT = 1;
+  REVIEWER_PERMISSION_ACTION_REVOKE = 2;
+}
+message ManageReviewerPermissionRequest {
+  string subject_auth_id = 1;
+  ReviewerPermissionAction action = 2;
+  optional int64 expected_revision = 3;
+  string reason = 4;
+}
+message GetReviewerPermissionRequest { string subject_auth_id = 1; }
+message ReviewerPermission {
+  string subject_auth_id = 1;
+  bool reviewer = 2;
+  int64 permission_revision = 3;
+}
