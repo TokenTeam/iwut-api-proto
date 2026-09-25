@@ -21,6 +21,7 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
@@ -46,6 +47,7 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
@@ -64,6 +66,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	auth_center/v1/email_login \
 	auth_center/v1/email_binding \
 	auth_center/v1/reviewer_permission \
 	app_center/v1/tester_membership \
