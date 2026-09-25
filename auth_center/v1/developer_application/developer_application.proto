@@ -1,0 +1,35 @@
+syntax = "proto3";
+package auth_center.v1.developer_application;
+import "google/api/annotations.proto";
+import "auth_center/v1/developer_status/developer_status.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_application;developer_application";
+
+// Both methods require exactly one canonical x-iwut-session for the current USER.
+service DeveloperApplicationService {
+  rpc ApplyForDeveloper(ApplyForDeveloperRequest) returns (DeveloperApplicationResult) {
+    option (google.api.http) = { post: "/v1/users/me/developer-application" body: "*" };
+  }
+  rpc GetOwnDeveloperEligibility(GetOwnDeveloperEligibilityRequest) returns (OwnDeveloperEligibility) {
+    option (google.api.http) = { get: "/v1/users/me/developer-eligibility" };
+  }
+}
+message ApplyForDeveloperRequest {}
+message GetOwnDeveloperEligibilityRequest {}
+message DeveloperApplicationResult {
+  auth_center.v1.developer_status.DeveloperStatus developer_status = 1;
+  optional int64 activated_at_unix_ms = 2;
+}
+message OwnDeveloperEligibility {
+  optional auth_center.v1.developer_status.DeveloperStatus developer_status = 1;
+  optional int64 activated_at_unix_ms = 2;
+  bool can_apply = 3;
+  repeated DeveloperApplicationBlocker blockers = 4;
+}
+enum DeveloperApplicationBlocker {
+  DEVELOPER_APPLICATION_BLOCKER_UNSPECIFIED = 0;
+  DEVELOPER_APPLICATION_BLOCKER_EMAIL_REQUIRED = 1;
+  DEVELOPER_APPLICATION_BLOCKER_EMAIL_LOGIN_UNAVAILABLE = 2;
+  DEVELOPER_APPLICATION_BLOCKER_ALREADY_DEVELOPER = 3;
+  DEVELOPER_APPLICATION_BLOCKER_EXISTING_APPLICATION = 4;
+  DEVELOPER_APPLICATION_BLOCKER_REAPPLICATION_NOT_ALLOWED = 5;
+}
