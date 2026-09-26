@@ -1,0 +1,35 @@
+syntax = "proto3";
+package app_center.v1.application_profile_review;
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "app_center/v1/application_profile_revision/application_profile_revision.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_review;applicationprofilereview";
+service ApplicationProfileReview {
+ rpc SubmitApplicationProfileRevisionReview(SubmitApplicationProfileRevisionReviewRequest) returns (SubmitApplicationProfileRevisionReviewResponse) {
+  option (google.api.http) = { post: "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews" body: "command" };
+ }
+}
+message SubmitApplicationProfileRevisionReviewCommand { int64 expected_revision = 1; }
+message SubmitApplicationProfileRevisionReviewRequest {
+ string application_id = 1 [json_name = "application_id"];
+ string profile_revision_id = 2 [json_name = "profile_revision_id"];
+ SubmitApplicationProfileRevisionReviewCommand command = 3;
+}
+message ApplicationProfileReviewRecord {
+ string profile_review_id = 1;
+ string application_id = 2;
+ string profile_revision_id = 3;
+ int32 attempt = 4;
+ int64 source_revision = 5;
+ string status = 6;
+ app_center.v1.application_profile_revision.ApplicationProfileContent snapshot = 7;
+ string submitted_by = 8;
+ google.protobuf.Timestamp submitted_at = 9;
+ // Currently always explicitly null. A later UC will define decision objects.
+ google.protobuf.Value decision = 10;
+}
+message SubmitApplicationProfileRevisionReviewResponse {
+ app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse profile_revision = 1;
+ ApplicationProfileReviewRecord review = 2;
+}
