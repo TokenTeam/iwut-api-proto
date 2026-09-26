@@ -82,9 +82,11 @@ func (DeveloperApplicationBlocker) EnumDescriptor() ([]byte, []int) {
 }
 
 type ApplyForDeveloperRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required public handle; normalized ASCII lowercase after validation.
+	DeveloperHandle string `protobuf:"bytes,1,opt,name=developer_handle,json=developerHandle,proto3" json:"developer_handle,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ApplyForDeveloperRequest) Reset() {
@@ -115,6 +117,13 @@ func (x *ApplyForDeveloperRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ApplyForDeveloperRequest.ProtoReflect.Descriptor instead.
 func (*ApplyForDeveloperRequest) Descriptor() ([]byte, []int) {
 	return file_auth_center_v1_developer_application_developer_application_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ApplyForDeveloperRequest) GetDeveloperHandle() string {
+	if x != nil {
+		return x.DeveloperHandle
+	}
+	return ""
 }
 
 type GetOwnDeveloperEligibilityRequest struct {
@@ -157,6 +166,7 @@ type DeveloperApplicationResult struct {
 	state             protoimpl.MessageState           `protogen:"open.v1"`
 	DeveloperStatus   developer_status.DeveloperStatus `protobuf:"varint,1,opt,name=developer_status,json=developerStatus,proto3,enum=auth_center.v1.developer_status.DeveloperStatus" json:"developer_status,omitempty"`
 	ActivatedAtUnixMs *int64                           `protobuf:"varint,2,opt,name=activated_at_unix_ms,json=activatedAtUnixMs,proto3,oneof" json:"activated_at_unix_ms,omitempty"`
+	DeveloperHandle   string                           `protobuf:"bytes,3,opt,name=developer_handle,json=developerHandle,proto3" json:"developer_handle,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -205,12 +215,20 @@ func (x *DeveloperApplicationResult) GetActivatedAtUnixMs() int64 {
 	return 0
 }
 
+func (x *DeveloperApplicationResult) GetDeveloperHandle() string {
+	if x != nil {
+		return x.DeveloperHandle
+	}
+	return ""
+}
+
 type OwnDeveloperEligibility struct {
 	state             protoimpl.MessageState            `protogen:"open.v1"`
 	DeveloperStatus   *developer_status.DeveloperStatus `protobuf:"varint,1,opt,name=developer_status,json=developerStatus,proto3,enum=auth_center.v1.developer_status.DeveloperStatus,oneof" json:"developer_status,omitempty"`
 	ActivatedAtUnixMs *int64                            `protobuf:"varint,2,opt,name=activated_at_unix_ms,json=activatedAtUnixMs,proto3,oneof" json:"activated_at_unix_ms,omitempty"`
 	CanApply          bool                              `protobuf:"varint,3,opt,name=can_apply,json=canApply,proto3" json:"can_apply,omitempty"`
 	Blockers          []DeveloperApplicationBlocker     `protobuf:"varint,4,rep,packed,name=blockers,proto3,enum=auth_center.v1.developer_application.DeveloperApplicationBlocker" json:"blockers,omitempty"`
+	DeveloperHandle   *string                           `protobuf:"bytes,5,opt,name=developer_handle,json=developerHandle,proto3,oneof" json:"developer_handle,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -273,24 +291,35 @@ func (x *OwnDeveloperEligibility) GetBlockers() []DeveloperApplicationBlocker {
 	return nil
 }
 
+func (x *OwnDeveloperEligibility) GetDeveloperHandle() string {
+	if x != nil && x.DeveloperHandle != nil {
+		return *x.DeveloperHandle
+	}
+	return ""
+}
+
 var File_auth_center_v1_developer_application_developer_application_proto protoreflect.FileDescriptor
 
 const file_auth_center_v1_developer_application_developer_application_proto_rawDesc = "" +
 	"\n" +
-	"@auth_center/v1/developer_application/developer_application.proto\x12$auth_center.v1.developer_application\x1a\x1cgoogle/api/annotations.proto\x1a6auth_center/v1/developer_status/developer_status.proto\"\x1a\n" +
-	"\x18ApplyForDeveloperRequest\"#\n" +
-	"!GetOwnDeveloperEligibilityRequest\"\xc8\x01\n" +
+	"@auth_center/v1/developer_application/developer_application.proto\x12$auth_center.v1.developer_application\x1a\x1cgoogle/api/annotations.proto\x1a6auth_center/v1/developer_status/developer_status.proto\"E\n" +
+	"\x18ApplyForDeveloperRequest\x12)\n" +
+	"\x10developer_handle\x18\x01 \x01(\tR\x0fdeveloperHandle\"#\n" +
+	"!GetOwnDeveloperEligibilityRequest\"\xf3\x01\n" +
 	"\x1aDeveloperApplicationResult\x12[\n" +
 	"\x10developer_status\x18\x01 \x01(\x0e20.auth_center.v1.developer_status.DeveloperStatusR\x0fdeveloperStatus\x124\n" +
-	"\x14activated_at_unix_ms\x18\x02 \x01(\x03H\x00R\x11activatedAtUnixMs\x88\x01\x01B\x17\n" +
-	"\x15_activated_at_unix_ms\"\xdb\x02\n" +
+	"\x14activated_at_unix_ms\x18\x02 \x01(\x03H\x00R\x11activatedAtUnixMs\x88\x01\x01\x12)\n" +
+	"\x10developer_handle\x18\x03 \x01(\tR\x0fdeveloperHandleB\x17\n" +
+	"\x15_activated_at_unix_ms\"\xa0\x03\n" +
 	"\x17OwnDeveloperEligibility\x12`\n" +
 	"\x10developer_status\x18\x01 \x01(\x0e20.auth_center.v1.developer_status.DeveloperStatusH\x00R\x0fdeveloperStatus\x88\x01\x01\x124\n" +
 	"\x14activated_at_unix_ms\x18\x02 \x01(\x03H\x01R\x11activatedAtUnixMs\x88\x01\x01\x12\x1b\n" +
 	"\tcan_apply\x18\x03 \x01(\bR\bcanApply\x12]\n" +
-	"\bblockers\x18\x04 \x03(\x0e2A.auth_center.v1.developer_application.DeveloperApplicationBlockerR\bblockersB\x13\n" +
+	"\bblockers\x18\x04 \x03(\x0e2A.auth_center.v1.developer_application.DeveloperApplicationBlockerR\bblockers\x12.\n" +
+	"\x10developer_handle\x18\x05 \x01(\tH\x02R\x0fdeveloperHandle\x88\x01\x01B\x13\n" +
 	"\x11_developer_statusB\x17\n" +
-	"\x15_activated_at_unix_ms*\xe3\x02\n" +
+	"\x15_activated_at_unix_msB\x13\n" +
+	"\x11_developer_handle*\xe3\x02\n" +
 	"\x1bDeveloperApplicationBlocker\x12-\n" +
 	")DEVELOPER_APPLICATION_BLOCKER_UNSPECIFIED\x10\x00\x120\n" +
 	",DEVELOPER_APPLICATION_BLOCKER_EMAIL_REQUIRED\x10\x01\x129\n" +

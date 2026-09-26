@@ -13,17 +13,22 @@ service DeveloperApplicationService {
     option (google.api.http) = { get: "/v1/users/me/developer-eligibility" };
   }
 }
-message ApplyForDeveloperRequest {}
+message ApplyForDeveloperRequest {
+  // Required public handle; normalized ASCII lowercase after validation.
+  string developer_handle = 1;
+}
 message GetOwnDeveloperEligibilityRequest {}
 message DeveloperApplicationResult {
   auth_center.v1.developer_status.DeveloperStatus developer_status = 1;
   optional int64 activated_at_unix_ms = 2;
+  string developer_handle = 3;
 }
 message OwnDeveloperEligibility {
   optional auth_center.v1.developer_status.DeveloperStatus developer_status = 1;
   optional int64 activated_at_unix_ms = 2;
   bool can_apply = 3;
   repeated DeveloperApplicationBlocker blockers = 4;
+  optional string developer_handle = 5;
 }
 enum DeveloperApplicationBlocker {
   DEVELOPER_APPLICATION_BLOCKER_UNSPECIFIED = 0;
