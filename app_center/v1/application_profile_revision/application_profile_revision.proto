@@ -1,0 +1,37 @@
+syntax = "proto3";
+package app_center.v1.application_profile_revision;
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_revision;applicationprofilerevision";
+
+service ApplicationProfileRevision {
+  rpc CreateApplicationProfileRevision(CreateApplicationProfileRevisionRequest) returns (CreateApplicationProfileRevisionResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/profile-revisions"
+      body: "*"
+    };
+  }
+}
+message CreateApplicationProfileRevisionRequest {
+  // HTTP obtains application_id only from the path.
+  string application_id = 1;
+  string display_name = 2;
+  // Required presence; only string_value and null_value are accepted.
+  google.protobuf.Value description = 3;
+  google.protobuf.Value icon = 4;
+}
+message CreateApplicationProfileRevisionResponse {
+  string profile_revision_id = 1;
+  string application_id = 2;
+  int32 sequence = 3;
+  string display_name = 4;
+  google.protobuf.Value description = 5;
+  google.protobuf.Value icon = 6;
+  string review_status = 7;
+  string created_by = 8;
+  google.protobuf.Timestamp created_at = 9;
+  int64 revision = 10;
+  string updated_by = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
