@@ -38,6 +38,12 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT              ErrorReason = 11
 	ErrorReason_ERROR_REASON_INVALID_CREATE_APPLICATION_PROFILE_REVISION_REQUEST ErrorReason = 12
 	ErrorReason_ERROR_REASON_INTERNAL                                            ErrorReason = 13
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_PROFILE_REVISION_ID             ErrorReason = 14
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_EXPECTED_REVISION_REQUIRED      ErrorReason = 15
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_FOUND              ErrorReason = 16
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_DRAFT              ErrorReason = 17
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_REVISION_CONFLICT               ErrorReason = 18
+	ErrorReason_ERROR_REASON_INVALID_UPDATE_APPLICATION_PROFILE_REVISION_REQUEST ErrorReason = 19
 )
 
 // Enum value maps for ErrorReason.
@@ -57,6 +63,12 @@ var (
 		11: "ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT",
 		12: "ERROR_REASON_INVALID_CREATE_APPLICATION_PROFILE_REVISION_REQUEST",
 		13: "ERROR_REASON_INTERNAL",
+		14: "ERROR_REASON_INVALID_APPLICATION_PROFILE_REVISION_ID",
+		15: "ERROR_REASON_APPLICATION_PROFILE_EXPECTED_REVISION_REQUIRED",
+		16: "ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_FOUND",
+		17: "ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_DRAFT",
+		18: "ERROR_REASON_APPLICATION_PROFILE_REVISION_CONFLICT",
+		19: "ERROR_REASON_INVALID_UPDATE_APPLICATION_PROFILE_REVISION_REQUEST",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                                         0,
@@ -73,6 +85,12 @@ var (
 		"ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT":              11,
 		"ERROR_REASON_INVALID_CREATE_APPLICATION_PROFILE_REVISION_REQUEST": 12,
 		"ERROR_REASON_INTERNAL":                                            13,
+		"ERROR_REASON_INVALID_APPLICATION_PROFILE_REVISION_ID":             14,
+		"ERROR_REASON_APPLICATION_PROFILE_EXPECTED_REVISION_REQUIRED":      15,
+		"ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_FOUND":              16,
+		"ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_DRAFT":              17,
+		"ERROR_REASON_APPLICATION_PROFILE_REVISION_CONFLICT":               18,
+		"ERROR_REASON_INVALID_UPDATE_APPLICATION_PROFILE_REVISION_REQUEST": 19,
 	}
 )
 
@@ -107,7 +125,7 @@ var File_app_center_v1_application_profile_revision_error_reason_proto protorefl
 
 const file_app_center_v1_application_profile_revision_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"=app_center/v1/application_profile_revision/error_reason.proto\x12*app_center.v1.application_profile_revision*\x9f\x05\n" +
+	"=app_center/v1/application_profile_revision/error_reason.proto\x12*app_center.v1.application_profile_revision*\x8a\b\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x01\x121\n" +
@@ -123,7 +141,13 @@ const file_app_center_v1_application_profile_revision_error_reason_proto_rawDesc
 	"\x127\n" +
 	"3ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT\x10\v\x12D\n" +
 	"@ERROR_REASON_INVALID_CREATE_APPLICATION_PROFILE_REVISION_REQUEST\x10\f\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\rBrZpgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_revision;applicationprofilerevisionb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\r\x128\n" +
+	"4ERROR_REASON_INVALID_APPLICATION_PROFILE_REVISION_ID\x10\x0e\x12?\n" +
+	";ERROR_REASON_APPLICATION_PROFILE_EXPECTED_REVISION_REQUIRED\x10\x0f\x127\n" +
+	"3ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_FOUND\x10\x10\x127\n" +
+	"3ERROR_REASON_APPLICATION_PROFILE_REVISION_NOT_DRAFT\x10\x11\x126\n" +
+	"2ERROR_REASON_APPLICATION_PROFILE_REVISION_CONFLICT\x10\x12\x12D\n" +
+	"@ERROR_REASON_INVALID_UPDATE_APPLICATION_PROFILE_REVISION_REQUEST\x10\x13BrZpgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_revision;applicationprofilerevisionb\x06proto3"
 
 var (
 	file_app_center_v1_application_profile_revision_error_reason_proto_rawDescOnce sync.Once

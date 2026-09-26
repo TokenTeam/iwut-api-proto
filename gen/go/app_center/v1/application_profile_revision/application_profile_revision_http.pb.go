@@ -20,20 +20,23 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationApplicationProfileRevisionCreateApplicationProfileRevision = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/CreateApplicationProfileRevision"
+const OperationApplicationProfileRevisionUpdateApplicationProfileRevision = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/UpdateApplicationProfileRevision"
 
 type ApplicationProfileRevisionHTTPServer interface {
 	CreateApplicationProfileRevision(context.Context, *CreateApplicationProfileRevisionRequest) (*CreateApplicationProfileRevisionResponse, error)
+	UpdateApplicationProfileRevision(context.Context, *UpdateApplicationProfileRevisionRequest) (*UpdateApplicationProfileRevisionResponse, error)
 }
 
 func RegisterApplicationProfileRevisionHTTPServer(s *http.Server, srv ApplicationProfileRevisionHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/applications/{application_id}/profile-revisions", _ApplicationProfileRevision_CreateApplicationProfileRevision0_HTTP_Handler(srv))
+	r.PUT("/v1/applications/{application_id}/profile-revisions/{profile_revision_id}", _ApplicationProfileRevision_UpdateApplicationProfileRevision0_HTTP_Handler(srv))
 }
 
 func _ApplicationProfileRevision_CreateApplicationProfileRevision0_HTTP_Handler(srv ApplicationProfileRevisionHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateApplicationProfileRevisionRequest
-		if err := ctx.Bind(&in); err != nil {
+		if err := ctx.Bind(&in.Profile); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
@@ -55,8 +58,34 @@ func _ApplicationProfileRevision_CreateApplicationProfileRevision0_HTTP_Handler(
 	}
 }
 
+func _ApplicationProfileRevision_UpdateApplicationProfileRevision0_HTTP_Handler(srv ApplicationProfileRevisionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateApplicationProfileRevisionRequest
+		if err := ctx.Bind(&in.Profile); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationProfileRevisionUpdateApplicationProfileRevision)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateApplicationProfileRevision(ctx, req.(*UpdateApplicationProfileRevisionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateApplicationProfileRevisionResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationProfileRevisionHTTPClient interface {
 	CreateApplicationProfileRevision(ctx context.Context, req *CreateApplicationProfileRevisionRequest, opts ...http.CallOption) (rsp *CreateApplicationProfileRevisionResponse, err error)
+	UpdateApplicationProfileRevision(ctx context.Context, req *UpdateApplicationProfileRevisionRequest, opts ...http.CallOption) (rsp *UpdateApplicationProfileRevisionResponse, err error)
 }
 
 type ApplicationProfileRevisionHTTPClientImpl struct {
@@ -73,7 +102,20 @@ func (c *ApplicationProfileRevisionHTTPClientImpl) CreateApplicationProfileRevis
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationApplicationProfileRevisionCreateApplicationProfileRevision))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in.Profile, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationProfileRevisionHTTPClientImpl) UpdateApplicationProfileRevision(ctx context.Context, in *UpdateApplicationProfileRevisionRequest, opts ...http.CallOption) (*UpdateApplicationProfileRevisionResponse, error) {
+	var out UpdateApplicationProfileRevisionResponse
+	pattern := "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationProfileRevisionUpdateApplicationProfileRevision))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in.Profile, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
