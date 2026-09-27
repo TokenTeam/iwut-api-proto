@@ -19,15 +19,43 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationProfileReviewDecideApplicationProfileRevisionReview = "/app_center.v1.application_profile_review.ApplicationProfileReview/DecideApplicationProfileRevisionReview"
 const OperationApplicationProfileReviewSubmitApplicationProfileRevisionReview = "/app_center.v1.application_profile_review.ApplicationProfileReview/SubmitApplicationProfileRevisionReview"
 
 type ApplicationProfileReviewHTTPServer interface {
+	DecideApplicationProfileRevisionReview(context.Context, *DecideApplicationProfileRevisionReviewRequest) (*DecideApplicationProfileRevisionReviewResponse, error)
 	SubmitApplicationProfileRevisionReview(context.Context, *SubmitApplicationProfileRevisionReviewRequest) (*SubmitApplicationProfileRevisionReviewResponse, error)
 }
 
 func RegisterApplicationProfileReviewHTTPServer(s *http.Server, srv ApplicationProfileReviewHTTPServer) {
 	r := s.Route("/")
+	r.POST("/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews/{profile_review_id}/decision", _ApplicationProfileReview_DecideApplicationProfileRevisionReview0_HTTP_Handler(srv))
 	r.POST("/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews", _ApplicationProfileReview_SubmitApplicationProfileRevisionReview0_HTTP_Handler(srv))
+}
+
+func _ApplicationProfileReview_DecideApplicationProfileRevisionReview0_HTTP_Handler(srv ApplicationProfileReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DecideApplicationProfileRevisionReviewRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationProfileReviewDecideApplicationProfileRevisionReview)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DecideApplicationProfileRevisionReview(ctx, req.(*DecideApplicationProfileRevisionReviewRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DecideApplicationProfileRevisionReviewResponse)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _ApplicationProfileReview_SubmitApplicationProfileRevisionReview0_HTTP_Handler(srv ApplicationProfileReviewHTTPServer) func(ctx http.Context) error {
@@ -56,6 +84,7 @@ func _ApplicationProfileReview_SubmitApplicationProfileRevisionReview0_HTTP_Hand
 }
 
 type ApplicationProfileReviewHTTPClient interface {
+	DecideApplicationProfileRevisionReview(ctx context.Context, req *DecideApplicationProfileRevisionReviewRequest, opts ...http.CallOption) (rsp *DecideApplicationProfileRevisionReviewResponse, err error)
 	SubmitApplicationProfileRevisionReview(ctx context.Context, req *SubmitApplicationProfileRevisionReviewRequest, opts ...http.CallOption) (rsp *SubmitApplicationProfileRevisionReviewResponse, err error)
 }
 
@@ -65,6 +94,19 @@ type ApplicationProfileReviewHTTPClientImpl struct {
 
 func NewApplicationProfileReviewHTTPClient(client *http.Client) ApplicationProfileReviewHTTPClient {
 	return &ApplicationProfileReviewHTTPClientImpl{client}
+}
+
+func (c *ApplicationProfileReviewHTTPClientImpl) DecideApplicationProfileRevisionReview(ctx context.Context, in *DecideApplicationProfileRevisionReviewRequest, opts ...http.CallOption) (*DecideApplicationProfileRevisionReviewResponse, error) {
+	var out DecideApplicationProfileRevisionReviewResponse
+	pattern := "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews/{profile_review_id}/decision"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationProfileReviewDecideApplicationProfileRevisionReview))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApplicationProfileReviewHTTPClientImpl) SubmitApplicationProfileRevisionReview(ctx context.Context, in *SubmitApplicationProfileRevisionReviewRequest, opts ...http.CallOption) (*SubmitApplicationProfileRevisionReviewResponse, error) {

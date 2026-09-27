@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	ApplicationProfileReview_DecideApplicationProfileRevisionReview_FullMethodName = "/app_center.v1.application_profile_review.ApplicationProfileReview/DecideApplicationProfileRevisionReview"
 	ApplicationProfileReview_SubmitApplicationProfileRevisionReview_FullMethodName = "/app_center.v1.application_profile_review.ApplicationProfileReview/SubmitApplicationProfileRevisionReview"
 )
 
@@ -26,6 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApplicationProfileReviewClient interface {
+	DecideApplicationProfileRevisionReview(ctx context.Context, in *DecideApplicationProfileRevisionReviewRequest, opts ...grpc.CallOption) (*DecideApplicationProfileRevisionReviewResponse, error)
 	SubmitApplicationProfileRevisionReview(ctx context.Context, in *SubmitApplicationProfileRevisionReviewRequest, opts ...grpc.CallOption) (*SubmitApplicationProfileRevisionReviewResponse, error)
 }
 
@@ -35,6 +37,16 @@ type applicationProfileReviewClient struct {
 
 func NewApplicationProfileReviewClient(cc grpc.ClientConnInterface) ApplicationProfileReviewClient {
 	return &applicationProfileReviewClient{cc}
+}
+
+func (c *applicationProfileReviewClient) DecideApplicationProfileRevisionReview(ctx context.Context, in *DecideApplicationProfileRevisionReviewRequest, opts ...grpc.CallOption) (*DecideApplicationProfileRevisionReviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DecideApplicationProfileRevisionReviewResponse)
+	err := c.cc.Invoke(ctx, ApplicationProfileReview_DecideApplicationProfileRevisionReview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *applicationProfileReviewClient) SubmitApplicationProfileRevisionReview(ctx context.Context, in *SubmitApplicationProfileRevisionReviewRequest, opts ...grpc.CallOption) (*SubmitApplicationProfileRevisionReviewResponse, error) {
@@ -51,6 +63,7 @@ func (c *applicationProfileReviewClient) SubmitApplicationProfileRevisionReview(
 // All implementations must embed UnimplementedApplicationProfileReviewServer
 // for forward compatibility.
 type ApplicationProfileReviewServer interface {
+	DecideApplicationProfileRevisionReview(context.Context, *DecideApplicationProfileRevisionReviewRequest) (*DecideApplicationProfileRevisionReviewResponse, error)
 	SubmitApplicationProfileRevisionReview(context.Context, *SubmitApplicationProfileRevisionReviewRequest) (*SubmitApplicationProfileRevisionReviewResponse, error)
 	mustEmbedUnimplementedApplicationProfileReviewServer()
 }
@@ -62,6 +75,9 @@ type ApplicationProfileReviewServer interface {
 // pointer dereference when methods are called.
 type UnimplementedApplicationProfileReviewServer struct{}
 
+func (UnimplementedApplicationProfileReviewServer) DecideApplicationProfileRevisionReview(context.Context, *DecideApplicationProfileRevisionReviewRequest) (*DecideApplicationProfileRevisionReviewResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DecideApplicationProfileRevisionReview not implemented")
+}
 func (UnimplementedApplicationProfileReviewServer) SubmitApplicationProfileRevisionReview(context.Context, *SubmitApplicationProfileRevisionReviewRequest) (*SubmitApplicationProfileRevisionReviewResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubmitApplicationProfileRevisionReview not implemented")
 }
@@ -85,6 +101,24 @@ func RegisterApplicationProfileReviewServer(s grpc.ServiceRegistrar, srv Applica
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ApplicationProfileReview_ServiceDesc, srv)
+}
+
+func _ApplicationProfileReview_DecideApplicationProfileRevisionReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DecideApplicationProfileRevisionReviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationProfileReviewServer).DecideApplicationProfileRevisionReview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationProfileReview_DecideApplicationProfileRevisionReview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationProfileReviewServer).DecideApplicationProfileRevisionReview(ctx, req.(*DecideApplicationProfileRevisionReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ApplicationProfileReview_SubmitApplicationProfileRevisionReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -112,6 +146,10 @@ var ApplicationProfileReview_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "app_center.v1.application_profile_review.ApplicationProfileReview",
 	HandlerType: (*ApplicationProfileReviewServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DecideApplicationProfileRevisionReview",
+			Handler:    _ApplicationProfileReview_DecideApplicationProfileRevisionReview_Handler,
+		},
 		{
 			MethodName: "SubmitApplicationProfileRevisionReview",
 			Handler:    _ApplicationProfileReview_SubmitApplicationProfileRevisionReview_Handler,

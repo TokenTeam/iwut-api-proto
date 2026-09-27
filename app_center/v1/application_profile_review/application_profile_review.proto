@@ -6,6 +6,9 @@ import "google/protobuf/timestamp.proto";
 import "app_center/v1/application_profile_revision/application_profile_revision.proto";
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_review;applicationprofilereview";
 service ApplicationProfileReview {
+ rpc DecideApplicationProfileRevisionReview(DecideApplicationProfileRevisionReviewRequest) returns (DecideApplicationProfileRevisionReviewResponse) {
+  option (google.api.http) = { post: "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews/{profile_review_id}/decision" body: "command" };
+ }
  rpc SubmitApplicationProfileRevisionReview(SubmitApplicationProfileRevisionReviewRequest) returns (SubmitApplicationProfileRevisionReviewResponse) {
   option (google.api.http) = { post: "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews" body: "command" };
  }
@@ -26,10 +29,36 @@ message ApplicationProfileReviewRecord {
  app_center.v1.application_profile_revision.ApplicationProfileContent snapshot = 7;
  string submitted_by = 8;
  google.protobuf.Timestamp submitted_at = 9;
- // Currently always explicitly null. A later UC will define decision objects.
+ // Null while PENDING; otherwise the immutable decision object defined by UC016.
  google.protobuf.Value decision = 10;
 }
 message SubmitApplicationProfileRevisionReviewResponse {
  app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse profile_revision = 1;
  ApplicationProfileReviewRecord review = 2;
+}
+
+enum ProfileReviewDecisionAction {
+ PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED = 0;
+ APPROVE = 1;
+ REJECT = 2;
+}
+message DecideApplicationProfileRevisionReviewCommand {
+ int64 expected_profile_revision_revision = 1;
+ // APPROVE requires explicit UUID string or null (NONE); REJECT omits it.
+ google.protobuf.Value expected_current_published_profile_revision_id = 2;
+ string expected_policy_version = 3;
+ ProfileReviewDecisionAction outcome = 4;
+ repeated string confirmed_check_ids = 5;
+ optional string reason = 6;
+}
+message DecideApplicationProfileRevisionReviewRequest {
+ string application_id = 1 [json_name = "application_id"];
+ string profile_revision_id = 2 [json_name = "profile_revision_id"];
+ string profile_review_id = 3 [json_name = "profile_review_id"];
+ DecideApplicationProfileRevisionReviewCommand command = 4;
+}
+message DecideApplicationProfileRevisionReviewResponse {
+ app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse profile_revision = 1;
+ ApplicationProfileReviewRecord review = 2;
+ google.protobuf.Value current_published_profile_revision_id = 3;
 }

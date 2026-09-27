@@ -25,6 +25,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ProfileReviewDecisionAction int32
+
+const (
+	ProfileReviewDecisionAction_PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED ProfileReviewDecisionAction = 0
+	ProfileReviewDecisionAction_APPROVE                                    ProfileReviewDecisionAction = 1
+	ProfileReviewDecisionAction_REJECT                                     ProfileReviewDecisionAction = 2
+)
+
+// Enum value maps for ProfileReviewDecisionAction.
+var (
+	ProfileReviewDecisionAction_name = map[int32]string{
+		0: "PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED",
+		1: "APPROVE",
+		2: "REJECT",
+	}
+	ProfileReviewDecisionAction_value = map[string]int32{
+		"PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED": 0,
+		"APPROVE": 1,
+		"REJECT":  2,
+	}
+)
+
+func (x ProfileReviewDecisionAction) Enum() *ProfileReviewDecisionAction {
+	p := new(ProfileReviewDecisionAction)
+	*p = x
+	return p
+}
+
+func (x ProfileReviewDecisionAction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProfileReviewDecisionAction) Descriptor() protoreflect.EnumDescriptor {
+	return file_app_center_v1_application_profile_review_application_profile_review_proto_enumTypes[0].Descriptor()
+}
+
+func (ProfileReviewDecisionAction) Type() protoreflect.EnumType {
+	return &file_app_center_v1_application_profile_review_application_profile_review_proto_enumTypes[0]
+}
+
+func (x ProfileReviewDecisionAction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProfileReviewDecisionAction.Descriptor instead.
+func (ProfileReviewDecisionAction) EnumDescriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_application_profile_review_proto_rawDescGZIP(), []int{0}
+}
+
 type SubmitApplicationProfileRevisionReviewCommand struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	ExpectedRevision int64                  `protobuf:"varint,1,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
@@ -140,7 +189,7 @@ type ApplicationProfileReviewRecord struct {
 	Snapshot          *application_profile_revision.ApplicationProfileContent `protobuf:"bytes,7,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
 	SubmittedBy       string                                                  `protobuf:"bytes,8,opt,name=submitted_by,json=submittedBy,proto3" json:"submitted_by,omitempty"`
 	SubmittedAt       *timestamppb.Timestamp                                  `protobuf:"bytes,9,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"`
-	// Currently always explicitly null. A later UC will define decision objects.
+	// Null while PENDING; otherwise the immutable decision object defined by UC016.
 	Decision      *structpb.Value `protobuf:"bytes,10,opt,name=decision,proto3" json:"decision,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -298,6 +347,219 @@ func (x *SubmitApplicationProfileRevisionReviewResponse) GetReview() *Applicatio
 	return nil
 }
 
+type DecideApplicationProfileRevisionReviewCommand struct {
+	state                           protoimpl.MessageState `protogen:"open.v1"`
+	ExpectedProfileRevisionRevision int64                  `protobuf:"varint,1,opt,name=expected_profile_revision_revision,json=expectedProfileRevisionRevision,proto3" json:"expected_profile_revision_revision,omitempty"`
+	// APPROVE requires explicit UUID string or null (NONE); REJECT omits it.
+	ExpectedCurrentPublishedProfileRevisionId *structpb.Value             `protobuf:"bytes,2,opt,name=expected_current_published_profile_revision_id,json=expectedCurrentPublishedProfileRevisionId,proto3" json:"expected_current_published_profile_revision_id,omitempty"`
+	ExpectedPolicyVersion                     string                      `protobuf:"bytes,3,opt,name=expected_policy_version,json=expectedPolicyVersion,proto3" json:"expected_policy_version,omitempty"`
+	Outcome                                   ProfileReviewDecisionAction `protobuf:"varint,4,opt,name=outcome,proto3,enum=app_center.v1.application_profile_review.ProfileReviewDecisionAction" json:"outcome,omitempty"`
+	ConfirmedCheckIds                         []string                    `protobuf:"bytes,5,rep,name=confirmed_check_ids,json=confirmedCheckIds,proto3" json:"confirmed_check_ids,omitempty"`
+	Reason                                    *string                     `protobuf:"bytes,6,opt,name=reason,proto3,oneof" json:"reason,omitempty"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) Reset() {
+	*x = DecideApplicationProfileRevisionReviewCommand{}
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationProfileRevisionReviewCommand) ProtoMessage() {}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationProfileRevisionReviewCommand.ProtoReflect.Descriptor instead.
+func (*DecideApplicationProfileRevisionReviewCommand) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_application_profile_review_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetExpectedProfileRevisionRevision() int64 {
+	if x != nil {
+		return x.ExpectedProfileRevisionRevision
+	}
+	return 0
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetExpectedCurrentPublishedProfileRevisionId() *structpb.Value {
+	if x != nil {
+		return x.ExpectedCurrentPublishedProfileRevisionId
+	}
+	return nil
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetExpectedPolicyVersion() string {
+	if x != nil {
+		return x.ExpectedPolicyVersion
+	}
+	return ""
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetOutcome() ProfileReviewDecisionAction {
+	if x != nil {
+		return x.Outcome
+	}
+	return ProfileReviewDecisionAction_PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetConfirmedCheckIds() []string {
+	if x != nil {
+		return x.ConfirmedCheckIds
+	}
+	return nil
+}
+
+func (x *DecideApplicationProfileRevisionReviewCommand) GetReason() string {
+	if x != nil && x.Reason != nil {
+		return *x.Reason
+	}
+	return ""
+}
+
+type DecideApplicationProfileRevisionReviewRequest struct {
+	state             protoimpl.MessageState                         `protogen:"open.v1"`
+	ApplicationId     string                                         `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	ProfileRevisionId string                                         `protobuf:"bytes,2,opt,name=profile_revision_id,proto3" json:"profile_revision_id,omitempty"`
+	ProfileReviewId   string                                         `protobuf:"bytes,3,opt,name=profile_review_id,proto3" json:"profile_review_id,omitempty"`
+	Command           *DecideApplicationProfileRevisionReviewCommand `protobuf:"bytes,4,opt,name=command,proto3" json:"command,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) Reset() {
+	*x = DecideApplicationProfileRevisionReviewRequest{}
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationProfileRevisionReviewRequest) ProtoMessage() {}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationProfileRevisionReviewRequest.ProtoReflect.Descriptor instead.
+func (*DecideApplicationProfileRevisionReviewRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_application_profile_review_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) GetProfileRevisionId() string {
+	if x != nil {
+		return x.ProfileRevisionId
+	}
+	return ""
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) GetProfileReviewId() string {
+	if x != nil {
+		return x.ProfileReviewId
+	}
+	return ""
+}
+
+func (x *DecideApplicationProfileRevisionReviewRequest) GetCommand() *DecideApplicationProfileRevisionReviewCommand {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+type DecideApplicationProfileRevisionReviewResponse struct {
+	state                             protoimpl.MessageState                                                 `protogen:"open.v1"`
+	ProfileRevision                   *application_profile_revision.CreateApplicationProfileRevisionResponse `protobuf:"bytes,1,opt,name=profile_revision,json=profileRevision,proto3" json:"profile_revision,omitempty"`
+	Review                            *ApplicationProfileReviewRecord                                        `protobuf:"bytes,2,opt,name=review,proto3" json:"review,omitempty"`
+	CurrentPublishedProfileRevisionId *structpb.Value                                                        `protobuf:"bytes,3,opt,name=current_published_profile_revision_id,json=currentPublishedProfileRevisionId,proto3" json:"current_published_profile_revision_id,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
+}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) Reset() {
+	*x = DecideApplicationProfileRevisionReviewResponse{}
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DecideApplicationProfileRevisionReviewResponse) ProtoMessage() {}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DecideApplicationProfileRevisionReviewResponse.ProtoReflect.Descriptor instead.
+func (*DecideApplicationProfileRevisionReviewResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_application_profile_review_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) GetProfileRevision() *application_profile_revision.CreateApplicationProfileRevisionResponse {
+	if x != nil {
+		return x.ProfileRevision
+	}
+	return nil
+}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) GetReview() *ApplicationProfileReviewRecord {
+	if x != nil {
+		return x.Review
+	}
+	return nil
+}
+
+func (x *DecideApplicationProfileRevisionReviewResponse) GetCurrentPublishedProfileRevisionId() *structpb.Value {
+	if x != nil {
+		return x.CurrentPublishedProfileRevisionId
+	}
+	return nil
+}
+
 var File_app_center_v1_application_profile_review_application_profile_review_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_profile_review_application_profile_review_proto_rawDesc = "" +
@@ -323,8 +585,31 @@ const file_app_center_v1_application_profile_review_application_profile_review_p
 	" \x01(\v2\x16.google.protobuf.ValueR\bdecision\"\x93\x02\n" +
 	".SubmitApplicationProfileRevisionReviewResponse\x12\x7f\n" +
 	"\x10profile_revision\x18\x01 \x01(\v2T.app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponseR\x0fprofileRevision\x12`\n" +
-	"\x06review\x18\x02 \x01(\v2H.app_center.v1.application_profile_review.ApplicationProfileReviewRecordR\x06review2\xdc\x02\n" +
-	"\x18ApplicationProfileReview\x12\xbf\x02\n" +
+	"\x06review\x18\x02 \x01(\v2H.app_center.v1.application_profile_review.ApplicationProfileReviewRecordR\x06review\"\xe8\x03\n" +
+	"-DecideApplicationProfileRevisionReviewCommand\x12K\n" +
+	"\"expected_profile_revision_revision\x18\x01 \x01(\x03R\x1fexpectedProfileRevisionRevision\x12y\n" +
+	".expected_current_published_profile_revision_id\x18\x02 \x01(\v2\x16.google.protobuf.ValueR)expectedCurrentPublishedProfileRevisionId\x126\n" +
+	"\x17expected_policy_version\x18\x03 \x01(\tR\x15expectedPolicyVersion\x12_\n" +
+	"\aoutcome\x18\x04 \x01(\x0e2E.app_center.v1.application_profile_review.ProfileReviewDecisionActionR\aoutcome\x12.\n" +
+	"\x13confirmed_check_ids\x18\x05 \x03(\tR\x11confirmedCheckIds\x12\x1b\n" +
+	"\x06reason\x18\x06 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
+	"\a_reason\"\xaa\x02\n" +
+	"-DecideApplicationProfileRevisionReviewRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x120\n" +
+	"\x13profile_revision_id\x18\x02 \x01(\tR\x13profile_revision_id\x12,\n" +
+	"\x11profile_review_id\x18\x03 \x01(\tR\x11profile_review_id\x12q\n" +
+	"\acommand\x18\x04 \x01(\v2W.app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewCommandR\acommand\"\xfd\x02\n" +
+	".DecideApplicationProfileRevisionReviewResponse\x12\x7f\n" +
+	"\x10profile_revision\x18\x01 \x01(\v2T.app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponseR\x0fprofileRevision\x12`\n" +
+	"\x06review\x18\x02 \x01(\v2H.app_center.v1.application_profile_review.ApplicationProfileReviewRecordR\x06review\x12h\n" +
+	"%current_published_profile_revision_id\x18\x03 \x01(\v2\x16.google.protobuf.ValueR!currentPublishedProfileRevisionId*f\n" +
+	"\x1bProfileReviewDecisionAction\x12.\n" +
+	"*PROFILE_REVIEW_DECISION_ACTION_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aAPPROVE\x10\x01\x12\n" +
+	"\n" +
+	"\x06REJECT\x10\x022\xbb\x05\n" +
+	"\x18ApplicationProfileReview\x12\xdc\x02\n" +
+	"&DecideApplicationProfileRevisionReview\x12W.app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewRequest\x1aX.app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse\"\x7f\x82\xd3\xe4\x93\x02y:\acommand\"n/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews/{profile_review_id}/decision\x12\xbf\x02\n" +
 	"&SubmitApplicationProfileRevisionReview\x12W.app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest\x1aX.app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse\"b\x82\xd3\xe4\x93\x02\\:\acommand\"Q/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviewsBnZlgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_review;applicationprofilereviewb\x06proto3"
 
 var (
@@ -339,31 +624,44 @@ func file_app_center_v1_application_profile_review_application_profile_review_pr
 	return file_app_center_v1_application_profile_review_application_profile_review_proto_rawDescData
 }
 
-var file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_app_center_v1_application_profile_review_application_profile_review_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_app_center_v1_application_profile_review_application_profile_review_proto_goTypes = []any{
-	(*SubmitApplicationProfileRevisionReviewCommand)(nil),                         // 0: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewCommand
-	(*SubmitApplicationProfileRevisionReviewRequest)(nil),                         // 1: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest
-	(*ApplicationProfileReviewRecord)(nil),                                        // 2: app_center.v1.application_profile_review.ApplicationProfileReviewRecord
-	(*SubmitApplicationProfileRevisionReviewResponse)(nil),                        // 3: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse
-	(*application_profile_revision.ApplicationProfileContent)(nil),                // 4: app_center.v1.application_profile_revision.ApplicationProfileContent
-	(*timestamppb.Timestamp)(nil),                                                 // 5: google.protobuf.Timestamp
-	(*structpb.Value)(nil),                                                        // 6: google.protobuf.Value
-	(*application_profile_revision.CreateApplicationProfileRevisionResponse)(nil), // 7: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
+	(ProfileReviewDecisionAction)(0),                                              // 0: app_center.v1.application_profile_review.ProfileReviewDecisionAction
+	(*SubmitApplicationProfileRevisionReviewCommand)(nil),                         // 1: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewCommand
+	(*SubmitApplicationProfileRevisionReviewRequest)(nil),                         // 2: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest
+	(*ApplicationProfileReviewRecord)(nil),                                        // 3: app_center.v1.application_profile_review.ApplicationProfileReviewRecord
+	(*SubmitApplicationProfileRevisionReviewResponse)(nil),                        // 4: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse
+	(*DecideApplicationProfileRevisionReviewCommand)(nil),                         // 5: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewCommand
+	(*DecideApplicationProfileRevisionReviewRequest)(nil),                         // 6: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewRequest
+	(*DecideApplicationProfileRevisionReviewResponse)(nil),                        // 7: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse
+	(*application_profile_revision.ApplicationProfileContent)(nil),                // 8: app_center.v1.application_profile_revision.ApplicationProfileContent
+	(*timestamppb.Timestamp)(nil),                                                 // 9: google.protobuf.Timestamp
+	(*structpb.Value)(nil),                                                        // 10: google.protobuf.Value
+	(*application_profile_revision.CreateApplicationProfileRevisionResponse)(nil), // 11: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
 }
 var file_app_center_v1_application_profile_review_application_profile_review_proto_depIdxs = []int32{
-	0, // 0: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest.command:type_name -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewCommand
-	4, // 1: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.snapshot:type_name -> app_center.v1.application_profile_revision.ApplicationProfileContent
-	5, // 2: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.submitted_at:type_name -> google.protobuf.Timestamp
-	6, // 3: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.decision:type_name -> google.protobuf.Value
-	7, // 4: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse.profile_revision:type_name -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
-	2, // 5: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse.review:type_name -> app_center.v1.application_profile_review.ApplicationProfileReviewRecord
-	1, // 6: app_center.v1.application_profile_review.ApplicationProfileReview.SubmitApplicationProfileRevisionReview:input_type -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest
-	3, // 7: app_center.v1.application_profile_review.ApplicationProfileReview.SubmitApplicationProfileRevisionReview:output_type -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse
-	7, // [7:8] is the sub-list for method output_type
-	6, // [6:7] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	1,  // 0: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest.command:type_name -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewCommand
+	8,  // 1: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.snapshot:type_name -> app_center.v1.application_profile_revision.ApplicationProfileContent
+	9,  // 2: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.submitted_at:type_name -> google.protobuf.Timestamp
+	10, // 3: app_center.v1.application_profile_review.ApplicationProfileReviewRecord.decision:type_name -> google.protobuf.Value
+	11, // 4: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse.profile_revision:type_name -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
+	3,  // 5: app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse.review:type_name -> app_center.v1.application_profile_review.ApplicationProfileReviewRecord
+	10, // 6: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewCommand.expected_current_published_profile_revision_id:type_name -> google.protobuf.Value
+	0,  // 7: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewCommand.outcome:type_name -> app_center.v1.application_profile_review.ProfileReviewDecisionAction
+	5,  // 8: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewRequest.command:type_name -> app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewCommand
+	11, // 9: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse.profile_revision:type_name -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
+	3,  // 10: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse.review:type_name -> app_center.v1.application_profile_review.ApplicationProfileReviewRecord
+	10, // 11: app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse.current_published_profile_revision_id:type_name -> google.protobuf.Value
+	6,  // 12: app_center.v1.application_profile_review.ApplicationProfileReview.DecideApplicationProfileRevisionReview:input_type -> app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewRequest
+	2,  // 13: app_center.v1.application_profile_review.ApplicationProfileReview.SubmitApplicationProfileRevisionReview:input_type -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewRequest
+	7,  // 14: app_center.v1.application_profile_review.ApplicationProfileReview.DecideApplicationProfileRevisionReview:output_type -> app_center.v1.application_profile_review.DecideApplicationProfileRevisionReviewResponse
+	4,  // 15: app_center.v1.application_profile_review.ApplicationProfileReview.SubmitApplicationProfileRevisionReview:output_type -> app_center.v1.application_profile_review.SubmitApplicationProfileRevisionReviewResponse
+	14, // [14:16] is the sub-list for method output_type
+	12, // [12:14] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_profile_review_application_profile_review_proto_init() }
@@ -371,18 +669,20 @@ func file_app_center_v1_application_profile_review_application_profile_review_pr
 	if File_app_center_v1_application_profile_review_application_profile_review_proto != nil {
 		return
 	}
+	file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_profile_review_application_profile_review_proto_rawDesc), len(file_app_center_v1_application_profile_review_application_profile_review_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   4,
+			NumEnums:      1,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_app_center_v1_application_profile_review_application_profile_review_proto_goTypes,
 		DependencyIndexes: file_app_center_v1_application_profile_review_application_profile_review_proto_depIdxs,
+		EnumInfos:         file_app_center_v1_application_profile_review_application_profile_review_proto_enumTypes,
 		MessageInfos:      file_app_center_v1_application_profile_review_application_profile_review_proto_msgTypes,
 	}.Build()
 	File_app_center_v1_application_profile_review_application_profile_review_proto = out.File
