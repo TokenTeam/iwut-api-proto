@@ -43,6 +43,7 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_FOUND            ErrorReason = 16
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT            ErrorReason = 17
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT    ErrorReason = 18
+	ErrorReason_ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION     ErrorReason = 19
 )
 
 // Enum value maps for ErrorReason.
@@ -67,6 +68,7 @@ var (
 		16: "ERROR_REASON_APPLICATION_VERSION_NOT_FOUND",
 		17: "ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT",
 		18: "ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT",
+		19: "ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                              0,
@@ -88,6 +90,7 @@ var (
 		"ERROR_REASON_APPLICATION_VERSION_NOT_FOUND":            16,
 		"ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT":            17,
 		"ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT":    18,
+		"ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION":     19,
 	}
 )
 
@@ -122,7 +125,7 @@ var File_app_center_v1_application_version_error_reason_proto protoreflect.FileD
 
 const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\xdf\x06\n" +
+	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\x96\a\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x01\x12&\n" +
@@ -143,7 +146,8 @@ const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"2ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED\x10\x0f\x12.\n" +
 	"*ERROR_REASON_APPLICATION_VERSION_NOT_FOUND\x10\x10\x12.\n" +
 	"*ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT\x10\x11\x126\n" +
-	"2ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT\x10\x12BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"2ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT\x10\x12\x125\n" +
+	"1ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION\x10\x13BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_error_reason_proto_rawDescOnce sync.Once

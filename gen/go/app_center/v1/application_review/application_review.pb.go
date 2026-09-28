@@ -7,6 +7,7 @@
 package applicationreview
 
 import (
+	application_version "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1096,14 +1097,15 @@ func (x *RestoredApplicationVersion) GetUpdatedAt() *timestamppb.Timestamp {
 }
 
 type ApplicationVersionReviewSnapshot struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	VersionLabel              string                 `protobuf:"bytes,1,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
-	LaunchUrl                 string                 `protobuf:"bytes,2,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
-	RpcApiMinVersion          int32                  `protobuf:"varint,3,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
-	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,4,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
-	RequiredCapabilities      []string               `protobuf:"bytes,5,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
-	RequiredScopes            []string               `protobuf:"bytes,6,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
-	OptionalScopes            []string               `protobuf:"bytes,7,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	state                     protoimpl.MessageState                          `protogen:"open.v1"`
+	VersionLabel              string                                          `protobuf:"bytes,1,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                                          `protobuf:"bytes,2,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                                           `protobuf:"varint,3,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                                           `protobuf:"varint,4,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string                                        `protobuf:"bytes,5,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string                                        `protobuf:"bytes,6,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string                                        `protobuf:"bytes,7,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	OauthRedirects            *application_version.OAuthRedirectConfiguration `protobuf:"bytes,8,opt,name=oauth_redirects,json=oauthRedirects,proto3" json:"oauth_redirects,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -1183,6 +1185,13 @@ func (x *ApplicationVersionReviewSnapshot) GetRequiredScopes() []string {
 func (x *ApplicationVersionReviewSnapshot) GetOptionalScopes() []string {
 	if x != nil {
 		return x.OptionalScopes
+	}
+	return nil
+}
+
+func (x *ApplicationVersionReviewSnapshot) GetOauthRedirects() *application_version.OAuthRedirectConfiguration {
+	if x != nil {
+		return x.OauthRedirects
 	}
 	return nil
 }
@@ -1275,7 +1284,7 @@ var File_app_center_v1_application_review_application_review_proto protoreflect.
 
 const file_app_center_v1_application_review_application_review_proto_rawDesc = "" +
 	"\n" +
-	"9app_center/v1/application_review/application_review.proto\x12 app_center.v1.application_review\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd0\x01\n" +
+	"9app_center/v1/application_review/application_review.proto\x12 app_center.v1.application_review\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a;app_center/v1/application_version/application_version.proto\"\xd0\x01\n" +
 	"%SubmitApplicationVersionReviewRequest\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
 	"\n" +
@@ -1367,7 +1376,7 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\n" +
 	"updated_by\x18\x05 \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xde\x02\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc6\x03\n" +
 	" ApplicationVersionReviewSnapshot\x12#\n" +
 	"\rversion_label\x18\x01 \x01(\tR\fversionLabel\x12\x1d\n" +
 	"\n" +
@@ -1376,7 +1385,8 @@ const file_app_center_v1_application_review_application_review_proto_rawDesc = "
 	"\x1drpc_api_max_version_exclusive\x18\x04 \x01(\x05R\x19rpcApiMaxVersionExclusive\x123\n" +
 	"\x15required_capabilities\x18\x05 \x03(\tR\x14requiredCapabilities\x12'\n" +
 	"\x0frequired_scopes\x18\x06 \x03(\tR\x0erequiredScopes\x12'\n" +
-	"\x0foptional_scopes\x18\a \x03(\tR\x0eoptionalScopes\"\xfe\x01\n" +
+	"\x0foptional_scopes\x18\a \x03(\tR\x0eoptionalScopes\x12f\n" +
+	"\x0foauth_redirects\x18\b \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\xfe\x01\n" +
 	"\x1bSubmittedApplicationVersion\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
 	"\n" +
@@ -1431,6 +1441,7 @@ var file_app_center_v1_application_review_application_review_proto_goTypes = []a
 	(*ApplicationVersionReviewSnapshot)(nil),                 // 16: app_center.v1.application_review.ApplicationVersionReviewSnapshot
 	(*SubmittedApplicationVersion)(nil),                      // 17: app_center.v1.application_review.SubmittedApplicationVersion
 	(*timestamppb.Timestamp)(nil),                            // 18: google.protobuf.Timestamp
+	(*application_version.OAuthRedirectConfiguration)(nil),   // 19: app_center.v1.application_version.OAuthRedirectConfiguration
 }
 var file_app_center_v1_application_review_application_review_proto_depIdxs = []int32{
 	2,  // 0: app_center.v1.application_review.SubmitApplicationVersionReviewRequest.command:type_name -> app_center.v1.application_review.SubmitApplicationVersionReviewCommand
@@ -1452,18 +1463,19 @@ var file_app_center_v1_application_review_application_review_proto_depIdxs = []i
 	15, // 16: app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse.version:type_name -> app_center.v1.application_review.RestoredApplicationVersion
 	18, // 17: app_center.v1.application_review.ApplicationReviewDraftRestoration.restored_at:type_name -> google.protobuf.Timestamp
 	18, // 18: app_center.v1.application_review.RestoredApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
-	18, // 19: app_center.v1.application_review.SubmittedApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
-	1,  // 20: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:input_type -> app_center.v1.application_review.SubmitApplicationVersionReviewRequest
-	11, // 21: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:input_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
-	5,  // 22: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:input_type -> app_center.v1.application_review.DecideApplicationVersionReviewRequest
-	3,  // 23: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:output_type -> app_center.v1.application_review.SubmitApplicationVersionReviewResponse
-	13, // 24: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:output_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
-	7,  // 25: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:output_type -> app_center.v1.application_review.DecideApplicationVersionReviewResponse
-	23, // [23:26] is the sub-list for method output_type
-	20, // [20:23] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	19, // 19: app_center.v1.application_review.ApplicationVersionReviewSnapshot.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	18, // 20: app_center.v1.application_review.SubmittedApplicationVersion.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 21: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:input_type -> app_center.v1.application_review.SubmitApplicationVersionReviewRequest
+	11, // 22: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:input_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftRequest
+	5,  // 23: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:input_type -> app_center.v1.application_review.DecideApplicationVersionReviewRequest
+	3,  // 24: app_center.v1.application_review.ApplicationReview.SubmitApplicationVersionReview:output_type -> app_center.v1.application_review.SubmitApplicationVersionReviewResponse
+	13, // 25: app_center.v1.application_review.ApplicationReview.RestoreRejectedApplicationVersionToDraft:output_type -> app_center.v1.application_review.RestoreRejectedApplicationVersionToDraftResponse
+	7,  // 26: app_center.v1.application_review.ApplicationReview.DecideApplicationVersionReview:output_type -> app_center.v1.application_review.DecideApplicationVersionReviewResponse
+	24, // [24:27] is the sub-list for method output_type
+	21, // [21:24] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_review_application_review_proto_init() }

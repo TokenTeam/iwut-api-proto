@@ -4,6 +4,7 @@ package app_center.v1.application_review;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "app_center/v1/application_version/application_version.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreview";
 
@@ -154,6 +155,7 @@ message ApplicationVersionReviewSnapshot {
   repeated string required_capabilities = 5;
   repeated string required_scopes = 6;
   repeated string optional_scopes = 7;
+  app_center.v1.application_version.OAuthRedirectConfiguration oauth_redirects = 8;
 }
 
 message SubmittedApplicationVersion {
