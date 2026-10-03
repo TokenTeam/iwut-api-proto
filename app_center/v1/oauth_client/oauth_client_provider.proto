@@ -108,7 +108,8 @@ message ResolveAuthorizationContextRequest {
 message AuthorizationContext {
   RuntimeConfiguration runtime = 1;
   string auth_id = 2;
-  string tester_membership_id = 3;
+  // Present for TEST authorization contexts and absent for STABLE.
+  optional string tester_membership_id = 3;
 }
 
 message ResolveAuthorizationContextResponse { AuthorizationContext context = 1; }

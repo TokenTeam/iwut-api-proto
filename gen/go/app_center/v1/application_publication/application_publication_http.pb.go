@@ -19,15 +19,21 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationPublicationClearStableSlot = "/app_center.v1.application_publication.ApplicationPublication/ClearStableSlot"
 const OperationApplicationPublicationPlaceApprovedVersionInTestSlot = "/app_center.v1.application_publication.ApplicationPublication/PlaceApprovedVersionInTestSlot"
+const OperationApplicationPublicationSetApprovedVersionInStableSlot = "/app_center.v1.application_publication.ApplicationPublication/SetApprovedVersionInStableSlot"
 
 type ApplicationPublicationHTTPServer interface {
+	ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error)
 	PlaceApprovedVersionInTestSlot(context.Context, *PlaceApprovedVersionInTestSlotRequest) (*PlaceApprovedVersionInTestSlotResponse, error)
+	SetApprovedVersionInStableSlot(context.Context, *SetApprovedVersionInStableSlotRequest) (*SetApprovedVersionInStableSlotResponse, error)
 }
 
 func RegisterApplicationPublicationHTTPServer(s *http.Server, srv ApplicationPublicationHTTPServer) {
 	r := s.Route("/")
 	r.PUT("/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot", _ApplicationPublication_PlaceApprovedVersionInTestSlot0_HTTP_Handler(srv))
+	r.PUT("/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot", _ApplicationPublication_SetApprovedVersionInStableSlot0_HTTP_Handler(srv))
+	r.DELETE("/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot", _ApplicationPublication_ClearStableSlot0_HTTP_Handler(srv))
 }
 
 func _ApplicationPublication_PlaceApprovedVersionInTestSlot0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
@@ -55,8 +61,57 @@ func _ApplicationPublication_PlaceApprovedVersionInTestSlot0_HTTP_Handler(srv Ap
 	}
 }
 
+func _ApplicationPublication_SetApprovedVersionInStableSlot0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetApprovedVersionInStableSlotRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationPublicationSetApprovedVersionInStableSlot)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetApprovedVersionInStableSlot(ctx, req.(*SetApprovedVersionInStableSlotRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetApprovedVersionInStableSlotResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ApplicationPublication_ClearStableSlot0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClearStableSlotRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationPublicationClearStableSlot)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClearStableSlot(ctx, req.(*ClearStableSlotRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ClearStableSlotResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationPublicationHTTPClient interface {
+	ClearStableSlot(ctx context.Context, req *ClearStableSlotRequest, opts ...http.CallOption) (rsp *ClearStableSlotResponse, err error)
 	PlaceApprovedVersionInTestSlot(ctx context.Context, req *PlaceApprovedVersionInTestSlotRequest, opts ...http.CallOption) (rsp *PlaceApprovedVersionInTestSlotResponse, err error)
+	SetApprovedVersionInStableSlot(ctx context.Context, req *SetApprovedVersionInStableSlotRequest, opts ...http.CallOption) (rsp *SetApprovedVersionInStableSlotResponse, err error)
 }
 
 type ApplicationPublicationHTTPClientImpl struct {
@@ -67,11 +122,37 @@ func NewApplicationPublicationHTTPClient(client *http.Client) ApplicationPublica
 	return &ApplicationPublicationHTTPClientImpl{client}
 }
 
+func (c *ApplicationPublicationHTTPClientImpl) ClearStableSlot(ctx context.Context, in *ClearStableSlotRequest, opts ...http.CallOption) (*ClearStableSlotResponse, error) {
+	var out ClearStableSlotResponse
+	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationPublicationClearStableSlot))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *ApplicationPublicationHTTPClientImpl) PlaceApprovedVersionInTestSlot(ctx context.Context, in *PlaceApprovedVersionInTestSlotRequest, opts ...http.CallOption) (*PlaceApprovedVersionInTestSlotResponse, error) {
 	var out PlaceApprovedVersionInTestSlotResponse
 	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationApplicationPublicationPlaceApprovedVersionInTestSlot))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationPublicationHTTPClientImpl) SetApprovedVersionInStableSlot(ctx context.Context, in *SetApprovedVersionInStableSlotRequest, opts ...http.CallOption) (*SetApprovedVersionInStableSlotResponse, error) {
+	var out SetApprovedVersionInStableSlotResponse
+	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationPublicationSetApprovedVersionInStableSlot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in.Command, &out, opts...)
 	if err != nil {

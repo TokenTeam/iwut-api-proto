@@ -195,24 +195,317 @@ func (x *PlaceApprovedVersionInTestSlotResponse) GetHistory() *ApplicationPublic
 	return nil
 }
 
-type ApplicationPublicationResource struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PublicationId string                 `protobuf:"bytes,1,opt,name=publication_id,json=publicationId,proto3" json:"publication_id,omitempty"`
-	ApplicationId string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor   int32                  `protobuf:"varint,3,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
-	TestVersionId string                 `protobuf:"bytes,4,opt,name=test_version_id,json=testVersionId,proto3" json:"test_version_id,omitempty"`
-	Revision      int64                  `protobuf:"varint,5,opt,name=revision,proto3" json:"revision,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,6,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,8,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+type SetApprovedVersionInStableSlotRequest struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor   int32                                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	Command       *SetApprovedVersionInStableSlotCommand `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *SetApprovedVersionInStableSlotRequest) Reset() {
+	*x = SetApprovedVersionInStableSlotRequest{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetApprovedVersionInStableSlotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetApprovedVersionInStableSlotRequest) ProtoMessage() {}
+
+func (x *SetApprovedVersionInStableSlotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetApprovedVersionInStableSlotRequest.ProtoReflect.Descriptor instead.
+func (*SetApprovedVersionInStableSlotRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SetApprovedVersionInStableSlotRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *SetApprovedVersionInStableSlotRequest) GetRpcApiMajor() int32 {
+	if x != nil {
+		return x.RpcApiMajor
+	}
+	return 0
+}
+
+func (x *SetApprovedVersionInStableSlotRequest) GetCommand() *SetApprovedVersionInStableSlotCommand {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+type SetApprovedVersionInStableSlotCommand struct {
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	VersionId                   string                 `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ExpectedPublicationRevision *int64                 `protobuf:"varint,2,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3,oneof" json:"expected_publication_revision,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *SetApprovedVersionInStableSlotCommand) Reset() {
+	*x = SetApprovedVersionInStableSlotCommand{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetApprovedVersionInStableSlotCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetApprovedVersionInStableSlotCommand) ProtoMessage() {}
+
+func (x *SetApprovedVersionInStableSlotCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetApprovedVersionInStableSlotCommand.ProtoReflect.Descriptor instead.
+func (*SetApprovedVersionInStableSlotCommand) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SetApprovedVersionInStableSlotCommand) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *SetApprovedVersionInStableSlotCommand) GetExpectedPublicationRevision() int64 {
+	if x != nil && x.ExpectedPublicationRevision != nil {
+		return *x.ExpectedPublicationRevision
+	}
+	return 0
+}
+
+type SetApprovedVersionInStableSlotResponse struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Changed       bool                                   `protobuf:"varint,1,opt,name=changed,proto3" json:"changed,omitempty"`
+	Publication   *ApplicationPublicationResource        `protobuf:"bytes,2,opt,name=publication,proto3" json:"publication,omitempty"`
+	History       *ApplicationPublicationHistoryResource `protobuf:"bytes,3,opt,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetApprovedVersionInStableSlotResponse) Reset() {
+	*x = SetApprovedVersionInStableSlotResponse{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetApprovedVersionInStableSlotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetApprovedVersionInStableSlotResponse) ProtoMessage() {}
+
+func (x *SetApprovedVersionInStableSlotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetApprovedVersionInStableSlotResponse.ProtoReflect.Descriptor instead.
+func (*SetApprovedVersionInStableSlotResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SetApprovedVersionInStableSlotResponse) GetChanged() bool {
+	if x != nil {
+		return x.Changed
+	}
+	return false
+}
+
+func (x *SetApprovedVersionInStableSlotResponse) GetPublication() *ApplicationPublicationResource {
+	if x != nil {
+		return x.Publication
+	}
+	return nil
+}
+
+func (x *SetApprovedVersionInStableSlotResponse) GetHistory() *ApplicationPublicationHistoryResource {
+	if x != nil {
+		return x.History
+	}
+	return nil
+}
+
+type ClearStableSlotRequest struct {
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ExpectedPublicationRevision int64                  `protobuf:"varint,3,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3" json:"expected_publication_revision,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *ClearStableSlotRequest) Reset() {
+	*x = ClearStableSlotRequest{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClearStableSlotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClearStableSlotRequest) ProtoMessage() {}
+
+func (x *ClearStableSlotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClearStableSlotRequest.ProtoReflect.Descriptor instead.
+func (*ClearStableSlotRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ClearStableSlotRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *ClearStableSlotRequest) GetRpcApiMajor() int32 {
+	if x != nil {
+		return x.RpcApiMajor
+	}
+	return 0
+}
+
+func (x *ClearStableSlotRequest) GetExpectedPublicationRevision() int64 {
+	if x != nil {
+		return x.ExpectedPublicationRevision
+	}
+	return 0
+}
+
+type ClearStableSlotResponse struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Changed       bool                                   `protobuf:"varint,1,opt,name=changed,proto3" json:"changed,omitempty"`
+	Publication   *ApplicationPublicationResource        `protobuf:"bytes,2,opt,name=publication,proto3" json:"publication,omitempty"`
+	History       *ApplicationPublicationHistoryResource `protobuf:"bytes,3,opt,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClearStableSlotResponse) Reset() {
+	*x = ClearStableSlotResponse{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClearStableSlotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClearStableSlotResponse) ProtoMessage() {}
+
+func (x *ClearStableSlotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClearStableSlotResponse.ProtoReflect.Descriptor instead.
+func (*ClearStableSlotResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ClearStableSlotResponse) GetChanged() bool {
+	if x != nil {
+		return x.Changed
+	}
+	return false
+}
+
+func (x *ClearStableSlotResponse) GetPublication() *ApplicationPublicationResource {
+	if x != nil {
+		return x.Publication
+	}
+	return nil
+}
+
+func (x *ClearStableSlotResponse) GetHistory() *ApplicationPublicationHistoryResource {
+	if x != nil {
+		return x.History
+	}
+	return nil
+}
+
+type ApplicationPublicationResource struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	PublicationId   string                 `protobuf:"bytes,1,opt,name=publication_id,json=publicationId,proto3" json:"publication_id,omitempty"`
+	ApplicationId   string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor     int32                  `protobuf:"varint,3,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	TestVersionId   *string                `protobuf:"bytes,4,opt,name=test_version_id,json=testVersionId,proto3,oneof" json:"test_version_id,omitempty"`
+	Revision        int64                  `protobuf:"varint,5,opt,name=revision,proto3" json:"revision,omitempty"`
+	CreatedBy       string                 `protobuf:"bytes,6,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedBy       string                 `protobuf:"bytes,8,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	StableVersionId *string                `protobuf:"bytes,10,opt,name=stable_version_id,json=stableVersionId,proto3,oneof" json:"stable_version_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
 func (x *ApplicationPublicationResource) Reset() {
 	*x = ApplicationPublicationResource{}
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[3]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -224,7 +517,7 @@ func (x *ApplicationPublicationResource) String() string {
 func (*ApplicationPublicationResource) ProtoMessage() {}
 
 func (x *ApplicationPublicationResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[3]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +530,7 @@ func (x *ApplicationPublicationResource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationPublicationResource.ProtoReflect.Descriptor instead.
 func (*ApplicationPublicationResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{3}
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ApplicationPublicationResource) GetPublicationId() string {
@@ -262,8 +555,8 @@ func (x *ApplicationPublicationResource) GetRpcApiMajor() int32 {
 }
 
 func (x *ApplicationPublicationResource) GetTestVersionId() string {
-	if x != nil {
-		return x.TestVersionId
+	if x != nil && x.TestVersionId != nil {
+		return *x.TestVersionId
 	}
 	return ""
 }
@@ -303,6 +596,13 @@ func (x *ApplicationPublicationResource) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ApplicationPublicationResource) GetStableVersionId() string {
+	if x != nil && x.StableVersionId != nil {
+		return *x.StableVersionId
+	}
+	return ""
+}
+
 type ApplicationPublicationHistoryResource struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	HistoryId              string                 `protobuf:"bytes,1,opt,name=history_id,json=historyId,proto3" json:"history_id,omitempty"`
@@ -312,10 +612,10 @@ type ApplicationPublicationHistoryResource struct {
 	PublicationRevision    int64                  `protobuf:"varint,5,opt,name=publication_revision,json=publicationRevision,proto3" json:"publication_revision,omitempty"`
 	Action                 string                 `protobuf:"bytes,6,opt,name=action,proto3" json:"action,omitempty"`
 	PreviousVersionId      *string                `protobuf:"bytes,7,opt,name=previous_version_id,json=previousVersionId,proto3,oneof" json:"previous_version_id,omitempty"`
-	NewVersionId           string                 `protobuf:"bytes,8,opt,name=new_version_id,json=newVersionId,proto3" json:"new_version_id,omitempty"`
-	ApprovedReviewId       string                 `protobuf:"bytes,9,opt,name=approved_review_id,json=approvedReviewId,proto3" json:"approved_review_id,omitempty"`
-	ScopeCatalogRevision   int64                  `protobuf:"varint,10,opt,name=scope_catalog_revision,json=scopeCatalogRevision,proto3" json:"scope_catalog_revision,omitempty"`
-	PreflightPolicyVersion string                 `protobuf:"bytes,11,opt,name=preflight_policy_version,json=preflightPolicyVersion,proto3" json:"preflight_policy_version,omitempty"`
+	NewVersionId           *string                `protobuf:"bytes,8,opt,name=new_version_id,json=newVersionId,proto3,oneof" json:"new_version_id,omitempty"`
+	ApprovedReviewId       *string                `protobuf:"bytes,9,opt,name=approved_review_id,json=approvedReviewId,proto3,oneof" json:"approved_review_id,omitempty"`
+	ScopeCatalogRevision   *int64                 `protobuf:"varint,10,opt,name=scope_catalog_revision,json=scopeCatalogRevision,proto3,oneof" json:"scope_catalog_revision,omitempty"`
+	PreflightPolicyVersion *string                `protobuf:"bytes,11,opt,name=preflight_policy_version,json=preflightPolicyVersion,proto3,oneof" json:"preflight_policy_version,omitempty"`
 	ChangedBy              string                 `protobuf:"bytes,12,opt,name=changed_by,json=changedBy,proto3" json:"changed_by,omitempty"`
 	ChangedAt              *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=changed_at,json=changedAt,proto3" json:"changed_at,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -324,7 +624,7 @@ type ApplicationPublicationHistoryResource struct {
 
 func (x *ApplicationPublicationHistoryResource) Reset() {
 	*x = ApplicationPublicationHistoryResource{}
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[4]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -336,7 +636,7 @@ func (x *ApplicationPublicationHistoryResource) String() string {
 func (*ApplicationPublicationHistoryResource) ProtoMessage() {}
 
 func (x *ApplicationPublicationHistoryResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[4]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +649,7 @@ func (x *ApplicationPublicationHistoryResource) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ApplicationPublicationHistoryResource.ProtoReflect.Descriptor instead.
 func (*ApplicationPublicationHistoryResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{4}
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ApplicationPublicationHistoryResource) GetHistoryId() string {
@@ -402,29 +702,29 @@ func (x *ApplicationPublicationHistoryResource) GetPreviousVersionId() string {
 }
 
 func (x *ApplicationPublicationHistoryResource) GetNewVersionId() string {
-	if x != nil {
-		return x.NewVersionId
+	if x != nil && x.NewVersionId != nil {
+		return *x.NewVersionId
 	}
 	return ""
 }
 
 func (x *ApplicationPublicationHistoryResource) GetApprovedReviewId() string {
-	if x != nil {
-		return x.ApprovedReviewId
+	if x != nil && x.ApprovedReviewId != nil {
+		return *x.ApprovedReviewId
 	}
 	return ""
 }
 
 func (x *ApplicationPublicationHistoryResource) GetScopeCatalogRevision() int64 {
-	if x != nil {
-		return x.ScopeCatalogRevision
+	if x != nil && x.ScopeCatalogRevision != nil {
+		return *x.ScopeCatalogRevision
 	}
 	return 0
 }
 
 func (x *ApplicationPublicationHistoryResource) GetPreflightPolicyVersion() string {
-	if x != nil {
-		return x.PreflightPolicyVersion
+	if x != nil && x.PreflightPolicyVersion != nil {
+		return *x.PreflightPolicyVersion
 	}
 	return ""
 }
@@ -460,12 +760,33 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"&PlaceApprovedVersionInTestSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\x8a\x03\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xda\x01\n" +
+	"%SetApprovedVersionInStableSlotRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12f\n" +
+	"\acommand\x18\x03 \x01(\v2L.app_center.v1.application_publication.SetApprovedVersionInStableSlotCommandR\acommand\"\xb1\x01\n" +
+	"%SetApprovedVersionInStableSlotCommand\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x01 \x01(\tR\tversionId\x12G\n" +
+	"\x1dexpected_publication_revision\x18\x02 \x01(\x03H\x00R\x1bexpectedPublicationRevision\x88\x01\x01B \n" +
+	"\x1e_expected_publication_revision\"\x93\x02\n" +
+	"&SetApprovedVersionInStableSlotResponse\x12\x18\n" +
+	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
+	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xa7\x01\n" +
+	"\x16ClearStableSlotRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12B\n" +
+	"\x1dexpected_publication_revision\x18\x03 \x01(\x03R\x1bexpectedPublicationRevision\"\x84\x02\n" +
+	"\x17ClearStableSlotResponse\x12\x18\n" +
+	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
+	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xea\x03\n" +
 	"\x1eApplicationPublicationResource\x12%\n" +
 	"\x0epublication_id\x18\x01 \x01(\tR\rpublicationId\x12%\n" +
 	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x03 \x01(\x05R\vrpcApiMajor\x12&\n" +
-	"\x0ftest_version_id\x18\x04 \x01(\tR\rtestVersionId\x12\x1a\n" +
+	"\rrpc_api_major\x18\x03 \x01(\x05R\vrpcApiMajor\x12+\n" +
+	"\x0ftest_version_id\x18\x04 \x01(\tH\x00R\rtestVersionId\x88\x01\x01\x12\x1a\n" +
 	"\brevision\x18\x05 \x01(\x03R\brevision\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x129\n" +
@@ -474,7 +795,11 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\n" +
 	"updated_by\x18\b \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xee\x04\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12/\n" +
+	"\x11stable_version_id\x18\n" +
+	" \x01(\tH\x01R\x0fstableVersionId\x88\x01\x01B\x12\n" +
+	"\x10_test_version_idB\x14\n" +
+	"\x12_stable_version_id\"\xe4\x05\n" +
 	"%ApplicationPublicationHistoryResource\x12\x1d\n" +
 	"\n" +
 	"history_id\x18\x01 \x01(\tR\thistoryId\x12%\n" +
@@ -483,19 +808,25 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\rrpc_api_major\x18\x04 \x01(\x05R\vrpcApiMajor\x121\n" +
 	"\x14publication_revision\x18\x05 \x01(\x03R\x13publicationRevision\x12\x16\n" +
 	"\x06action\x18\x06 \x01(\tR\x06action\x123\n" +
-	"\x13previous_version_id\x18\a \x01(\tH\x00R\x11previousVersionId\x88\x01\x01\x12$\n" +
-	"\x0enew_version_id\x18\b \x01(\tR\fnewVersionId\x12,\n" +
-	"\x12approved_review_id\x18\t \x01(\tR\x10approvedReviewId\x124\n" +
+	"\x13previous_version_id\x18\a \x01(\tH\x00R\x11previousVersionId\x88\x01\x01\x12)\n" +
+	"\x0enew_version_id\x18\b \x01(\tH\x01R\fnewVersionId\x88\x01\x01\x121\n" +
+	"\x12approved_review_id\x18\t \x01(\tH\x02R\x10approvedReviewId\x88\x01\x01\x129\n" +
 	"\x16scope_catalog_revision\x18\n" +
-	" \x01(\x03R\x14scopeCatalogRevision\x128\n" +
-	"\x18preflight_policy_version\x18\v \x01(\tR\x16preflightPolicyVersion\x12\x1d\n" +
+	" \x01(\x03H\x03R\x14scopeCatalogRevision\x88\x01\x01\x12=\n" +
+	"\x18preflight_policy_version\x18\v \x01(\tH\x04R\x16preflightPolicyVersion\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"changed_by\x18\f \x01(\tR\tchangedBy\x129\n" +
 	"\n" +
 	"changed_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tchangedAtB\x16\n" +
-	"\x14_previous_version_id2\xb3\x02\n" +
+	"\x14_previous_version_idB\x11\n" +
+	"\x0f_new_version_idB\x15\n" +
+	"\x13_approved_review_idB\x19\n" +
+	"\x17_scope_catalog_revisionB\x1b\n" +
+	"\x19_preflight_policy_version2\xb7\x06\n" +
 	"\x16ApplicationPublication\x12\x98\x02\n" +
-	"\x1ePlaceApprovedVersionInTestSlot\x12L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest\x1aM.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse\"Y\x82\xd3\xe4\x93\x02S:\acommand\x1aH/v1/applications/{application_id}/publications/{rpc_api_major}/test-slotBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"\x1ePlaceApprovedVersionInTestSlot\x12L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest\x1aM.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse\"Y\x82\xd3\xe4\x93\x02S:\acommand\x1aH/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot\x12\x9a\x02\n" +
+	"\x1eSetApprovedVersionInStableSlot\x12L.app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest\x1aM.app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse\"[\x82\xd3\xe4\x93\x02U:\acommand\x1aJ/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot\x12\xe4\x01\n" +
+	"\x0fClearStableSlot\x12=.app_center.v1.application_publication.ClearStableSlotRequest\x1a>.app_center.v1.application_publication.ClearStableSlotResponse\"R\x82\xd3\xe4\x93\x02L*J/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slotBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_application_publication_proto_rawDescOnce sync.Once
@@ -509,29 +840,43 @@ func file_app_center_v1_application_publication_application_publication_proto_ra
 	return file_app_center_v1_application_publication_application_publication_proto_rawDescData
 }
 
-var file_app_center_v1_application_publication_application_publication_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_app_center_v1_application_publication_application_publication_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_app_center_v1_application_publication_application_publication_proto_goTypes = []any{
 	(*PlaceApprovedVersionInTestSlotRequest)(nil),  // 0: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
 	(*PlaceApprovedVersionInTestSlotCommand)(nil),  // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommand
 	(*PlaceApprovedVersionInTestSlotResponse)(nil), // 2: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse
-	(*ApplicationPublicationResource)(nil),         // 3: app_center.v1.application_publication.ApplicationPublicationResource
-	(*ApplicationPublicationHistoryResource)(nil),  // 4: app_center.v1.application_publication.ApplicationPublicationHistoryResource
-	(*timestamppb.Timestamp)(nil),                  // 5: google.protobuf.Timestamp
+	(*SetApprovedVersionInStableSlotRequest)(nil),  // 3: app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest
+	(*SetApprovedVersionInStableSlotCommand)(nil),  // 4: app_center.v1.application_publication.SetApprovedVersionInStableSlotCommand
+	(*SetApprovedVersionInStableSlotResponse)(nil), // 5: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse
+	(*ClearStableSlotRequest)(nil),                 // 6: app_center.v1.application_publication.ClearStableSlotRequest
+	(*ClearStableSlotResponse)(nil),                // 7: app_center.v1.application_publication.ClearStableSlotResponse
+	(*ApplicationPublicationResource)(nil),         // 8: app_center.v1.application_publication.ApplicationPublicationResource
+	(*ApplicationPublicationHistoryResource)(nil),  // 9: app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	(*timestamppb.Timestamp)(nil),                  // 10: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_publication_application_publication_proto_depIdxs = []int32{
-	1, // 0: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest.command:type_name -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommand
-	3, // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
-	4, // 2: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
-	5, // 3: app_center.v1.application_publication.ApplicationPublicationResource.created_at:type_name -> google.protobuf.Timestamp
-	5, // 4: app_center.v1.application_publication.ApplicationPublicationResource.updated_at:type_name -> google.protobuf.Timestamp
-	5, // 5: app_center.v1.application_publication.ApplicationPublicationHistoryResource.changed_at:type_name -> google.protobuf.Timestamp
-	0, // 6: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:input_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
-	2, // 7: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:output_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse
-	7, // [7:8] is the sub-list for method output_type
-	6, // [6:7] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	1,  // 0: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest.command:type_name -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommand
+	8,  // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	9,  // 2: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	4,  // 3: app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest.command:type_name -> app_center.v1.application_publication.SetApprovedVersionInStableSlotCommand
+	8,  // 4: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	9,  // 5: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	8,  // 6: app_center.v1.application_publication.ClearStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	9,  // 7: app_center.v1.application_publication.ClearStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	10, // 8: app_center.v1.application_publication.ApplicationPublicationResource.created_at:type_name -> google.protobuf.Timestamp
+	10, // 9: app_center.v1.application_publication.ApplicationPublicationResource.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 10: app_center.v1.application_publication.ApplicationPublicationHistoryResource.changed_at:type_name -> google.protobuf.Timestamp
+	0,  // 11: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:input_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
+	3,  // 12: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:input_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest
+	6,  // 13: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:input_type -> app_center.v1.application_publication.ClearStableSlotRequest
+	2,  // 14: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:output_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse
+	5,  // 15: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:output_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse
+	7,  // 16: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:output_type -> app_center.v1.application_publication.ClearStableSlotResponse
+	14, // [14:17] is the sub-list for method output_type
+	11, // [11:14] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_publication_application_publication_proto_init() }
@@ -541,13 +886,15 @@ func file_app_center_v1_application_publication_application_publication_proto_in
 	}
 	file_app_center_v1_application_publication_application_publication_proto_msgTypes[1].OneofWrappers = []any{}
 	file_app_center_v1_application_publication_application_publication_proto_msgTypes[4].OneofWrappers = []any{}
+	file_app_center_v1_application_publication_application_publication_proto_msgTypes[8].OneofWrappers = []any{}
+	file_app_center_v1_application_publication_application_publication_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_publication_application_publication_proto_rawDesc), len(file_app_center_v1_application_publication_application_publication_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
