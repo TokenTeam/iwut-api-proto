@@ -1,0 +1,21 @@
+syntax = "proto3";
+package auth_center.v1.oauth_delegation;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/oauth_delegation;oauthdelegation";
+import "google/protobuf/timestamp.proto";
+
+// Native internal gRPC only. Requires service identity and a separate opaque
+// access-token metadata carrier; callers cannot choose audiences or scopes.
+service OAuthDelegationService {
+  rpc IssueDelegationContext(IssueDelegationContextRequest) returns (IssueDelegationContextResponse);
+}
+message IssueDelegationContextRequest {
+  string route_id = 1;
+  string policy_digest = 2;
+  string protocol = 3;
+  string method = 4;
+  string target_path = 5;
+}
+message IssueDelegationContextResponse {
+  string delegation_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}

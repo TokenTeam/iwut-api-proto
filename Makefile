@@ -21,6 +21,11 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	auth_center/v1/oauth_delegation/oauth_delegation.proto \
+	auth_center/v1/oauth_grant/oauth_grant.proto \
+	app_center/v1/oauth_client/oauth_client_provider.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
 	auth_center/v1/developer_application/developer_application.proto \
 	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
@@ -48,6 +53,9 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	auth_center/v1/oauth_grant/oauth_grant.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
 	auth_center/v1/developer_application/developer_application.proto \
 	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
@@ -68,6 +76,9 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	auth_center/v1/oauth_grant \
+	auth_center/v1/oauth_delegation \
+	app_center/v1/oauth_client \
 	auth_center/v1/developer_application \
 	auth_center/v1/email_login \
 	auth_center/v1/email_binding \
