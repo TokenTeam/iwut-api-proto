@@ -243,6 +243,238 @@ func (x *ReviewerPermission) GetPermissionRevision() int64 {
 	return 0
 }
 
+type ManageApplicationReviewPermissionRequest struct {
+	state            protoimpl.MessageState   `protogen:"open.v1"`
+	SubjectAuthId    string                   `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	Permission       string                   `protobuf:"bytes,2,opt,name=permission,proto3" json:"permission,omitempty"`
+	Action           ReviewerPermissionAction `protobuf:"varint,3,opt,name=action,proto3,enum=auth_center.v1.reviewer_permission.ReviewerPermissionAction" json:"action,omitempty"`
+	ExpectedRevision *int64                   `protobuf:"varint,4,opt,name=expected_revision,json=expectedRevision,proto3,oneof" json:"expected_revision,omitempty"`
+	Reason           string                   `protobuf:"bytes,5,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ManageApplicationReviewPermissionRequest) Reset() {
+	*x = ManageApplicationReviewPermissionRequest{}
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ManageApplicationReviewPermissionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ManageApplicationReviewPermissionRequest) ProtoMessage() {}
+
+func (x *ManageApplicationReviewPermissionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ManageApplicationReviewPermissionRequest.ProtoReflect.Descriptor instead.
+func (*ManageApplicationReviewPermissionRequest) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ManageApplicationReviewPermissionRequest) GetSubjectAuthId() string {
+	if x != nil {
+		return x.SubjectAuthId
+	}
+	return ""
+}
+
+func (x *ManageApplicationReviewPermissionRequest) GetPermission() string {
+	if x != nil {
+		return x.Permission
+	}
+	return ""
+}
+
+func (x *ManageApplicationReviewPermissionRequest) GetAction() ReviewerPermissionAction {
+	if x != nil {
+		return x.Action
+	}
+	return ReviewerPermissionAction_REVIEWER_PERMISSION_ACTION_UNSPECIFIED
+}
+
+func (x *ManageApplicationReviewPermissionRequest) GetExpectedRevision() int64 {
+	if x != nil && x.ExpectedRevision != nil {
+		return *x.ExpectedRevision
+	}
+	return 0
+}
+
+func (x *ManageApplicationReviewPermissionRequest) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+type GetApplicationReviewPermissionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApplicationReviewPermissionsRequest) Reset() {
+	*x = GetApplicationReviewPermissionsRequest{}
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApplicationReviewPermissionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApplicationReviewPermissionsRequest) ProtoMessage() {}
+
+func (x *GetApplicationReviewPermissionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApplicationReviewPermissionsRequest.ProtoReflect.Descriptor instead.
+func (*GetApplicationReviewPermissionsRequest) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetApplicationReviewPermissionsRequest) GetSubjectAuthId() string {
+	if x != nil {
+		return x.SubjectAuthId
+	}
+	return ""
+}
+
+type ApplicationReviewPermission struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Permission    string                 `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty"`
+	Granted       bool                   `protobuf:"varint,2,opt,name=granted,proto3" json:"granted,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ApplicationReviewPermission) Reset() {
+	*x = ApplicationReviewPermission{}
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplicationReviewPermission) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplicationReviewPermission) ProtoMessage() {}
+
+func (x *ApplicationReviewPermission) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplicationReviewPermission.ProtoReflect.Descriptor instead.
+func (*ApplicationReviewPermission) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ApplicationReviewPermission) GetPermission() string {
+	if x != nil {
+		return x.Permission
+	}
+	return ""
+}
+
+func (x *ApplicationReviewPermission) GetGranted() bool {
+	if x != nil {
+		return x.Granted
+	}
+	return false
+}
+
+type ApplicationReviewPermissions struct {
+	state              protoimpl.MessageState         `protogen:"open.v1"`
+	SubjectAuthId      string                         `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	Permissions        []*ApplicationReviewPermission `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	PermissionRevision int64                          `protobuf:"varint,3,opt,name=permission_revision,json=permissionRevision,proto3" json:"permission_revision,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ApplicationReviewPermissions) Reset() {
+	*x = ApplicationReviewPermissions{}
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplicationReviewPermissions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplicationReviewPermissions) ProtoMessage() {}
+
+func (x *ApplicationReviewPermissions) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplicationReviewPermissions.ProtoReflect.Descriptor instead.
+func (*ApplicationReviewPermissions) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ApplicationReviewPermissions) GetSubjectAuthId() string {
+	if x != nil {
+		return x.SubjectAuthId
+	}
+	return ""
+}
+
+func (x *ApplicationReviewPermissions) GetPermissions() []*ApplicationReviewPermission {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
+func (x *ApplicationReviewPermissions) GetPermissionRevision() int64 {
+	if x != nil {
+		return x.PermissionRevision
+	}
+	return 0
+}
+
 var File_auth_center_v1_reviewer_permission_reviewer_permission_proto protoreflect.FileDescriptor
 
 const file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDesc = "" +
@@ -259,14 +491,36 @@ const file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDesc 
 	"\x12ReviewerPermission\x12&\n" +
 	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12\x1a\n" +
 	"\breviewer\x18\x02 \x01(\bR\breviewer\x12/\n" +
+	"\x13permission_revision\x18\x03 \x01(\x03R\x12permissionRevision\"\xa8\x02\n" +
+	"(ManageApplicationReviewPermissionRequest\x12&\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12\x1e\n" +
+	"\n" +
+	"permission\x18\x02 \x01(\tR\n" +
+	"permission\x12T\n" +
+	"\x06action\x18\x03 \x01(\x0e2<.auth_center.v1.reviewer_permission.ReviewerPermissionActionR\x06action\x120\n" +
+	"\x11expected_revision\x18\x04 \x01(\x03H\x00R\x10expectedRevision\x88\x01\x01\x12\x16\n" +
+	"\x06reason\x18\x05 \x01(\tR\x06reasonB\x14\n" +
+	"\x12_expected_revision\"P\n" +
+	"&GetApplicationReviewPermissionsRequest\x12&\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\"W\n" +
+	"\x1bApplicationReviewPermission\x12\x1e\n" +
+	"\n" +
+	"permission\x18\x01 \x01(\tR\n" +
+	"permission\x12\x18\n" +
+	"\agranted\x18\x02 \x01(\bR\agranted\"\xda\x01\n" +
+	"\x1cApplicationReviewPermissions\x12&\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12a\n" +
+	"\vpermissions\x18\x02 \x03(\v2?.auth_center.v1.reviewer_permission.ApplicationReviewPermissionR\vpermissions\x12/\n" +
 	"\x13permission_revision\x18\x03 \x01(\x03R\x12permissionRevision*\x93\x01\n" +
 	"\x18ReviewerPermissionAction\x12*\n" +
 	"&REVIEWER_PERMISSION_ACTION_UNSPECIFIED\x10\x00\x12$\n" +
 	" REVIEWER_PERMISSION_ACTION_GRANT\x10\x01\x12%\n" +
-	"!REVIEWER_PERMISSION_ACTION_REVOKE\x10\x022\xbe\x03\n" +
+	"!REVIEWER_PERMISSION_ACTION_REVOKE\x10\x022\xbe\a\n" +
 	"\x19ReviewerPermissionService\x12\xd3\x01\n" +
 	"\x18ManageReviewerPermission\x12C.auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest\x1a6.auth_center.v1.reviewer_permission.ReviewerPermission\":\x82\xd3\xe4\x93\x024:\x01*\x1a//v1/users/{subject_auth_id}/reviewer-permission\x12\xca\x01\n" +
-	"\x15GetReviewerPermission\x12@.auth_center.v1.reviewer_permission.GetReviewerPermissionRequest\x1a6.auth_center.v1.reviewer_permission.ReviewerPermission\"7\x82\xd3\xe4\x93\x021\x12//v1/users/{subject_auth_id}/reviewer-permissionBbZ`github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/reviewer_permission;reviewerpermissionb\x06proto3"
+	"\x15GetReviewerPermission\x12@.auth_center.v1.reviewer_permission.GetReviewerPermissionRequest\x1a6.auth_center.v1.reviewer_permission.ReviewerPermission\"7\x82\xd3\xe4\x93\x021\x12//v1/users/{subject_auth_id}/reviewer-permission\x12\x87\x02\n" +
+	"!ManageApplicationReviewPermission\x12L.auth_center.v1.reviewer_permission.ManageApplicationReviewPermissionRequest\x1a@.auth_center.v1.reviewer_permission.ApplicationReviewPermissions\"R\x82\xd3\xe4\x93\x02L:\x01*\x1aG/v1/users/{subject_auth_id}/application-review-permissions/{permission}\x12\xf3\x01\n" +
+	"\x1fGetApplicationReviewPermissions\x12J.auth_center.v1.reviewer_permission.GetApplicationReviewPermissionsRequest\x1a@.auth_center.v1.reviewer_permission.ApplicationReviewPermissions\"B\x82\xd3\xe4\x93\x02<\x12:/v1/users/{subject_auth_id}/application-review-permissionsBbZ`github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/reviewer_permission;reviewerpermissionb\x06proto3"
 
 var (
 	file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescOnce sync.Once
@@ -281,24 +535,34 @@ func file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDescGZ
 }
 
 var file_auth_center_v1_reviewer_permission_reviewer_permission_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_auth_center_v1_reviewer_permission_reviewer_permission_proto_goTypes = []any{
-	(ReviewerPermissionAction)(0),           // 0: auth_center.v1.reviewer_permission.ReviewerPermissionAction
-	(*ManageReviewerPermissionRequest)(nil), // 1: auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest
-	(*GetReviewerPermissionRequest)(nil),    // 2: auth_center.v1.reviewer_permission.GetReviewerPermissionRequest
-	(*ReviewerPermission)(nil),              // 3: auth_center.v1.reviewer_permission.ReviewerPermission
+	(ReviewerPermissionAction)(0),                    // 0: auth_center.v1.reviewer_permission.ReviewerPermissionAction
+	(*ManageReviewerPermissionRequest)(nil),          // 1: auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest
+	(*GetReviewerPermissionRequest)(nil),             // 2: auth_center.v1.reviewer_permission.GetReviewerPermissionRequest
+	(*ReviewerPermission)(nil),                       // 3: auth_center.v1.reviewer_permission.ReviewerPermission
+	(*ManageApplicationReviewPermissionRequest)(nil), // 4: auth_center.v1.reviewer_permission.ManageApplicationReviewPermissionRequest
+	(*GetApplicationReviewPermissionsRequest)(nil),   // 5: auth_center.v1.reviewer_permission.GetApplicationReviewPermissionsRequest
+	(*ApplicationReviewPermission)(nil),              // 6: auth_center.v1.reviewer_permission.ApplicationReviewPermission
+	(*ApplicationReviewPermissions)(nil),             // 7: auth_center.v1.reviewer_permission.ApplicationReviewPermissions
 }
 var file_auth_center_v1_reviewer_permission_reviewer_permission_proto_depIdxs = []int32{
 	0, // 0: auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest.action:type_name -> auth_center.v1.reviewer_permission.ReviewerPermissionAction
-	1, // 1: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageReviewerPermission:input_type -> auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest
-	2, // 2: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetReviewerPermission:input_type -> auth_center.v1.reviewer_permission.GetReviewerPermissionRequest
-	3, // 3: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageReviewerPermission:output_type -> auth_center.v1.reviewer_permission.ReviewerPermission
-	3, // 4: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetReviewerPermission:output_type -> auth_center.v1.reviewer_permission.ReviewerPermission
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 1: auth_center.v1.reviewer_permission.ManageApplicationReviewPermissionRequest.action:type_name -> auth_center.v1.reviewer_permission.ReviewerPermissionAction
+	6, // 2: auth_center.v1.reviewer_permission.ApplicationReviewPermissions.permissions:type_name -> auth_center.v1.reviewer_permission.ApplicationReviewPermission
+	1, // 3: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageReviewerPermission:input_type -> auth_center.v1.reviewer_permission.ManageReviewerPermissionRequest
+	2, // 4: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetReviewerPermission:input_type -> auth_center.v1.reviewer_permission.GetReviewerPermissionRequest
+	4, // 5: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageApplicationReviewPermission:input_type -> auth_center.v1.reviewer_permission.ManageApplicationReviewPermissionRequest
+	5, // 6: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetApplicationReviewPermissions:input_type -> auth_center.v1.reviewer_permission.GetApplicationReviewPermissionsRequest
+	3, // 7: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageReviewerPermission:output_type -> auth_center.v1.reviewer_permission.ReviewerPermission
+	3, // 8: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetReviewerPermission:output_type -> auth_center.v1.reviewer_permission.ReviewerPermission
+	7, // 9: auth_center.v1.reviewer_permission.ReviewerPermissionService.ManageApplicationReviewPermission:output_type -> auth_center.v1.reviewer_permission.ApplicationReviewPermissions
+	7, // 10: auth_center.v1.reviewer_permission.ReviewerPermissionService.GetApplicationReviewPermissions:output_type -> auth_center.v1.reviewer_permission.ApplicationReviewPermissions
+	7, // [7:11] is the sub-list for method output_type
+	3, // [3:7] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_auth_center_v1_reviewer_permission_reviewer_permission_proto_init() }
@@ -307,13 +571,14 @@ func file_auth_center_v1_reviewer_permission_reviewer_permission_proto_init() {
 		return
 	}
 	file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[0].OneofWrappers = []any{}
+	file_auth_center_v1_reviewer_permission_reviewer_permission_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDesc), len(file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

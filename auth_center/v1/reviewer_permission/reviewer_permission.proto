@@ -11,6 +11,13 @@ service ReviewerPermissionService {
   rpc GetReviewerPermission(GetReviewerPermissionRequest) returns (ReviewerPermission) {
     option (google.api.http) = { get: "/v1/users/{subject_auth_id}/reviewer-permission" };
   }
+  // Explicitly manage one of app.profile.review or app.version.review.
+  rpc ManageApplicationReviewPermission(ManageApplicationReviewPermissionRequest) returns (ApplicationReviewPermissions) {
+    option (google.api.http) = { put: "/v1/users/{subject_auth_id}/application-review-permissions/{permission}" body: "*" };
+  }
+  rpc GetApplicationReviewPermissions(GetApplicationReviewPermissionsRequest) returns (ApplicationReviewPermissions) {
+    option (google.api.http) = { get: "/v1/users/{subject_auth_id}/application-review-permissions" };
+  }
 }
 enum ReviewerPermissionAction {
   REVIEWER_PERMISSION_ACTION_UNSPECIFIED = 0;
@@ -27,5 +34,23 @@ message GetReviewerPermissionRequest { string subject_auth_id = 1; }
 message ReviewerPermission {
   string subject_auth_id = 1;
   bool reviewer = 2;
+  int64 permission_revision = 3;
+}
+
+message ManageApplicationReviewPermissionRequest {
+  string subject_auth_id = 1;
+  string permission = 2;
+  ReviewerPermissionAction action = 3;
+  optional int64 expected_revision = 4;
+  string reason = 5;
+}
+message GetApplicationReviewPermissionsRequest { string subject_auth_id = 1; }
+message ApplicationReviewPermission {
+  string permission = 1;
+  bool granted = 2;
+}
+message ApplicationReviewPermissions {
+  string subject_auth_id = 1;
+  repeated ApplicationReviewPermission permissions = 2;
   int64 permission_revision = 3;
 }

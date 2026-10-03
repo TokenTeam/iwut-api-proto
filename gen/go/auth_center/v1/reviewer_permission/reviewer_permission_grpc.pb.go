@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReviewerPermissionService_ManageReviewerPermission_FullMethodName = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/ManageReviewerPermission"
-	ReviewerPermissionService_GetReviewerPermission_FullMethodName    = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/GetReviewerPermission"
+	ReviewerPermissionService_ManageReviewerPermission_FullMethodName          = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/ManageReviewerPermission"
+	ReviewerPermissionService_GetReviewerPermission_FullMethodName             = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/GetReviewerPermission"
+	ReviewerPermissionService_ManageApplicationReviewPermission_FullMethodName = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/ManageApplicationReviewPermission"
+	ReviewerPermissionService_GetApplicationReviewPermissions_FullMethodName   = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/GetApplicationReviewPermissions"
 )
 
 // ReviewerPermissionServiceClient is the client API for ReviewerPermissionService service.
@@ -31,6 +33,9 @@ const (
 type ReviewerPermissionServiceClient interface {
 	ManageReviewerPermission(ctx context.Context, in *ManageReviewerPermissionRequest, opts ...grpc.CallOption) (*ReviewerPermission, error)
 	GetReviewerPermission(ctx context.Context, in *GetReviewerPermissionRequest, opts ...grpc.CallOption) (*ReviewerPermission, error)
+	// Explicitly manage one of app.profile.review or app.version.review.
+	ManageApplicationReviewPermission(ctx context.Context, in *ManageApplicationReviewPermissionRequest, opts ...grpc.CallOption) (*ApplicationReviewPermissions, error)
+	GetApplicationReviewPermissions(ctx context.Context, in *GetApplicationReviewPermissionsRequest, opts ...grpc.CallOption) (*ApplicationReviewPermissions, error)
 }
 
 type reviewerPermissionServiceClient struct {
@@ -61,6 +66,26 @@ func (c *reviewerPermissionServiceClient) GetReviewerPermission(ctx context.Cont
 	return out, nil
 }
 
+func (c *reviewerPermissionServiceClient) ManageApplicationReviewPermission(ctx context.Context, in *ManageApplicationReviewPermissionRequest, opts ...grpc.CallOption) (*ApplicationReviewPermissions, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplicationReviewPermissions)
+	err := c.cc.Invoke(ctx, ReviewerPermissionService_ManageApplicationReviewPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *reviewerPermissionServiceClient) GetApplicationReviewPermissions(ctx context.Context, in *GetApplicationReviewPermissionsRequest, opts ...grpc.CallOption) (*ApplicationReviewPermissions, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplicationReviewPermissions)
+	err := c.cc.Invoke(ctx, ReviewerPermissionService_GetApplicationReviewPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReviewerPermissionServiceServer is the server API for ReviewerPermissionService service.
 // All implementations must embed UnimplementedReviewerPermissionServiceServer
 // for forward compatibility.
@@ -69,6 +94,9 @@ func (c *reviewerPermissionServiceClient) GetReviewerPermission(ctx context.Cont
 type ReviewerPermissionServiceServer interface {
 	ManageReviewerPermission(context.Context, *ManageReviewerPermissionRequest) (*ReviewerPermission, error)
 	GetReviewerPermission(context.Context, *GetReviewerPermissionRequest) (*ReviewerPermission, error)
+	// Explicitly manage one of app.profile.review or app.version.review.
+	ManageApplicationReviewPermission(context.Context, *ManageApplicationReviewPermissionRequest) (*ApplicationReviewPermissions, error)
+	GetApplicationReviewPermissions(context.Context, *GetApplicationReviewPermissionsRequest) (*ApplicationReviewPermissions, error)
 	mustEmbedUnimplementedReviewerPermissionServiceServer()
 }
 
@@ -84,6 +112,12 @@ func (UnimplementedReviewerPermissionServiceServer) ManageReviewerPermission(con
 }
 func (UnimplementedReviewerPermissionServiceServer) GetReviewerPermission(context.Context, *GetReviewerPermissionRequest) (*ReviewerPermission, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetReviewerPermission not implemented")
+}
+func (UnimplementedReviewerPermissionServiceServer) ManageApplicationReviewPermission(context.Context, *ManageApplicationReviewPermissionRequest) (*ApplicationReviewPermissions, error) {
+	return nil, status.Error(codes.Unimplemented, "method ManageApplicationReviewPermission not implemented")
+}
+func (UnimplementedReviewerPermissionServiceServer) GetApplicationReviewPermissions(context.Context, *GetApplicationReviewPermissionsRequest) (*ApplicationReviewPermissions, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApplicationReviewPermissions not implemented")
 }
 func (UnimplementedReviewerPermissionServiceServer) mustEmbedUnimplementedReviewerPermissionServiceServer() {
 }
@@ -143,6 +177,42 @@ func _ReviewerPermissionService_GetReviewerPermission_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ReviewerPermissionService_ManageApplicationReviewPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManageApplicationReviewPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewerPermissionServiceServer).ManageApplicationReviewPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReviewerPermissionService_ManageApplicationReviewPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewerPermissionServiceServer).ManageApplicationReviewPermission(ctx, req.(*ManageApplicationReviewPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReviewerPermissionService_GetApplicationReviewPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApplicationReviewPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewerPermissionServiceServer).GetApplicationReviewPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReviewerPermissionService_GetApplicationReviewPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewerPermissionServiceServer).GetApplicationReviewPermissions(ctx, req.(*GetApplicationReviewPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ReviewerPermissionService_ServiceDesc is the grpc.ServiceDesc for ReviewerPermissionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -157,6 +227,14 @@ var ReviewerPermissionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReviewerPermission",
 			Handler:    _ReviewerPermissionService_GetReviewerPermission_Handler,
+		},
+		{
+			MethodName: "ManageApplicationReviewPermission",
+			Handler:    _ReviewerPermissionService_ManageApplicationReviewPermission_Handler,
+		},
+		{
+			MethodName: "GetApplicationReviewPermissions",
+			Handler:    _ReviewerPermissionService_GetApplicationReviewPermissions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

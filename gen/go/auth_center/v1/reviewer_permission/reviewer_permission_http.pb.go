@@ -19,11 +19,16 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationReviewerPermissionServiceGetApplicationReviewPermissions = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/GetApplicationReviewPermissions"
 const OperationReviewerPermissionServiceGetReviewerPermission = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/GetReviewerPermission"
+const OperationReviewerPermissionServiceManageApplicationReviewPermission = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/ManageApplicationReviewPermission"
 const OperationReviewerPermissionServiceManageReviewerPermission = "/auth_center.v1.reviewer_permission.ReviewerPermissionService/ManageReviewerPermission"
 
 type ReviewerPermissionServiceHTTPServer interface {
+	GetApplicationReviewPermissions(context.Context, *GetApplicationReviewPermissionsRequest) (*ApplicationReviewPermissions, error)
 	GetReviewerPermission(context.Context, *GetReviewerPermissionRequest) (*ReviewerPermission, error)
+	// ManageApplicationReviewPermission Explicitly manage one of app.profile.review or app.version.review.
+	ManageApplicationReviewPermission(context.Context, *ManageApplicationReviewPermissionRequest) (*ApplicationReviewPermissions, error)
 	ManageReviewerPermission(context.Context, *ManageReviewerPermissionRequest) (*ReviewerPermission, error)
 }
 
@@ -31,6 +36,8 @@ func RegisterReviewerPermissionServiceHTTPServer(s *http.Server, srv ReviewerPer
 	r := s.Route("/")
 	r.PUT("/v1/users/{subject_auth_id}/reviewer-permission", _ReviewerPermissionService_ManageReviewerPermission0_HTTP_Handler(srv))
 	r.GET("/v1/users/{subject_auth_id}/reviewer-permission", _ReviewerPermissionService_GetReviewerPermission0_HTTP_Handler(srv))
+	r.PUT("/v1/users/{subject_auth_id}/application-review-permissions/{permission}", _ReviewerPermissionService_ManageApplicationReviewPermission0_HTTP_Handler(srv))
+	r.GET("/v1/users/{subject_auth_id}/application-review-permissions", _ReviewerPermissionService_GetApplicationReviewPermissions0_HTTP_Handler(srv))
 }
 
 func _ReviewerPermissionService_ManageReviewerPermission0_HTTP_Handler(srv ReviewerPermissionServiceHTTPServer) func(ctx http.Context) error {
@@ -80,8 +87,58 @@ func _ReviewerPermissionService_GetReviewerPermission0_HTTP_Handler(srv Reviewer
 	}
 }
 
+func _ReviewerPermissionService_ManageApplicationReviewPermission0_HTTP_Handler(srv ReviewerPermissionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ManageApplicationReviewPermissionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewerPermissionServiceManageApplicationReviewPermission)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ManageApplicationReviewPermission(ctx, req.(*ManageApplicationReviewPermissionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ApplicationReviewPermissions)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ReviewerPermissionService_GetApplicationReviewPermissions0_HTTP_Handler(srv ReviewerPermissionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetApplicationReviewPermissionsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewerPermissionServiceGetApplicationReviewPermissions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetApplicationReviewPermissions(ctx, req.(*GetApplicationReviewPermissionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ApplicationReviewPermissions)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ReviewerPermissionServiceHTTPClient interface {
+	GetApplicationReviewPermissions(ctx context.Context, req *GetApplicationReviewPermissionsRequest, opts ...http.CallOption) (rsp *ApplicationReviewPermissions, err error)
 	GetReviewerPermission(ctx context.Context, req *GetReviewerPermissionRequest, opts ...http.CallOption) (rsp *ReviewerPermission, err error)
+	// ManageApplicationReviewPermission Explicitly manage one of app.profile.review or app.version.review.
+	ManageApplicationReviewPermission(ctx context.Context, req *ManageApplicationReviewPermissionRequest, opts ...http.CallOption) (rsp *ApplicationReviewPermissions, err error)
 	ManageReviewerPermission(ctx context.Context, req *ManageReviewerPermissionRequest, opts ...http.CallOption) (rsp *ReviewerPermission, err error)
 }
 
@@ -93,6 +150,19 @@ func NewReviewerPermissionServiceHTTPClient(client *http.Client) ReviewerPermiss
 	return &ReviewerPermissionServiceHTTPClientImpl{client}
 }
 
+func (c *ReviewerPermissionServiceHTTPClientImpl) GetApplicationReviewPermissions(ctx context.Context, in *GetApplicationReviewPermissionsRequest, opts ...http.CallOption) (*ApplicationReviewPermissions, error) {
+	var out ApplicationReviewPermissions
+	pattern := "/v1/users/{subject_auth_id}/application-review-permissions"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationReviewerPermissionServiceGetApplicationReviewPermissions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *ReviewerPermissionServiceHTTPClientImpl) GetReviewerPermission(ctx context.Context, in *GetReviewerPermissionRequest, opts ...http.CallOption) (*ReviewerPermission, error) {
 	var out ReviewerPermission
 	pattern := "/v1/users/{subject_auth_id}/reviewer-permission"
@@ -100,6 +170,20 @@ func (c *ReviewerPermissionServiceHTTPClientImpl) GetReviewerPermission(ctx cont
 	opts = append(opts, http.Operation(OperationReviewerPermissionServiceGetReviewerPermission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ManageApplicationReviewPermission Explicitly manage one of app.profile.review or app.version.review.
+func (c *ReviewerPermissionServiceHTTPClientImpl) ManageApplicationReviewPermission(ctx context.Context, in *ManageApplicationReviewPermissionRequest, opts ...http.CallOption) (*ApplicationReviewPermissions, error) {
+	var out ApplicationReviewPermissions
+	pattern := "/v1/users/{subject_auth_id}/application-review-permissions/{permission}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationReviewerPermissionServiceManageApplicationReviewPermission))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
