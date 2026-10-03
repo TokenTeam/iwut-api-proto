@@ -21,6 +21,7 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/oauth_client/oauth_client_provider.proto \
 	app_center/v1/oauth_client/oauth_client.proto \
 	app_center/v1/oauth_client/error_reason.proto \
 	app_center/v1/application_profile_review/application_profile_review.proto \
