@@ -45,6 +45,8 @@ const (
 	ErrorReason_ERROR_REASON_LAUNCH_URL_INSPECTION_UNAVAILABLE         ErrorReason = 18
 	ErrorReason_ERROR_REASON_INTERNAL                                  ErrorReason = 19
 	ErrorReason_ERROR_REASON_OAUTH_CLIENT_REGISTRATION_REQUIRED        ErrorReason = 20
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_REQUIRED              ErrorReason = 21
+	ErrorReason_ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT    ErrorReason = 22
 )
 
 // Enum value maps for ErrorReason.
@@ -71,6 +73,8 @@ var (
 		18: "ERROR_REASON_LAUNCH_URL_INSPECTION_UNAVAILABLE",
 		19: "ERROR_REASON_INTERNAL",
 		20: "ERROR_REASON_OAUTH_CLIENT_REGISTRATION_REQUIRED",
+		21: "ERROR_REASON_APPLICATION_PROFILE_REQUIRED",
+		22: "ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                               0,
@@ -94,6 +98,8 @@ var (
 		"ERROR_REASON_LAUNCH_URL_INSPECTION_UNAVAILABLE":         18,
 		"ERROR_REASON_INTERNAL":                                  19,
 		"ERROR_REASON_OAUTH_CLIENT_REGISTRATION_REQUIRED":        20,
+		"ERROR_REASON_APPLICATION_PROFILE_REQUIRED":              21,
+		"ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT":    22,
 	}
 )
 
@@ -128,7 +134,7 @@ var File_app_center_v1_application_publication_error_reason_proto protoreflect.F
 
 const file_app_center_v1_application_publication_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"8app_center/v1/application_publication/error_reason.proto\x12%app_center.v1.application_publication*\x88\b\n" +
+	"8app_center/v1/application_publication/error_reason.proto\x12%app_center.v1.application_publication*\xf0\b\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -151,7 +157,9 @@ const file_app_center_v1_application_publication_error_reason_proto_rawDesc = ""
 	"2ERROR_REASON_APPLICATION_LAUNCH_URL_NOT_REVIEWABLE\x10\x11\x122\n" +
 	".ERROR_REASON_LAUNCH_URL_INSPECTION_UNAVAILABLE\x10\x12\x12\x19\n" +
 	"\x15ERROR_REASON_INTERNAL\x10\x13\x123\n" +
-	"/ERROR_REASON_OAUTH_CLIENT_REGISTRATION_REQUIRED\x10\x14BiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"/ERROR_REASON_OAUTH_CLIENT_REGISTRATION_REQUIRED\x10\x14\x12-\n" +
+	")ERROR_REASON_APPLICATION_PROFILE_REQUIRED\x10\x15\x127\n" +
+	"3ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT\x10\x16BiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_error_reason_proto_rawDescOnce sync.Once
