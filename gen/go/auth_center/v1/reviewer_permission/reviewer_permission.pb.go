@@ -139,9 +139,10 @@ func (x *ManageReviewerPermissionRequest) GetReason() string {
 	return ""
 }
 
+// Path-only GET field: match the HTTP template to avoid an extra query key.
 type GetReviewerPermissionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,proto3" json:"subject_auth_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -245,7 +246,7 @@ func (x *ReviewerPermission) GetPermissionRevision() int64 {
 
 type ManageApplicationReviewPermissionRequest struct {
 	state            protoimpl.MessageState   `protogen:"open.v1"`
-	SubjectAuthId    string                   `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	SubjectAuthId    string                   `protobuf:"bytes,1,opt,name=subject_auth_id,proto3" json:"subject_auth_id,omitempty"`
 	Permission       string                   `protobuf:"bytes,2,opt,name=permission,proto3" json:"permission,omitempty"`
 	Action           ReviewerPermissionAction `protobuf:"varint,3,opt,name=action,proto3,enum=auth_center.v1.reviewer_permission.ReviewerPermissionAction" json:"action,omitempty"`
 	ExpectedRevision *int64                   `protobuf:"varint,4,opt,name=expected_revision,json=expectedRevision,proto3,oneof" json:"expected_revision,omitempty"`
@@ -321,7 +322,7 @@ func (x *ManageApplicationReviewPermissionRequest) GetReason() string {
 
 type GetApplicationReviewPermissionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,proto3" json:"subject_auth_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -485,24 +486,24 @@ const file_auth_center_v1_reviewer_permission_reviewer_permission_proto_rawDesc 
 	"\x06action\x18\x02 \x01(\x0e2<.auth_center.v1.reviewer_permission.ReviewerPermissionActionR\x06action\x120\n" +
 	"\x11expected_revision\x18\x03 \x01(\x03H\x00R\x10expectedRevision\x88\x01\x01\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reasonB\x14\n" +
-	"\x12_expected_revision\"F\n" +
-	"\x1cGetReviewerPermissionRequest\x12&\n" +
-	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\"\x89\x01\n" +
+	"\x12_expected_revision\"H\n" +
+	"\x1cGetReviewerPermissionRequest\x12(\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\x0fsubject_auth_id\"\x89\x01\n" +
 	"\x12ReviewerPermission\x12&\n" +
 	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12\x1a\n" +
 	"\breviewer\x18\x02 \x01(\bR\breviewer\x12/\n" +
-	"\x13permission_revision\x18\x03 \x01(\x03R\x12permissionRevision\"\xa8\x02\n" +
-	"(ManageApplicationReviewPermissionRequest\x12&\n" +
-	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12\x1e\n" +
+	"\x13permission_revision\x18\x03 \x01(\x03R\x12permissionRevision\"\xaa\x02\n" +
+	"(ManageApplicationReviewPermissionRequest\x12(\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\x0fsubject_auth_id\x12\x1e\n" +
 	"\n" +
 	"permission\x18\x02 \x01(\tR\n" +
 	"permission\x12T\n" +
 	"\x06action\x18\x03 \x01(\x0e2<.auth_center.v1.reviewer_permission.ReviewerPermissionActionR\x06action\x120\n" +
 	"\x11expected_revision\x18\x04 \x01(\x03H\x00R\x10expectedRevision\x88\x01\x01\x12\x16\n" +
 	"\x06reason\x18\x05 \x01(\tR\x06reasonB\x14\n" +
-	"\x12_expected_revision\"P\n" +
-	"&GetApplicationReviewPermissionsRequest\x12&\n" +
-	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\"W\n" +
+	"\x12_expected_revision\"R\n" +
+	"&GetApplicationReviewPermissionsRequest\x12(\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\x0fsubject_auth_id\"W\n" +
 	"\x1bApplicationReviewPermission\x12\x1e\n" +
 	"\n" +
 	"permission\x18\x01 \x01(\tR\n" +

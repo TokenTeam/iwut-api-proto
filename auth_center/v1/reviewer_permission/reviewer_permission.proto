@@ -30,7 +30,8 @@ message ManageReviewerPermissionRequest {
   optional int64 expected_revision = 3;
   string reason = 4;
 }
-message GetReviewerPermissionRequest { string subject_auth_id = 1; }
+// Path-only GET field: match the HTTP template to avoid an extra query key.
+message GetReviewerPermissionRequest { string subject_auth_id = 1 [json_name = "subject_auth_id"]; }
 message ReviewerPermission {
   string subject_auth_id = 1;
   bool reviewer = 2;
@@ -38,13 +39,13 @@ message ReviewerPermission {
 }
 
 message ManageApplicationReviewPermissionRequest {
-  string subject_auth_id = 1;
+  string subject_auth_id = 1 [json_name = "subject_auth_id"];
   string permission = 2;
   ReviewerPermissionAction action = 3;
   optional int64 expected_revision = 4;
   string reason = 5;
 }
-message GetApplicationReviewPermissionsRequest { string subject_auth_id = 1; }
+message GetApplicationReviewPermissionsRequest { string subject_auth_id = 1 [json_name = "subject_auth_id"]; }
 message ApplicationReviewPermission {
   string permission = 1;
   bool granted = 2;
