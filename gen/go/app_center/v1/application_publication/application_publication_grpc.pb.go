@@ -22,6 +22,8 @@ const (
 	ApplicationPublication_PlaceApprovedVersionInTestSlot_FullMethodName = "/app_center.v1.application_publication.ApplicationPublication/PlaceApprovedVersionInTestSlot"
 	ApplicationPublication_SetApprovedVersionInStableSlot_FullMethodName = "/app_center.v1.application_publication.ApplicationPublication/SetApprovedVersionInStableSlot"
 	ApplicationPublication_ClearStableSlot_FullMethodName                = "/app_center.v1.application_publication.ApplicationPublication/ClearStableSlot"
+	ApplicationPublication_SetGreyRollout_FullMethodName                 = "/app_center.v1.application_publication.ApplicationPublication/SetGreyRollout"
+	ApplicationPublication_ClearGreyRollout_FullMethodName               = "/app_center.v1.application_publication.ApplicationPublication/ClearGreyRollout"
 )
 
 // ApplicationPublicationClient is the client API for ApplicationPublication service.
@@ -31,6 +33,8 @@ type ApplicationPublicationClient interface {
 	PlaceApprovedVersionInTestSlot(ctx context.Context, in *PlaceApprovedVersionInTestSlotRequest, opts ...grpc.CallOption) (*PlaceApprovedVersionInTestSlotResponse, error)
 	SetApprovedVersionInStableSlot(ctx context.Context, in *SetApprovedVersionInStableSlotRequest, opts ...grpc.CallOption) (*SetApprovedVersionInStableSlotResponse, error)
 	ClearStableSlot(ctx context.Context, in *ClearStableSlotRequest, opts ...grpc.CallOption) (*ClearStableSlotResponse, error)
+	SetGreyRollout(ctx context.Context, in *SetGreyRolloutRequest, opts ...grpc.CallOption) (*SetGreyRolloutResponse, error)
+	ClearGreyRollout(ctx context.Context, in *ClearGreyRolloutRequest, opts ...grpc.CallOption) (*ClearGreyRolloutResponse, error)
 }
 
 type applicationPublicationClient struct {
@@ -71,6 +75,26 @@ func (c *applicationPublicationClient) ClearStableSlot(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *applicationPublicationClient) SetGreyRollout(ctx context.Context, in *SetGreyRolloutRequest, opts ...grpc.CallOption) (*SetGreyRolloutResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetGreyRolloutResponse)
+	err := c.cc.Invoke(ctx, ApplicationPublication_SetGreyRollout_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationPublicationClient) ClearGreyRollout(ctx context.Context, in *ClearGreyRolloutRequest, opts ...grpc.CallOption) (*ClearGreyRolloutResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearGreyRolloutResponse)
+	err := c.cc.Invoke(ctx, ApplicationPublication_ClearGreyRollout_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationPublicationServer is the server API for ApplicationPublication service.
 // All implementations must embed UnimplementedApplicationPublicationServer
 // for forward compatibility.
@@ -78,6 +102,8 @@ type ApplicationPublicationServer interface {
 	PlaceApprovedVersionInTestSlot(context.Context, *PlaceApprovedVersionInTestSlotRequest) (*PlaceApprovedVersionInTestSlotResponse, error)
 	SetApprovedVersionInStableSlot(context.Context, *SetApprovedVersionInStableSlotRequest) (*SetApprovedVersionInStableSlotResponse, error)
 	ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error)
+	SetGreyRollout(context.Context, *SetGreyRolloutRequest) (*SetGreyRolloutResponse, error)
+	ClearGreyRollout(context.Context, *ClearGreyRolloutRequest) (*ClearGreyRolloutResponse, error)
 	mustEmbedUnimplementedApplicationPublicationServer()
 }
 
@@ -96,6 +122,12 @@ func (UnimplementedApplicationPublicationServer) SetApprovedVersionInStableSlot(
 }
 func (UnimplementedApplicationPublicationServer) ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ClearStableSlot not implemented")
+}
+func (UnimplementedApplicationPublicationServer) SetGreyRollout(context.Context, *SetGreyRolloutRequest) (*SetGreyRolloutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetGreyRollout not implemented")
+}
+func (UnimplementedApplicationPublicationServer) ClearGreyRollout(context.Context, *ClearGreyRolloutRequest) (*ClearGreyRolloutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearGreyRollout not implemented")
 }
 func (UnimplementedApplicationPublicationServer) mustEmbedUnimplementedApplicationPublicationServer() {
 }
@@ -173,6 +205,42 @@ func _ApplicationPublication_ClearStableSlot_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationPublication_SetGreyRollout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetGreyRolloutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationPublicationServer).SetGreyRollout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationPublication_SetGreyRollout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationPublicationServer).SetGreyRollout(ctx, req.(*SetGreyRolloutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApplicationPublication_ClearGreyRollout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearGreyRolloutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationPublicationServer).ClearGreyRollout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationPublication_ClearGreyRollout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationPublicationServer).ClearGreyRollout(ctx, req.(*ClearGreyRolloutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationPublication_ServiceDesc is the grpc.ServiceDesc for ApplicationPublication service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -191,6 +259,14 @@ var ApplicationPublication_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearStableSlot",
 			Handler:    _ApplicationPublication_ClearStableSlot_Handler,
+		},
+		{
+			MethodName: "SetGreyRollout",
+			Handler:    _ApplicationPublication_SetGreyRollout_Handler,
+		},
+		{
+			MethodName: "ClearGreyRollout",
+			Handler:    _ApplicationPublication_ClearGreyRollout_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

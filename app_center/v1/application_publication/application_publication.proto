@@ -27,6 +27,17 @@ service ApplicationPublication {
       delete: "/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot"
     };
   }
+  rpc SetGreyRollout(SetGreyRolloutRequest) returns (SetGreyRolloutResponse) {
+    option (google.api.http) = {
+      put: "/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout"
+      body: "command"
+    };
+  }
+  rpc ClearGreyRollout(ClearGreyRolloutRequest) returns (ClearGreyRolloutResponse) {
+    option (google.api.http) = {
+      delete: "/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout"
+    };
+  }
 }
 
 message PlaceApprovedVersionInTestSlotRequest {
@@ -75,6 +86,42 @@ message ClearStableSlotResponse {
   ApplicationPublicationHistoryResource history = 3;
 }
 
+message SetGreyRolloutRequest {
+  string application_id = 1;
+  int32 rpc_api_major = 2;
+  SetGreyRolloutCommand command = 3;
+}
+
+message SetGreyRolloutCommand {
+  string version_id = 1;
+  int32 exposure_basis_points = 2;
+  int64 expected_publication_revision = 3;
+}
+
+message SetGreyRolloutResponse {
+  bool changed = 1;
+  ApplicationPublicationResource publication = 2;
+  ApplicationPublicationHistoryResource history = 3;
+}
+
+message ClearGreyRolloutRequest {
+  string application_id = 1;
+  int32 rpc_api_major = 2;
+  int64 expected_publication_revision = 3;
+}
+
+message ClearGreyRolloutResponse {
+  bool changed = 1;
+  ApplicationPublicationResource publication = 2;
+  ApplicationPublicationHistoryResource history = 3;
+}
+
+message GreyRolloutResource {
+  string rollout_id = 1;
+  string version_id = 2;
+  int32 exposure_basis_points = 3;
+}
+
 message ApplicationPublicationResource {
   string publication_id = 1;
   string application_id = 2;
@@ -86,6 +133,7 @@ message ApplicationPublicationResource {
   string updated_by = 8;
   google.protobuf.Timestamp updated_at = 9;
   optional string stable_version_id = 10;
+  optional GreyRolloutResource grey_rollout = 11;
 }
 
 message ApplicationPublicationHistoryResource {
@@ -102,4 +150,7 @@ message ApplicationPublicationHistoryResource {
   optional string preflight_policy_version = 11;
   string changed_by = 12;
   google.protobuf.Timestamp changed_at = 13;
+  optional string grey_rollout_id = 14;
+  optional int32 previous_exposure_basis_points = 15;
+  optional int32 new_exposure_basis_points = 16;
 }

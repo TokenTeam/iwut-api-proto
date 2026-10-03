@@ -19,14 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationPublicationClearGreyRollout = "/app_center.v1.application_publication.ApplicationPublication/ClearGreyRollout"
 const OperationApplicationPublicationClearStableSlot = "/app_center.v1.application_publication.ApplicationPublication/ClearStableSlot"
 const OperationApplicationPublicationPlaceApprovedVersionInTestSlot = "/app_center.v1.application_publication.ApplicationPublication/PlaceApprovedVersionInTestSlot"
 const OperationApplicationPublicationSetApprovedVersionInStableSlot = "/app_center.v1.application_publication.ApplicationPublication/SetApprovedVersionInStableSlot"
+const OperationApplicationPublicationSetGreyRollout = "/app_center.v1.application_publication.ApplicationPublication/SetGreyRollout"
 
 type ApplicationPublicationHTTPServer interface {
+	ClearGreyRollout(context.Context, *ClearGreyRolloutRequest) (*ClearGreyRolloutResponse, error)
 	ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error)
 	PlaceApprovedVersionInTestSlot(context.Context, *PlaceApprovedVersionInTestSlotRequest) (*PlaceApprovedVersionInTestSlotResponse, error)
 	SetApprovedVersionInStableSlot(context.Context, *SetApprovedVersionInStableSlotRequest) (*SetApprovedVersionInStableSlotResponse, error)
+	SetGreyRollout(context.Context, *SetGreyRolloutRequest) (*SetGreyRolloutResponse, error)
 }
 
 func RegisterApplicationPublicationHTTPServer(s *http.Server, srv ApplicationPublicationHTTPServer) {
@@ -34,6 +38,8 @@ func RegisterApplicationPublicationHTTPServer(s *http.Server, srv ApplicationPub
 	r.PUT("/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot", _ApplicationPublication_PlaceApprovedVersionInTestSlot0_HTTP_Handler(srv))
 	r.PUT("/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot", _ApplicationPublication_SetApprovedVersionInStableSlot0_HTTP_Handler(srv))
 	r.DELETE("/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot", _ApplicationPublication_ClearStableSlot0_HTTP_Handler(srv))
+	r.PUT("/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout", _ApplicationPublication_SetGreyRollout0_HTTP_Handler(srv))
+	r.DELETE("/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout", _ApplicationPublication_ClearGreyRollout0_HTTP_Handler(srv))
 }
 
 func _ApplicationPublication_PlaceApprovedVersionInTestSlot0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
@@ -108,10 +114,59 @@ func _ApplicationPublication_ClearStableSlot0_HTTP_Handler(srv ApplicationPublic
 	}
 }
 
+func _ApplicationPublication_SetGreyRollout0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetGreyRolloutRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationPublicationSetGreyRollout)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetGreyRollout(ctx, req.(*SetGreyRolloutRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetGreyRolloutResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ApplicationPublication_ClearGreyRollout0_HTTP_Handler(srv ApplicationPublicationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClearGreyRolloutRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationPublicationClearGreyRollout)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClearGreyRollout(ctx, req.(*ClearGreyRolloutRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ClearGreyRolloutResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationPublicationHTTPClient interface {
+	ClearGreyRollout(ctx context.Context, req *ClearGreyRolloutRequest, opts ...http.CallOption) (rsp *ClearGreyRolloutResponse, err error)
 	ClearStableSlot(ctx context.Context, req *ClearStableSlotRequest, opts ...http.CallOption) (rsp *ClearStableSlotResponse, err error)
 	PlaceApprovedVersionInTestSlot(ctx context.Context, req *PlaceApprovedVersionInTestSlotRequest, opts ...http.CallOption) (rsp *PlaceApprovedVersionInTestSlotResponse, err error)
 	SetApprovedVersionInStableSlot(ctx context.Context, req *SetApprovedVersionInStableSlotRequest, opts ...http.CallOption) (rsp *SetApprovedVersionInStableSlotResponse, err error)
+	SetGreyRollout(ctx context.Context, req *SetGreyRolloutRequest, opts ...http.CallOption) (rsp *SetGreyRolloutResponse, err error)
 }
 
 type ApplicationPublicationHTTPClientImpl struct {
@@ -120,6 +175,19 @@ type ApplicationPublicationHTTPClientImpl struct {
 
 func NewApplicationPublicationHTTPClient(client *http.Client) ApplicationPublicationHTTPClient {
 	return &ApplicationPublicationHTTPClientImpl{client}
+}
+
+func (c *ApplicationPublicationHTTPClientImpl) ClearGreyRollout(ctx context.Context, in *ClearGreyRolloutRequest, opts ...http.CallOption) (*ClearGreyRolloutResponse, error) {
+	var out ClearGreyRolloutResponse
+	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationPublicationClearGreyRollout))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApplicationPublicationHTTPClientImpl) ClearStableSlot(ctx context.Context, in *ClearStableSlotRequest, opts ...http.CallOption) (*ClearStableSlotResponse, error) {
@@ -153,6 +221,19 @@ func (c *ApplicationPublicationHTTPClientImpl) SetApprovedVersionInStableSlot(ct
 	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationApplicationPublicationSetApprovedVersionInStableSlot))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationPublicationHTTPClientImpl) SetGreyRollout(ctx context.Context, in *SetGreyRolloutRequest, opts ...http.CallOption) (*SetGreyRolloutResponse, error) {
+	var out SetGreyRolloutResponse
+	pattern := "/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationPublicationSetGreyRollout))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in.Command, &out, opts...)
 	if err != nil {

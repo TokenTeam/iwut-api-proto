@@ -487,6 +487,366 @@ func (x *ClearStableSlotResponse) GetHistory() *ApplicationPublicationHistoryRes
 	return nil
 }
 
+type SetGreyRolloutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor   int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	Command       *SetGreyRolloutCommand `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetGreyRolloutRequest) Reset() {
+	*x = SetGreyRolloutRequest{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetGreyRolloutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetGreyRolloutRequest) ProtoMessage() {}
+
+func (x *SetGreyRolloutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetGreyRolloutRequest.ProtoReflect.Descriptor instead.
+func (*SetGreyRolloutRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SetGreyRolloutRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *SetGreyRolloutRequest) GetRpcApiMajor() int32 {
+	if x != nil {
+		return x.RpcApiMajor
+	}
+	return 0
+}
+
+func (x *SetGreyRolloutRequest) GetCommand() *SetGreyRolloutCommand {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+type SetGreyRolloutCommand struct {
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	VersionId                   string                 `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ExposureBasisPoints         int32                  `protobuf:"varint,2,opt,name=exposure_basis_points,json=exposureBasisPoints,proto3" json:"exposure_basis_points,omitempty"`
+	ExpectedPublicationRevision int64                  `protobuf:"varint,3,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3" json:"expected_publication_revision,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *SetGreyRolloutCommand) Reset() {
+	*x = SetGreyRolloutCommand{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetGreyRolloutCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetGreyRolloutCommand) ProtoMessage() {}
+
+func (x *SetGreyRolloutCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetGreyRolloutCommand.ProtoReflect.Descriptor instead.
+func (*SetGreyRolloutCommand) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SetGreyRolloutCommand) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *SetGreyRolloutCommand) GetExposureBasisPoints() int32 {
+	if x != nil {
+		return x.ExposureBasisPoints
+	}
+	return 0
+}
+
+func (x *SetGreyRolloutCommand) GetExpectedPublicationRevision() int64 {
+	if x != nil {
+		return x.ExpectedPublicationRevision
+	}
+	return 0
+}
+
+type SetGreyRolloutResponse struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Changed       bool                                   `protobuf:"varint,1,opt,name=changed,proto3" json:"changed,omitempty"`
+	Publication   *ApplicationPublicationResource        `protobuf:"bytes,2,opt,name=publication,proto3" json:"publication,omitempty"`
+	History       *ApplicationPublicationHistoryResource `protobuf:"bytes,3,opt,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetGreyRolloutResponse) Reset() {
+	*x = SetGreyRolloutResponse{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetGreyRolloutResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetGreyRolloutResponse) ProtoMessage() {}
+
+func (x *SetGreyRolloutResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetGreyRolloutResponse.ProtoReflect.Descriptor instead.
+func (*SetGreyRolloutResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SetGreyRolloutResponse) GetChanged() bool {
+	if x != nil {
+		return x.Changed
+	}
+	return false
+}
+
+func (x *SetGreyRolloutResponse) GetPublication() *ApplicationPublicationResource {
+	if x != nil {
+		return x.Publication
+	}
+	return nil
+}
+
+func (x *SetGreyRolloutResponse) GetHistory() *ApplicationPublicationHistoryResource {
+	if x != nil {
+		return x.History
+	}
+	return nil
+}
+
+type ClearGreyRolloutRequest struct {
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ExpectedPublicationRevision int64                  `protobuf:"varint,3,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3" json:"expected_publication_revision,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *ClearGreyRolloutRequest) Reset() {
+	*x = ClearGreyRolloutRequest{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClearGreyRolloutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClearGreyRolloutRequest) ProtoMessage() {}
+
+func (x *ClearGreyRolloutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClearGreyRolloutRequest.ProtoReflect.Descriptor instead.
+func (*ClearGreyRolloutRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ClearGreyRolloutRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *ClearGreyRolloutRequest) GetRpcApiMajor() int32 {
+	if x != nil {
+		return x.RpcApiMajor
+	}
+	return 0
+}
+
+func (x *ClearGreyRolloutRequest) GetExpectedPublicationRevision() int64 {
+	if x != nil {
+		return x.ExpectedPublicationRevision
+	}
+	return 0
+}
+
+type ClearGreyRolloutResponse struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Changed       bool                                   `protobuf:"varint,1,opt,name=changed,proto3" json:"changed,omitempty"`
+	Publication   *ApplicationPublicationResource        `protobuf:"bytes,2,opt,name=publication,proto3" json:"publication,omitempty"`
+	History       *ApplicationPublicationHistoryResource `protobuf:"bytes,3,opt,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClearGreyRolloutResponse) Reset() {
+	*x = ClearGreyRolloutResponse{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClearGreyRolloutResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClearGreyRolloutResponse) ProtoMessage() {}
+
+func (x *ClearGreyRolloutResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClearGreyRolloutResponse.ProtoReflect.Descriptor instead.
+func (*ClearGreyRolloutResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ClearGreyRolloutResponse) GetChanged() bool {
+	if x != nil {
+		return x.Changed
+	}
+	return false
+}
+
+func (x *ClearGreyRolloutResponse) GetPublication() *ApplicationPublicationResource {
+	if x != nil {
+		return x.Publication
+	}
+	return nil
+}
+
+func (x *ClearGreyRolloutResponse) GetHistory() *ApplicationPublicationHistoryResource {
+	if x != nil {
+		return x.History
+	}
+	return nil
+}
+
+type GreyRolloutResource struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	RolloutId           string                 `protobuf:"bytes,1,opt,name=rollout_id,json=rolloutId,proto3" json:"rollout_id,omitempty"`
+	VersionId           string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ExposureBasisPoints int32                  `protobuf:"varint,3,opt,name=exposure_basis_points,json=exposureBasisPoints,proto3" json:"exposure_basis_points,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *GreyRolloutResource) Reset() {
+	*x = GreyRolloutResource{}
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GreyRolloutResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GreyRolloutResource) ProtoMessage() {}
+
+func (x *GreyRolloutResource) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GreyRolloutResource.ProtoReflect.Descriptor instead.
+func (*GreyRolloutResource) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GreyRolloutResource) GetRolloutId() string {
+	if x != nil {
+		return x.RolloutId
+	}
+	return ""
+}
+
+func (x *GreyRolloutResource) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *GreyRolloutResource) GetExposureBasisPoints() int32 {
+	if x != nil {
+		return x.ExposureBasisPoints
+	}
+	return 0
+}
+
 type ApplicationPublicationResource struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	PublicationId   string                 `protobuf:"bytes,1,opt,name=publication_id,json=publicationId,proto3" json:"publication_id,omitempty"`
@@ -499,13 +859,14 @@ type ApplicationPublicationResource struct {
 	UpdatedBy       string                 `protobuf:"bytes,8,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	StableVersionId *string                `protobuf:"bytes,10,opt,name=stable_version_id,json=stableVersionId,proto3,oneof" json:"stable_version_id,omitempty"`
+	GreyRollout     *GreyRolloutResource   `protobuf:"bytes,11,opt,name=grey_rollout,json=greyRollout,proto3,oneof" json:"grey_rollout,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ApplicationPublicationResource) Reset() {
 	*x = ApplicationPublicationResource{}
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -517,7 +878,7 @@ func (x *ApplicationPublicationResource) String() string {
 func (*ApplicationPublicationResource) ProtoMessage() {}
 
 func (x *ApplicationPublicationResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -530,7 +891,7 @@ func (x *ApplicationPublicationResource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationPublicationResource.ProtoReflect.Descriptor instead.
 func (*ApplicationPublicationResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{8}
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ApplicationPublicationResource) GetPublicationId() string {
@@ -603,28 +964,38 @@ func (x *ApplicationPublicationResource) GetStableVersionId() string {
 	return ""
 }
 
+func (x *ApplicationPublicationResource) GetGreyRollout() *GreyRolloutResource {
+	if x != nil {
+		return x.GreyRollout
+	}
+	return nil
+}
+
 type ApplicationPublicationHistoryResource struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	HistoryId              string                 `protobuf:"bytes,1,opt,name=history_id,json=historyId,proto3" json:"history_id,omitempty"`
-	PublicationId          string                 `protobuf:"bytes,2,opt,name=publication_id,json=publicationId,proto3" json:"publication_id,omitempty"`
-	ApplicationId          string                 `protobuf:"bytes,3,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor            int32                  `protobuf:"varint,4,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
-	PublicationRevision    int64                  `protobuf:"varint,5,opt,name=publication_revision,json=publicationRevision,proto3" json:"publication_revision,omitempty"`
-	Action                 string                 `protobuf:"bytes,6,opt,name=action,proto3" json:"action,omitempty"`
-	PreviousVersionId      *string                `protobuf:"bytes,7,opt,name=previous_version_id,json=previousVersionId,proto3,oneof" json:"previous_version_id,omitempty"`
-	NewVersionId           *string                `protobuf:"bytes,8,opt,name=new_version_id,json=newVersionId,proto3,oneof" json:"new_version_id,omitempty"`
-	ApprovedReviewId       *string                `protobuf:"bytes,9,opt,name=approved_review_id,json=approvedReviewId,proto3,oneof" json:"approved_review_id,omitempty"`
-	ScopeCatalogRevision   *int64                 `protobuf:"varint,10,opt,name=scope_catalog_revision,json=scopeCatalogRevision,proto3,oneof" json:"scope_catalog_revision,omitempty"`
-	PreflightPolicyVersion *string                `protobuf:"bytes,11,opt,name=preflight_policy_version,json=preflightPolicyVersion,proto3,oneof" json:"preflight_policy_version,omitempty"`
-	ChangedBy              string                 `protobuf:"bytes,12,opt,name=changed_by,json=changedBy,proto3" json:"changed_by,omitempty"`
-	ChangedAt              *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=changed_at,json=changedAt,proto3" json:"changed_at,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	HistoryId                   string                 `protobuf:"bytes,1,opt,name=history_id,json=historyId,proto3" json:"history_id,omitempty"`
+	PublicationId               string                 `protobuf:"bytes,2,opt,name=publication_id,json=publicationId,proto3" json:"publication_id,omitempty"`
+	ApplicationId               string                 `protobuf:"bytes,3,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	RpcApiMajor                 int32                  `protobuf:"varint,4,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	PublicationRevision         int64                  `protobuf:"varint,5,opt,name=publication_revision,json=publicationRevision,proto3" json:"publication_revision,omitempty"`
+	Action                      string                 `protobuf:"bytes,6,opt,name=action,proto3" json:"action,omitempty"`
+	PreviousVersionId           *string                `protobuf:"bytes,7,opt,name=previous_version_id,json=previousVersionId,proto3,oneof" json:"previous_version_id,omitempty"`
+	NewVersionId                *string                `protobuf:"bytes,8,opt,name=new_version_id,json=newVersionId,proto3,oneof" json:"new_version_id,omitempty"`
+	ApprovedReviewId            *string                `protobuf:"bytes,9,opt,name=approved_review_id,json=approvedReviewId,proto3,oneof" json:"approved_review_id,omitempty"`
+	ScopeCatalogRevision        *int64                 `protobuf:"varint,10,opt,name=scope_catalog_revision,json=scopeCatalogRevision,proto3,oneof" json:"scope_catalog_revision,omitempty"`
+	PreflightPolicyVersion      *string                `protobuf:"bytes,11,opt,name=preflight_policy_version,json=preflightPolicyVersion,proto3,oneof" json:"preflight_policy_version,omitempty"`
+	ChangedBy                   string                 `protobuf:"bytes,12,opt,name=changed_by,json=changedBy,proto3" json:"changed_by,omitempty"`
+	ChangedAt                   *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=changed_at,json=changedAt,proto3" json:"changed_at,omitempty"`
+	GreyRolloutId               *string                `protobuf:"bytes,14,opt,name=grey_rollout_id,json=greyRolloutId,proto3,oneof" json:"grey_rollout_id,omitempty"`
+	PreviousExposureBasisPoints *int32                 `protobuf:"varint,15,opt,name=previous_exposure_basis_points,json=previousExposureBasisPoints,proto3,oneof" json:"previous_exposure_basis_points,omitempty"`
+	NewExposureBasisPoints      *int32                 `protobuf:"varint,16,opt,name=new_exposure_basis_points,json=newExposureBasisPoints,proto3,oneof" json:"new_exposure_basis_points,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ApplicationPublicationHistoryResource) Reset() {
 	*x = ApplicationPublicationHistoryResource{}
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -636,7 +1007,7 @@ func (x *ApplicationPublicationHistoryResource) String() string {
 func (*ApplicationPublicationHistoryResource) ProtoMessage() {}
 
 func (x *ApplicationPublicationHistoryResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_publication_application_publication_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -649,7 +1020,7 @@ func (x *ApplicationPublicationHistoryResource) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ApplicationPublicationHistoryResource.ProtoReflect.Descriptor instead.
 func (*ApplicationPublicationHistoryResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{9}
+	return file_app_center_v1_application_publication_application_publication_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ApplicationPublicationHistoryResource) GetHistoryId() string {
@@ -743,6 +1114,27 @@ func (x *ApplicationPublicationHistoryResource) GetChangedAt() *timestamppb.Time
 	return nil
 }
 
+func (x *ApplicationPublicationHistoryResource) GetGreyRolloutId() string {
+	if x != nil && x.GreyRolloutId != nil {
+		return *x.GreyRolloutId
+	}
+	return ""
+}
+
+func (x *ApplicationPublicationHistoryResource) GetPreviousExposureBasisPoints() int32 {
+	if x != nil && x.PreviousExposureBasisPoints != nil {
+		return *x.PreviousExposureBasisPoints
+	}
+	return 0
+}
+
+func (x *ApplicationPublicationHistoryResource) GetNewExposureBasisPoints() int32 {
+	if x != nil && x.NewExposureBasisPoints != nil {
+		return *x.NewExposureBasisPoints
+	}
+	return 0
+}
+
 var File_app_center_v1_application_publication_application_publication_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_publication_application_publication_proto_rawDesc = "" +
@@ -781,7 +1173,34 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\x17ClearStableSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xea\x03\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xba\x01\n" +
+	"\x15SetGreyRolloutRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12V\n" +
+	"\acommand\x18\x03 \x01(\v2<.app_center.v1.application_publication.SetGreyRolloutCommandR\acommand\"\xae\x01\n" +
+	"\x15SetGreyRolloutCommand\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x01 \x01(\tR\tversionId\x122\n" +
+	"\x15exposure_basis_points\x18\x02 \x01(\x05R\x13exposureBasisPoints\x12B\n" +
+	"\x1dexpected_publication_revision\x18\x03 \x01(\x03R\x1bexpectedPublicationRevision\"\x83\x02\n" +
+	"\x16SetGreyRolloutResponse\x12\x18\n" +
+	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
+	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xa8\x01\n" +
+	"\x17ClearGreyRolloutRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12B\n" +
+	"\x1dexpected_publication_revision\x18\x03 \x01(\x03R\x1bexpectedPublicationRevision\"\x85\x02\n" +
+	"\x18ClearGreyRolloutResponse\x12\x18\n" +
+	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
+	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\x87\x01\n" +
+	"\x13GreyRolloutResource\x12\x1d\n" +
+	"\n" +
+	"rollout_id\x18\x01 \x01(\tR\trolloutId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x122\n" +
+	"\x15exposure_basis_points\x18\x03 \x01(\x05R\x13exposureBasisPoints\"\xdf\x04\n" +
 	"\x1eApplicationPublicationResource\x12%\n" +
 	"\x0epublication_id\x18\x01 \x01(\tR\rpublicationId\x12%\n" +
 	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\"\n" +
@@ -797,9 +1216,11 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\n" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12/\n" +
 	"\x11stable_version_id\x18\n" +
-	" \x01(\tH\x01R\x0fstableVersionId\x88\x01\x01B\x12\n" +
+	" \x01(\tH\x01R\x0fstableVersionId\x88\x01\x01\x12b\n" +
+	"\fgrey_rollout\x18\v \x01(\v2:.app_center.v1.application_publication.GreyRolloutResourceH\x02R\vgreyRollout\x88\x01\x01B\x12\n" +
 	"\x10_test_version_idB\x14\n" +
-	"\x12_stable_version_id\"\xe4\x05\n" +
+	"\x12_stable_version_idB\x0f\n" +
+	"\r_grey_rollout\"\xf0\a\n" +
 	"%ApplicationPublicationHistoryResource\x12\x1d\n" +
 	"\n" +
 	"history_id\x18\x01 \x01(\tR\thistoryId\x12%\n" +
@@ -817,16 +1238,25 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\n" +
 	"changed_by\x18\f \x01(\tR\tchangedBy\x129\n" +
 	"\n" +
-	"changed_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tchangedAtB\x16\n" +
+	"changed_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tchangedAt\x12+\n" +
+	"\x0fgrey_rollout_id\x18\x0e \x01(\tH\x05R\rgreyRolloutId\x88\x01\x01\x12H\n" +
+	"\x1eprevious_exposure_basis_points\x18\x0f \x01(\x05H\x06R\x1bpreviousExposureBasisPoints\x88\x01\x01\x12>\n" +
+	"\x19new_exposure_basis_points\x18\x10 \x01(\x05H\aR\x16newExposureBasisPoints\x88\x01\x01B\x16\n" +
 	"\x14_previous_version_idB\x11\n" +
 	"\x0f_new_version_idB\x15\n" +
 	"\x13_approved_review_idB\x19\n" +
 	"\x17_scope_catalog_revisionB\x1b\n" +
-	"\x19_preflight_policy_version2\xb7\x06\n" +
+	"\x19_preflight_policy_versionB\x12\n" +
+	"\x10_grey_rollout_idB!\n" +
+	"\x1f_previous_exposure_basis_pointsB\x1c\n" +
+	"\x1a_new_exposure_basis_points2\x90\n" +
+	"\n" +
 	"\x16ApplicationPublication\x12\x98\x02\n" +
 	"\x1ePlaceApprovedVersionInTestSlot\x12L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest\x1aM.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse\"Y\x82\xd3\xe4\x93\x02S:\acommand\x1aH/v1/applications/{application_id}/publications/{rpc_api_major}/test-slot\x12\x9a\x02\n" +
 	"\x1eSetApprovedVersionInStableSlot\x12L.app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest\x1aM.app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse\"[\x82\xd3\xe4\x93\x02U:\acommand\x1aJ/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot\x12\xe4\x01\n" +
-	"\x0fClearStableSlot\x12=.app_center.v1.application_publication.ClearStableSlotRequest\x1a>.app_center.v1.application_publication.ClearStableSlotResponse\"R\x82\xd3\xe4\x93\x02L*J/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slotBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"\x0fClearStableSlot\x12=.app_center.v1.application_publication.ClearStableSlotRequest\x1a>.app_center.v1.application_publication.ClearStableSlotResponse\"R\x82\xd3\xe4\x93\x02L*J/v1/applications/{application_id}/publications/{rpc_api_major}/stable-slot\x12\xeb\x01\n" +
+	"\x0eSetGreyRollout\x12<.app_center.v1.application_publication.SetGreyRolloutRequest\x1a=.app_center.v1.application_publication.SetGreyRolloutResponse\"\\\x82\xd3\xe4\x93\x02V:\acommand\x1aK/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rollout\x12\xe8\x01\n" +
+	"\x10ClearGreyRollout\x12>.app_center.v1.application_publication.ClearGreyRolloutRequest\x1a?.app_center.v1.application_publication.ClearGreyRolloutResponse\"S\x82\xd3\xe4\x93\x02M*K/v1/applications/{application_id}/publications/{rpc_api_major}/grey-rolloutBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_application_publication_proto_rawDescOnce sync.Once
@@ -840,7 +1270,7 @@ func file_app_center_v1_application_publication_application_publication_proto_ra
 	return file_app_center_v1_application_publication_application_publication_proto_rawDescData
 }
 
-var file_app_center_v1_application_publication_application_publication_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_app_center_v1_application_publication_application_publication_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_app_center_v1_application_publication_application_publication_proto_goTypes = []any{
 	(*PlaceApprovedVersionInTestSlotRequest)(nil),  // 0: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
 	(*PlaceApprovedVersionInTestSlotCommand)(nil),  // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommand
@@ -850,33 +1280,49 @@ var file_app_center_v1_application_publication_application_publication_proto_goT
 	(*SetApprovedVersionInStableSlotResponse)(nil), // 5: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse
 	(*ClearStableSlotRequest)(nil),                 // 6: app_center.v1.application_publication.ClearStableSlotRequest
 	(*ClearStableSlotResponse)(nil),                // 7: app_center.v1.application_publication.ClearStableSlotResponse
-	(*ApplicationPublicationResource)(nil),         // 8: app_center.v1.application_publication.ApplicationPublicationResource
-	(*ApplicationPublicationHistoryResource)(nil),  // 9: app_center.v1.application_publication.ApplicationPublicationHistoryResource
-	(*timestamppb.Timestamp)(nil),                  // 10: google.protobuf.Timestamp
+	(*SetGreyRolloutRequest)(nil),                  // 8: app_center.v1.application_publication.SetGreyRolloutRequest
+	(*SetGreyRolloutCommand)(nil),                  // 9: app_center.v1.application_publication.SetGreyRolloutCommand
+	(*SetGreyRolloutResponse)(nil),                 // 10: app_center.v1.application_publication.SetGreyRolloutResponse
+	(*ClearGreyRolloutRequest)(nil),                // 11: app_center.v1.application_publication.ClearGreyRolloutRequest
+	(*ClearGreyRolloutResponse)(nil),               // 12: app_center.v1.application_publication.ClearGreyRolloutResponse
+	(*GreyRolloutResource)(nil),                    // 13: app_center.v1.application_publication.GreyRolloutResource
+	(*ApplicationPublicationResource)(nil),         // 14: app_center.v1.application_publication.ApplicationPublicationResource
+	(*ApplicationPublicationHistoryResource)(nil),  // 15: app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	(*timestamppb.Timestamp)(nil),                  // 16: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_publication_application_publication_proto_depIdxs = []int32{
 	1,  // 0: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest.command:type_name -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommand
-	8,  // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
-	9,  // 2: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	14, // 1: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	15, // 2: app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
 	4,  // 3: app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest.command:type_name -> app_center.v1.application_publication.SetApprovedVersionInStableSlotCommand
-	8,  // 4: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
-	9,  // 5: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
-	8,  // 6: app_center.v1.application_publication.ClearStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
-	9,  // 7: app_center.v1.application_publication.ClearStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
-	10, // 8: app_center.v1.application_publication.ApplicationPublicationResource.created_at:type_name -> google.protobuf.Timestamp
-	10, // 9: app_center.v1.application_publication.ApplicationPublicationResource.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 10: app_center.v1.application_publication.ApplicationPublicationHistoryResource.changed_at:type_name -> google.protobuf.Timestamp
-	0,  // 11: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:input_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
-	3,  // 12: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:input_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest
-	6,  // 13: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:input_type -> app_center.v1.application_publication.ClearStableSlotRequest
-	2,  // 14: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:output_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse
-	5,  // 15: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:output_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse
-	7,  // 16: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:output_type -> app_center.v1.application_publication.ClearStableSlotResponse
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 4: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	15, // 5: app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	14, // 6: app_center.v1.application_publication.ClearStableSlotResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	15, // 7: app_center.v1.application_publication.ClearStableSlotResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	9,  // 8: app_center.v1.application_publication.SetGreyRolloutRequest.command:type_name -> app_center.v1.application_publication.SetGreyRolloutCommand
+	14, // 9: app_center.v1.application_publication.SetGreyRolloutResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	15, // 10: app_center.v1.application_publication.SetGreyRolloutResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	14, // 11: app_center.v1.application_publication.ClearGreyRolloutResponse.publication:type_name -> app_center.v1.application_publication.ApplicationPublicationResource
+	15, // 12: app_center.v1.application_publication.ClearGreyRolloutResponse.history:type_name -> app_center.v1.application_publication.ApplicationPublicationHistoryResource
+	16, // 13: app_center.v1.application_publication.ApplicationPublicationResource.created_at:type_name -> google.protobuf.Timestamp
+	16, // 14: app_center.v1.application_publication.ApplicationPublicationResource.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 15: app_center.v1.application_publication.ApplicationPublicationResource.grey_rollout:type_name -> app_center.v1.application_publication.GreyRolloutResource
+	16, // 16: app_center.v1.application_publication.ApplicationPublicationHistoryResource.changed_at:type_name -> google.protobuf.Timestamp
+	0,  // 17: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:input_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotRequest
+	3,  // 18: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:input_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotRequest
+	6,  // 19: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:input_type -> app_center.v1.application_publication.ClearStableSlotRequest
+	8,  // 20: app_center.v1.application_publication.ApplicationPublication.SetGreyRollout:input_type -> app_center.v1.application_publication.SetGreyRolloutRequest
+	11, // 21: app_center.v1.application_publication.ApplicationPublication.ClearGreyRollout:input_type -> app_center.v1.application_publication.ClearGreyRolloutRequest
+	2,  // 22: app_center.v1.application_publication.ApplicationPublication.PlaceApprovedVersionInTestSlot:output_type -> app_center.v1.application_publication.PlaceApprovedVersionInTestSlotResponse
+	5,  // 23: app_center.v1.application_publication.ApplicationPublication.SetApprovedVersionInStableSlot:output_type -> app_center.v1.application_publication.SetApprovedVersionInStableSlotResponse
+	7,  // 24: app_center.v1.application_publication.ApplicationPublication.ClearStableSlot:output_type -> app_center.v1.application_publication.ClearStableSlotResponse
+	10, // 25: app_center.v1.application_publication.ApplicationPublication.SetGreyRollout:output_type -> app_center.v1.application_publication.SetGreyRolloutResponse
+	12, // 26: app_center.v1.application_publication.ApplicationPublication.ClearGreyRollout:output_type -> app_center.v1.application_publication.ClearGreyRolloutResponse
+	22, // [22:27] is the sub-list for method output_type
+	17, // [17:22] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_publication_application_publication_proto_init() }
@@ -886,15 +1332,15 @@ func file_app_center_v1_application_publication_application_publication_proto_in
 	}
 	file_app_center_v1_application_publication_application_publication_proto_msgTypes[1].OneofWrappers = []any{}
 	file_app_center_v1_application_publication_application_publication_proto_msgTypes[4].OneofWrappers = []any{}
-	file_app_center_v1_application_publication_application_publication_proto_msgTypes[8].OneofWrappers = []any{}
-	file_app_center_v1_application_publication_application_publication_proto_msgTypes[9].OneofWrappers = []any{}
+	file_app_center_v1_application_publication_application_publication_proto_msgTypes[14].OneofWrappers = []any{}
+	file_app_center_v1_application_publication_application_publication_proto_msgTypes[15].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_publication_application_publication_proto_rawDesc), len(file_app_center_v1_application_publication_application_publication_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
