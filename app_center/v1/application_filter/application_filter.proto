@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package app_center.v1.application_filter;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_filter;applicationfilter";
+
+service ApplicationFilterService {
+  rpc GetApplicationFilter(GetApplicationFilterRequest) returns (GetApplicationFilterResponse) {
+    option (google.api.http) = { get: "/v1/applications/{application_id}/filter" };
+  }
+  rpc SetApplicationFilter(SetApplicationFilterRequest) returns (SetApplicationFilterResponse) {
+    option (google.api.http) = {
+      put: "/v1/applications/{application_id}/filter"
+      body: "command"
+    };
+  }
+  rpc ClearApplicationFilter(ClearApplicationFilterRequest) returns (ClearApplicationFilterResponse) {
+    option (google.api.http) = { delete: "/v1/applications/{application_id}/filter" };
+  }
+}
+
+enum FilterMode {
+  FILTER_MODE_UNSPECIFIED = 0;
+  FILTER_MODE_ALLOW_ALL = 1;
+  FILTER_MODE_RULE = 2;
+}
+
+enum FilterGroupOperator {
+  FILTER_GROUP_OPERATOR_UNSPECIFIED = 0;
+  FILTER_GROUP_OPERATOR_ALL = 1;
+  FILTER_GROUP_OPERATOR_ANY = 2;
+  FILTER_GROUP_OPERATOR_NOT = 3;
+}
+
+enum FilterPredicateOperator {
+  FILTER_PREDICATE_OPERATOR_UNSPECIFIED = 0;
+  FILTER_PREDICATE_OPERATOR_EQ = 1;
+  FILTER_PREDICATE_OPERATOR_NE = 2;
+  FILTER_PREDICATE_OPERATOR_LT = 3;
+  FILTER_PREDICATE_OPERATOR_LTE = 4;
+  FILTER_PREDICATE_OPERATOR_GT = 5;
+  FILTER_PREDICATE_OPERATOR_GTE = 6;
+  FILTER_PREDICATE_OPERATOR_EXISTS = 7;
+  FILTER_PREDICATE_OPERATOR_NOT_EXISTS = 8;
+}
+
+message ProfileScalar {
+  oneof value {
+    string string_value = 1;
+    int32 integer_value = 2;
+    bool boolean_value = 3;
+    string date_value = 4;
+  }
+}
+
+message FilterRule {
+  oneof node {
+    FilterGroup group = 1;
+    FilterPredicate predicate = 2;
+  }
+}
+
+message FilterGroup {
+  FilterGroupOperator operator = 1;
+  repeated FilterRule children = 2;
+}
+
+message FilterPredicate {
+  string field_key = 1;
+  FilterPredicateOperator operator = 2;
+  ProfileScalar value = 3;
+}
+
+message ApplicationFilterRevisionResource {
+  string filter_revision_id = 1;
+  int64 sequence = 2;
+  string schema_version = 3;
+  FilterMode mode = 4;
+  FilterRule rule = 5;
+  string published_by = 6;
+  google.protobuf.Timestamp published_at = 7;
+}
+
+message ApplicationFilterResource {
+  string application_id = 1;
+  int64 revision = 2;
+  FilterMode effective_mode = 3;
+  ApplicationFilterRevisionResource current_revision = 4;
+}
+
+message GetApplicationFilterRequest {
+  string application_id = 1;
+}
+
+message GetApplicationFilterResponse {
+  ApplicationFilterResource filter = 1;
+}
+
+message SetApplicationFilterCommand {
+  int64 expected_revision = 1;
+  FilterRule rule = 2;
+}
+
+message SetApplicationFilterRequest {
+  string application_id = 1;
+  SetApplicationFilterCommand command = 2;
+}
+
+message SetApplicationFilterResponse {
+  bool changed = 1;
+  ApplicationFilterResource filter = 2;
+}
+
+message ClearApplicationFilterRequest {
+  string application_id = 1;
+  int64 expected_revision = 2;
+}
+
+message ClearApplicationFilterResponse {
+  bool changed = 1;
+  ApplicationFilterResource filter = 2;
+}
