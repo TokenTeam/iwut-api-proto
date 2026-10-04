@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/runtime_resolution/runtime_resolution.proto \
+	app_center/v1/runtime_resolution/error_reason.proto \
 	app_center/v1/application_filter/application_filter.proto \
 	app_center/v1/application_filter/error_reason.proto \
 	app_center/v1/oauth_client/oauth_client_provider.proto \
@@ -55,6 +57,8 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	app_center/v1/runtime_resolution/runtime_resolution.proto \
+	app_center/v1/runtime_resolution/error_reason.proto \
 	app_center/v1/application_filter/application_filter.proto \
 	app_center/v1/application_filter/error_reason.proto \
 	app_center/v1/oauth_client/oauth_client.proto \
@@ -81,6 +85,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/runtime_resolution \
 	app_center/v1/application_filter \
 	app_center/v1/oauth_client \
 	app_center/v1/application_profile_review \
