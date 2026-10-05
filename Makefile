@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_owner_exit/account_owner_exit.proto \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
 	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_delegation/oauth_delegation.proto \
@@ -80,6 +82,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/account_owner_exit \
+	auth_center/v1/account_owner_exit \
 	auth_center/v1/platform_administrator \
 	auth_center/v1/oauth_grant \
 	auth_center/v1/oauth_delegation \

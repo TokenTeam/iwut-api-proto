@@ -1,0 +1,18 @@
+syntax = "proto3";
+package app_center.v1.account_owner_exit;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/account_owner_exit;accountownerexit";
+service AccountOwnerExitService {
+ rpc PrepareAccountOwnerExit(PrepareAccountOwnerExitRequest) returns (PrepareAccountOwnerExitResponse);
+ rpc FinishAccountOwnerExit(FinishAccountOwnerExitRequest) returns (AccountOwnerExitStatus);
+ rpc GetAccountOwnerExitStatus(GetAccountOwnerExitStatusRequest) returns (AccountOwnerExitStatus);
+}
+enum Purpose { PURPOSE_UNSPECIFIED = 0; PURPOSE_DEVELOPER_WITHDRAWAL = 1; PURPOSE_ACCOUNT_CLOSURE = 2; }
+enum Decision { DECISION_UNSPECIFIED = 0; DECISION_PENDING = 1; DECISION_COMMITTED = 2; DECISION_CANCELLED = 3; }
+enum Outcome { OUTCOME_UNSPECIFIED = 0; OUTCOME_PREPARED = 1; OUTCOME_BLOCKED = 2; }
+enum Blocker { BLOCKER_NONE = 0; BLOCKER_OWNED_APPLICATIONS = 1; BLOCKER_PENDING_OWNERSHIP_CHANGE = 2; }
+enum CleanupState { CLEANUP_STATE_UNSPECIFIED = 0; CLEANUP_STATE_NOT_REQUIRED = 1; CLEANUP_STATE_PENDING = 2; CLEANUP_STATE_COMPLETE = 3; }
+message PrepareAccountOwnerExitRequest { string auth_id = 1; string operation_id = 2; Purpose purpose = 3; }
+message PrepareAccountOwnerExitResponse { Outcome outcome = 1; string receipt_id = 2; Blocker blocker = 3; }
+message FinishAccountOwnerExitRequest { string auth_id = 1; string operation_id = 2; string receipt_id = 3; Decision decision = 4; Purpose purpose = 5; }
+message GetAccountOwnerExitStatusRequest { string auth_id = 1; string operation_id = 2; }
+message AccountOwnerExitStatus { string auth_id = 1; string operation_id = 2; Purpose purpose = 3; Decision decision = 4; string receipt_id = 5; CleanupState cleanup_state = 6; }
