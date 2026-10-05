@@ -29,6 +29,7 @@ const (
 	DeveloperStatus_DEVELOPER_STATUS_APPROVED    DeveloperStatus = 2
 	DeveloperStatus_DEVELOPER_STATUS_REJECTED    DeveloperStatus = 3
 	DeveloperStatus_DEVELOPER_STATUS_SUSPENDED   DeveloperStatus = 4
+	DeveloperStatus_DEVELOPER_STATUS_WITHDRAWN   DeveloperStatus = 5
 )
 
 // Enum value maps for DeveloperStatus.
@@ -39,6 +40,7 @@ var (
 		2: "DEVELOPER_STATUS_APPROVED",
 		3: "DEVELOPER_STATUS_REJECTED",
 		4: "DEVELOPER_STATUS_SUSPENDED",
+		5: "DEVELOPER_STATUS_WITHDRAWN",
 	}
 	DeveloperStatus_value = map[string]int32{
 		"DEVELOPER_STATUS_UNSPECIFIED": 0,
@@ -46,6 +48,7 @@ var (
 		"DEVELOPER_STATUS_APPROVED":    2,
 		"DEVELOPER_STATUS_REJECTED":    3,
 		"DEVELOPER_STATUS_SUSPENDED":   4,
+		"DEVELOPER_STATUS_WITHDRAWN":   5,
 	}
 )
 
@@ -74,6 +77,58 @@ func (x DeveloperStatus) Number() protoreflect.EnumNumber {
 // Deprecated: Use DeveloperStatus.Descriptor instead.
 func (DeveloperStatus) EnumDescriptor() ([]byte, []int) {
 	return file_auth_center_v1_developer_status_developer_status_proto_rawDescGZIP(), []int{0}
+}
+
+type AccountStatus int32
+
+const (
+	AccountStatus_ACCOUNT_STATUS_UNSPECIFIED AccountStatus = 0
+	AccountStatus_ACCOUNT_STATUS_ACTIVE      AccountStatus = 1
+	AccountStatus_ACCOUNT_STATUS_DISABLED    AccountStatus = 2
+	AccountStatus_ACCOUNT_STATUS_CLOSED      AccountStatus = 3
+)
+
+// Enum value maps for AccountStatus.
+var (
+	AccountStatus_name = map[int32]string{
+		0: "ACCOUNT_STATUS_UNSPECIFIED",
+		1: "ACCOUNT_STATUS_ACTIVE",
+		2: "ACCOUNT_STATUS_DISABLED",
+		3: "ACCOUNT_STATUS_CLOSED",
+	}
+	AccountStatus_value = map[string]int32{
+		"ACCOUNT_STATUS_UNSPECIFIED": 0,
+		"ACCOUNT_STATUS_ACTIVE":      1,
+		"ACCOUNT_STATUS_DISABLED":    2,
+		"ACCOUNT_STATUS_CLOSED":      3,
+	}
+)
+
+func (x AccountStatus) Enum() *AccountStatus {
+	p := new(AccountStatus)
+	*p = x
+	return p
+}
+
+func (x AccountStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AccountStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_auth_center_v1_developer_status_developer_status_proto_enumTypes[1].Descriptor()
+}
+
+func (AccountStatus) Type() protoreflect.EnumType {
+	return &file_auth_center_v1_developer_status_developer_status_proto_enumTypes[1]
+}
+
+func (x AccountStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AccountStatus.Descriptor instead.
+func (AccountStatus) EnumDescriptor() ([]byte, []int) {
+	return file_auth_center_v1_developer_status_developer_status_proto_rawDescGZIP(), []int{1}
 }
 
 type BatchGetDeveloperStatusesRequest struct {
@@ -168,6 +223,7 @@ type DeveloperStatusEntry struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	AuthId          string                 `protobuf:"bytes,1,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
 	DeveloperStatus DeveloperStatus        `protobuf:"varint,2,opt,name=developer_status,json=developerStatus,proto3,enum=auth_center.v1.developer_status.DeveloperStatus" json:"developer_status,omitempty"`
+	AccountStatus   AccountStatus          `protobuf:"varint,3,opt,name=account_status,json=accountStatus,proto3,enum=auth_center.v1.developer_status.AccountStatus" json:"account_status,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -216,6 +272,13 @@ func (x *DeveloperStatusEntry) GetDeveloperStatus() DeveloperStatus {
 	return DeveloperStatus_DEVELOPER_STATUS_UNSPECIFIED
 }
 
+func (x *DeveloperStatusEntry) GetAccountStatus() AccountStatus {
+	if x != nil {
+		return x.AccountStatus
+	}
+	return AccountStatus_ACCOUNT_STATUS_UNSPECIFIED
+}
+
 var File_auth_center_v1_developer_status_developer_status_proto protoreflect.FileDescriptor
 
 const file_auth_center_v1_developer_status_developer_status_proto_rawDesc = "" +
@@ -224,16 +287,23 @@ const file_auth_center_v1_developer_status_developer_status_proto_rawDesc = "" +
 	" BatchGetDeveloperStatusesRequest\x12\x19\n" +
 	"\bauth_ids\x18\x01 \x03(\tR\aauthIds\"t\n" +
 	"!BatchGetDeveloperStatusesResponse\x12O\n" +
-	"\aentries\x18\x01 \x03(\v25.auth_center.v1.developer_status.DeveloperStatusEntryR\aentries\"\x8c\x01\n" +
+	"\aentries\x18\x01 \x03(\v25.auth_center.v1.developer_status.DeveloperStatusEntryR\aentries\"\xe3\x01\n" +
 	"\x14DeveloperStatusEntry\x12\x17\n" +
 	"\aauth_id\x18\x01 \x01(\tR\x06authId\x12[\n" +
-	"\x10developer_status\x18\x02 \x01(\x0e20.auth_center.v1.developer_status.DeveloperStatusR\x0fdeveloperStatus*\xaf\x01\n" +
+	"\x10developer_status\x18\x02 \x01(\x0e20.auth_center.v1.developer_status.DeveloperStatusR\x0fdeveloperStatus\x12U\n" +
+	"\x0eaccount_status\x18\x03 \x01(\x0e2..auth_center.v1.developer_status.AccountStatusR\raccountStatus*\xcf\x01\n" +
 	"\x0fDeveloperStatus\x12 \n" +
 	"\x1cDEVELOPER_STATUS_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18DEVELOPER_STATUS_PENDING\x10\x01\x12\x1d\n" +
 	"\x19DEVELOPER_STATUS_APPROVED\x10\x02\x12\x1d\n" +
 	"\x19DEVELOPER_STATUS_REJECTED\x10\x03\x12\x1e\n" +
-	"\x1aDEVELOPER_STATUS_SUSPENDED\x10\x042\xbf\x01\n" +
+	"\x1aDEVELOPER_STATUS_SUSPENDED\x10\x04\x12\x1e\n" +
+	"\x1aDEVELOPER_STATUS_WITHDRAWN\x10\x05*\x82\x01\n" +
+	"\rAccountStatus\x12\x1e\n" +
+	"\x1aACCOUNT_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15ACCOUNT_STATUS_ACTIVE\x10\x01\x12\x1b\n" +
+	"\x17ACCOUNT_STATUS_DISABLED\x10\x02\x12\x19\n" +
+	"\x15ACCOUNT_STATUS_CLOSED\x10\x032\xbf\x01\n" +
 	"\x18DeveloperStatusDirectory\x12\xa2\x01\n" +
 	"\x19BatchGetDeveloperStatuses\x12A.auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest\x1aB.auth_center.v1.developer_status.BatchGetDeveloperStatusesResponseB\\ZZgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_status;developerstatusb\x06proto3"
 
@@ -249,24 +319,26 @@ func file_auth_center_v1_developer_status_developer_status_proto_rawDescGZIP() [
 	return file_auth_center_v1_developer_status_developer_status_proto_rawDescData
 }
 
-var file_auth_center_v1_developer_status_developer_status_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_auth_center_v1_developer_status_developer_status_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_auth_center_v1_developer_status_developer_status_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_auth_center_v1_developer_status_developer_status_proto_goTypes = []any{
 	(DeveloperStatus)(0),                      // 0: auth_center.v1.developer_status.DeveloperStatus
-	(*BatchGetDeveloperStatusesRequest)(nil),  // 1: auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest
-	(*BatchGetDeveloperStatusesResponse)(nil), // 2: auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse
-	(*DeveloperStatusEntry)(nil),              // 3: auth_center.v1.developer_status.DeveloperStatusEntry
+	(AccountStatus)(0),                        // 1: auth_center.v1.developer_status.AccountStatus
+	(*BatchGetDeveloperStatusesRequest)(nil),  // 2: auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest
+	(*BatchGetDeveloperStatusesResponse)(nil), // 3: auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse
+	(*DeveloperStatusEntry)(nil),              // 4: auth_center.v1.developer_status.DeveloperStatusEntry
 }
 var file_auth_center_v1_developer_status_developer_status_proto_depIdxs = []int32{
-	3, // 0: auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse.entries:type_name -> auth_center.v1.developer_status.DeveloperStatusEntry
+	4, // 0: auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse.entries:type_name -> auth_center.v1.developer_status.DeveloperStatusEntry
 	0, // 1: auth_center.v1.developer_status.DeveloperStatusEntry.developer_status:type_name -> auth_center.v1.developer_status.DeveloperStatus
-	1, // 2: auth_center.v1.developer_status.DeveloperStatusDirectory.BatchGetDeveloperStatuses:input_type -> auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest
-	2, // 3: auth_center.v1.developer_status.DeveloperStatusDirectory.BatchGetDeveloperStatuses:output_type -> auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 2: auth_center.v1.developer_status.DeveloperStatusEntry.account_status:type_name -> auth_center.v1.developer_status.AccountStatus
+	2, // 3: auth_center.v1.developer_status.DeveloperStatusDirectory.BatchGetDeveloperStatuses:input_type -> auth_center.v1.developer_status.BatchGetDeveloperStatusesRequest
+	3, // 4: auth_center.v1.developer_status.DeveloperStatusDirectory.BatchGetDeveloperStatuses:output_type -> auth_center.v1.developer_status.BatchGetDeveloperStatusesResponse
+	4, // [4:5] is the sub-list for method output_type
+	3, // [3:4] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_auth_center_v1_developer_status_developer_status_proto_init() }
@@ -279,7 +351,7 @@ func file_auth_center_v1_developer_status_developer_status_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_developer_status_developer_status_proto_rawDesc), len(file_auth_center_v1_developer_status_developer_status_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
