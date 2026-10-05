@@ -22,6 +22,7 @@ message BatchGetDeveloperStatusesResponse {
 message DeveloperStatusEntry {
   string auth_id = 1;
   DeveloperStatus developer_status = 2;
+  AccountStatus account_status = 3;
 }
 
 enum DeveloperStatus {
@@ -30,4 +31,12 @@ enum DeveloperStatus {
   DEVELOPER_STATUS_APPROVED = 2;
   DEVELOPER_STATUS_REJECTED = 3;
   DEVELOPER_STATUS_SUSPENDED = 4;
+  DEVELOPER_STATUS_WITHDRAWN = 5;
+}
+
+enum AccountStatus {
+  ACCOUNT_STATUS_UNSPECIFIED = 0;
+  ACCOUNT_STATUS_ACTIVE = 1;
+  ACCOUNT_STATUS_DISABLED = 2;
+  ACCOUNT_STATUS_CLOSED = 3;
 }
