@@ -1,0 +1,20 @@
+syntax = "proto3";
+package auth_center.v1.platform_administrator;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/platform_administrator;platformadministrator";
+// Exact Auth-audience USER JWS and current complete platform administrator required.
+service PlatformAdministratorService {
+ rpc ManagePlatformAdministrator(ManagePlatformAdministratorRequest) returns (PlatformAdministratorState) {option (google.api.http)={post:"/v1/platform-administrators:manage" body:"*"};}
+ rpc GetPlatformAdministrator(GetPlatformAdministratorRequest) returns (PlatformAdministratorState) {option (google.api.http)={post:"/v1/platform-administrators:get" body:"*"};}
+ rpc ListPlatformAdministrators(ListPlatformAdministratorsRequest) returns (PlatformAdministratorPage) {option (google.api.http)={post:"/v1/platform-administrators:list" body:"*"};}
+}
+enum Action { ACTION_UNSPECIFIED=0; GRANT=1; REVOKE=2; }
+enum AccountStatus { ACCOUNT_STATUS_UNSPECIFIED=0; ACTIVE=1; DISABLED=2; }
+enum Membership { MEMBERSHIP_UNSPECIFIED=0; NONE=1; GRANTED=2; }
+enum GrantBlocker { GRANT_BLOCKER_UNSPECIFIED=0; ALREADY_GRANTED=1; ACCOUNT_DISABLED=2; EMAIL_REQUIRED=3; EMAIL_RECOVERY_UNAVAILABLE=4; }
+message ManagePlatformAdministratorRequest {string subject_auth_id=1; Action action=2; optional int64 expected_permission_revision=3; string reason=4;}
+message GetPlatformAdministratorRequest {string subject_auth_id=1;}
+message ListPlatformAdministratorsRequest {optional int32 page_size=1; string after_auth_id=2;}
+message PlatformAdministratorState {string subject_auth_id=1; AccountStatus account_status=2; Membership membership=3; bool effective=4; int64 permission_revision=5; repeated GrantBlocker grant_blockers=6;}
+message PlatformAdministratorPage {repeated PlatformAdministratorState items=1; string next_after_auth_id=2; google.protobuf.Timestamp observed_at=3;}
