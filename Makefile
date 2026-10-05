@@ -21,10 +21,11 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
-	auth_center/v1/developer_management/developer_management.proto \
 	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
+	auth_center/v1/developer_management/developer_management.proto \
 	app_center/v1/account_owner_exit/account_owner_exit.proto \
 	auth_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_closure/account_closure.proto \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
 	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_delegation/oauth_delegation.proto \
@@ -59,8 +60,9 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
-	auth_center/v1/developer_management/developer_management.proto \
 	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
+	auth_center/v1/developer_management/developer_management.proto \
+	auth_center/v1/account_closure/account_closure.proto \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
 	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_grant/oauth_grant.proto \
@@ -86,10 +88,11 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
-	auth_center/v1/developer_management \
 	auth_center/v1/developer_withdrawal \
+	auth_center/v1/developer_management \
 	app_center/v1/account_owner_exit \
 	auth_center/v1/account_owner_exit \
+	auth_center/v1/account_closure \
 	auth_center/v1/platform_administrator \
 	auth_center/v1/oauth_grant \
 	auth_center/v1/oauth_delegation \
