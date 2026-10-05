@@ -90,7 +90,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
-	gen/go/auth_center/v1/session_management \
+	auth_center/v1/session_management \
 	auth_center/v1/developer_withdrawal \
 	auth_center/v1/developer_management \
 	app_center/v1/account_owner_exit \
