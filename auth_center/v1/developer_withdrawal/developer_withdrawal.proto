@@ -1,0 +1,16 @@
+syntax = "proto3";
+package auth_center.v1.developer_withdrawal;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_withdrawal;developerwithdrawal";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+service DeveloperWithdrawalService {
+ rpc PrepareDeveloperWithdrawal(PrepareDeveloperWithdrawalRequest) returns (DeveloperWithdrawalOperation) {option(google.api.http)={post:"/v1/users/me/developer-withdrawal:prepare" body:"*"};}
+ rpc ConfirmDeveloperWithdrawal(ConfirmDeveloperWithdrawalRequest) returns (DeveloperWithdrawalOperation) {option(google.api.http)={post:"/v1/users/me/developer-withdrawal:confirm" body:"*"};}
+ rpc CancelDeveloperWithdrawal(CancelDeveloperWithdrawalRequest) returns (DeveloperWithdrawalOperation) {option(google.api.http)={post:"/v1/users/me/developer-withdrawal:cancel" body:"*"};}
+ rpc GetDeveloperWithdrawal(GetDeveloperWithdrawalRequest) returns (DeveloperWithdrawalOperation) {option(google.api.http)={post:"/v1/users/me/developer-withdrawal:get" body:"*"};}
+}
+message PrepareDeveloperWithdrawalRequest {string request_id=1;int64 expected_developer_revision=2;}
+message ConfirmDeveloperWithdrawalRequest {string operation_id=1;string confirmation=2;}
+message CancelDeveloperWithdrawalRequest {string operation_id=1;}
+message GetDeveloperWithdrawalRequest {string operation_id=1;}
+message DeveloperWithdrawalOperation {string operation_id=1;string state=2;google.protobuf.Timestamp expires_at=3;string developer_status=4;int64 developer_revision=5;string blocker=6;google.protobuf.Timestamp completed_at=7;}
