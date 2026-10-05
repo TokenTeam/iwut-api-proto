@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_owner_exit/account_owner_exit.proto \
 	app_center/v1/application_catalog/application_catalog.proto \
 	app_center/v1/application_catalog/error_reason.proto \
 	app_center/v1/runtime_resolution/runtime_resolution.proto \
@@ -89,6 +91,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/account_owner_exit \
+	auth_center/v1/account_owner_exit \
 	app_center/v1/application_catalog \
 	app_center/v1/runtime_resolution \
 	app_center/v1/application_filter \

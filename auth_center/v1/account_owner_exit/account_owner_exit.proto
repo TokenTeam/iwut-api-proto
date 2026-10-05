@@ -1,0 +1,10 @@
+syntax = "proto3";
+package auth_center.v1.account_owner_exit;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/account_owner_exit;accountownerexit";
+service AccountOwnerExitDecisionService {
+ rpc GetAccountOwnerExitDecision(GetAccountOwnerExitDecisionRequest) returns (GetAccountOwnerExitDecisionResponse);
+}
+enum Purpose { PURPOSE_UNSPECIFIED = 0; PURPOSE_DEVELOPER_WITHDRAWAL = 1; PURPOSE_ACCOUNT_CLOSURE = 2; }
+enum Decision { DECISION_UNSPECIFIED = 0; DECISION_PENDING = 1; DECISION_COMMITTED = 2; DECISION_CANCELLED = 3; }
+message GetAccountOwnerExitDecisionRequest { string auth_id = 1; string operation_id = 2; }
+message GetAccountOwnerExitDecisionResponse { Decision decision = 1; Purpose purpose = 2; string receipt_id = 3; }
