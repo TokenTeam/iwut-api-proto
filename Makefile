@@ -22,6 +22,7 @@ GEN_OUT := gen/go
 
 PROTO_FILES := \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
+	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_delegation/oauth_delegation.proto \
 	auth_center/v1/oauth_grant/oauth_grant.proto \
 	app_center/v1/oauth_client/oauth_client_provider.proto \
@@ -55,6 +56,7 @@ PROTO_FILES := \
 
 HTTP_PROTO_FILES := \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
+	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_grant/oauth_grant.proto \
 	app_center/v1/oauth_client/oauth_client.proto \
 	app_center/v1/oauth_client/error_reason.proto \

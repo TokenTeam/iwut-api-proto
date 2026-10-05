@@ -1,0 +1,14 @@
+syntax = "proto3";
+package auth_center.v1.account_management;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/account_management;accountmanagement";
+service AccountManagementService {
+ rpc ManageUserAccountStatus(ManageUserAccountStatusRequest) returns (UserAccountStatus) { option (google.api.http) = {post:"/v1/user-accounts:manage-status" body:"*"}; }
+ rpc GetUserAccountStatus(GetUserAccountStatusRequest) returns (UserAccountStatus) { option (google.api.http) = {post:"/v1/user-accounts:get-status" body:"*"}; }
+}
+enum AccountStatusAction { ACCOUNT_STATUS_ACTION_UNSPECIFIED=0; ACCOUNT_STATUS_ACTION_DISABLE=1; ACCOUNT_STATUS_ACTION_RESTORE=2; }
+enum AccountStatus { ACCOUNT_STATUS_UNSPECIFIED=0; ACCOUNT_STATUS_ACTIVE=1; ACCOUNT_STATUS_DISABLED=2; }
+message ManageUserAccountStatusRequest { string subject_auth_id=1; AccountStatusAction action=2; optional int64 expected_account_revision=3; string reason=4; }
+message GetUserAccountStatusRequest { string subject_auth_id=1; }
+message UserAccountStatus { string subject_auth_id=1; AccountStatus account_status=2; int64 account_revision=3; google.protobuf.Timestamp status_changed_at=4; }
