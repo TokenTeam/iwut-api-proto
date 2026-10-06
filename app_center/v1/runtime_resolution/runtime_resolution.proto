@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package app_center.v1.runtime_resolution;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/runtime_resolution;runtime_resolution";
+
+service RuntimeResolutionService {
+  // Resolves one exact-major TEST, GREY or STABLE target. Identity is optional.
+  rpc ResolveLaunchTarget(ResolveLaunchTargetRequest) returns (LaunchTargetDescriptor) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/launch-target:resolve"
+      body: "query"
+    };
+  }
+}
+
+message ResolveLaunchTargetRequest {
+  string application_id = 1;
+  ResolveLaunchTargetQuery query = 2;
+}
+
+message ResolveLaunchTargetQuery {
+  int32 host_rpc_api_major = 1;
+  repeated string host_capabilities = 2;
+}
+
+enum LaunchChannel {
+  LAUNCH_CHANNEL_UNSPECIFIED = 0;
+  LAUNCH_CHANNEL_TEST = 1;
+  LAUNCH_CHANNEL_GREY = 2;
+  LAUNCH_CHANNEL_STABLE = 3;
+}
+
+// A consistent read snapshot, not a lease, token or candidate collection.
+message LaunchTargetDescriptor {
+  string application_id = 1;
+  string publication_id = 2;
+  int64 publication_revision = 3;
+  LaunchChannel channel = 4;
+  int32 rpc_api_major = 5;
+  string version_id = 6;
+  string version_label = 7;
+  string launch_url = 8;
+  int32 rpc_api_min_version = 9;
+  int32 rpc_api_max_version_exclusive = 10;
+  repeated string required_capabilities = 11;
+  repeated string required_scopes = 12;
+  repeated string optional_scopes = 13;
+}

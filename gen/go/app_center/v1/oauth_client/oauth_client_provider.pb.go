@@ -877,10 +877,11 @@ func (x *ResolveAuthorizationContextRequest) GetExpectedRuntimeVersion() *Runtim
 }
 
 type AuthorizationContext struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Runtime            *RuntimeConfiguration  `protobuf:"bytes,1,opt,name=runtime,proto3" json:"runtime,omitempty"`
-	AuthId             string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
-	TesterMembershipId string                 `protobuf:"bytes,3,opt,name=tester_membership_id,json=testerMembershipId,proto3" json:"tester_membership_id,omitempty"`
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Runtime *RuntimeConfiguration  `protobuf:"bytes,1,opt,name=runtime,proto3" json:"runtime,omitempty"`
+	AuthId  string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
+	// Present for TEST authorization contexts and absent for STABLE.
+	TesterMembershipId *string `protobuf:"bytes,3,opt,name=tester_membership_id,json=testerMembershipId,proto3,oneof" json:"tester_membership_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -930,8 +931,8 @@ func (x *AuthorizationContext) GetAuthId() string {
 }
 
 func (x *AuthorizationContext) GetTesterMembershipId() string {
-	if x != nil {
-		return x.TesterMembershipId
+	if x != nil && x.TesterMembershipId != nil {
+		return *x.TesterMembershipId
 	}
 	return ""
 }
@@ -1284,11 +1285,12 @@ const file_app_center_v1_oauth_client_oauth_client_provider_proto_rawDesc = "" +
 	"\achannel\x18\x03 \x01(\x0e2(.app_center.v1.oauth_client.OAuthChannelR\achannel\x12\"\n" +
 	"\rrpc_api_major\x18\x04 \x01(\x05R\vrpcApiMajor\x12D\n" +
 	"\x1eexpected_registration_revision\x18\x05 \x01(\x03R\x1cexpectedRegistrationRevision\x12d\n" +
-	"\x18expected_runtime_version\x18\x06 \x01(\v2*.app_center.v1.oauth_client.RuntimeVersionR\x16expectedRuntimeVersion\"\xad\x01\n" +
+	"\x18expected_runtime_version\x18\x06 \x01(\v2*.app_center.v1.oauth_client.RuntimeVersionR\x16expectedRuntimeVersion\"\xcb\x01\n" +
 	"\x14AuthorizationContext\x12J\n" +
 	"\aruntime\x18\x01 \x01(\v20.app_center.v1.oauth_client.RuntimeConfigurationR\aruntime\x12\x17\n" +
-	"\aauth_id\x18\x02 \x01(\tR\x06authId\x120\n" +
-	"\x14tester_membership_id\x18\x03 \x01(\tR\x12testerMembershipId\"q\n" +
+	"\aauth_id\x18\x02 \x01(\tR\x06authId\x125\n" +
+	"\x14tester_membership_id\x18\x03 \x01(\tH\x00R\x12testerMembershipId\x88\x01\x01B\x17\n" +
+	"\x15_tester_membership_id\"q\n" +
 	"#ResolveAuthorizationContextResponse\x12J\n" +
 	"\acontext\x18\x01 \x01(\v20.app_center.v1.oauth_client.AuthorizationContextR\acontext\"P\n" +
 	"'GetApplicationPublishedRedirectsRequest\x12%\n" +
@@ -1407,6 +1409,7 @@ func file_app_center_v1_oauth_client_oauth_client_provider_proto_init() {
 	}
 	file_app_center_v1_oauth_client_oauth_client_proto_init()
 	file_app_center_v1_oauth_client_oauth_client_provider_proto_msgTypes[1].OneofWrappers = []any{}
+	file_app_center_v1_oauth_client_oauth_client_provider_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

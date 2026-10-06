@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package app_center.v1.application_closure;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_closure;applicationclosure";
+
+service ApplicationClosureService {
+  rpc GetApplicationClosurePreview(GetApplicationClosurePreviewRequest) returns (GetApplicationClosurePreviewResponse) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/closure-preview"};
+  }
+  rpc CloseApplication(CloseApplicationRequest) returns (CloseApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}:close"
+      body: "command"
+    };
+  }
+  rpc GetApplicationClosure(GetApplicationClosureRequest) returns (GetApplicationClosureResponse) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/closure"};
+  }
+}
+
+enum ApplicationLifecycleStatus {
+  APPLICATION_LIFECYCLE_STATUS_UNSPECIFIED = 0;
+  APPLICATION_LIFECYCLE_STATUS_ACTIVE = 1;
+  APPLICATION_LIFECYCLE_STATUS_CLOSING = 2;
+  APPLICATION_LIFECYCLE_STATUS_CLOSED = 3;
+}
+
+message ApplicationClosurePreview {
+  string application_id = 1;
+  int64 ownership_revision = 2;
+  int64 lifecycle_revision = 3;
+  ApplicationLifecycleStatus lifecycle_status = 4;
+  bool has_pending_admin_transfer = 5;
+  int32 active_publication_channel_count = 6;
+  int32 enabled_oauth_client_count = 7;
+  int32 active_tester_count = 8;
+  int32 pending_review_count = 9;
+}
+
+message ApplicationClosureResource {
+  string closure_id = 1;
+  string application_id = 2;
+  ApplicationLifecycleStatus lifecycle_status = 3;
+  int64 lifecycle_revision = 4;
+  google.protobuf.Timestamp closing_started_at = 5;
+  optional google.protobuf.Timestamp closed_at = 6;
+}
+
+message GetApplicationClosurePreviewRequest { string application_id = 1; }
+message GetApplicationClosurePreviewResponse { ApplicationClosurePreview preview = 1; }
+
+message CloseApplicationRequest {
+  string application_id = 1;
+  CloseApplicationCommand command = 2;
+}
+message CloseApplicationCommand {
+  int64 expected_ownership_revision = 1;
+  int64 expected_lifecycle_revision = 2;
+  string confirmation = 3;
+}
+message CloseApplicationResponse { ApplicationClosureResource closure = 1; }
+
+message GetApplicationClosureRequest { string application_id = 1; }
+message GetApplicationClosureResponse { ApplicationClosureResource closure = 1; }

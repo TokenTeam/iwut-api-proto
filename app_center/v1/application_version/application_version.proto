@@ -36,6 +36,7 @@ message CreateApplicationVersionRequest {
   repeated string required_capabilities = 6;
   repeated string required_scopes = 7;
   repeated string optional_scopes = 8;
+  OAuthRedirectConfiguration oauth_redirects = 9;
 }
 
 message CreateApplicationVersionResponse {
@@ -55,6 +56,7 @@ message CreateApplicationVersionResponse {
   int64 revision = 14;
   string updated_by = 15;
   google.protobuf.Timestamp updated_at = 16;
+  OAuthRedirectConfiguration oauth_redirects = 17;
 }
 
 message UpdateApplicationVersionRequest {
@@ -74,6 +76,7 @@ message DraftApplicationVersionReplacement {
   repeated string required_capabilities = 5;
   repeated string required_scopes = 6;
   repeated string optional_scopes = 7;
+  OAuthRedirectConfiguration oauth_redirects = 8;
 }
 
 message UpdateApplicationVersionResponse {
@@ -93,4 +96,13 @@ message UpdateApplicationVersionResponse {
   int64 revision = 14;
   string updated_by = 15;
   google.protobuf.Timestamp updated_at = 16;
+  OAuthRedirectConfiguration oauth_redirects = 17;
+}
+
+// OAuthRedirectConfiguration is reviewed version content. Both arrays are
+// required by the application contract; an empty array disables that client
+// type for this version.
+message OAuthRedirectConfiguration {
+  repeated string pkce_redirect_uris = 1;
+  repeated string confidential_redirect_uris = 2;
 }

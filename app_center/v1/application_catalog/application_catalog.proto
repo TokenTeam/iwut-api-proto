@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package app_center.v1.application_catalog;
+
+import "app_center/v1/application_filter/application_filter.proto";
+import "app_center/v1/runtime_resolution/runtime_resolution.proto";
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_catalog;applicationcatalog";
+
+service ApplicationCatalogService {
+  rpc ListPublicApplications(ListPublicApplicationsRequest) returns (PublicApplicationCatalogPage) {
+    option (google.api.http) = {
+      post: "/v1/catalog/applications:search"
+      body: "query"
+    };
+  }
+
+  rpc GetPublicApplication(GetPublicApplicationRequest) returns (PublicApplicationCatalogItem) {
+    option (google.api.http) = {
+      post: "/v1/catalog/applications/{application_id}:get"
+      body: "query"
+    };
+  }
+}
+
+message CatalogRuntimeQuery {
+  int32 host_rpc_api_major = 1;
+  repeated string host_capabilities = 2;
+}
+
+message ListPublicApplicationsRequest {
+  ListPublicApplicationsQuery query = 1;
+}
+
+message ListPublicApplicationsQuery {
+  CatalogRuntimeQuery runtime = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message GetPublicApplicationRequest {
+  string application_id = 1;
+  CatalogRuntimeQuery query = 2;
+}
+
+message PublicApplicationProfile {
+  string profile_revision_id = 1;
+  string display_name = 2;
+  optional string description = 3;
+  optional string icon = 4;
+}
+
+message PublicApplicationFilter {
+  int64 revision = 1;
+  string filter_revision_id = 2;
+  string schema_version = 3;
+  app_center.v1.application_filter.FilterMode mode = 4;
+  app_center.v1.application_filter.FilterRule rule = 5;
+}
+
+message PublicApplicationCatalogItem {
+  string application_id = 1;
+  PublicApplicationProfile profile = 2;
+  app_center.v1.runtime_resolution.LaunchTargetDescriptor launch_target = 3;
+  PublicApplicationFilter filter = 4;
+}
+
+message PublicApplicationCatalogPage {
+  repeated PublicApplicationCatalogItem applications = 1;
+  string next_page_token = 2;
+}

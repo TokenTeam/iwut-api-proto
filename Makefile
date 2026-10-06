@@ -22,6 +22,10 @@ GEN_OUT := gen/go
 
 PROTO_FILES := \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	app_center/v1/application_operations/application_operations.proto \
+	app_center/v1/application_operations/error_reason.proto \
+	app_center/v1/application_closure/application_closure.proto \
+	app_center/v1/application_closure/error_reason.proto \
 	auth_center/v1/application_close_reauth/application_close_reauth.proto \
 	auth_center/v1/application_close_reauth/error_reason.proto \
 	auth_center/v1/application_closure/application_closure.proto \
@@ -29,20 +33,34 @@ PROTO_FILES := \
 	auth_center/v1/session_management/session_management.proto \
 	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
 	auth_center/v1/developer_management/developer_management.proto \
-	app_center/v1/account_owner_exit/account_owner_exit.proto \
-	auth_center/v1/account_owner_exit/account_owner_exit.proto \
 	auth_center/v1/account_closure/account_closure.proto \
 	auth_center/v1/platform_administrator/platform_administrator.proto \
 	auth_center/v1/account_management/account_management.proto \
 	auth_center/v1/oauth_delegation/oauth_delegation.proto \
 	auth_center/v1/oauth_grant/oauth_grant.proto \
-	app_center/v1/oauth_client/oauth_client_provider.proto \
-	app_center/v1/oauth_client/oauth_client.proto \
-	app_center/v1/oauth_client/error_reason.proto \
 	auth_center/v1/developer_application/developer_application.proto \
 	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
+	app_center/v1/application_admin_transfer/application_admin_transfer.proto \
+	app_center/v1/application_admin_transfer/error_reason.proto \
+	app_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_owner_exit/account_owner_exit.proto \
+	app_center/v1/application_catalog/application_catalog.proto \
+	app_center/v1/application_catalog/error_reason.proto \
+	app_center/v1/runtime_resolution/runtime_resolution.proto \
+	app_center/v1/runtime_resolution/error_reason.proto \
+	app_center/v1/application_filter/application_filter.proto \
+	app_center/v1/application_filter/error_reason.proto \
+	app_center/v1/oauth_client/oauth_client_provider.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
+	app_center/v1/application_profile_review/application_profile_review.proto \
+	app_center/v1/application_profile_review/error_reason.proto \
+	app_center/v1/application_profile_revision/application_profile_revision.proto \
+	app_center/v1/application_profile_revision/error_reason.proto \
+	app_center/v1/catalog/catalog.proto \
+	app_center/v1/catalog/error_reason.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
 	app_center/v1/tester_membership/error_reason.proto \
 	app_center/v1/application_publication/application_publication.proto \
@@ -67,6 +85,10 @@ PROTO_FILES := \
 
 HTTP_PROTO_FILES := \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	app_center/v1/application_operations/application_operations.proto \
+	app_center/v1/application_operations/error_reason.proto \
+	app_center/v1/application_closure/application_closure.proto \
+	app_center/v1/application_closure/error_reason.proto \
 	auth_center/v1/application_close_reauth/application_close_reauth.proto \
 	auth_center/v1/application_close_reauth/error_reason.proto \
 	auth_center/v1/session_management/session_management.proto \
@@ -82,6 +104,22 @@ HTTP_PROTO_FILES := \
 	auth_center/v1/email_login/email_login.proto \
 	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
+	app_center/v1/application_admin_transfer/application_admin_transfer.proto \
+	app_center/v1/application_admin_transfer/error_reason.proto \
+	app_center/v1/application_catalog/application_catalog.proto \
+	app_center/v1/application_catalog/error_reason.proto \
+	app_center/v1/runtime_resolution/runtime_resolution.proto \
+	app_center/v1/runtime_resolution/error_reason.proto \
+	app_center/v1/application_filter/application_filter.proto \
+	app_center/v1/application_filter/error_reason.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
+	app_center/v1/application_profile_review/application_profile_review.proto \
+	app_center/v1/application_profile_review/error_reason.proto \
+	app_center/v1/application_profile_revision/application_profile_revision.proto \
+	app_center/v1/application_profile_revision/error_reason.proto \
+	app_center/v1/catalog/catalog.proto \
+	app_center/v1/catalog/error_reason.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
 	app_center/v1/tester_membership/error_reason.proto \
 	app_center/v1/application_publication/application_publication.proto \
@@ -99,6 +137,8 @@ HTTP_PROTO_FILES := \
 
 GENERATED_DIRS := \
 	auth_center/v1/application_operations_permission \
+	app_center/v1/application_operations \
+	app_center/v1/application_closure \
 	auth_center/v1/application_close_reauth \
 	auth_center/v1/application_closure \
 	auth_center/v1/session_management \
@@ -115,6 +155,13 @@ GENERATED_DIRS := \
 	auth_center/v1/email_login \
 	auth_center/v1/email_binding \
 	auth_center/v1/reviewer_permission \
+	app_center/v1/application_admin_transfer \
+	app_center/v1/application_catalog \
+	app_center/v1/runtime_resolution \
+	app_center/v1/application_filter \
+	app_center/v1/application_profile_review \
+	app_center/v1/application_profile_revision \
+	app_center/v1/catalog \
 	app_center/v1/tester_membership \
 	app_center/v1/tester_join_link \
 	app_center/v1/application_publication \

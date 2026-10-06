@@ -27,14 +27,15 @@ type CreateApplicationVersionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// HTTP obtains application_id from the resource path. Native gRPC callers
 	// carry the same value in this field.
-	ApplicationId             string   `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	VersionLabel              string   `protobuf:"bytes,2,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
-	LaunchUrl                 string   `protobuf:"bytes,3,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
-	RpcApiMinVersion          int32    `protobuf:"varint,4,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
-	RpcApiMaxVersionExclusive int32    `protobuf:"varint,5,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
-	RequiredCapabilities      []string `protobuf:"bytes,6,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
-	RequiredScopes            []string `protobuf:"bytes,7,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
-	OptionalScopes            []string `protobuf:"bytes,8,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	ApplicationId             string                      `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionLabel              string                      `protobuf:"bytes,2,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                      `protobuf:"bytes,3,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                       `protobuf:"varint,4,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                       `protobuf:"varint,5,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string                    `protobuf:"bytes,6,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string                    `protobuf:"bytes,7,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string                    `protobuf:"bytes,8,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	OauthRedirects            *OAuthRedirectConfiguration `protobuf:"bytes,9,opt,name=oauth_redirects,json=oauthRedirects,proto3" json:"oauth_redirects,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -125,24 +126,32 @@ func (x *CreateApplicationVersionRequest) GetOptionalScopes() []string {
 	return nil
 }
 
+func (x *CreateApplicationVersionRequest) GetOauthRedirects() *OAuthRedirectConfiguration {
+	if x != nil {
+		return x.OauthRedirects
+	}
+	return nil
+}
+
 type CreateApplicationVersionResponse struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	VersionId                 string                 `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	ApplicationId             string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	Sequence                  int32                  `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
-	VersionLabel              string                 `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
-	LaunchUrl                 string                 `protobuf:"bytes,5,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
-	RpcApiMinVersion          int32                  `protobuf:"varint,6,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
-	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,7,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
-	RequiredCapabilities      []string               `protobuf:"bytes,8,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
-	RequiredScopes            []string               `protobuf:"bytes,9,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
-	OptionalScopes            []string               `protobuf:"bytes,10,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
-	ReviewStatus              string                 `protobuf:"bytes,11,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
-	CreatedBy                 string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt                 *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Revision                  int64                  `protobuf:"varint,14,opt,name=revision,proto3" json:"revision,omitempty"`
-	UpdatedBy                 string                 `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt                 *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	state                     protoimpl.MessageState      `protogen:"open.v1"`
+	VersionId                 string                      `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ApplicationId             string                      `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Sequence                  int32                       `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	VersionLabel              string                      `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                      `protobuf:"bytes,5,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                       `protobuf:"varint,6,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                       `protobuf:"varint,7,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string                    `protobuf:"bytes,8,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string                    `protobuf:"bytes,9,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string                    `protobuf:"bytes,10,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	ReviewStatus              string                      `protobuf:"bytes,11,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	CreatedBy                 string                      `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Revision                  int64                       `protobuf:"varint,14,opt,name=revision,proto3" json:"revision,omitempty"`
+	UpdatedBy                 string                      `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	UpdatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	OauthRedirects            *OAuthRedirectConfiguration `protobuf:"bytes,17,opt,name=oauth_redirects,json=oauthRedirects,proto3" json:"oauth_redirects,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -289,6 +298,13 @@ func (x *CreateApplicationVersionResponse) GetUpdatedAt() *timestamppb.Timestamp
 	return nil
 }
 
+func (x *CreateApplicationVersionResponse) GetOauthRedirects() *OAuthRedirectConfiguration {
+	if x != nil {
+		return x.OauthRedirects
+	}
+	return nil
+}
+
 type UpdateApplicationVersionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
@@ -360,14 +376,15 @@ func (x *UpdateApplicationVersionRequest) GetReplacement() *DraftApplicationVers
 }
 
 type DraftApplicationVersionReplacement struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	VersionLabel              string                 `protobuf:"bytes,1,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
-	LaunchUrl                 string                 `protobuf:"bytes,2,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
-	RpcApiMinVersion          int32                  `protobuf:"varint,3,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
-	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,4,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
-	RequiredCapabilities      []string               `protobuf:"bytes,5,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
-	RequiredScopes            []string               `protobuf:"bytes,6,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
-	OptionalScopes            []string               `protobuf:"bytes,7,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	state                     protoimpl.MessageState      `protogen:"open.v1"`
+	VersionLabel              string                      `protobuf:"bytes,1,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                      `protobuf:"bytes,2,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                       `protobuf:"varint,3,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                       `protobuf:"varint,4,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string                    `protobuf:"bytes,5,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string                    `protobuf:"bytes,6,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string                    `protobuf:"bytes,7,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	OauthRedirects            *OAuthRedirectConfiguration `protobuf:"bytes,8,opt,name=oauth_redirects,json=oauthRedirects,proto3" json:"oauth_redirects,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -451,24 +468,32 @@ func (x *DraftApplicationVersionReplacement) GetOptionalScopes() []string {
 	return nil
 }
 
+func (x *DraftApplicationVersionReplacement) GetOauthRedirects() *OAuthRedirectConfiguration {
+	if x != nil {
+		return x.OauthRedirects
+	}
+	return nil
+}
+
 type UpdateApplicationVersionResponse struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	VersionId                 string                 `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	ApplicationId             string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	Sequence                  int32                  `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
-	VersionLabel              string                 `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
-	LaunchUrl                 string                 `protobuf:"bytes,5,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
-	RpcApiMinVersion          int32                  `protobuf:"varint,6,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
-	RpcApiMaxVersionExclusive int32                  `protobuf:"varint,7,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
-	RequiredCapabilities      []string               `protobuf:"bytes,8,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
-	RequiredScopes            []string               `protobuf:"bytes,9,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
-	OptionalScopes            []string               `protobuf:"bytes,10,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
-	ReviewStatus              string                 `protobuf:"bytes,11,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
-	CreatedBy                 string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt                 *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Revision                  int64                  `protobuf:"varint,14,opt,name=revision,proto3" json:"revision,omitempty"`
-	UpdatedBy                 string                 `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt                 *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	state                     protoimpl.MessageState      `protogen:"open.v1"`
+	VersionId                 string                      `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ApplicationId             string                      `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Sequence                  int32                       `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	VersionLabel              string                      `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	LaunchUrl                 string                      `protobuf:"bytes,5,opt,name=launch_url,json=launchUrl,proto3" json:"launch_url,omitempty"`
+	RpcApiMinVersion          int32                       `protobuf:"varint,6,opt,name=rpc_api_min_version,json=rpcApiMinVersion,proto3" json:"rpc_api_min_version,omitempty"`
+	RpcApiMaxVersionExclusive int32                       `protobuf:"varint,7,opt,name=rpc_api_max_version_exclusive,json=rpcApiMaxVersionExclusive,proto3" json:"rpc_api_max_version_exclusive,omitempty"`
+	RequiredCapabilities      []string                    `protobuf:"bytes,8,rep,name=required_capabilities,json=requiredCapabilities,proto3" json:"required_capabilities,omitempty"`
+	RequiredScopes            []string                    `protobuf:"bytes,9,rep,name=required_scopes,json=requiredScopes,proto3" json:"required_scopes,omitempty"`
+	OptionalScopes            []string                    `protobuf:"bytes,10,rep,name=optional_scopes,json=optionalScopes,proto3" json:"optional_scopes,omitempty"`
+	ReviewStatus              string                      `protobuf:"bytes,11,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	CreatedBy                 string                      `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Revision                  int64                       `protobuf:"varint,14,opt,name=revision,proto3" json:"revision,omitempty"`
+	UpdatedBy                 string                      `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	UpdatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	OauthRedirects            *OAuthRedirectConfiguration `protobuf:"bytes,17,opt,name=oauth_redirects,json=oauthRedirects,proto3" json:"oauth_redirects,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -615,11 +640,73 @@ func (x *UpdateApplicationVersionResponse) GetUpdatedAt() *timestamppb.Timestamp
 	return nil
 }
 
+func (x *UpdateApplicationVersionResponse) GetOauthRedirects() *OAuthRedirectConfiguration {
+	if x != nil {
+		return x.OauthRedirects
+	}
+	return nil
+}
+
+// OAuthRedirectConfiguration is reviewed version content. Both arrays are
+// required by the application contract; an empty array disables that client
+// type for this version.
+type OAuthRedirectConfiguration struct {
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	PkceRedirectUris         []string               `protobuf:"bytes,1,rep,name=pkce_redirect_uris,json=pkceRedirectUris,proto3" json:"pkce_redirect_uris,omitempty"`
+	ConfidentialRedirectUris []string               `protobuf:"bytes,2,rep,name=confidential_redirect_uris,json=confidentialRedirectUris,proto3" json:"confidential_redirect_uris,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *OAuthRedirectConfiguration) Reset() {
+	*x = OAuthRedirectConfiguration{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthRedirectConfiguration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthRedirectConfiguration) ProtoMessage() {}
+
+func (x *OAuthRedirectConfiguration) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthRedirectConfiguration.ProtoReflect.Descriptor instead.
+func (*OAuthRedirectConfiguration) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *OAuthRedirectConfiguration) GetPkceRedirectUris() []string {
+	if x != nil {
+		return x.PkceRedirectUris
+	}
+	return nil
+}
+
+func (x *OAuthRedirectConfiguration) GetConfidentialRedirectUris() []string {
+	if x != nil {
+		return x.ConfidentialRedirectUris
+	}
+	return nil
+}
+
 var File_app_center_v1_application_version_application_version_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_version_application_version_proto_rawDesc = "" +
 	"\n" +
-	";app_center/v1/application_version/application_version.proto\x12!app_center.v1.application_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x84\x03\n" +
+	";app_center/v1/application_version/application_version.proto\x12!app_center.v1.application_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xec\x03\n" +
 	"\x1fCreateApplicationVersionRequest\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12#\n" +
 	"\rversion_label\x18\x02 \x01(\tR\fversionLabel\x12\x1d\n" +
@@ -629,7 +716,8 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\x1drpc_api_max_version_exclusive\x18\x05 \x01(\x05R\x19rpcApiMaxVersionExclusive\x123\n" +
 	"\x15required_capabilities\x18\x06 \x03(\tR\x14requiredCapabilities\x12'\n" +
 	"\x0frequired_scopes\x18\a \x03(\tR\x0erequiredScopes\x12'\n" +
-	"\x0foptional_scopes\x18\b \x03(\tR\x0eoptionalScopes\"\xb5\x05\n" +
+	"\x0foptional_scopes\x18\b \x03(\tR\x0eoptionalScopes\x12f\n" +
+	"\x0foauth_redirects\x18\t \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\x9d\x06\n" +
 	" CreateApplicationVersionResponse\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12%\n" +
@@ -653,13 +741,14 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\n" +
 	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xfd\x01\n" +
+	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12f\n" +
+	"\x0foauth_redirects\x18\x11 \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\xfd\x01\n" +
 	"\x1fUpdateApplicationVersionRequest\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x02 \x01(\tR\tversionId\x12+\n" +
 	"\x11expected_revision\x18\x03 \x01(\x03R\x10expectedRevision\x12g\n" +
-	"\vreplacement\x18\x04 \x01(\v2E.app_center.v1.application_version.DraftApplicationVersionReplacementR\vreplacement\"\xe0\x02\n" +
+	"\vreplacement\x18\x04 \x01(\v2E.app_center.v1.application_version.DraftApplicationVersionReplacementR\vreplacement\"\xc8\x03\n" +
 	"\"DraftApplicationVersionReplacement\x12#\n" +
 	"\rversion_label\x18\x01 \x01(\tR\fversionLabel\x12\x1d\n" +
 	"\n" +
@@ -668,7 +757,8 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\x1drpc_api_max_version_exclusive\x18\x04 \x01(\x05R\x19rpcApiMaxVersionExclusive\x123\n" +
 	"\x15required_capabilities\x18\x05 \x03(\tR\x14requiredCapabilities\x12'\n" +
 	"\x0frequired_scopes\x18\x06 \x03(\tR\x0erequiredScopes\x12'\n" +
-	"\x0foptional_scopes\x18\a \x03(\tR\x0eoptionalScopes\"\xb5\x05\n" +
+	"\x0foptional_scopes\x18\a \x03(\tR\x0eoptionalScopes\x12f\n" +
+	"\x0foauth_redirects\x18\b \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\x9d\x06\n" +
 	" UpdateApplicationVersionResponse\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12%\n" +
@@ -692,7 +782,11 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\n" +
 	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xe5\x03\n" +
+	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12f\n" +
+	"\x0foauth_redirects\x18\x11 \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\x88\x01\n" +
+	"\x1aOAuthRedirectConfiguration\x12,\n" +
+	"\x12pkce_redirect_uris\x18\x01 \x03(\tR\x10pkceRedirectUris\x12<\n" +
+	"\x1aconfidential_redirect_uris\x18\x02 \x03(\tR\x18confidentialRedirectUris2\xe5\x03\n" +
 	"\x12ApplicationVersion\x12\xda\x01\n" +
 	"\x18CreateApplicationVersion\x12B.app_center.v1.application_version.CreateApplicationVersionRequest\x1aC.app_center.v1.application_version.CreateApplicationVersionResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/applications/{application_id}/versions\x12\xf1\x01\n" +
 	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
@@ -709,30 +803,35 @@ func file_app_center_v1_application_version_application_version_proto_rawDescGZI
 	return file_app_center_v1_application_version_application_version_proto_rawDescData
 }
 
-var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_app_center_v1_application_version_application_version_proto_goTypes = []any{
 	(*CreateApplicationVersionRequest)(nil),    // 0: app_center.v1.application_version.CreateApplicationVersionRequest
 	(*CreateApplicationVersionResponse)(nil),   // 1: app_center.v1.application_version.CreateApplicationVersionResponse
 	(*UpdateApplicationVersionRequest)(nil),    // 2: app_center.v1.application_version.UpdateApplicationVersionRequest
 	(*DraftApplicationVersionReplacement)(nil), // 3: app_center.v1.application_version.DraftApplicationVersionReplacement
 	(*UpdateApplicationVersionResponse)(nil),   // 4: app_center.v1.application_version.UpdateApplicationVersionResponse
-	(*timestamppb.Timestamp)(nil),              // 5: google.protobuf.Timestamp
+	(*OAuthRedirectConfiguration)(nil),         // 5: app_center.v1.application_version.OAuthRedirectConfiguration
+	(*timestamppb.Timestamp)(nil),              // 6: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_version_application_version_proto_depIdxs = []int32{
-	5, // 0: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
-	5, // 1: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	3, // 2: app_center.v1.application_version.UpdateApplicationVersionRequest.replacement:type_name -> app_center.v1.application_version.DraftApplicationVersionReplacement
-	5, // 3: app_center.v1.application_version.UpdateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
-	5, // 4: app_center.v1.application_version.UpdateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	0, // 5: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
-	2, // 6: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:input_type -> app_center.v1.application_version.UpdateApplicationVersionRequest
-	1, // 7: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
-	4, // 8: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:output_type -> app_center.v1.application_version.UpdateApplicationVersionResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5,  // 0: app_center.v1.application_version.CreateApplicationVersionRequest.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	6,  // 1: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 2: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 3: app_center.v1.application_version.CreateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	3,  // 4: app_center.v1.application_version.UpdateApplicationVersionRequest.replacement:type_name -> app_center.v1.application_version.DraftApplicationVersionReplacement
+	5,  // 5: app_center.v1.application_version.DraftApplicationVersionReplacement.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	6,  // 6: app_center.v1.application_version.UpdateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 7: app_center.v1.application_version.UpdateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 8: app_center.v1.application_version.UpdateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	0,  // 9: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
+	2,  // 10: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:input_type -> app_center.v1.application_version.UpdateApplicationVersionRequest
+	1,  // 11: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
+	4,  // 12: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:output_type -> app_center.v1.application_version.UpdateApplicationVersionResponse
+	11, // [11:13] is the sub-list for method output_type
+	9,  // [9:11] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_version_application_version_proto_init() }
@@ -746,7 +845,7 @@ func file_app_center_v1_application_version_application_version_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_version_application_version_proto_rawDesc), len(file_app_center_v1_application_version_application_version_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package app_center.v1.application_admin_transfer;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_admin_transfer;applicationadmintransfer";
+
+service ApplicationAdminTransferService {
+  rpc GetApplicationOwnership(GetApplicationOwnershipRequest) returns (GetApplicationOwnershipResponse) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/ownership"};
+  }
+  rpc InitiateApplicationAdminTransfer(InitiateApplicationAdminTransferRequest) returns (InitiateApplicationAdminTransferResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/admin-transfers"
+      body: "command"
+    };
+  }
+  rpc GetApplicationAdminTransfer(GetApplicationAdminTransferRequest) returns (GetApplicationAdminTransferResponse) {
+    option (google.api.http) = {get: "/v1/application-admin-transfers/{transfer_id}"};
+  }
+  rpc AcceptApplicationAdminTransfer(AcceptApplicationAdminTransferRequest) returns (AcceptApplicationAdminTransferResponse) {
+    option (google.api.http) = {
+      post: "/v1/application-admin-transfers/{transfer_id}:accept"
+      body: "command"
+    };
+  }
+  rpc RejectApplicationAdminTransfer(RejectApplicationAdminTransferRequest) returns (RejectApplicationAdminTransferResponse) {
+    option (google.api.http) = {
+      post: "/v1/application-admin-transfers/{transfer_id}:reject"
+      body: "*"
+    };
+  }
+  rpc CancelApplicationAdminTransfer(CancelApplicationAdminTransferRequest) returns (CancelApplicationAdminTransferResponse) {
+    option (google.api.http) = {
+      post: "/v1/application-admin-transfers/{transfer_id}:cancel"
+      body: "*"
+    };
+  }
+}
+
+enum ApplicationAdminTransferStatus {
+  APPLICATION_ADMIN_TRANSFER_STATUS_UNSPECIFIED = 0;
+  APPLICATION_ADMIN_TRANSFER_STATUS_PENDING = 1;
+  APPLICATION_ADMIN_TRANSFER_STATUS_ACCEPTED = 2;
+  APPLICATION_ADMIN_TRANSFER_STATUS_REJECTED = 3;
+  APPLICATION_ADMIN_TRANSFER_STATUS_CANCELLED = 4;
+  APPLICATION_ADMIN_TRANSFER_STATUS_EXPIRED = 5;
+}
+
+enum ConfidentialCredentialHandling {
+  CONFIDENTIAL_CREDENTIAL_HANDLING_UNSPECIFIED = 0;
+  CONFIDENTIAL_CREDENTIAL_HANDLING_KEEP = 1;
+  CONFIDENTIAL_CREDENTIAL_HANDLING_ROTATE = 2;
+}
+
+message ApplicationOwnershipResource {
+  string application_id = 1;
+  int64 ownership_revision = 2;
+  optional string pending_transfer_id = 3;
+  optional google.protobuf.Timestamp pending_expires_at = 4;
+}
+
+message ApplicationAdminTransferResource {
+  string transfer_id = 1;
+  string application_id = 2;
+  string from_admin_id = 3;
+  string to_admin_id = 4;
+  int64 source_ownership_revision = 5;
+  ApplicationAdminTransferStatus status = 6;
+  google.protobuf.Timestamp requested_at = 7;
+  google.protobuf.Timestamp expires_at = 8;
+  optional google.protobuf.Timestamp resolved_at = 9;
+  optional string resolved_by = 10;
+  optional ConfidentialCredentialHandling confidential_credential_handling = 11;
+}
+
+message RotatedCredentialResource {
+  string channel = 1;
+  string client_id = 2;
+  int64 credential_revision = 3;
+  string client_secret = 4;
+}
+
+message GetApplicationOwnershipRequest { string application_id = 1; }
+message GetApplicationOwnershipResponse { ApplicationOwnershipResource ownership = 1; }
+
+message InitiateApplicationAdminTransferRequest {
+  string application_id = 1;
+  InitiateApplicationAdminTransferCommand command = 2;
+}
+message InitiateApplicationAdminTransferCommand {
+  string to_auth_id = 1;
+  int64 expected_ownership_revision = 2;
+}
+message InitiateApplicationAdminTransferResponse { ApplicationAdminTransferResource transfer = 1; }
+
+message GetApplicationAdminTransferRequest { string transfer_id = 1; }
+message GetApplicationAdminTransferResponse { ApplicationAdminTransferResource transfer = 1; }
+
+message AcceptApplicationAdminTransferRequest {
+  string transfer_id = 1;
+  AcceptApplicationAdminTransferCommand command = 2;
+}
+message AcceptApplicationAdminTransferCommand {
+  ConfidentialCredentialHandling confidential_credential_handling = 1;
+}
+message AcceptApplicationAdminTransferResponse {
+  ApplicationAdminTransferResource transfer = 1;
+  repeated RotatedCredentialResource rotated_credentials = 2;
+  bool secrets_disclosed = 3;
+}
+
+message RejectApplicationAdminTransferRequest { string transfer_id = 1; }
+message RejectApplicationAdminTransferResponse { ApplicationAdminTransferResource transfer = 1; }
+
+message CancelApplicationAdminTransferRequest { string transfer_id = 1; }
+message CancelApplicationAdminTransferResponse { ApplicationAdminTransferResource transfer = 1; }

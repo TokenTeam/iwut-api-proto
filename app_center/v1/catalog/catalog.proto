@@ -1,0 +1,37 @@
+syntax = "proto3";
+package app_center.v1.catalog;
+import "google/api/annotations.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/catalog;catalog";
+
+service Catalog {
+  // Resolves only the exact-major test slot for an authenticated ACTIVE Tester.
+  rpc ResolveTestLaunchTarget(ResolveTestLaunchTargetRequest) returns (TestLaunchDescriptor) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/test-launch:resolve"
+      body: "query"
+    };
+  }
+}
+message ResolveTestLaunchTargetRequest {
+  string application_id = 1;
+  ResolveTestLaunchTargetQuery query = 2;
+}
+message ResolveTestLaunchTargetQuery {
+  int32 host_rpc_api_major = 1;
+  repeated string host_capabilities = 2;
+}
+// A consistent read snapshot, not a lease or token. Never cache in shared caches.
+message TestLaunchDescriptor {
+  string application_id = 1;
+  string publication_id = 2;
+  int64 publication_revision = 3;
+  int32 rpc_api_major = 4;
+  string version_id = 5;
+  string version_label = 6;
+  string launch_url = 7;
+  int32 rpc_api_min_version = 8;
+  int32 rpc_api_max_version_exclusive = 9;
+  repeated string required_capabilities = 10;
+  repeated string required_scopes = 11;
+  repeated string optional_scopes = 12;
+}
