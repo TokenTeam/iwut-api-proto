@@ -21,6 +21,27 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/application_close_reauth/application_close_reauth.proto \
+	auth_center/v1/application_close_reauth/error_reason.proto \
+	auth_center/v1/application_closure/application_closure.proto \
+	auth_center/v1/application_closure/error_reason.proto \
+	auth_center/v1/session_management/session_management.proto \
+	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
+	auth_center/v1/developer_management/developer_management.proto \
+	app_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_owner_exit/account_owner_exit.proto \
+	auth_center/v1/account_closure/account_closure.proto \
+	auth_center/v1/platform_administrator/platform_administrator.proto \
+	auth_center/v1/account_management/account_management.proto \
+	auth_center/v1/oauth_delegation/oauth_delegation.proto \
+	auth_center/v1/oauth_grant/oauth_grant.proto \
+	app_center/v1/oauth_client/oauth_client_provider.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
+	auth_center/v1/developer_application/developer_application.proto \
+	auth_center/v1/email_login/email_login.proto \
+	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
 	app_center/v1/tester_membership/error_reason.proto \
@@ -45,6 +66,21 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/application_close_reauth/application_close_reauth.proto \
+	auth_center/v1/application_close_reauth/error_reason.proto \
+	auth_center/v1/session_management/session_management.proto \
+	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
+	auth_center/v1/developer_management/developer_management.proto \
+	auth_center/v1/account_closure/account_closure.proto \
+	auth_center/v1/platform_administrator/platform_administrator.proto \
+	auth_center/v1/account_management/account_management.proto \
+	auth_center/v1/oauth_grant/oauth_grant.proto \
+	app_center/v1/oauth_client/oauth_client.proto \
+	app_center/v1/oauth_client/error_reason.proto \
+	auth_center/v1/developer_application/developer_application.proto \
+	auth_center/v1/email_login/email_login.proto \
+	auth_center/v1/email_binding/email_binding.proto \
 	auth_center/v1/reviewer_permission/reviewer_permission.proto \
 	app_center/v1/tester_membership/tester_membership.proto \
 	app_center/v1/tester_membership/error_reason.proto \
@@ -62,6 +98,22 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	auth_center/v1/application_operations_permission \
+	auth_center/v1/application_close_reauth \
+	auth_center/v1/application_closure \
+	auth_center/v1/session_management \
+	auth_center/v1/developer_withdrawal \
+	auth_center/v1/developer_management \
+	app_center/v1/account_owner_exit \
+	auth_center/v1/account_owner_exit \
+	auth_center/v1/account_closure \
+	auth_center/v1/platform_administrator \
+	auth_center/v1/oauth_grant \
+	auth_center/v1/oauth_delegation \
+	app_center/v1/oauth_client \
+	auth_center/v1/developer_application \
+	auth_center/v1/email_login \
+	auth_center/v1/email_binding \
 	auth_center/v1/reviewer_permission \
 	app_center/v1/tester_membership \
 	app_center/v1/tester_join_link \

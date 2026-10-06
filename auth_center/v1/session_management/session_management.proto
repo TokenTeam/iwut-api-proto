@@ -1,0 +1,46 @@
+syntax = "proto3";
+package auth_center.v1.session_management;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/session_management;sessionmanagement";
+
+// Both methods require the one current platform Session. Neither touches LRU.
+service SessionManagementService {
+  rpc ListOwnSessions(ListOwnSessionsRequest) returns (OwnSessionPage) {
+    option (google.api.http) = {post: "/v1/users/me/sessions:list" body: "*"};
+  }
+  rpc RevokeOwnSessions(RevokeOwnSessionsRequest) returns (SessionsRevoked) {
+    option (google.api.http) = {post: "/v1/users/me/sessions:revoke" body: "*"};
+  }
+}
+message ListOwnSessionsRequest {
+  optional int32 page_size = 1; // Absent means 10; explicit 0 is invalid.
+  string cursor = 2;
+}
+message RevokeOwnSessionsRequest {
+  repeated string session_ids = 1; // Unique 1..50 UUIDv4 values, excluding current.
+}
+message SessionsRevoked {}
+enum AuthenticationMethod {
+  AUTHENTICATION_METHOD_UNSPECIFIED = 0;
+  DEVICE_CREDENTIAL = 1;
+  EMAIL_CODE_AND_DEVICE = 2;
+}
+message OwnSessionSummary {
+  string session_id = 1;
+  string credential_id = 2;
+  AuthenticationMethod authentication_method = 3;
+  google.protobuf.Timestamp authenticated_at = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp last_used_at = 6;
+  google.protobuf.Timestamp expires_at = 7;
+  bool is_current = 8;
+}
+message OwnSessionPage {
+  string current_session_id = 1;
+  google.protobuf.Timestamp observed_at = 2;
+  repeated OwnSessionSummary sessions = 3;
+  // Last scanned candidate, possibly absent from sessions. Continue even if
+  // sessions is empty; empty next_cursor alone means scanning is complete.
+  string next_cursor = 4;
+}

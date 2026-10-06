@@ -1,0 +1,16 @@
+syntax = "proto3";
+package auth_center.v1.developer_management;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/developer_management;developermanagement";
+// Requires Auth-audience USER JWS and current complete administrator membership.
+service DeveloperManagementService {
+ rpc ManageDeveloperStatus(ManageDeveloperStatusRequest) returns (ManagedDeveloperStatus) {option (google.api.http)={post:"/v1/developers:manage-status" body:"*"};}
+ rpc GetManagedDeveloperStatus(GetManagedDeveloperStatusRequest) returns (ManagedDeveloperStatus) {option (google.api.http)={post:"/v1/developers:get-managed-status" body:"*"};}
+}
+enum Action {ACTION_UNSPECIFIED=0;SUSPEND=1;RESTORE=2;}
+enum AccountStatus {ACCOUNT_STATUS_UNSPECIFIED=0;ACTIVE=1;DISABLED=2;}
+enum DeveloperStatus {DEVELOPER_STATUS_UNSPECIFIED=0;PENDING=1;APPROVED=2;REJECTED=3;SUSPENDED=4;WITHDRAWN=5;}
+message ManageDeveloperStatusRequest{string subject_auth_id=1;Action action=2;optional int64 expected_developer_revision=3;string reason=4;}
+message GetManagedDeveloperStatusRequest{string subject_auth_id=1;}
+message ManagedDeveloperStatus{string subject_auth_id=1;AccountStatus account_status=2;DeveloperStatus developer_status=3;int64 developer_revision=4;google.protobuf.Timestamp status_changed_at=5;}

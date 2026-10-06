@@ -36,6 +36,7 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS ErrorReason = 5
 	ErrorReason_ERROR_REASON_APPLICATION_QUOTA_EXCEEDED      ErrorReason = 6
 	ErrorReason_ERROR_REASON_INTERNAL                        ErrorReason = 7
+	ErrorReason_ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED      ErrorReason = 8
 )
 
 // Enum value maps for ErrorReason.
@@ -49,6 +50,7 @@ var (
 		5: "ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS",
 		6: "ERROR_REASON_APPLICATION_QUOTA_EXCEEDED",
 		7: "ERROR_REASON_INTERNAL",
+		8: "ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                     0,
@@ -59,6 +61,7 @@ var (
 		"ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS": 5,
 		"ERROR_REASON_APPLICATION_QUOTA_EXCEEDED":      6,
 		"ERROR_REASON_INTERNAL":                        7,
+		"ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED":      8,
 	}
 )
 
@@ -93,7 +96,7 @@ var File_app_center_v1_application_error_reason_proto protoreflect.FileDescripto
 
 const file_app_center_v1_application_error_reason_proto_rawDesc = "" +
 	"\n" +
-	",app_center/v1/application/error_reason.proto\x12\x19app_center.v1.application*\xd9\x02\n" +
+	",app_center/v1/application/error_reason.proto\x12\x19app_center.v1.application*\x86\x03\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12)\n" +
 	"%ERROR_REASON_INVALID_APPLICATION_NAME\x10\x01\x12,\n" +
@@ -102,7 +105,8 @@ const file_app_center_v1_application_error_reason_proto_rawDesc = "" +
 	"(ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED\x10\x04\x120\n" +
 	",ERROR_REASON_APPLICATION_NAME_ALREADY_EXISTS\x10\x05\x12+\n" +
 	"'ERROR_REASON_APPLICATION_QUOTA_EXCEEDED\x10\x06\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\aBRZPgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;applicationb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\a\x12+\n" +
+	"'ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED\x10\bBRZPgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application;applicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_error_reason_proto_rawDescOnce sync.Once

@@ -1,0 +1,112 @@
+syntax = "proto3";
+package auth_center.v1.account_closure;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/account_closure;account_closure";
+
+// These methods accept only their dedicated device proof or closure token.
+// Session, user JWS and OAuth Authorization carriers are forbidden.
+service AccountClosureService {
+  rpc BeginAccountClosure(BeginAccountClosureRequest) returns (AccountClosureChallenge) {
+    option (google.api.http) = { post: "/v1/account-closures:begin" body: "*" };
+  }
+  rpc PrepareAccountClosure(PrepareAccountClosureRequest) returns (AccountClosurePreparation) {
+    option (google.api.http) = { post: "/v1/account-closures:prepare" body: "*" };
+  }
+  rpc ConfirmAccountClosure(ConfirmAccountClosureRequest) returns (AccountClosureStatus) {
+    option (google.api.http) = { post: "/v1/account-closures:confirm" body: "*" };
+  }
+  rpc CancelAccountClosure(CancelAccountClosureRequest) returns (AccountClosureStatus) {
+    option (google.api.http) = { post: "/v1/account-closures:cancel" body: "*" };
+  }
+  rpc GetAccountClosure(GetAccountClosureRequest) returns (AccountClosureStatus) {
+    option (google.api.http) = { post: "/v1/account-closures:get" body: "*" };
+  }
+}
+
+message BeginAccountClosureRequest {
+  string request_id = 1;
+  oneof credential_locator {
+    string credential_id = 2;
+    bytes public_key_fingerprint = 3;
+  }
+}
+message AccountClosureChallenge {
+  string operation_id = 1;
+  bytes challenge = 2;
+  bytes signing_payload = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string service_id = 5;
+  string application_id = 6;
+  string policy_version = 7;
+}
+message PrepareAccountClosureRequest {
+  string operation_id = 1;
+  bytes signature = 2;
+}
+enum PreparationOutcome {
+  PREPARATION_OUTCOME_UNSPECIFIED = 0;
+  PREPARATION_OUTCOME_READY = 1;
+  PREPARATION_OUTCOME_PREPARING = 2;
+  PREPARATION_OUTCOME_BLOCKED = 3;
+}
+enum Blocker {
+  BLOCKER_NONE = 0;
+  BLOCKER_ADMIN_HANDOVER_REQUIRED = 1;
+  BLOCKER_DEVELOPER_WITHDRAWAL_REQUIRED = 2;
+  BLOCKER_OWNED_APPLICATIONS = 3;
+  BLOCKER_PENDING_OWNERSHIP_CHANGE = 4;
+  BLOCKER_LIFECYCLE_OPERATION_PENDING = 5;
+}
+message AccountClosurePreview {
+  string auth_id = 1;
+  string developer_handle = 2;
+  string policy_version = 3;
+  bool irreversible = 4;
+  repeated string data_to_delete = 5;
+  repeated string permanent_retention = 6;
+  google.protobuf.Timestamp expires_at = 7;
+  uint32 audit_retention_days = 8;
+  uint32 backup_retention_days = 9;
+}
+message AccountClosurePreparation {
+  string operation_id = 1;
+  PreparationOutcome outcome = 2;
+  Blocker blocker = 3;
+  AccountClosurePreview preview = 4;
+  // Returned once, never persisted in plaintext. Confirm/Cancel use the
+  // x-iwut-closure-confirmation header; Get uses x-iwut-closure-receipt.
+  string confirmation_token = 5;
+  string receipt_token = 6;
+}
+message ConfirmAccountClosureRequest {
+  string operation_id = 1;
+  string confirmation = 2; // Must equal CLOSE_ACCOUNT.
+  string policy_version = 3;
+}
+message CancelAccountClosureRequest { string operation_id = 1; }
+message GetAccountClosureRequest { string operation_id = 1; }
+enum ClosureState {
+  CLOSURE_STATE_UNSPECIFIED = 0;
+  CLOSURE_STATE_PREPARING = 1;
+  CLOSURE_STATE_READY = 2;
+  CLOSURE_STATE_CANCELLED = 3;
+  CLOSURE_STATE_TERMINATION_PENDING = 4;
+  CLOSURE_STATE_TERMINATED = 5;
+  CLOSURE_STATE_CLEANUP_COMPLETE = 6;
+}
+enum CleanupProgress {
+  CLEANUP_PROGRESS_UNSPECIFIED = 0;
+  CLEANUP_PROGRESS_NOT_STARTED = 1;
+  CLEANUP_PROGRESS_AUTH_PENDING = 2;
+  CLEANUP_PROGRESS_APP_PENDING = 3;
+  CLEANUP_PROGRESS_COMPLETE = 4;
+}
+// Deliberately excludes account identifiers, profile, email, handle and reasons.
+message AccountClosureStatus {
+  ClosureState state = 1;
+  google.protobuf.Timestamp terminated_at = 2;
+  CleanupProgress cleanup_progress = 3;
+  google.protobuf.Timestamp backup_expiry_upper_bound = 4;
+}

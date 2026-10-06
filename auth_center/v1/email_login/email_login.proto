@@ -1,0 +1,38 @@
+syntax = "proto3";
+package auth_center.v1.email_login;
+import "google/api/annotations.proto";
+import "auth_center/v1/authentication/authentication.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/email_login;email_login";
+
+// Both methods require the x-iwut-session key to be completely absent.
+service EmailLoginService {
+  rpc BeginEmailLogin(BeginEmailLoginRequest) returns (EmailLoginChallenge) {
+    option (google.api.http) = { post: "/v1/email-logins" body: "*" };
+  }
+  rpc CompleteEmailLogin(CompleteEmailLoginRequest) returns (EmailLoginResult) {
+    option (google.api.http) = { post: "/v1/email-logins/{operation_id}/completion" body: "*" };
+  }
+}
+message BeginEmailLoginRequest {
+  string request_id = 1;
+  string email = 2;
+  auth_center.v1.authentication.CredentialRegistrationProposal credential_proposal = 3;
+}
+message EmailLoginChallenge {
+  string operation_id = 1;
+  bytes challenge = 2;
+  bytes signing_payload = 3;
+  string protocol_version = 4;
+  int64 expires_at_unix_ms = 5;
+  int64 resend_after_unix_ms = 6;
+}
+message CompleteEmailLoginRequest {
+  string operation_id = 1;
+  string code = 2;
+  auth_center.v1.authentication.CredentialProof proof = 3;
+}
+message EmailLoginResult {
+  string auth_id = 1;
+  string credential_id = 2;
+  auth_center.v1.authentication.SessionEstablished session = 3;
+}

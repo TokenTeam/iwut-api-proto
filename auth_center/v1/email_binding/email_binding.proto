@@ -1,0 +1,75 @@
+syntax = "proto3";
+package auth_center.v1.email_binding;
+import "google/api/annotations.proto";
+import "auth_center/v1/authentication/authentication.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/email_binding;email_binding";
+
+// Session absence selects registration; a supplied invalid Session never does.
+service EmailBindingService {
+  rpc BeginSetEmail(BeginSetEmailRequest) returns (EmailVerificationStarted) {
+    option (google.api.http) = { post: "/v1/email-bindings" body: "*" };
+  }
+  rpc CompleteSetEmail(CompleteSetEmailRequest) returns (EmailActivated) {
+    option (google.api.http) = { post: "/v1/email-bindings/{operation_id}/completion" body: "*" };
+  }
+  rpc GetOwnEmailBinding(GetOwnEmailBindingRequest) returns (OwnEmailBinding) {
+    option (google.api.http) = { get: "/v1/users/me/email-binding" };
+  }
+}
+enum EmailMode {
+  EMAIL_MODE_UNSPECIFIED = 0;
+  EMAIL_MODE_REGISTER = 1;
+  EMAIL_MODE_BIND = 2;
+}
+message BeginSetEmailRequest {
+  string request_id = 1;
+  string email = 2;
+  oneof intent {
+    BindEmailIntent binding = 3;
+    RegisterEmailIntent registration = 4;
+  }
+}
+message BindEmailIntent { optional int64 expected_revision = 1; }
+message RegisterEmailIntent {
+  auth_center.v1.authentication.CredentialRegistrationProposal credential_proposal = 1;
+  auth_center.v1.authentication.StudentAssociationDeclaration association = 2;
+}
+message EmailVerificationStarted {
+  string operation_id = 1;
+  EmailMode mode = 2;
+  string target_email = 3;
+  int64 expires_at_unix_ms = 4;
+  int64 resend_after_unix_ms = 5;
+  EmailRegistrationChallenge registration_challenge = 6;
+}
+message EmailRegistrationChallenge {
+  bytes challenge = 1;
+  bytes signing_payload = 2;
+  string protocol_version = 3;
+}
+message CompleteSetEmailRequest {
+  string operation_id = 1;
+  string code = 2;
+  auth_center.v1.authentication.CredentialProof registration_proof = 3;
+}
+message EmailActivated {
+  string operation_id = 1;
+  EmailMode mode = 2;
+  string email = 3;
+  int64 verified_at_unix_ms = 4;
+  int64 revision = 5;
+  auth_center.v1.authentication.UserRegistrationResult registration_result = 6;
+}
+message GetOwnEmailBindingRequest {}
+message OwnEmailBinding {
+  int64 revision = 1;
+  ActiveEmail active_email = 2;
+  PendingEmailBinding pending = 3;
+}
+message ActiveEmail { string email = 1; int64 verified_at_unix_ms = 2; }
+message PendingEmailBinding {
+  string operation_id = 1;
+  string target_email = 2;
+  int64 expires_at_unix_ms = 3;
+  int64 resend_after_unix_ms = 4;
+}

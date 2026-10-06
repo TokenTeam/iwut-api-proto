@@ -1,0 +1,65 @@
+syntax = "proto3";
+package auth_center.v1.application_operations_permission;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_operations_permission;applicationoperationspermission";
+
+// Requires a verified Auth-audience user identity and current full platform
+// administrator authority. The operation permissions do not authorize this API.
+service ApplicationOperationsPermissionService {
+  rpc ManageApplicationOperationsPermission(ManageApplicationOperationsPermissionRequest) returns (ApplicationOperationsPermissions) {
+    option (google.api.http) = {
+      put: "/v1/users/{subject_auth_id}/application-operation-permissions/{permission}"
+      body: "*"
+    };
+  }
+  rpc GetApplicationOperationsPermissions(GetApplicationOperationsPermissionsRequest) returns (ApplicationOperationsPermissions) {
+    option (google.api.http) = {get: "/v1/users/{subject_auth_id}/application-operation-permissions"};
+  }
+}
+
+enum ApplicationOperationsPermissionAction {
+  APPLICATION_OPERATIONS_PERMISSION_ACTION_UNSPECIFIED = 0;
+  APPLICATION_OPERATIONS_PERMISSION_ACTION_GRANT = 1;
+  APPLICATION_OPERATIONS_PERMISSION_ACTION_REVOKE = 2;
+}
+
+enum ApplicationOperationsAccountStatus {
+  APPLICATION_OPERATIONS_ACCOUNT_STATUS_UNSPECIFIED = 0;
+  APPLICATION_OPERATIONS_ACCOUNT_STATUS_ACTIVE = 1;
+  APPLICATION_OPERATIONS_ACCOUNT_STATUS_DISABLED = 2;
+}
+
+enum ApplicationOperationsGrantBlocker {
+  APPLICATION_OPERATIONS_GRANT_BLOCKER_UNSPECIFIED = 0;
+  APPLICATION_OPERATIONS_GRANT_BLOCKER_ACCOUNT_DISABLED = 1;
+  APPLICATION_OPERATIONS_GRANT_BLOCKER_EMAIL_REQUIRED = 2;
+  APPLICATION_OPERATIONS_GRANT_BLOCKER_EMAIL_RECOVERY_UNAVAILABLE = 3;
+}
+
+message ManageApplicationOperationsPermissionRequest {
+  string subject_auth_id = 1 [json_name = "subject_auth_id"];
+  string permission = 2;
+  ApplicationOperationsPermissionAction action = 3;
+  optional int64 expected_permission_revision = 4;
+  string reason = 5;
+}
+
+message GetApplicationOperationsPermissionsRequest {
+  string subject_auth_id = 1 [json_name = "subject_auth_id"];
+}
+
+message ApplicationOperationsPermission {
+  string permission = 1;
+  bool granted = 2;
+  bool effective = 3;
+}
+
+message ApplicationOperationsPermissions {
+  string subject_auth_id = 1;
+  ApplicationOperationsAccountStatus account_status = 2;
+  repeated ApplicationOperationsPermission permissions = 3;
+  int64 permission_revision = 4;
+  repeated ApplicationOperationsGrantBlocker grant_blockers = 5;
+}

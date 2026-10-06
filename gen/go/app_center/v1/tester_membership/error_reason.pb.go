@@ -41,6 +41,7 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_TESTER_MEMBERSHIP_NOT_FOUND ErrorReason = 14
 	ErrorReason_ERROR_REASON_APPLICATION_TESTER_STATE_INCONSISTENT   ErrorReason = 15
 	ErrorReason_ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST           ErrorReason = 16
+	ErrorReason_ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED              ErrorReason = 17
 )
 
 // Enum value maps for ErrorReason.
@@ -63,6 +64,7 @@ var (
 		14: "ERROR_REASON_APPLICATION_TESTER_MEMBERSHIP_NOT_FOUND",
 		15: "ERROR_REASON_APPLICATION_TESTER_STATE_INCONSISTENT",
 		16: "ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST",
+		17: "ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                             0,
@@ -82,6 +84,7 @@ var (
 		"ERROR_REASON_APPLICATION_TESTER_MEMBERSHIP_NOT_FOUND": 14,
 		"ERROR_REASON_APPLICATION_TESTER_STATE_INCONSISTENT":   15,
 		"ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST":           16,
+		"ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED":              17,
 	}
 )
 
@@ -116,7 +119,7 @@ var File_app_center_v1_tester_membership_error_reason_proto protoreflect.FileDes
 
 const file_app_center_v1_tester_membership_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"2app_center/v1/tester_membership/error_reason.proto\x12\x1fapp_center.v1.tester_membership*\x8a\x06\n" +
+	"2app_center/v1/tester_membership/error_reason.proto\x12\x1fapp_center.v1.tester_membership*\xb7\x06\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_AUTHENTICATED_USER_REQUIRED\x10\x01\x12+\n" +
@@ -135,7 +138,8 @@ const file_app_center_v1_tester_membership_error_reason_proto_rawDesc = "" +
 	"'ERROR_REASON_APPLICATION_ADMIN_REQUIRED\x10\r\x128\n" +
 	"4ERROR_REASON_APPLICATION_TESTER_MEMBERSHIP_NOT_FOUND\x10\x0e\x126\n" +
 	"2ERROR_REASON_APPLICATION_TESTER_STATE_INCONSISTENT\x10\x0f\x12.\n" +
-	"*ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST\x10\x10B]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
+	"*ERROR_REASON_INVALID_REMOVE_TESTER_REQUEST\x10\x10\x12+\n" +
+	"'ERROR_REASON_ACCOUNT_OWNER_EXIT_BLOCKED\x10\x11B]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
 
 var (
 	file_app_center_v1_tester_membership_error_reason_proto_rawDescOnce sync.Once

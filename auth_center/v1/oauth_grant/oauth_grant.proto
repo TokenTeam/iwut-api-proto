@@ -1,0 +1,48 @@
+syntax = "proto3";
+package auth_center.v1.oauth_grant;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/oauth_grant;oauthgrant";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// Both methods require the current USER's x-iwut-session carrier.
+service OAuthGrantService {
+  rpc ListOwnApplicationGrants(ListOwnApplicationGrantsRequest) returns (ListOwnApplicationGrantsResponse) {
+    option (google.api.http) = { post: "/v1/users/me/application-grants:list" body: "*" };
+  }
+  rpc RevokeOwnApplicationGrant(RevokeOwnApplicationGrantRequest) returns (RevokeOwnApplicationGrantResponse) {
+    option (google.api.http) = { post: "/v1/users/me/application-grants/{grant_id}:revoke" body: "*" };
+  }
+}
+message ApplicationGrant {
+  string grant_id = 1;
+  string application_id = 2;
+  string channel = 3;
+  string status = 4;
+  repeated string granted_scopes = 5;
+  int64 revision = 6;
+  string display_name = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+message ListOwnApplicationGrantsRequest {
+  string cursor = 1;
+  int32 page_size = 2;
+}
+message ListOwnApplicationGrantsResponse {
+  repeated ApplicationGrant grants = 1;
+  string next_cursor = 2;
+}
+enum RevocationMode {
+  REVOCATION_MODE_UNSPECIFIED = 0;
+  REVOCATION_MODE_ALL = 1;
+  REVOCATION_MODE_SCOPES = 2;
+}
+message RevokeOwnApplicationGrantRequest {
+  string grant_id = 1 [json_name = "grant_id"];
+  optional int64 expected_revision = 2;
+  RevocationMode mode = 3;
+  repeated string scopes = 4;
+}
+message RevokeOwnApplicationGrantResponse {
+  ApplicationGrant grant = 1;
+}
