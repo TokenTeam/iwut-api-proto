@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package auth_center.v1.application_closure;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_closure;applicationclosure";
+
+// Native gRPC only. App Center authenticates with a trusted service identity.
+service ApplicationClosureService {
+  rpc ApplyApplicationClosure(ApplyApplicationClosureRequest) returns (ApplicationClosureStatus);
+  rpc GetApplicationClosureStatus(GetApplicationClosureStatusRequest) returns (ApplicationClosureStatus);
+}
+
+message ApplyApplicationClosureRequest {
+  string application_id = 1;
+  string closure_id = 2;
+  google.protobuf.Timestamp closing_started_at = 3;
+}
+
+message GetApplicationClosureStatusRequest {
+  string application_id = 1;
+  string closure_id = 2;
+}
+
+enum ApplicationClosureState {
+  APPLICATION_CLOSURE_STATE_UNSPECIFIED = 0;
+  APPLICATION_CLOSURE_STATE_APPLIED = 1;
+}
+
+message ApplicationClosureStatus {
+  string application_id = 1;
+  string closure_id = 2;
+  ApplicationClosureState state = 3;
+  string receipt_id = 4;
+  google.protobuf.Timestamp applied_at = 5;
+}
