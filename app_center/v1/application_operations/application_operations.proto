@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package app_center.v1.application_operations;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_operations;applicationoperations";
+
+service ApplicationOperationsService {
+  rpc GetApplicationPlatformAvailability(GetApplicationPlatformAvailabilityRequest) returns (GetApplicationPlatformAvailabilityResponse) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/platform-availability"};
+  }
+  rpc SuspendApplication(SuspendApplicationRequest) returns (SuspendApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}:suspend"
+      body: "command"
+    };
+  }
+  rpc RestoreApplication(RestoreApplicationRequest) returns (RestoreApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}:restore"
+      body: "command"
+    };
+  }
+}
+
+enum ApplicationLifecycleStatus {
+  APPLICATION_LIFECYCLE_STATUS_UNSPECIFIED = 0;
+  APPLICATION_LIFECYCLE_STATUS_ACTIVE = 1;
+  APPLICATION_LIFECYCLE_STATUS_CLOSING = 2;
+  APPLICATION_LIFECYCLE_STATUS_CLOSED = 3;
+}
+
+enum PlatformAvailabilityStatus {
+  PLATFORM_AVAILABILITY_STATUS_UNSPECIFIED = 0;
+  PLATFORM_AVAILABILITY_STATUS_AVAILABLE = 1;
+  PLATFORM_AVAILABILITY_STATUS_SUSPENDED = 2;
+}
+
+message ApplicationPlatformAvailability {
+  string application_id = 1;
+  ApplicationLifecycleStatus lifecycle_status = 2;
+  int64 lifecycle_revision = 3;
+  PlatformAvailabilityStatus platform_availability_status = 4;
+  int64 platform_availability_revision = 5;
+  optional string last_operation_event_id = 6;
+  optional google.protobuf.Timestamp suspended_at = 7;
+  optional google.protobuf.Timestamp restored_at = 8;
+}
+
+message GetApplicationPlatformAvailabilityRequest { string application_id = 1; }
+message GetApplicationPlatformAvailabilityResponse { ApplicationPlatformAvailability availability = 1; }
+
+message ApplicationPlatformAvailabilityCommand {
+  int64 expected_lifecycle_revision = 1;
+  int64 expected_platform_availability_revision = 2;
+  string reason = 3;
+}
+
+message SuspendApplicationRequest {
+  string application_id = 1;
+  ApplicationPlatformAvailabilityCommand command = 2;
+}
+message SuspendApplicationResponse { ApplicationPlatformAvailability availability = 1; }
+
+message RestoreApplicationRequest {
+  string application_id = 1;
+  ApplicationPlatformAvailabilityCommand command = 2;
+}
+message RestoreApplicationResponse { ApplicationPlatformAvailability availability = 1; }
