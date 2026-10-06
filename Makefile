@@ -21,6 +21,10 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	auth_center/v1/application_close_reauth/application_close_reauth.proto \
+	auth_center/v1/application_close_reauth/error_reason.proto \
+	auth_center/v1/application_closure/application_closure.proto \
+	auth_center/v1/application_closure/error_reason.proto \
 	auth_center/v1/session_management/session_management.proto \
 	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
 	auth_center/v1/developer_management/developer_management.proto \
@@ -61,6 +65,8 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	auth_center/v1/application_close_reauth/application_close_reauth.proto \
+	auth_center/v1/application_close_reauth/error_reason.proto \
 	auth_center/v1/session_management/session_management.proto \
 	auth_center/v1/developer_withdrawal/developer_withdrawal.proto \
 	auth_center/v1/developer_management/developer_management.proto \
@@ -90,6 +96,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	auth_center/v1/application_close_reauth \
+	auth_center/v1/application_closure \
 	auth_center/v1/session_management \
 	auth_center/v1/developer_withdrawal \
 	auth_center/v1/developer_management \

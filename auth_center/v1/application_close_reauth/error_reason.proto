@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package auth_center.v1.application_close_reauth;
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_close_reauth;applicationclosereauth";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_INVALID_APPLICATION_CLOSE_REAUTH_REQUEST = 1;
+  ERROR_REASON_APPLICATION_CLOSE_REAUTH_FAILED = 2;
+  ERROR_REASON_APPLICATION_CLOSE_REAUTH_RATE_LIMITED = 3;
+  ERROR_REASON_APPLICATION_CLOSE_REAUTH_UNAVAILABLE = 4;
+  ERROR_REASON_APPLICATION_CLOSE_REAUTH_STATE_INCONSISTENT = 5;
+}
