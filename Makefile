@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/application_closure/application_closure.proto \
+	app_center/v1/application_closure/error_reason.proto \
 	app_center/v1/application_admin_transfer/application_admin_transfer.proto \
 	app_center/v1/application_admin_transfer/error_reason.proto \
 	app_center/v1/account_owner_exit/account_owner_exit.proto \
@@ -63,6 +65,8 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	app_center/v1/application_closure/application_closure.proto \
+	app_center/v1/application_closure/error_reason.proto \
 	app_center/v1/application_admin_transfer/application_admin_transfer.proto \
 	app_center/v1/application_admin_transfer/error_reason.proto \
 	app_center/v1/application_catalog/application_catalog.proto \
@@ -95,6 +99,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/application_closure \
 	app_center/v1/application_admin_transfer \
 	app_center/v1/account_owner_exit \
 	auth_center/v1/account_owner_exit \
