@@ -1,0 +1,13 @@
+syntax = "proto3";
+package app_center.v1.application_review_query;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review_query;applicationreviewquery";
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_REVIEWER_IDENTITY_REQUIRED = 1;
+  ERROR_REASON_APPLICATION_REVIEW_PERMISSION_REQUIRED = 2;
+  ERROR_REASON_INVALID_APPLICATION_REVIEW_QUERY = 3;
+  ERROR_REASON_INVALID_APPLICATION_REVIEW_PAGE_TOKEN = 4;
+  ERROR_REASON_APPLICATION_REVIEW_NOT_FOUND = 5;
+  ERROR_REASON_APPLICATION_REVIEW_STATE_INCONSISTENT = 6;
+  ERROR_REASON_INTERNAL = 7;
+}
