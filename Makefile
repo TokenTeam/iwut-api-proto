@@ -25,6 +25,8 @@ PROTO_FILES := \
 	app_center/v1/application_management/error_reason.proto \
 	app_center/v1/application_review_query/application_review_query.proto \
 	app_center/v1/application_review_query/error_reason.proto \
+	app_center/v1/application_profile_review_query/application_profile_review_query.proto \
+	app_center/v1/application_profile_review_query/error_reason.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
 	app_center/v1/application_operations/application_operations.proto \
 	app_center/v1/application_operations/error_reason.proto \
@@ -92,6 +94,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_management/error_reason.proto \
 	app_center/v1/application_review_query/application_review_query.proto \
 	app_center/v1/application_review_query/error_reason.proto \
+	app_center/v1/application_profile_review_query/application_profile_review_query.proto \
+	app_center/v1/application_profile_review_query/error_reason.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
 	app_center/v1/application_operations/application_operations.proto \
 	app_center/v1/application_operations/error_reason.proto \
@@ -146,6 +150,7 @@ HTTP_PROTO_FILES := \
 GENERATED_DIRS := \
 	app_center/v1/application_management \
 	app_center/v1/application_review_query \
+	app_center/v1/application_profile_review_query \
 	auth_center/v1/application_operations_permission \
 	app_center/v1/application_operations \
 	app_center/v1/application_closure \

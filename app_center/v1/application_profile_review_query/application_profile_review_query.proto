@@ -1,0 +1,31 @@
+syntax = "proto3";
+package app_center.v1.application_profile_review_query;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "app_center/v1/application_profile_review/application_profile_review.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_review_query;applicationprofilereviewquery";
+service ApplicationProfileReviewQueryService {
+  rpc ListPendingApplicationProfileReviews(ListPendingApplicationProfileReviewsRequest) returns (PendingApplicationProfileReviewPage) { option (google.api.http) = {post: "/v1/reviews/application-profiles:search" body: "query"}; }
+  rpc GetApplicationProfileReview(GetApplicationProfileReviewRequest) returns (ApplicationProfileReviewDetail) { option (google.api.http) = {get: "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}/reviews/{profile_review_id}"}; }
+}
+message ListPendingApplicationProfileReviewsRequest { ListPendingApplicationProfileReviewsQuery query = 1; }
+message ListPendingApplicationProfileReviewsQuery { optional string application_id = 1; int32 page_size = 2; string page_token = 3; }
+message GetApplicationProfileReviewRequest { string application_id = 1; string profile_revision_id = 2; string profile_review_id = 3; }
+enum ProfileReviewConflict { PROFILE_REVIEW_CONFLICT_UNSPECIFIED = 0; CURRENT_ADMIN = 1; REVISION_CREATOR = 2; REVIEW_SUBMITTER = 3; }
+message ProfileReviewDecisionEligibility { bool eligible = 1; repeated ProfileReviewConflict conflicts = 2; }
+message PendingApplicationProfileReview {
+  string application_id = 1; string application_name = 2; string profile_revision_id = 3; int32 sequence = 4; string display_name = 5;
+  string profile_review_id = 6; int32 attempt = 7; google.protobuf.Timestamp submitted_at = 8; ProfileReviewDecisionEligibility decision_eligibility = 9;
+}
+message PendingApplicationProfileReviewPage { repeated PendingApplicationProfileReview items = 1; string next_page_token = 2; google.protobuf.Timestamp as_of = 3; }
+message ProfileReviewApplicationContext { string application_id = 1; string name = 2; string admin_id = 3; string lifecycle_status = 4; string platform_availability_status = 5; }
+message ProfileRevisionReviewContext { string profile_revision_id = 1; int32 sequence = 2; string review_status = 3; int64 revision = 4; string created_by = 5; }
+message ProfileReviewPolicyContext { string version = 1; repeated string required_check_ids = 2; }
+message ApplicationProfileReviewDetail {
+  ProfileReviewApplicationContext application = 1;
+  ProfileRevisionReviewContext profile_revision = 2;
+  app_center.v1.application_profile_review.ApplicationProfileReviewRecord review = 3;
+  ProfileReviewPolicyContext current_policy = 4;
+  ProfileReviewDecisionEligibility decision_eligibility = 5;
+  google.protobuf.Timestamp as_of = 6;
+}
