@@ -1,0 +1,12 @@
+syntax = "proto3";
+package app_center.v1.application_management;
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_management;applicationmanagement";
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_AUTHENTICATED_USER_REQUIRED = 1;
+  ERROR_REASON_INVALID_APPLICATION_MANAGEMENT_REQUEST = 2;
+  ERROR_REASON_INVALID_APPLICATION_MANAGEMENT_PAGE_TOKEN = 3;
+  ERROR_REASON_APPLICATION_MANAGEMENT_NOT_FOUND = 4;
+  ERROR_REASON_APPLICATION_MANAGEMENT_STATE_INCONSISTENT = 5;
+  ERROR_REASON_INTERNAL = 6;
+}

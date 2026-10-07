@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package app_center.v1.application_management;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_management;applicationmanagement";
+
+service ApplicationManagementQueryService {
+  rpc ListMyApplications(ListMyApplicationsRequest) returns (OwnedApplicationPage) {
+    option (google.api.http) = {post: "/v1/applications:search" body: "query"};
+  }
+  rpc GetMyApplication(GetMyApplicationRequest) returns (OwnedApplicationManagementDetail) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}"};
+  }
+}
+
+message ListMyApplicationsRequest { ListMyApplicationsQuery query = 1; }
+message ListMyApplicationsQuery {
+  repeated string lifecycle_statuses = 1;
+  repeated string platform_availability_statuses = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+message GetMyApplicationRequest { string application_id = 1; }
+
+message OwnedApplicationCore {
+  string application_id = 1;
+  string name = 2;
+  string admin_id = 3;
+  google.protobuf.Timestamp created_at = 4;
+  int64 ownership_revision = 5;
+  string lifecycle_status = 6;
+  int64 lifecycle_revision = 7;
+  string platform_availability_status = 8;
+  int64 platform_availability_revision = 9;
+}
+message ApplicationManagementCounts {
+  int64 version_count = 1;
+  int64 draft_version_count = 2;
+  int64 submitted_version_count = 3;
+  int64 approved_version_count = 4;
+  int64 rejected_version_count = 5;
+  int64 pending_version_review_count = 6;
+  int64 pending_profile_review_count = 7;
+  int64 active_tester_count = 8;
+}
+message OwnedApplicationSummary {
+  OwnedApplicationCore application = 1;
+  ApplicationManagementCounts counts = 2;
+}
+message OwnedApplicationPage {
+  repeated OwnedApplicationSummary items = 1;
+  string next_page_token = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
+
+message ApplicationProfileStateSummary {
+  optional string working_profile_revision_id = 1;
+  optional string current_published_profile_revision_id = 2;
+}
+message ApplicationPublicationSummary {
+  int32 rpc_api_major = 1;
+  int64 revision = 2;
+  optional string test_version_id = 3;
+  optional string grey_version_id = 4;
+  int32 grey_rollout_percent = 5;
+  optional string stable_version_id = 6;
+}
+message ApplicationFilterStateSummary {
+  int64 revision = 1;
+  optional string filter_revision_id = 2;
+  int64 sequence = 3;
+  string schema_version = 4;
+  string mode = 5;
+}
+message OAuthClientIdentitySummary {
+  string client_id = 1;
+  string status = 2;
+  int64 authorization_epoch = 3;
+  optional int64 credential_revision = 4;
+  optional google.protobuf.Timestamp credential_rotated_at = 5;
+}
+message OAuthRegistrationSummary {
+  string channel = 1;
+  int64 registration_revision = 2;
+  optional OAuthClientIdentitySummary public_client = 3;
+  optional OAuthClientIdentitySummary confidential_client = 4;
+}
+message PendingApplicationTransferSummary {
+  string transfer_id = 1;
+  string to_admin_id = 2;
+  google.protobuf.Timestamp requested_at = 3;
+  google.protobuf.Timestamp expires_at = 4;
+}
+message ApplicationClosureSummary {
+  string closure_id = 1;
+  string status = 2;
+  string auth_revocation_state = 3;
+  google.protobuf.Timestamp closing_started_at = 4;
+  optional google.protobuf.Timestamp closed_at = 5;
+}
+message OwnedApplicationManagementDetail {
+  OwnedApplicationCore application = 1;
+  ApplicationManagementCounts counts = 2;
+  ApplicationProfileStateSummary profile_state = 3;
+  repeated ApplicationPublicationSummary publications = 4;
+  ApplicationFilterStateSummary filter_state = 5;
+  repeated OAuthRegistrationSummary oauth_registrations = 6;
+  optional PendingApplicationTransferSummary pending_transfer = 7;
+  optional ApplicationClosureSummary closure = 8;
+  google.protobuf.Timestamp as_of = 9;
+}
