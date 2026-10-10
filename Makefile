@@ -21,6 +21,8 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/application_archival/application_archival.proto \
+	app_center/v1/application_archival/error_reason.proto \
 	app_center/v1/application_management/application_management.proto \
 	app_center/v1/application_management/error_reason.proto \
 	app_center/v1/application_review_query/application_review_query.proto \
@@ -90,6 +92,8 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	app_center/v1/application_archival/application_archival.proto \
+	app_center/v1/application_archival/error_reason.proto \
 	app_center/v1/application_management/application_management.proto \
 	app_center/v1/application_management/error_reason.proto \
 	app_center/v1/application_review_query/application_review_query.proto \
@@ -148,6 +152,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/application_archival \
 	app_center/v1/application_management \
 	app_center/v1/application_review_query \
 	app_center/v1/application_profile_review_query \

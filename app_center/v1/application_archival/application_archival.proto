@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package app_center.v1.application_archival;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_archival;applicationarchival";
+
+service ApplicationArchivalService {
+  rpc GetApplicationArchiveState(GetApplicationArchiveStateRequest) returns (GetApplicationArchiveStateResponse) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/archive-state"};
+  }
+  rpc ArchiveApplication(ArchiveApplicationRequest) returns (ArchiveApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}:archive"
+      body: "command"
+    };
+  }
+  rpc UnarchiveApplication(UnarchiveApplicationRequest) returns (UnarchiveApplicationResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}:unarchive"
+      body: "command"
+    };
+  }
+}
+
+enum ApplicationLifecycleStatus {
+  APPLICATION_LIFECYCLE_STATUS_UNSPECIFIED = 0;
+  APPLICATION_LIFECYCLE_STATUS_ACTIVE = 1;
+  APPLICATION_LIFECYCLE_STATUS_CLOSING = 2;
+  APPLICATION_LIFECYCLE_STATUS_CLOSED = 3;
+}
+
+enum PlatformAvailabilityStatus {
+  PLATFORM_AVAILABILITY_STATUS_UNSPECIFIED = 0;
+  PLATFORM_AVAILABILITY_STATUS_AVAILABLE = 1;
+  PLATFORM_AVAILABILITY_STATUS_SUSPENDED = 2;
+}
+
+enum ApplicationArchiveStatus {
+  APPLICATION_ARCHIVE_STATUS_UNSPECIFIED = 0;
+  APPLICATION_ARCHIVE_STATUS_UNARCHIVED = 1;
+  APPLICATION_ARCHIVE_STATUS_ARCHIVED = 2;
+}
+
+message ApplicationArchiveState {
+  string application_id = 1;
+  ApplicationLifecycleStatus lifecycle_status = 2;
+  PlatformAvailabilityStatus platform_availability_status = 3;
+  ApplicationArchiveStatus archive_status = 4;
+  int64 archive_revision = 5;
+}
+
+message ApplicationArchiveCommand { int64 expected_archive_revision = 1; }
+
+message GetApplicationArchiveStateRequest { string application_id = 1; }
+message GetApplicationArchiveStateResponse { ApplicationArchiveState state = 1; }
+
+message ArchiveApplicationRequest {
+  string application_id = 1;
+  ApplicationArchiveCommand command = 2;
+}
+message ArchiveApplicationResponse { ApplicationArchiveState state = 1; }
+
+message UnarchiveApplicationRequest {
+  string application_id = 1;
+  ApplicationArchiveCommand command = 2;
+}
+message UnarchiveApplicationResponse { ApplicationArchiveState state = 1; }

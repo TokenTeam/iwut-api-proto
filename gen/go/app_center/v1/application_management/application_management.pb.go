@@ -73,6 +73,7 @@ type ListMyApplicationsQuery struct {
 	PlatformAvailabilityStatuses []string               `protobuf:"bytes,2,rep,name=platform_availability_statuses,json=platformAvailabilityStatuses,proto3" json:"platform_availability_statuses,omitempty"`
 	PageSize                     int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	PageToken                    string                 `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	ArchiveStatuses              []string               `protobuf:"bytes,5,rep,name=archive_statuses,json=archiveStatuses,proto3" json:"archive_statuses,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -135,6 +136,13 @@ func (x *ListMyApplicationsQuery) GetPageToken() string {
 	return ""
 }
 
+func (x *ListMyApplicationsQuery) GetArchiveStatuses() []string {
+	if x != nil {
+		return x.ArchiveStatuses
+	}
+	return nil
+}
+
 type GetMyApplicationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
@@ -190,6 +198,8 @@ type OwnedApplicationCore struct {
 	LifecycleRevision            int64                  `protobuf:"varint,7,opt,name=lifecycle_revision,json=lifecycleRevision,proto3" json:"lifecycle_revision,omitempty"`
 	PlatformAvailabilityStatus   string                 `protobuf:"bytes,8,opt,name=platform_availability_status,json=platformAvailabilityStatus,proto3" json:"platform_availability_status,omitempty"`
 	PlatformAvailabilityRevision int64                  `protobuf:"varint,9,opt,name=platform_availability_revision,json=platformAvailabilityRevision,proto3" json:"platform_availability_revision,omitempty"`
+	ArchiveStatus                string                 `protobuf:"bytes,10,opt,name=archive_status,json=archiveStatus,proto3" json:"archive_status,omitempty"`
+	ArchiveRevision              int64                  `protobuf:"varint,11,opt,name=archive_revision,json=archiveRevision,proto3" json:"archive_revision,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -283,6 +293,20 @@ func (x *OwnedApplicationCore) GetPlatformAvailabilityStatus() string {
 func (x *OwnedApplicationCore) GetPlatformAvailabilityRevision() int64 {
 	if x != nil {
 		return x.PlatformAvailabilityRevision
+	}
+	return 0
+}
+
+func (x *OwnedApplicationCore) GetArchiveStatus() string {
+	if x != nil {
+		return x.ArchiveStatus
+	}
+	return ""
+}
+
+func (x *OwnedApplicationCore) GetArchiveRevision() int64 {
+	if x != nil {
+		return x.ArchiveRevision
 	}
 	return 0
 }
@@ -1113,15 +1137,16 @@ const file_app_center_v1_application_management_application_management_proto_raw
 	"\n" +
 	"Aapp_center/v1/application_management/application_management.proto\x12$app_center.v1.application_management\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"p\n" +
 	"\x19ListMyApplicationsRequest\x12S\n" +
-	"\x05query\x18\x01 \x01(\v2=.app_center.v1.application_management.ListMyApplicationsQueryR\x05query\"\xca\x01\n" +
+	"\x05query\x18\x01 \x01(\v2=.app_center.v1.application_management.ListMyApplicationsQueryR\x05query\"\xf5\x01\n" +
 	"\x17ListMyApplicationsQuery\x12-\n" +
 	"\x12lifecycle_statuses\x18\x01 \x03(\tR\x11lifecycleStatuses\x12D\n" +
 	"\x1eplatform_availability_statuses\x18\x02 \x03(\tR\x1cplatformAvailabilityStatuses\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"@\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\x12)\n" +
+	"\x10archive_statuses\x18\x05 \x03(\tR\x0farchiveStatuses\"@\n" +
 	"\x17GetMyApplicationRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\"\xb8\x03\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\"\x8a\x04\n" +
 	"\x14OwnedApplicationCore\x12%\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
@@ -1132,7 +1157,10 @@ const file_app_center_v1_application_management_application_management_proto_raw
 	"\x10lifecycle_status\x18\x06 \x01(\tR\x0flifecycleStatus\x12-\n" +
 	"\x12lifecycle_revision\x18\a \x01(\x03R\x11lifecycleRevision\x12@\n" +
 	"\x1cplatform_availability_status\x18\b \x01(\tR\x1aplatformAvailabilityStatus\x12D\n" +
-	"\x1eplatform_availability_revision\x18\t \x01(\x03R\x1cplatformAvailabilityRevision\"\xc8\x03\n" +
+	"\x1eplatform_availability_revision\x18\t \x01(\x03R\x1cplatformAvailabilityRevision\x12%\n" +
+	"\x0earchive_status\x18\n" +
+	" \x01(\tR\rarchiveStatus\x12)\n" +
+	"\x10archive_revision\x18\v \x01(\x03R\x0farchiveRevision\"\xc8\x03\n" +
 	"\x1bApplicationManagementCounts\x12#\n" +
 	"\rversion_count\x18\x01 \x01(\x03R\fversionCount\x12.\n" +
 	"\x13draft_version_count\x18\x02 \x01(\x03R\x11draftVersionCount\x126\n" +
