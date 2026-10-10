@@ -23,6 +23,19 @@ service ApplicationVersion {
       body: "replacement"
     };
   }
+  rpc ListApplicationVersions(ListApplicationVersionsRequest)
+      returns (OwnedApplicationVersionPage) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions:search"
+      body: "query"
+    };
+  }
+  rpc GetApplicationVersion(GetApplicationVersionRequest)
+      returns (OwnedApplicationVersionDetail) {
+    option (google.api.http) = {
+      get: "/v1/applications/{application_id}/versions/{version_id}"
+    };
+  }
 }
 
 message CreateApplicationVersionRequest {
@@ -105,4 +118,97 @@ message UpdateApplicationVersionResponse {
 message OAuthRedirectConfiguration {
   repeated string pkce_redirect_uris = 1;
   repeated string confidential_redirect_uris = 2;
+}
+
+message ListApplicationVersionsRequest {
+  string application_id = 1;
+  ListApplicationVersionsQuery query = 2;
+}
+
+message ListApplicationVersionsQuery {
+  optional string review_status = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message GetApplicationVersionRequest {
+  string application_id = 1;
+  string version_id = 2;
+}
+
+message OwnedApplicationVersionReviewSummary {
+  string review_id = 1;
+  int32 attempt = 2;
+  string status = 3;
+  google.protobuf.Timestamp submitted_at = 4;
+  optional google.protobuf.Timestamp decided_at = 5;
+  optional google.protobuf.Timestamp restored_at = 6;
+}
+
+message OwnedApplicationVersionSummary {
+  string version_id = 1;
+  string application_id = 2;
+  int32 sequence = 3;
+  string version_label = 4;
+  int32 rpc_api_min_version = 5;
+  int32 rpc_api_max_version_exclusive = 6;
+  string review_status = 7;
+  int64 revision = 8;
+  string created_by = 9;
+  google.protobuf.Timestamp created_at = 10;
+  string updated_by = 11;
+  google.protobuf.Timestamp updated_at = 12;
+  optional OwnedApplicationVersionReviewSummary latest_review = 13;
+}
+
+message OwnedApplicationVersionPage {
+  repeated OwnedApplicationVersionSummary items = 1;
+  string next_page_token = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
+
+message OwnedApplicationVersionResource {
+  string version_id = 1;
+  string application_id = 2;
+  int32 sequence = 3;
+  string version_label = 4;
+  string launch_url = 5;
+  int32 rpc_api_min_version = 6;
+  int32 rpc_api_max_version_exclusive = 7;
+  repeated string required_capabilities = 8;
+  repeated string required_scopes = 9;
+  repeated string optional_scopes = 10;
+  OAuthRedirectConfiguration oauth_redirects = 11;
+  string review_status = 12;
+  int64 revision = 13;
+  string created_by = 14;
+  google.protobuf.Timestamp created_at = 15;
+  string updated_by = 16;
+  google.protobuf.Timestamp updated_at = 17;
+}
+
+message OwnedApplicationVersionReviewDecision {
+  string outcome = 1;
+  optional string reason = 2;
+  google.protobuf.Timestamp decided_at = 3;
+}
+
+message OwnedApplicationVersionDraftRestoration {
+  google.protobuf.Timestamp restored_at = 1;
+}
+
+message OwnedApplicationVersionLatestReview {
+  string review_id = 1;
+  int32 attempt = 2;
+  string status = 3;
+  string submitted_by = 4;
+  google.protobuf.Timestamp submitted_at = 5;
+  optional OwnedApplicationVersionReviewDecision decision = 6;
+  optional OwnedApplicationVersionDraftRestoration draft_restoration = 7;
+}
+
+message OwnedApplicationVersionDetail {
+  OwnedApplicationVersionResource version = 1;
+  optional OwnedApplicationVersionLatestReview latest_review = 2;
+  google.protobuf.Timestamp as_of = 3;
 }
