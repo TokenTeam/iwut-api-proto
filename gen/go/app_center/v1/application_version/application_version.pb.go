@@ -647,6 +647,207 @@ func (x *UpdateApplicationVersionResponse) GetOauthRedirects() *OAuthRedirectCon
 	return nil
 }
 
+type AbandonApplicationVersionDraftRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	// Native gRPC callers provide expected_revision. HTTP callers use a strong
+	// If-Match header; DELETE has no body or query parameters.
+	ExpectedRevision int64 `protobuf:"varint,3,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *AbandonApplicationVersionDraftRequest) Reset() {
+	*x = AbandonApplicationVersionDraftRequest{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AbandonApplicationVersionDraftRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AbandonApplicationVersionDraftRequest) ProtoMessage() {}
+
+func (x *AbandonApplicationVersionDraftRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AbandonApplicationVersionDraftRequest.ProtoReflect.Descriptor instead.
+func (*AbandonApplicationVersionDraftRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AbandonApplicationVersionDraftRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *AbandonApplicationVersionDraftRequest) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *AbandonApplicationVersionDraftRequest) GetExpectedRevision() int64 {
+	if x != nil {
+		return x.ExpectedRevision
+	}
+	return 0
+}
+
+type AbandonApplicationVersionDraftResponse struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Changed       bool                           `protobuf:"varint,1,opt,name=changed,proto3" json:"changed,omitempty"`
+	Abandonment   *ApplicationVersionAbandonment `protobuf:"bytes,2,opt,name=abandonment,proto3" json:"abandonment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AbandonApplicationVersionDraftResponse) Reset() {
+	*x = AbandonApplicationVersionDraftResponse{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AbandonApplicationVersionDraftResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AbandonApplicationVersionDraftResponse) ProtoMessage() {}
+
+func (x *AbandonApplicationVersionDraftResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AbandonApplicationVersionDraftResponse.ProtoReflect.Descriptor instead.
+func (*AbandonApplicationVersionDraftResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AbandonApplicationVersionDraftResponse) GetChanged() bool {
+	if x != nil {
+		return x.Changed
+	}
+	return false
+}
+
+func (x *AbandonApplicationVersionDraftResponse) GetAbandonment() *ApplicationVersionAbandonment {
+	if x != nil {
+		return x.Abandonment
+	}
+	return nil
+}
+
+// ApplicationVersionAbandonment is the minimal immutable summary returned by
+// the abandon command. It deliberately excludes deleted runtime content and
+// all actor identities.
+type ApplicationVersionAbandonment struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId  string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	VersionId      string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	Sequence       int32                  `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	VersionLabel   string                 `protobuf:"bytes,4,opt,name=version_label,json=versionLabel,proto3" json:"version_label,omitempty"`
+	SourceRevision int64                  `protobuf:"varint,5,opt,name=source_revision,json=sourceRevision,proto3" json:"source_revision,omitempty"`
+	AbandonedAt    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=abandoned_at,json=abandonedAt,proto3" json:"abandoned_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ApplicationVersionAbandonment) Reset() {
+	*x = ApplicationVersionAbandonment{}
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplicationVersionAbandonment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplicationVersionAbandonment) ProtoMessage() {}
+
+func (x *ApplicationVersionAbandonment) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplicationVersionAbandonment.ProtoReflect.Descriptor instead.
+func (*ApplicationVersionAbandonment) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ApplicationVersionAbandonment) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *ApplicationVersionAbandonment) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *ApplicationVersionAbandonment) GetSequence() int32 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *ApplicationVersionAbandonment) GetVersionLabel() string {
+	if x != nil {
+		return x.VersionLabel
+	}
+	return ""
+}
+
+func (x *ApplicationVersionAbandonment) GetSourceRevision() int64 {
+	if x != nil {
+		return x.SourceRevision
+	}
+	return 0
+}
+
+func (x *ApplicationVersionAbandonment) GetAbandonedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AbandonedAt
+	}
+	return nil
+}
+
 // OAuthRedirectConfiguration is reviewed version content. Both arrays are
 // required by the application contract; an empty array disables that client
 // type for this version.
@@ -660,7 +861,7 @@ type OAuthRedirectConfiguration struct {
 
 func (x *OAuthRedirectConfiguration) Reset() {
 	*x = OAuthRedirectConfiguration{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -672,7 +873,7 @@ func (x *OAuthRedirectConfiguration) String() string {
 func (*OAuthRedirectConfiguration) ProtoMessage() {}
 
 func (x *OAuthRedirectConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[5]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -685,7 +886,7 @@ func (x *OAuthRedirectConfiguration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthRedirectConfiguration.ProtoReflect.Descriptor instead.
 func (*OAuthRedirectConfiguration) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{5}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OAuthRedirectConfiguration) GetPkceRedirectUris() []string {
@@ -712,7 +913,7 @@ type ListApplicationVersionsRequest struct {
 
 func (x *ListApplicationVersionsRequest) Reset() {
 	*x = ListApplicationVersionsRequest{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[6]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -724,7 +925,7 @@ func (x *ListApplicationVersionsRequest) String() string {
 func (*ListApplicationVersionsRequest) ProtoMessage() {}
 
 func (x *ListApplicationVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[6]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -737,7 +938,7 @@ func (x *ListApplicationVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListApplicationVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListApplicationVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{6}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListApplicationVersionsRequest) GetApplicationId() string {
@@ -765,7 +966,7 @@ type ListApplicationVersionsQuery struct {
 
 func (x *ListApplicationVersionsQuery) Reset() {
 	*x = ListApplicationVersionsQuery{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[7]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -777,7 +978,7 @@ func (x *ListApplicationVersionsQuery) String() string {
 func (*ListApplicationVersionsQuery) ProtoMessage() {}
 
 func (x *ListApplicationVersionsQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[7]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -790,7 +991,7 @@ func (x *ListApplicationVersionsQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListApplicationVersionsQuery.ProtoReflect.Descriptor instead.
 func (*ListApplicationVersionsQuery) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{7}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListApplicationVersionsQuery) GetReviewStatus() string {
@@ -824,7 +1025,7 @@ type GetApplicationVersionRequest struct {
 
 func (x *GetApplicationVersionRequest) Reset() {
 	*x = GetApplicationVersionRequest{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -836,7 +1037,7 @@ func (x *GetApplicationVersionRequest) String() string {
 func (*GetApplicationVersionRequest) ProtoMessage() {}
 
 func (x *GetApplicationVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -849,7 +1050,7 @@ func (x *GetApplicationVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApplicationVersionRequest.ProtoReflect.Descriptor instead.
 func (*GetApplicationVersionRequest) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{8}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetApplicationVersionRequest) GetApplicationId() string {
@@ -880,7 +1081,7 @@ type OwnedApplicationVersionReviewSummary struct {
 
 func (x *OwnedApplicationVersionReviewSummary) Reset() {
 	*x = OwnedApplicationVersionReviewSummary{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -892,7 +1093,7 @@ func (x *OwnedApplicationVersionReviewSummary) String() string {
 func (*OwnedApplicationVersionReviewSummary) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionReviewSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -905,7 +1106,7 @@ func (x *OwnedApplicationVersionReviewSummary) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use OwnedApplicationVersionReviewSummary.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionReviewSummary) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{9}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *OwnedApplicationVersionReviewSummary) GetReviewId() string {
@@ -970,7 +1171,7 @@ type OwnedApplicationVersionSummary struct {
 
 func (x *OwnedApplicationVersionSummary) Reset() {
 	*x = OwnedApplicationVersionSummary{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[10]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -982,7 +1183,7 @@ func (x *OwnedApplicationVersionSummary) String() string {
 func (*OwnedApplicationVersionSummary) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[10]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -995,7 +1196,7 @@ func (x *OwnedApplicationVersionSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnedApplicationVersionSummary.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionSummary) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{10}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *OwnedApplicationVersionSummary) GetVersionId() string {
@@ -1093,7 +1294,7 @@ type OwnedApplicationVersionPage struct {
 
 func (x *OwnedApplicationVersionPage) Reset() {
 	*x = OwnedApplicationVersionPage{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[11]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1105,7 +1306,7 @@ func (x *OwnedApplicationVersionPage) String() string {
 func (*OwnedApplicationVersionPage) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionPage) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[11]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1118,7 +1319,7 @@ func (x *OwnedApplicationVersionPage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnedApplicationVersionPage.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionPage) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{11}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *OwnedApplicationVersionPage) GetItems() []*OwnedApplicationVersionSummary {
@@ -1166,7 +1367,7 @@ type OwnedApplicationVersionResource struct {
 
 func (x *OwnedApplicationVersionResource) Reset() {
 	*x = OwnedApplicationVersionResource{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[12]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1178,7 +1379,7 @@ func (x *OwnedApplicationVersionResource) String() string {
 func (*OwnedApplicationVersionResource) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionResource) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[12]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1191,7 +1392,7 @@ func (x *OwnedApplicationVersionResource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnedApplicationVersionResource.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionResource) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{12}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *OwnedApplicationVersionResource) GetVersionId() string {
@@ -1317,7 +1518,7 @@ type OwnedApplicationVersionReviewDecision struct {
 
 func (x *OwnedApplicationVersionReviewDecision) Reset() {
 	*x = OwnedApplicationVersionReviewDecision{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[13]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1329,7 +1530,7 @@ func (x *OwnedApplicationVersionReviewDecision) String() string {
 func (*OwnedApplicationVersionReviewDecision) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionReviewDecision) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[13]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1342,7 +1543,7 @@ func (x *OwnedApplicationVersionReviewDecision) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use OwnedApplicationVersionReviewDecision.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionReviewDecision) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{13}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *OwnedApplicationVersionReviewDecision) GetOutcome() string {
@@ -1375,7 +1576,7 @@ type OwnedApplicationVersionDraftRestoration struct {
 
 func (x *OwnedApplicationVersionDraftRestoration) Reset() {
 	*x = OwnedApplicationVersionDraftRestoration{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[14]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1387,7 +1588,7 @@ func (x *OwnedApplicationVersionDraftRestoration) String() string {
 func (*OwnedApplicationVersionDraftRestoration) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionDraftRestoration) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[14]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1400,7 +1601,7 @@ func (x *OwnedApplicationVersionDraftRestoration) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use OwnedApplicationVersionDraftRestoration.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionDraftRestoration) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{14}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *OwnedApplicationVersionDraftRestoration) GetRestoredAt() *timestamppb.Timestamp {
@@ -1425,7 +1626,7 @@ type OwnedApplicationVersionLatestReview struct {
 
 func (x *OwnedApplicationVersionLatestReview) Reset() {
 	*x = OwnedApplicationVersionLatestReview{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[15]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1437,7 +1638,7 @@ func (x *OwnedApplicationVersionLatestReview) String() string {
 func (*OwnedApplicationVersionLatestReview) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionLatestReview) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[15]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1450,7 +1651,7 @@ func (x *OwnedApplicationVersionLatestReview) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use OwnedApplicationVersionLatestReview.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionLatestReview) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{15}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *OwnedApplicationVersionLatestReview) GetReviewId() string {
@@ -1513,7 +1714,7 @@ type OwnedApplicationVersionDetail struct {
 
 func (x *OwnedApplicationVersionDetail) Reset() {
 	*x = OwnedApplicationVersionDetail{}
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[16]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1525,7 +1726,7 @@ func (x *OwnedApplicationVersionDetail) String() string {
 func (*OwnedApplicationVersionDetail) ProtoMessage() {}
 
 func (x *OwnedApplicationVersionDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[16]
+	mi := &file_app_center_v1_application_version_application_version_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1538,7 +1739,7 @@ func (x *OwnedApplicationVersionDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnedApplicationVersionDetail.ProtoReflect.Descriptor instead.
 func (*OwnedApplicationVersionDetail) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{16}
+	return file_app_center_v1_application_version_application_version_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *OwnedApplicationVersionDetail) GetVersion() *OwnedApplicationVersionResource {
@@ -1643,7 +1844,23 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
 	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12f\n" +
-	"\x0foauth_redirects\x18\x11 \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\x88\x01\n" +
+	"\x0foauth_redirects\x18\x11 \x01(\v2=.app_center.v1.application_version.OAuthRedirectConfigurationR\x0eoauthRedirects\"\x9a\x01\n" +
+	"%AbandonApplicationVersionDraftRequest\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12+\n" +
+	"\x11expected_revision\x18\x03 \x01(\x03R\x10expectedRevision\"\xa6\x01\n" +
+	"&AbandonApplicationVersionDraftResponse\x12\x18\n" +
+	"\achanged\x18\x01 \x01(\bR\achanged\x12b\n" +
+	"\vabandonment\x18\x02 \x01(\v2@.app_center.v1.application_version.ApplicationVersionAbandonmentR\vabandonment\"\x8e\x02\n" +
+	"\x1dApplicationVersionAbandonment\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12\x1a\n" +
+	"\bsequence\x18\x03 \x01(\x05R\bsequence\x12#\n" +
+	"\rversion_label\x18\x04 \x01(\tR\fversionLabel\x12'\n" +
+	"\x0fsource_revision\x18\x05 \x01(\x03R\x0esourceRevision\x12=\n" +
+	"\fabandoned_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vabandonedAt\"\x88\x01\n" +
 	"\x1aOAuthRedirectConfiguration\x12,\n" +
 	"\x12pkce_redirect_uris\x18\x01 \x03(\tR\x10pkceRedirectUris\x12<\n" +
 	"\x1aconfidential_redirect_uris\x18\x02 \x03(\tR\x18confidentialRedirectUris\"\x9e\x01\n" +
@@ -1742,10 +1959,11 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\aversion\x18\x01 \x01(\v2B.app_center.v1.application_version.OwnedApplicationVersionResourceR\aversion\x12p\n" +
 	"\rlatest_review\x18\x02 \x01(\v2F.app_center.v1.application_version.OwnedApplicationVersionLatestReviewH\x00R\flatestReview\x88\x01\x01\x12/\n" +
 	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOfB\x10\n" +
-	"\x0e_latest_review2\xa4\a\n" +
+	"\x0e_latest_review2\x9d\t\n" +
 	"\x12ApplicationVersion\x12\xda\x01\n" +
 	"\x18CreateApplicationVersion\x12B.app_center.v1.application_version.CreateApplicationVersionRequest\x1aC.app_center.v1.application_version.CreateApplicationVersionResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/applications/{application_id}/versions\x12\xf1\x01\n" +
-	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}\x12\xde\x01\n" +
+	"\x18UpdateApplicationVersion\x12B.app_center.v1.application_version.UpdateApplicationVersionRequest\x1aC.app_center.v1.application_version.UpdateApplicationVersionResponse\"L\x82\xd3\xe4\x93\x02F:\vreplacement\x1a7/v1/applications/{application_id}/versions/{version_id}\x12\xf6\x01\n" +
+	"\x1eAbandonApplicationVersionDraft\x12H.app_center.v1.application_version.AbandonApplicationVersionDraftRequest\x1aI.app_center.v1.application_version.AbandonApplicationVersionDraftResponse\"?\x82\xd3\xe4\x93\x029*7/v1/applications/{application_id}/versions/{version_id}\x12\xde\x01\n" +
 	"\x17ListApplicationVersions\x12A.app_center.v1.application_version.ListApplicationVersionsRequest\x1a>.app_center.v1.application_version.OwnedApplicationVersionPage\"@\x82\xd3\xe4\x93\x02::\x05query\"1/v1/applications/{application_id}/versions:search\x12\xdb\x01\n" +
 	"\x15GetApplicationVersion\x12?.app_center.v1.application_version.GetApplicationVersionRequest\x1a@.app_center.v1.application_version.OwnedApplicationVersionDetail\"?\x82\xd3\xe4\x93\x029\x127/v1/applications/{application_id}/versions/{version_id}BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
@@ -1761,70 +1979,77 @@ func file_app_center_v1_application_version_application_version_proto_rawDescGZI
 	return file_app_center_v1_application_version_application_version_proto_rawDescData
 }
 
-var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_app_center_v1_application_version_application_version_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_app_center_v1_application_version_application_version_proto_goTypes = []any{
 	(*CreateApplicationVersionRequest)(nil),         // 0: app_center.v1.application_version.CreateApplicationVersionRequest
 	(*CreateApplicationVersionResponse)(nil),        // 1: app_center.v1.application_version.CreateApplicationVersionResponse
 	(*UpdateApplicationVersionRequest)(nil),         // 2: app_center.v1.application_version.UpdateApplicationVersionRequest
 	(*DraftApplicationVersionReplacement)(nil),      // 3: app_center.v1.application_version.DraftApplicationVersionReplacement
 	(*UpdateApplicationVersionResponse)(nil),        // 4: app_center.v1.application_version.UpdateApplicationVersionResponse
-	(*OAuthRedirectConfiguration)(nil),              // 5: app_center.v1.application_version.OAuthRedirectConfiguration
-	(*ListApplicationVersionsRequest)(nil),          // 6: app_center.v1.application_version.ListApplicationVersionsRequest
-	(*ListApplicationVersionsQuery)(nil),            // 7: app_center.v1.application_version.ListApplicationVersionsQuery
-	(*GetApplicationVersionRequest)(nil),            // 8: app_center.v1.application_version.GetApplicationVersionRequest
-	(*OwnedApplicationVersionReviewSummary)(nil),    // 9: app_center.v1.application_version.OwnedApplicationVersionReviewSummary
-	(*OwnedApplicationVersionSummary)(nil),          // 10: app_center.v1.application_version.OwnedApplicationVersionSummary
-	(*OwnedApplicationVersionPage)(nil),             // 11: app_center.v1.application_version.OwnedApplicationVersionPage
-	(*OwnedApplicationVersionResource)(nil),         // 12: app_center.v1.application_version.OwnedApplicationVersionResource
-	(*OwnedApplicationVersionReviewDecision)(nil),   // 13: app_center.v1.application_version.OwnedApplicationVersionReviewDecision
-	(*OwnedApplicationVersionDraftRestoration)(nil), // 14: app_center.v1.application_version.OwnedApplicationVersionDraftRestoration
-	(*OwnedApplicationVersionLatestReview)(nil),     // 15: app_center.v1.application_version.OwnedApplicationVersionLatestReview
-	(*OwnedApplicationVersionDetail)(nil),           // 16: app_center.v1.application_version.OwnedApplicationVersionDetail
-	(*timestamppb.Timestamp)(nil),                   // 17: google.protobuf.Timestamp
+	(*AbandonApplicationVersionDraftRequest)(nil),   // 5: app_center.v1.application_version.AbandonApplicationVersionDraftRequest
+	(*AbandonApplicationVersionDraftResponse)(nil),  // 6: app_center.v1.application_version.AbandonApplicationVersionDraftResponse
+	(*ApplicationVersionAbandonment)(nil),           // 7: app_center.v1.application_version.ApplicationVersionAbandonment
+	(*OAuthRedirectConfiguration)(nil),              // 8: app_center.v1.application_version.OAuthRedirectConfiguration
+	(*ListApplicationVersionsRequest)(nil),          // 9: app_center.v1.application_version.ListApplicationVersionsRequest
+	(*ListApplicationVersionsQuery)(nil),            // 10: app_center.v1.application_version.ListApplicationVersionsQuery
+	(*GetApplicationVersionRequest)(nil),            // 11: app_center.v1.application_version.GetApplicationVersionRequest
+	(*OwnedApplicationVersionReviewSummary)(nil),    // 12: app_center.v1.application_version.OwnedApplicationVersionReviewSummary
+	(*OwnedApplicationVersionSummary)(nil),          // 13: app_center.v1.application_version.OwnedApplicationVersionSummary
+	(*OwnedApplicationVersionPage)(nil),             // 14: app_center.v1.application_version.OwnedApplicationVersionPage
+	(*OwnedApplicationVersionResource)(nil),         // 15: app_center.v1.application_version.OwnedApplicationVersionResource
+	(*OwnedApplicationVersionReviewDecision)(nil),   // 16: app_center.v1.application_version.OwnedApplicationVersionReviewDecision
+	(*OwnedApplicationVersionDraftRestoration)(nil), // 17: app_center.v1.application_version.OwnedApplicationVersionDraftRestoration
+	(*OwnedApplicationVersionLatestReview)(nil),     // 18: app_center.v1.application_version.OwnedApplicationVersionLatestReview
+	(*OwnedApplicationVersionDetail)(nil),           // 19: app_center.v1.application_version.OwnedApplicationVersionDetail
+	(*timestamppb.Timestamp)(nil),                   // 20: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_version_application_version_proto_depIdxs = []int32{
-	5,  // 0: app_center.v1.application_version.CreateApplicationVersionRequest.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
-	17, // 1: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
-	17, // 2: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 3: app_center.v1.application_version.CreateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	8,  // 0: app_center.v1.application_version.CreateApplicationVersionRequest.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	20, // 1: app_center.v1.application_version.CreateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	20, // 2: app_center.v1.application_version.CreateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	8,  // 3: app_center.v1.application_version.CreateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
 	3,  // 4: app_center.v1.application_version.UpdateApplicationVersionRequest.replacement:type_name -> app_center.v1.application_version.DraftApplicationVersionReplacement
-	5,  // 5: app_center.v1.application_version.DraftApplicationVersionReplacement.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
-	17, // 6: app_center.v1.application_version.UpdateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
-	17, // 7: app_center.v1.application_version.UpdateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 8: app_center.v1.application_version.UpdateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
-	7,  // 9: app_center.v1.application_version.ListApplicationVersionsRequest.query:type_name -> app_center.v1.application_version.ListApplicationVersionsQuery
-	17, // 10: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.submitted_at:type_name -> google.protobuf.Timestamp
-	17, // 11: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.decided_at:type_name -> google.protobuf.Timestamp
-	17, // 12: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.restored_at:type_name -> google.protobuf.Timestamp
-	17, // 13: app_center.v1.application_version.OwnedApplicationVersionSummary.created_at:type_name -> google.protobuf.Timestamp
-	17, // 14: app_center.v1.application_version.OwnedApplicationVersionSummary.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 15: app_center.v1.application_version.OwnedApplicationVersionSummary.latest_review:type_name -> app_center.v1.application_version.OwnedApplicationVersionReviewSummary
-	10, // 16: app_center.v1.application_version.OwnedApplicationVersionPage.items:type_name -> app_center.v1.application_version.OwnedApplicationVersionSummary
-	17, // 17: app_center.v1.application_version.OwnedApplicationVersionPage.as_of:type_name -> google.protobuf.Timestamp
-	5,  // 18: app_center.v1.application_version.OwnedApplicationVersionResource.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
-	17, // 19: app_center.v1.application_version.OwnedApplicationVersionResource.created_at:type_name -> google.protobuf.Timestamp
-	17, // 20: app_center.v1.application_version.OwnedApplicationVersionResource.updated_at:type_name -> google.protobuf.Timestamp
-	17, // 21: app_center.v1.application_version.OwnedApplicationVersionReviewDecision.decided_at:type_name -> google.protobuf.Timestamp
-	17, // 22: app_center.v1.application_version.OwnedApplicationVersionDraftRestoration.restored_at:type_name -> google.protobuf.Timestamp
-	17, // 23: app_center.v1.application_version.OwnedApplicationVersionLatestReview.submitted_at:type_name -> google.protobuf.Timestamp
-	13, // 24: app_center.v1.application_version.OwnedApplicationVersionLatestReview.decision:type_name -> app_center.v1.application_version.OwnedApplicationVersionReviewDecision
-	14, // 25: app_center.v1.application_version.OwnedApplicationVersionLatestReview.draft_restoration:type_name -> app_center.v1.application_version.OwnedApplicationVersionDraftRestoration
-	12, // 26: app_center.v1.application_version.OwnedApplicationVersionDetail.version:type_name -> app_center.v1.application_version.OwnedApplicationVersionResource
-	15, // 27: app_center.v1.application_version.OwnedApplicationVersionDetail.latest_review:type_name -> app_center.v1.application_version.OwnedApplicationVersionLatestReview
-	17, // 28: app_center.v1.application_version.OwnedApplicationVersionDetail.as_of:type_name -> google.protobuf.Timestamp
-	0,  // 29: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
-	2,  // 30: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:input_type -> app_center.v1.application_version.UpdateApplicationVersionRequest
-	6,  // 31: app_center.v1.application_version.ApplicationVersion.ListApplicationVersions:input_type -> app_center.v1.application_version.ListApplicationVersionsRequest
-	8,  // 32: app_center.v1.application_version.ApplicationVersion.GetApplicationVersion:input_type -> app_center.v1.application_version.GetApplicationVersionRequest
-	1,  // 33: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
-	4,  // 34: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:output_type -> app_center.v1.application_version.UpdateApplicationVersionResponse
-	11, // 35: app_center.v1.application_version.ApplicationVersion.ListApplicationVersions:output_type -> app_center.v1.application_version.OwnedApplicationVersionPage
-	16, // 36: app_center.v1.application_version.ApplicationVersion.GetApplicationVersion:output_type -> app_center.v1.application_version.OwnedApplicationVersionDetail
-	33, // [33:37] is the sub-list for method output_type
-	29, // [29:33] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	8,  // 5: app_center.v1.application_version.DraftApplicationVersionReplacement.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	20, // 6: app_center.v1.application_version.UpdateApplicationVersionResponse.created_at:type_name -> google.protobuf.Timestamp
+	20, // 7: app_center.v1.application_version.UpdateApplicationVersionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	8,  // 8: app_center.v1.application_version.UpdateApplicationVersionResponse.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	7,  // 9: app_center.v1.application_version.AbandonApplicationVersionDraftResponse.abandonment:type_name -> app_center.v1.application_version.ApplicationVersionAbandonment
+	20, // 10: app_center.v1.application_version.ApplicationVersionAbandonment.abandoned_at:type_name -> google.protobuf.Timestamp
+	10, // 11: app_center.v1.application_version.ListApplicationVersionsRequest.query:type_name -> app_center.v1.application_version.ListApplicationVersionsQuery
+	20, // 12: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.submitted_at:type_name -> google.protobuf.Timestamp
+	20, // 13: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.decided_at:type_name -> google.protobuf.Timestamp
+	20, // 14: app_center.v1.application_version.OwnedApplicationVersionReviewSummary.restored_at:type_name -> google.protobuf.Timestamp
+	20, // 15: app_center.v1.application_version.OwnedApplicationVersionSummary.created_at:type_name -> google.protobuf.Timestamp
+	20, // 16: app_center.v1.application_version.OwnedApplicationVersionSummary.updated_at:type_name -> google.protobuf.Timestamp
+	12, // 17: app_center.v1.application_version.OwnedApplicationVersionSummary.latest_review:type_name -> app_center.v1.application_version.OwnedApplicationVersionReviewSummary
+	13, // 18: app_center.v1.application_version.OwnedApplicationVersionPage.items:type_name -> app_center.v1.application_version.OwnedApplicationVersionSummary
+	20, // 19: app_center.v1.application_version.OwnedApplicationVersionPage.as_of:type_name -> google.protobuf.Timestamp
+	8,  // 20: app_center.v1.application_version.OwnedApplicationVersionResource.oauth_redirects:type_name -> app_center.v1.application_version.OAuthRedirectConfiguration
+	20, // 21: app_center.v1.application_version.OwnedApplicationVersionResource.created_at:type_name -> google.protobuf.Timestamp
+	20, // 22: app_center.v1.application_version.OwnedApplicationVersionResource.updated_at:type_name -> google.protobuf.Timestamp
+	20, // 23: app_center.v1.application_version.OwnedApplicationVersionReviewDecision.decided_at:type_name -> google.protobuf.Timestamp
+	20, // 24: app_center.v1.application_version.OwnedApplicationVersionDraftRestoration.restored_at:type_name -> google.protobuf.Timestamp
+	20, // 25: app_center.v1.application_version.OwnedApplicationVersionLatestReview.submitted_at:type_name -> google.protobuf.Timestamp
+	16, // 26: app_center.v1.application_version.OwnedApplicationVersionLatestReview.decision:type_name -> app_center.v1.application_version.OwnedApplicationVersionReviewDecision
+	17, // 27: app_center.v1.application_version.OwnedApplicationVersionLatestReview.draft_restoration:type_name -> app_center.v1.application_version.OwnedApplicationVersionDraftRestoration
+	15, // 28: app_center.v1.application_version.OwnedApplicationVersionDetail.version:type_name -> app_center.v1.application_version.OwnedApplicationVersionResource
+	18, // 29: app_center.v1.application_version.OwnedApplicationVersionDetail.latest_review:type_name -> app_center.v1.application_version.OwnedApplicationVersionLatestReview
+	20, // 30: app_center.v1.application_version.OwnedApplicationVersionDetail.as_of:type_name -> google.protobuf.Timestamp
+	0,  // 31: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:input_type -> app_center.v1.application_version.CreateApplicationVersionRequest
+	2,  // 32: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:input_type -> app_center.v1.application_version.UpdateApplicationVersionRequest
+	5,  // 33: app_center.v1.application_version.ApplicationVersion.AbandonApplicationVersionDraft:input_type -> app_center.v1.application_version.AbandonApplicationVersionDraftRequest
+	9,  // 34: app_center.v1.application_version.ApplicationVersion.ListApplicationVersions:input_type -> app_center.v1.application_version.ListApplicationVersionsRequest
+	11, // 35: app_center.v1.application_version.ApplicationVersion.GetApplicationVersion:input_type -> app_center.v1.application_version.GetApplicationVersionRequest
+	1,  // 36: app_center.v1.application_version.ApplicationVersion.CreateApplicationVersion:output_type -> app_center.v1.application_version.CreateApplicationVersionResponse
+	4,  // 37: app_center.v1.application_version.ApplicationVersion.UpdateApplicationVersion:output_type -> app_center.v1.application_version.UpdateApplicationVersionResponse
+	6,  // 38: app_center.v1.application_version.ApplicationVersion.AbandonApplicationVersionDraft:output_type -> app_center.v1.application_version.AbandonApplicationVersionDraftResponse
+	14, // 39: app_center.v1.application_version.ApplicationVersion.ListApplicationVersions:output_type -> app_center.v1.application_version.OwnedApplicationVersionPage
+	19, // 40: app_center.v1.application_version.ApplicationVersion.GetApplicationVersion:output_type -> app_center.v1.application_version.OwnedApplicationVersionDetail
+	36, // [36:41] is the sub-list for method output_type
+	31, // [31:36] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_version_application_version_proto_init() }
@@ -1832,19 +2057,19 @@ func file_app_center_v1_application_version_application_version_proto_init() {
 	if File_app_center_v1_application_version_application_version_proto != nil {
 		return
 	}
-	file_app_center_v1_application_version_application_version_proto_msgTypes[7].OneofWrappers = []any{}
-	file_app_center_v1_application_version_application_version_proto_msgTypes[9].OneofWrappers = []any{}
 	file_app_center_v1_application_version_application_version_proto_msgTypes[10].OneofWrappers = []any{}
+	file_app_center_v1_application_version_application_version_proto_msgTypes[12].OneofWrappers = []any{}
 	file_app_center_v1_application_version_application_version_proto_msgTypes[13].OneofWrappers = []any{}
-	file_app_center_v1_application_version_application_version_proto_msgTypes[15].OneofWrappers = []any{}
 	file_app_center_v1_application_version_application_version_proto_msgTypes[16].OneofWrappers = []any{}
+	file_app_center_v1_application_version_application_version_proto_msgTypes[18].OneofWrappers = []any{}
+	file_app_center_v1_application_version_application_version_proto_msgTypes[19].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_version_application_version_proto_rawDesc), len(file_app_center_v1_application_version_application_version_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

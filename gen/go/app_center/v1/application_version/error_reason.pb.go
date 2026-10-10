@@ -24,33 +24,38 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_ERROR_REASON_UNSPECIFIED                                       ErrorReason = 0
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                            ErrorReason = 1
-	ErrorReason_ERROR_REASON_INVALID_VERSION_LABEL                             ErrorReason = 2
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_LAUNCH_URL                    ErrorReason = 3
-	ErrorReason_ERROR_REASON_INVALID_RPC_API_RANGE                             ErrorReason = 4
-	ErrorReason_ERROR_REASON_INVALID_REQUIRED_CAPABILITY                       ErrorReason = 5
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_SCOPE                         ErrorReason = 6
-	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                       ErrorReason = 7
-	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                        ErrorReason = 8
-	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                       ErrorReason = 9
-	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                             ErrorReason = 10
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                        ErrorReason = 11
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS          ErrorReason = 12
-	ErrorReason_ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE                         ErrorReason = 13
-	ErrorReason_ERROR_REASON_INTERNAL                                          ErrorReason = 14
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED             ErrorReason = 15
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_FOUND                     ErrorReason = 16
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT                     ErrorReason = 17
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT             ErrorReason = 18
-	ErrorReason_ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION              ErrorReason = 19
-	ErrorReason_ERROR_REASON_USER_IDENTITY_REQUIRED                            ErrorReason = 20
-	ErrorReason_ERROR_REASON_INVALID_USER_IDENTITY                             ErrorReason = 21
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_VERSION_QUERY                 ErrorReason = 22
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_VERSION_PAGE_TOKEN            ErrorReason = 23
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND          ErrorReason = 24
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT ErrorReason = 25
-	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE        ErrorReason = 26
+	ErrorReason_ERROR_REASON_UNSPECIFIED                                        ErrorReason = 0
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                             ErrorReason = 1
+	ErrorReason_ERROR_REASON_INVALID_VERSION_LABEL                              ErrorReason = 2
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_LAUNCH_URL                     ErrorReason = 3
+	ErrorReason_ERROR_REASON_INVALID_RPC_API_RANGE                              ErrorReason = 4
+	ErrorReason_ERROR_REASON_INVALID_REQUIRED_CAPABILITY                        ErrorReason = 5
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_SCOPE                          ErrorReason = 6
+	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                        ErrorReason = 7
+	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                         ErrorReason = 8
+	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                        ErrorReason = 9
+	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                              ErrorReason = 10
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                         ErrorReason = 11
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS           ErrorReason = 12
+	ErrorReason_ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE                          ErrorReason = 13
+	ErrorReason_ERROR_REASON_INTERNAL                                           ErrorReason = 14
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED              ErrorReason = 15
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_FOUND                      ErrorReason = 16
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT                      ErrorReason = 17
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT              ErrorReason = 18
+	ErrorReason_ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION               ErrorReason = 19
+	ErrorReason_ERROR_REASON_USER_IDENTITY_REQUIRED                             ErrorReason = 20
+	ErrorReason_ERROR_REASON_INVALID_USER_IDENTITY                              ErrorReason = 21
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_VERSION_QUERY                  ErrorReason = 22
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_VERSION_PAGE_TOKEN             ErrorReason = 23
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND           ErrorReason = 24
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT  ErrorReason = 25
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE         ErrorReason = 26
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_VERSION_ABANDONMENT            ErrorReason = 27
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_NOT_ABANDONABLE                ErrorReason = 28
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED        ErrorReason = 29
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT ErrorReason = 30
+	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE        ErrorReason = 31
 )
 
 // Enum value maps for ErrorReason.
@@ -83,35 +88,45 @@ var (
 		24: "ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND",
 		25: "ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT",
 		26: "ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE",
+		27: "ERROR_REASON_INVALID_APPLICATION_VERSION_ABANDONMENT",
+		28: "ERROR_REASON_APPLICATION_VERSION_NOT_ABANDONABLE",
+		29: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED",
+		30: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT",
+		31: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE",
 	}
 	ErrorReason_value = map[string]int32{
-		"ERROR_REASON_UNSPECIFIED":                                       0,
-		"ERROR_REASON_INVALID_APPLICATION_ID":                            1,
-		"ERROR_REASON_INVALID_VERSION_LABEL":                             2,
-		"ERROR_REASON_INVALID_APPLICATION_LAUNCH_URL":                    3,
-		"ERROR_REASON_INVALID_RPC_API_RANGE":                             4,
-		"ERROR_REASON_INVALID_REQUIRED_CAPABILITY":                       5,
-		"ERROR_REASON_INVALID_APPLICATION_SCOPE":                         6,
-		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                       7,
-		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                        8,
-		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                       9,
-		"ERROR_REASON_APPLICATION_NOT_FOUND":                             10,
-		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                        11,
-		"ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS":          12,
-		"ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE":                         13,
-		"ERROR_REASON_INTERNAL":                                          14,
-		"ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED":             15,
-		"ERROR_REASON_APPLICATION_VERSION_NOT_FOUND":                     16,
-		"ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT":                     17,
-		"ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT":             18,
-		"ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION":              19,
-		"ERROR_REASON_USER_IDENTITY_REQUIRED":                            20,
-		"ERROR_REASON_INVALID_USER_IDENTITY":                             21,
-		"ERROR_REASON_INVALID_APPLICATION_VERSION_QUERY":                 22,
-		"ERROR_REASON_INVALID_APPLICATION_VERSION_PAGE_TOKEN":            23,
-		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND":          24,
-		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT": 25,
-		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE":        26,
+		"ERROR_REASON_UNSPECIFIED":                                        0,
+		"ERROR_REASON_INVALID_APPLICATION_ID":                             1,
+		"ERROR_REASON_INVALID_VERSION_LABEL":                              2,
+		"ERROR_REASON_INVALID_APPLICATION_LAUNCH_URL":                     3,
+		"ERROR_REASON_INVALID_RPC_API_RANGE":                              4,
+		"ERROR_REASON_INVALID_REQUIRED_CAPABILITY":                        5,
+		"ERROR_REASON_INVALID_APPLICATION_SCOPE":                          6,
+		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                        7,
+		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                         8,
+		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                        9,
+		"ERROR_REASON_APPLICATION_NOT_FOUND":                              10,
+		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                         11,
+		"ERROR_REASON_APPLICATION_VERSION_LABEL_ALREADY_EXISTS":           12,
+		"ERROR_REASON_SCOPE_CATALOG_UNAVAILABLE":                          13,
+		"ERROR_REASON_INTERNAL":                                           14,
+		"ERROR_REASON_APPLICATION_VERSION_REVISION_REQUIRED":              15,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_FOUND":                      16,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_DRAFT":                      17,
+		"ERROR_REASON_APPLICATION_VERSION_REVISION_CONFLICT":              18,
+		"ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION":               19,
+		"ERROR_REASON_USER_IDENTITY_REQUIRED":                             20,
+		"ERROR_REASON_INVALID_USER_IDENTITY":                              21,
+		"ERROR_REASON_INVALID_APPLICATION_VERSION_QUERY":                  22,
+		"ERROR_REASON_INVALID_APPLICATION_VERSION_PAGE_TOKEN":             23,
+		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND":           24,
+		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT":  25,
+		"ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE":         26,
+		"ERROR_REASON_INVALID_APPLICATION_VERSION_ABANDONMENT":            27,
+		"ERROR_REASON_APPLICATION_VERSION_NOT_ABANDONABLE":                28,
+		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED":        29,
+		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT": 30,
+		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE":        31,
 	}
 )
 
@@ -146,8 +161,7 @@ var File_app_center_v1_application_version_error_reason_proto protoreflect.FileD
 
 const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\x90\n" +
-	"\n" +
+	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\xc1\f\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x01\x12&\n" +
@@ -176,7 +190,12 @@ const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"3ERROR_REASON_INVALID_APPLICATION_VERSION_PAGE_TOKEN\x10\x17\x129\n" +
 	"5ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_NOT_FOUND\x10\x18\x12B\n" +
 	">ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_STATE_INCONSISTENT\x10\x19\x12;\n" +
-	"7ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE\x10\x1aBaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"7ERROR_REASON_APPLICATION_VERSION_MANAGEMENT_UNAVAILABLE\x10\x1a\x128\n" +
+	"4ERROR_REASON_INVALID_APPLICATION_VERSION_ABANDONMENT\x10\x1b\x124\n" +
+	"0ERROR_REASON_APPLICATION_VERSION_NOT_ABANDONABLE\x10\x1c\x12<\n" +
+	"8ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED\x10\x1d\x12C\n" +
+	"?ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT\x10\x1e\x12<\n" +
+	"8ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE\x10\x1fBaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_error_reason_proto_rawDescOnce sync.Once

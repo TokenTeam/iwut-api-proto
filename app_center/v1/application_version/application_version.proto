@@ -23,6 +23,12 @@ service ApplicationVersion {
       body: "replacement"
     };
   }
+  rpc AbandonApplicationVersionDraft(AbandonApplicationVersionDraftRequest)
+      returns (AbandonApplicationVersionDraftResponse) {
+    option (google.api.http) = {
+      delete: "/v1/applications/{application_id}/versions/{version_id}"
+    };
+  }
   rpc ListApplicationVersions(ListApplicationVersionsRequest)
       returns (OwnedApplicationVersionPage) {
     option (google.api.http) = {
@@ -110,6 +116,31 @@ message UpdateApplicationVersionResponse {
   string updated_by = 15;
   google.protobuf.Timestamp updated_at = 16;
   OAuthRedirectConfiguration oauth_redirects = 17;
+}
+
+message AbandonApplicationVersionDraftRequest {
+  string application_id = 1;
+  string version_id = 2;
+  // Native gRPC callers provide expected_revision. HTTP callers use a strong
+  // If-Match header; DELETE has no body or query parameters.
+  int64 expected_revision = 3;
+}
+
+message AbandonApplicationVersionDraftResponse {
+  bool changed = 1;
+  ApplicationVersionAbandonment abandonment = 2;
+}
+
+// ApplicationVersionAbandonment is the minimal immutable summary returned by
+// the abandon command. It deliberately excludes deleted runtime content and
+// all actor identities.
+message ApplicationVersionAbandonment {
+  string application_id = 1;
+  string version_id = 2;
+  int32 sequence = 3;
+  string version_label = 4;
+  int64 source_revision = 5;
+  google.protobuf.Timestamp abandoned_at = 6;
 }
 
 // OAuthRedirectConfiguration is reviewed version content. Both arrays are

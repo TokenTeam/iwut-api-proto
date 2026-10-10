@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ApplicationVersion_CreateApplicationVersion_FullMethodName = "/app_center.v1.application_version.ApplicationVersion/CreateApplicationVersion"
-	ApplicationVersion_UpdateApplicationVersion_FullMethodName = "/app_center.v1.application_version.ApplicationVersion/UpdateApplicationVersion"
-	ApplicationVersion_ListApplicationVersions_FullMethodName  = "/app_center.v1.application_version.ApplicationVersion/ListApplicationVersions"
-	ApplicationVersion_GetApplicationVersion_FullMethodName    = "/app_center.v1.application_version.ApplicationVersion/GetApplicationVersion"
+	ApplicationVersion_CreateApplicationVersion_FullMethodName       = "/app_center.v1.application_version.ApplicationVersion/CreateApplicationVersion"
+	ApplicationVersion_UpdateApplicationVersion_FullMethodName       = "/app_center.v1.application_version.ApplicationVersion/UpdateApplicationVersion"
+	ApplicationVersion_AbandonApplicationVersionDraft_FullMethodName = "/app_center.v1.application_version.ApplicationVersion/AbandonApplicationVersionDraft"
+	ApplicationVersion_ListApplicationVersions_FullMethodName        = "/app_center.v1.application_version.ApplicationVersion/ListApplicationVersions"
+	ApplicationVersion_GetApplicationVersion_FullMethodName          = "/app_center.v1.application_version.ApplicationVersion/GetApplicationVersion"
 )
 
 // ApplicationVersionClient is the client API for ApplicationVersion service.
@@ -33,6 +34,7 @@ const (
 type ApplicationVersionClient interface {
 	CreateApplicationVersion(ctx context.Context, in *CreateApplicationVersionRequest, opts ...grpc.CallOption) (*CreateApplicationVersionResponse, error)
 	UpdateApplicationVersion(ctx context.Context, in *UpdateApplicationVersionRequest, opts ...grpc.CallOption) (*UpdateApplicationVersionResponse, error)
+	AbandonApplicationVersionDraft(ctx context.Context, in *AbandonApplicationVersionDraftRequest, opts ...grpc.CallOption) (*AbandonApplicationVersionDraftResponse, error)
 	ListApplicationVersions(ctx context.Context, in *ListApplicationVersionsRequest, opts ...grpc.CallOption) (*OwnedApplicationVersionPage, error)
 	GetApplicationVersion(ctx context.Context, in *GetApplicationVersionRequest, opts ...grpc.CallOption) (*OwnedApplicationVersionDetail, error)
 }
@@ -59,6 +61,16 @@ func (c *applicationVersionClient) UpdateApplicationVersion(ctx context.Context,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateApplicationVersionResponse)
 	err := c.cc.Invoke(ctx, ApplicationVersion_UpdateApplicationVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationVersionClient) AbandonApplicationVersionDraft(ctx context.Context, in *AbandonApplicationVersionDraftRequest, opts ...grpc.CallOption) (*AbandonApplicationVersionDraftResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AbandonApplicationVersionDraftResponse)
+	err := c.cc.Invoke(ctx, ApplicationVersion_AbandonApplicationVersionDraft_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -93,6 +105,7 @@ func (c *applicationVersionClient) GetApplicationVersion(ctx context.Context, in
 type ApplicationVersionServer interface {
 	CreateApplicationVersion(context.Context, *CreateApplicationVersionRequest) (*CreateApplicationVersionResponse, error)
 	UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error)
+	AbandonApplicationVersionDraft(context.Context, *AbandonApplicationVersionDraftRequest) (*AbandonApplicationVersionDraftResponse, error)
 	ListApplicationVersions(context.Context, *ListApplicationVersionsRequest) (*OwnedApplicationVersionPage, error)
 	GetApplicationVersion(context.Context, *GetApplicationVersionRequest) (*OwnedApplicationVersionDetail, error)
 	mustEmbedUnimplementedApplicationVersionServer()
@@ -110,6 +123,9 @@ func (UnimplementedApplicationVersionServer) CreateApplicationVersion(context.Co
 }
 func (UnimplementedApplicationVersionServer) UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateApplicationVersion not implemented")
+}
+func (UnimplementedApplicationVersionServer) AbandonApplicationVersionDraft(context.Context, *AbandonApplicationVersionDraftRequest) (*AbandonApplicationVersionDraftResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AbandonApplicationVersionDraft not implemented")
 }
 func (UnimplementedApplicationVersionServer) ListApplicationVersions(context.Context, *ListApplicationVersionsRequest) (*OwnedApplicationVersionPage, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListApplicationVersions not implemented")
@@ -174,6 +190,24 @@ func _ApplicationVersion_UpdateApplicationVersion_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationVersion_AbandonApplicationVersionDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbandonApplicationVersionDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationVersionServer).AbandonApplicationVersionDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationVersion_AbandonApplicationVersionDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationVersionServer).AbandonApplicationVersionDraft(ctx, req.(*AbandonApplicationVersionDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApplicationVersion_ListApplicationVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListApplicationVersionsRequest)
 	if err := dec(in); err != nil {
@@ -224,6 +258,10 @@ var ApplicationVersion_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateApplicationVersion",
 			Handler:    _ApplicationVersion_UpdateApplicationVersion_Handler,
+		},
+		{
+			MethodName: "AbandonApplicationVersionDraft",
+			Handler:    _ApplicationVersion_AbandonApplicationVersionDraft_Handler,
 		},
 		{
 			MethodName: "ListApplicationVersions",
