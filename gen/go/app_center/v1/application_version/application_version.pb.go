@@ -962,7 +962,6 @@ type OwnedApplicationVersionSummary struct {
 	Revision                  int64                                 `protobuf:"varint,8,opt,name=revision,proto3" json:"revision,omitempty"`
 	CreatedBy                 string                                `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	CreatedAt                 *timestamppb.Timestamp                `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy                 string                                `protobuf:"bytes,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	UpdatedAt                 *timestamppb.Timestamp                `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	LatestReview              *OwnedApplicationVersionReviewSummary `protobuf:"bytes,13,opt,name=latest_review,json=latestReview,proto3,oneof" json:"latest_review,omitempty"`
 	unknownFields             protoimpl.UnknownFields
@@ -1069,13 +1068,6 @@ func (x *OwnedApplicationVersionSummary) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *OwnedApplicationVersionSummary) GetUpdatedBy() string {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return ""
-}
-
 func (x *OwnedApplicationVersionSummary) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
@@ -1167,7 +1159,6 @@ type OwnedApplicationVersionResource struct {
 	Revision                  int64                       `protobuf:"varint,13,opt,name=revision,proto3" json:"revision,omitempty"`
 	CreatedBy                 string                      `protobuf:"bytes,14,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	CreatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy                 string                      `protobuf:"bytes,16,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	UpdatedAt                 *timestamppb.Timestamp      `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
@@ -1306,13 +1297,6 @@ func (x *OwnedApplicationVersionResource) GetCreatedAt() *timestamppb.Timestamp 
 		return x.CreatedAt
 	}
 	return nil
-}
-
-func (x *OwnedApplicationVersionResource) GetUpdatedBy() string {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return ""
 }
 
 func (x *OwnedApplicationVersionResource) GetUpdatedAt() *timestamppb.Timestamp {
@@ -1686,7 +1670,7 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\vrestored_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\n" +
 	"restoredAt\x88\x01\x01B\r\n" +
 	"\v_decided_atB\x0e\n" +
-	"\f_restored_at\"\x92\x05\n" +
+	"\f_restored_at\"\x85\x05\n" +
 	"\x1eOwnedApplicationVersionSummary\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12%\n" +
@@ -1701,17 +1685,16 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"created_by\x18\t \x01(\tR\tcreatedBy\x129\n" +
 	"\n" +
 	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_by\x18\v \x01(\tR\tupdatedBy\x129\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12q\n" +
 	"\rlatest_review\x18\r \x01(\v2G.app_center.v1.application_version.OwnedApplicationVersionReviewSummaryH\x00R\flatestReview\x88\x01\x01B\x10\n" +
-	"\x0e_latest_review\"\xcf\x01\n" +
+	"\x0e_latest_reviewJ\x04\b\v\x10\fR\n" +
+	"updated_by\"\xcf\x01\n" +
 	"\x1bOwnedApplicationVersionPage\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.app_center.v1.application_version.OwnedApplicationVersionSummaryR\x05items\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12/\n" +
-	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf\"\x9c\x06\n" +
+	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf\"\x8f\x06\n" +
 	"\x1fOwnedApplicationVersionResource\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12%\n" +
@@ -1732,11 +1715,10 @@ const file_app_center_v1_application_version_application_version_proto_rawDesc =
 	"\n" +
 	"created_by\x18\x0e \x01(\tR\tcreatedBy\x129\n" +
 	"\n" +
-	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_by\x18\x10 \x01(\tR\tupdatedBy\x129\n" +
-	"\n" +
-	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa4\x01\n" +
+	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtJ\x04\b\x10\x10\x11R\n" +
+	"updated_by\"\xa4\x01\n" +
 	"%OwnedApplicationVersionReviewDecision\x12\x18\n" +
 	"\aoutcome\x18\x01 \x01(\tR\aoutcome\x12\x1b\n" +
 	"\x06reason\x18\x02 \x01(\tH\x00R\x06reason\x88\x01\x01\x129\n" +

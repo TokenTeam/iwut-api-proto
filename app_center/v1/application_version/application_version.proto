@@ -146,6 +146,9 @@ message OwnedApplicationVersionReviewSummary {
 }
 
 message OwnedApplicationVersionSummary {
+  reserved 11;
+  reserved "updated_by";
+
   string version_id = 1;
   string application_id = 2;
   int32 sequence = 3;
@@ -156,7 +159,6 @@ message OwnedApplicationVersionSummary {
   int64 revision = 8;
   string created_by = 9;
   google.protobuf.Timestamp created_at = 10;
-  string updated_by = 11;
   google.protobuf.Timestamp updated_at = 12;
   optional OwnedApplicationVersionReviewSummary latest_review = 13;
 }
@@ -168,6 +170,9 @@ message OwnedApplicationVersionPage {
 }
 
 message OwnedApplicationVersionResource {
+  reserved 16;
+  reserved "updated_by";
+
   string version_id = 1;
   string application_id = 2;
   int32 sequence = 3;
@@ -183,7 +188,6 @@ message OwnedApplicationVersionResource {
   int64 revision = 13;
   string created_by = 14;
   google.protobuf.Timestamp created_at = 15;
-  string updated_by = 16;
   google.protobuf.Timestamp updated_at = 17;
 }
 
