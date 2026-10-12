@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package app_center.v1.test_application_catalog;
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/test_application_catalog;testapplicationcatalog";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_AUTHENTICATED_USER_REQUIRED = 1;
+  ERROR_REASON_INVALID_AUTHENTICATED_USER = 2;
+  ERROR_REASON_INVALID_MY_TEST_APPLICATION_QUERY = 3;
+  ERROR_REASON_INVALID_MY_TEST_APPLICATION_PAGE_TOKEN = 4;
+  ERROR_REASON_MY_TEST_APPLICATION_NOT_FOUND = 5;
+  ERROR_REASON_MY_TEST_APPLICATION_STATE_INCONSISTENT = 6;
+  ERROR_REASON_MY_TEST_APPLICATION_UNAVAILABLE = 7;
+  ERROR_REASON_INTERNAL = 8;
+}

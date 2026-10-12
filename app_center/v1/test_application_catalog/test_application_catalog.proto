@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package app_center.v1.test_application_catalog;
+
+import "app_center/v1/catalog/catalog.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/test_application_catalog;testapplicationcatalog";
+
+// Authenticated USER participation query. Identity comes only from the trusted
+// server context; administrator and Reviewer roles do not grant participation.
+service TestApplicationCatalogService {
+  rpc ListMyTestApplications(ListMyTestApplicationsRequest) returns (MyTestApplicationPage) {
+    option (google.api.http) = {
+      post: "/v1/test-applications:search"
+      body: "query"
+    };
+  }
+
+  rpc GetMyTestApplication(GetMyTestApplicationRequest) returns (MyTestApplicationDetail) {
+    option (google.api.http) = {
+      post: "/v1/test-applications/{application_id}:resolve"
+      body: "runtime"
+    };
+  }
+}
+
+message RuntimeQuery {
+  int32 host_rpc_api_major = 1;
+  repeated string host_capabilities = 2;
+}
+
+message ListMyTestApplicationsRequest {
+  ListQuery query = 1;
+}
+
+message ListQuery {
+  RuntimeQuery runtime = 1;
+  // Defaults to 20, with an inclusive range of 1 through 100.
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message GetMyTestApplicationRequest {
+  string application_id = 1 [json_name = "application_id"];
+  RuntimeQuery runtime = 2;
+}
+
+enum TestAvailability {
+  TEST_AVAILABILITY_UNSPECIFIED = 0;
+  TEST_AVAILABILITY_READY = 1;
+  TEST_AVAILABILITY_PROFILE_REQUIRED = 2;
+  TEST_AVAILABILITY_TEST_TARGET_UNAVAILABLE = 3;
+  TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT = 4;
+}
+
+// Only the caller's current episode is exposed; no source link or actor.
+message OwnMembership {
+  string membership_id = 1;
+  google.protobuf.Timestamp joined_at = 2;
+}
+
+message PublicProfile {
+  string profile_revision_id = 1;
+  string display_name = 2;
+  optional string description = 3;
+  optional string icon = 4;
+}
+
+message MyTestApplicationItem {
+  string application_id = 1;
+  OwnMembership membership = 2;
+  PublicProfile profile = 3;
+  TestAvailability availability = 4;
+  // Present only for READY. Never contains a Grey or Stable fallback.
+  app_center.v1.catalog.TestLaunchDescriptor launch_target = 5;
+  repeated string missing_capabilities = 6;
+}
+
+message MyTestApplicationPage {
+  repeated MyTestApplicationItem items = 1;
+  string next_page_token = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
+
+message MyTestApplicationDetail {
+  MyTestApplicationItem item = 1;
+  google.protobuf.Timestamp as_of = 2;
+}
