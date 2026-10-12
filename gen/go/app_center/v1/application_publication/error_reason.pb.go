@@ -50,6 +50,8 @@ const (
 	ErrorReason_ERROR_REASON_STABLE_PUBLICATION_REQUIRED_BY_GREY        ErrorReason = 23
 	ErrorReason_ERROR_REASON_APPLICATION_PUBLICATION_STATE_INCONSISTENT ErrorReason = 24
 	ErrorReason_ERROR_REASON_GREY_STABLE_BASELINE_REQUIRED              ErrorReason = 25
+	ErrorReason_ERROR_REASON_APPLICATION_PUBLICATION_NOT_ALLOWED        ErrorReason = 26
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                     ErrorReason = 27
 )
 
 // Enum value maps for ErrorReason.
@@ -81,6 +83,8 @@ var (
 		23: "ERROR_REASON_STABLE_PUBLICATION_REQUIRED_BY_GREY",
 		24: "ERROR_REASON_APPLICATION_PUBLICATION_STATE_INCONSISTENT",
 		25: "ERROR_REASON_GREY_STABLE_BASELINE_REQUIRED",
+		26: "ERROR_REASON_APPLICATION_PUBLICATION_NOT_ALLOWED",
+		27: "ERROR_REASON_INVALID_APPLICATION_ID",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                                0,
@@ -109,6 +113,8 @@ var (
 		"ERROR_REASON_STABLE_PUBLICATION_REQUIRED_BY_GREY":        23,
 		"ERROR_REASON_APPLICATION_PUBLICATION_STATE_INCONSISTENT": 24,
 		"ERROR_REASON_GREY_STABLE_BASELINE_REQUIRED":              25,
+		"ERROR_REASON_APPLICATION_PUBLICATION_NOT_ALLOWED":        26,
+		"ERROR_REASON_INVALID_APPLICATION_ID":                     27,
 	}
 )
 
@@ -143,7 +149,7 @@ var File_app_center_v1_application_publication_error_reason_proto protoreflect.F
 
 const file_app_center_v1_application_publication_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"8app_center/v1/application_publication/error_reason.proto\x12%app_center.v1.application_publication*\x93\n" +
+	"8app_center/v1/application_publication/error_reason.proto\x12%app_center.v1.application_publication*\xf2\n" +
 	"\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
@@ -172,7 +178,9 @@ const file_app_center_v1_application_publication_error_reason_proto_rawDesc = ""
 	"3ERROR_REASON_APPLICATION_PROFILE_STATE_INCONSISTENT\x10\x16\x124\n" +
 	"0ERROR_REASON_STABLE_PUBLICATION_REQUIRED_BY_GREY\x10\x17\x12;\n" +
 	"7ERROR_REASON_APPLICATION_PUBLICATION_STATE_INCONSISTENT\x10\x18\x12.\n" +
-	"*ERROR_REASON_GREY_STABLE_BASELINE_REQUIRED\x10\x19BiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
+	"*ERROR_REASON_GREY_STABLE_BASELINE_REQUIRED\x10\x19\x124\n" +
+	"0ERROR_REASON_APPLICATION_PUBLICATION_NOT_ALLOWED\x10\x1a\x12'\n" +
+	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x1bBiZggithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_publication;applicationpublicationb\x06proto3"
 
 var (
 	file_app_center_v1_application_publication_error_reason_proto_rawDescOnce sync.Once

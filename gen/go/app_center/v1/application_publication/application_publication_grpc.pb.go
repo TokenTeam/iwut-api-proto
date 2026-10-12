@@ -22,6 +22,7 @@ const (
 	ApplicationPublication_PlaceApprovedVersionInTestSlot_FullMethodName = "/app_center.v1.application_publication.ApplicationPublication/PlaceApprovedVersionInTestSlot"
 	ApplicationPublication_SetApprovedVersionInStableSlot_FullMethodName = "/app_center.v1.application_publication.ApplicationPublication/SetApprovedVersionInStableSlot"
 	ApplicationPublication_ClearStableSlot_FullMethodName                = "/app_center.v1.application_publication.ApplicationPublication/ClearStableSlot"
+	ApplicationPublication_ClearTestSlot_FullMethodName                  = "/app_center.v1.application_publication.ApplicationPublication/ClearTestSlot"
 	ApplicationPublication_SetGreyRollout_FullMethodName                 = "/app_center.v1.application_publication.ApplicationPublication/SetGreyRollout"
 	ApplicationPublication_ClearGreyRollout_FullMethodName               = "/app_center.v1.application_publication.ApplicationPublication/ClearGreyRollout"
 )
@@ -33,6 +34,7 @@ type ApplicationPublicationClient interface {
 	PlaceApprovedVersionInTestSlot(ctx context.Context, in *PlaceApprovedVersionInTestSlotRequest, opts ...grpc.CallOption) (*PlaceApprovedVersionInTestSlotResponse, error)
 	SetApprovedVersionInStableSlot(ctx context.Context, in *SetApprovedVersionInStableSlotRequest, opts ...grpc.CallOption) (*SetApprovedVersionInStableSlotResponse, error)
 	ClearStableSlot(ctx context.Context, in *ClearStableSlotRequest, opts ...grpc.CallOption) (*ClearStableSlotResponse, error)
+	ClearTestSlot(ctx context.Context, in *ClearTestSlotRequest, opts ...grpc.CallOption) (*ClearTestSlotResponse, error)
 	SetGreyRollout(ctx context.Context, in *SetGreyRolloutRequest, opts ...grpc.CallOption) (*SetGreyRolloutResponse, error)
 	ClearGreyRollout(ctx context.Context, in *ClearGreyRolloutRequest, opts ...grpc.CallOption) (*ClearGreyRolloutResponse, error)
 }
@@ -75,6 +77,16 @@ func (c *applicationPublicationClient) ClearStableSlot(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *applicationPublicationClient) ClearTestSlot(ctx context.Context, in *ClearTestSlotRequest, opts ...grpc.CallOption) (*ClearTestSlotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearTestSlotResponse)
+	err := c.cc.Invoke(ctx, ApplicationPublication_ClearTestSlot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *applicationPublicationClient) SetGreyRollout(ctx context.Context, in *SetGreyRolloutRequest, opts ...grpc.CallOption) (*SetGreyRolloutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetGreyRolloutResponse)
@@ -102,6 +114,7 @@ type ApplicationPublicationServer interface {
 	PlaceApprovedVersionInTestSlot(context.Context, *PlaceApprovedVersionInTestSlotRequest) (*PlaceApprovedVersionInTestSlotResponse, error)
 	SetApprovedVersionInStableSlot(context.Context, *SetApprovedVersionInStableSlotRequest) (*SetApprovedVersionInStableSlotResponse, error)
 	ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error)
+	ClearTestSlot(context.Context, *ClearTestSlotRequest) (*ClearTestSlotResponse, error)
 	SetGreyRollout(context.Context, *SetGreyRolloutRequest) (*SetGreyRolloutResponse, error)
 	ClearGreyRollout(context.Context, *ClearGreyRolloutRequest) (*ClearGreyRolloutResponse, error)
 	mustEmbedUnimplementedApplicationPublicationServer()
@@ -122,6 +135,9 @@ func (UnimplementedApplicationPublicationServer) SetApprovedVersionInStableSlot(
 }
 func (UnimplementedApplicationPublicationServer) ClearStableSlot(context.Context, *ClearStableSlotRequest) (*ClearStableSlotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ClearStableSlot not implemented")
+}
+func (UnimplementedApplicationPublicationServer) ClearTestSlot(context.Context, *ClearTestSlotRequest) (*ClearTestSlotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearTestSlot not implemented")
 }
 func (UnimplementedApplicationPublicationServer) SetGreyRollout(context.Context, *SetGreyRolloutRequest) (*SetGreyRolloutResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetGreyRollout not implemented")
@@ -205,6 +221,24 @@ func _ApplicationPublication_ClearStableSlot_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationPublication_ClearTestSlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearTestSlotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationPublicationServer).ClearTestSlot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationPublication_ClearTestSlot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationPublicationServer).ClearTestSlot(ctx, req.(*ClearTestSlotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApplicationPublication_SetGreyRollout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetGreyRolloutRequest)
 	if err := dec(in); err != nil {
@@ -259,6 +293,10 @@ var ApplicationPublication_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearStableSlot",
 			Handler:    _ApplicationPublication_ClearStableSlot_Handler,
+		},
+		{
+			MethodName: "ClearTestSlot",
+			Handler:    _ApplicationPublication_ClearTestSlot_Handler,
 		},
 		{
 			MethodName: "SetGreyRollout",
