@@ -1,0 +1,51 @@
+syntax = "proto3";
+package app_center.v1.tester_management;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_management;testermanagement";
+service ApplicationTesterManagementService {
+  rpc GetApplicationTesterManagement(GetApplicationTesterManagementRequest) returns (ApplicationTesterManagement) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/tester-management"};
+  }
+  rpc ListApplicationTesterMemberships(ListApplicationTesterMembershipsRequest) returns (MembershipPage) {
+    option (google.api.http) = {post: "/v1/applications/{application_id}/tester-memberships:search" body: "query"};
+  }
+  rpc ListApplicationTesterJoinLinks(ListApplicationTesterJoinLinksRequest) returns (JoinLinkPage) {
+    option (google.api.http) = {post: "/v1/applications/{application_id}/tester-join-links:search" body: "query"};
+  }
+}
+enum MembershipStatus { MEMBERSHIP_STATUS_UNSPECIFIED = 0; MEMBERSHIP_STATUS_ACTIVE = 1; MEMBERSHIP_STATUS_REMOVED = 2; MEMBERSHIP_STATUS_ALL = 3; }
+enum JoinLinkStatus { JOIN_LINK_STATUS_UNSPECIFIED = 0; JOIN_LINK_STATUS_ACTIVE = 1; JOIN_LINK_STATUS_REVOKED = 2; JOIN_LINK_STATUS_ALL = 3; }
+enum RevocationReason { REVOCATION_REASON_UNSPECIFIED = 0; REVOCATION_REASON_ROTATED = 1; REVOCATION_REASON_MANUAL = 2; REVOCATION_REASON_ADMIN_TRANSFER = 3; REVOCATION_REASON_APPLICATION_CLOSURE = 4; }
+message GetApplicationTesterManagementRequest { string application_id = 1 [json_name = "application_id"]; }
+message ListApplicationTesterMembershipsRequest { string application_id = 1 [json_name = "application_id"]; MembershipQuery query = 2; }
+message ListApplicationTesterJoinLinksRequest { string application_id = 1 [json_name = "application_id"]; JoinLinkQuery query = 2; }
+message MembershipQuery { MembershipStatus status = 1; int32 page_size = 2; string page_token = 3; }
+message JoinLinkQuery { JoinLinkStatus status = 1; int32 page_size = 2; string page_token = 3; }
+message TesterCapacity { int32 active_tester_count = 1; int32 tester_limit = 2; }
+message ManagedTesterMembership {
+  string membership_id = 1;
+  string application_id = 2;
+  string tester_auth_id = 3;
+  MembershipStatus status = 4;
+  string joined_via_join_link_id = 5;
+  google.protobuf.Timestamp joined_at = 6;
+  optional google.protobuf.Timestamp removed_at = 7;
+}
+message ManagedTesterJoinLink {
+  string join_link_id = 1;
+  string application_id = 2;
+  JoinLinkStatus status = 3;
+  google.protobuf.Timestamp created_at = 4;
+  optional google.protobuf.Timestamp revoked_at = 5;
+  optional RevocationReason revocation_reason = 6;
+  optional string replaced_by_join_link_id = 7;
+}
+message ApplicationTesterManagement {
+  string application_id = 1;
+  TesterCapacity capacity = 2;
+  optional ManagedTesterJoinLink active_join_link = 3;
+  google.protobuf.Timestamp as_of = 4;
+}
+message MembershipPage { repeated ManagedTesterMembership items = 1; string next_page_token = 2; google.protobuf.Timestamp as_of = 3; }
+message JoinLinkPage { repeated ManagedTesterJoinLink items = 1; string next_page_token = 2; google.protobuf.Timestamp as_of = 3; }
