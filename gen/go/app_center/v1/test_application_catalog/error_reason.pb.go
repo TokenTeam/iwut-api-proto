@@ -25,8 +25,8 @@ type ErrorReason int32
 
 const (
 	ErrorReason_ERROR_REASON_UNSPECIFIED                            ErrorReason = 0
-	ErrorReason_ERROR_REASON_AUTHENTICATED_USER_REQUIRED            ErrorReason = 1
-	ErrorReason_ERROR_REASON_INVALID_AUTHENTICATED_USER             ErrorReason = 2
+	ErrorReason_ERROR_REASON_USER_IDENTITY_REQUIRED                 ErrorReason = 1
+	ErrorReason_ERROR_REASON_INVALID_USER_IDENTITY                  ErrorReason = 2
 	ErrorReason_ERROR_REASON_INVALID_MY_TEST_APPLICATION_QUERY      ErrorReason = 3
 	ErrorReason_ERROR_REASON_INVALID_MY_TEST_APPLICATION_PAGE_TOKEN ErrorReason = 4
 	ErrorReason_ERROR_REASON_MY_TEST_APPLICATION_NOT_FOUND          ErrorReason = 5
@@ -39,8 +39,8 @@ const (
 var (
 	ErrorReason_name = map[int32]string{
 		0: "ERROR_REASON_UNSPECIFIED",
-		1: "ERROR_REASON_AUTHENTICATED_USER_REQUIRED",
-		2: "ERROR_REASON_INVALID_AUTHENTICATED_USER",
+		1: "ERROR_REASON_USER_IDENTITY_REQUIRED",
+		2: "ERROR_REASON_INVALID_USER_IDENTITY",
 		3: "ERROR_REASON_INVALID_MY_TEST_APPLICATION_QUERY",
 		4: "ERROR_REASON_INVALID_MY_TEST_APPLICATION_PAGE_TOKEN",
 		5: "ERROR_REASON_MY_TEST_APPLICATION_NOT_FOUND",
@@ -50,8 +50,8 @@ var (
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                            0,
-		"ERROR_REASON_AUTHENTICATED_USER_REQUIRED":            1,
-		"ERROR_REASON_INVALID_AUTHENTICATED_USER":             2,
+		"ERROR_REASON_USER_IDENTITY_REQUIRED":                 1,
+		"ERROR_REASON_INVALID_USER_IDENTITY":                  2,
 		"ERROR_REASON_INVALID_MY_TEST_APPLICATION_QUERY":      3,
 		"ERROR_REASON_INVALID_MY_TEST_APPLICATION_PAGE_TOKEN": 4,
 		"ERROR_REASON_MY_TEST_APPLICATION_NOT_FOUND":          5,
@@ -92,11 +92,11 @@ var File_app_center_v1_test_application_catalog_error_reason_proto protoreflect.
 
 const file_app_center_v1_test_application_catalog_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"9app_center/v1/test_application_catalog/error_reason.proto\x12&app_center.v1.test_application_catalog*\xa9\x03\n" +
+	"9app_center/v1/test_application_catalog/error_reason.proto\x12&app_center.v1.test_application_catalog*\x9f\x03\n" +
 	"\vErrorReason\x12\x1c\n" +
-	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
-	"(ERROR_REASON_AUTHENTICATED_USER_REQUIRED\x10\x01\x12+\n" +
-	"'ERROR_REASON_INVALID_AUTHENTICATED_USER\x10\x02\x122\n" +
+	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
+	"#ERROR_REASON_USER_IDENTITY_REQUIRED\x10\x01\x12&\n" +
+	"\"ERROR_REASON_INVALID_USER_IDENTITY\x10\x02\x122\n" +
 	".ERROR_REASON_INVALID_MY_TEST_APPLICATION_QUERY\x10\x03\x127\n" +
 	"3ERROR_REASON_INVALID_MY_TEST_APPLICATION_PAGE_TOKEN\x10\x04\x12.\n" +
 	"*ERROR_REASON_MY_TEST_APPLICATION_NOT_FOUND\x10\x05\x127\n" +
