@@ -473,6 +473,794 @@ func (x *UpdateApplicationProfileRevisionResponse) GetUpdatedAt() *timestamppb.T
 	return nil
 }
 
+type ListApplicationProfileRevisionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	ReviewStatus  *string                `protobuf:"bytes,2,opt,name=review_status,json=reviewStatus,proto3,oneof" json:"review_status,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListApplicationProfileRevisionsRequest) Reset() {
+	*x = ListApplicationProfileRevisionsRequest{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListApplicationProfileRevisionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListApplicationProfileRevisionsRequest) ProtoMessage() {}
+
+func (x *ListApplicationProfileRevisionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListApplicationProfileRevisionsRequest.ProtoReflect.Descriptor instead.
+func (*ListApplicationProfileRevisionsRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListApplicationProfileRevisionsRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *ListApplicationProfileRevisionsRequest) GetReviewStatus() string {
+	if x != nil && x.ReviewStatus != nil {
+		return *x.ReviewStatus
+	}
+	return ""
+}
+
+func (x *ListApplicationProfileRevisionsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListApplicationProfileRevisionsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type GetApplicationProfileRevisionRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId     string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	ProfileRevisionId string                 `protobuf:"bytes,2,opt,name=profile_revision_id,proto3" json:"profile_revision_id,omitempty"`
+	ReviewPageSize    int32                  `protobuf:"varint,3,opt,name=review_page_size,json=reviewPageSize,proto3" json:"review_page_size,omitempty"`
+	ReviewPageToken   string                 `protobuf:"bytes,4,opt,name=review_page_token,json=reviewPageToken,proto3" json:"review_page_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetApplicationProfileRevisionRequest) Reset() {
+	*x = GetApplicationProfileRevisionRequest{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApplicationProfileRevisionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApplicationProfileRevisionRequest) ProtoMessage() {}
+
+func (x *GetApplicationProfileRevisionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApplicationProfileRevisionRequest.ProtoReflect.Descriptor instead.
+func (*GetApplicationProfileRevisionRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetApplicationProfileRevisionRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *GetApplicationProfileRevisionRequest) GetProfileRevisionId() string {
+	if x != nil {
+		return x.ProfileRevisionId
+	}
+	return ""
+}
+
+func (x *GetApplicationProfileRevisionRequest) GetReviewPageSize() int32 {
+	if x != nil {
+		return x.ReviewPageSize
+	}
+	return 0
+}
+
+func (x *GetApplicationProfileRevisionRequest) GetReviewPageToken() string {
+	if x != nil {
+		return x.ReviewPageToken
+	}
+	return ""
+}
+
+type OwnedApplicationProfileState struct {
+	state                             protoimpl.MessageState `protogen:"open.v1"`
+	WorkingProfileRevisionId          *structpb.Value        `protobuf:"bytes,1,opt,name=working_profile_revision_id,json=workingProfileRevisionId,proto3" json:"working_profile_revision_id,omitempty"`
+	CurrentPublishedProfileRevisionId *structpb.Value        `protobuf:"bytes,2,opt,name=current_published_profile_revision_id,json=currentPublishedProfileRevisionId,proto3" json:"current_published_profile_revision_id,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileState) Reset() {
+	*x = OwnedApplicationProfileState{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileState) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileState) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileState.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileState) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *OwnedApplicationProfileState) GetWorkingProfileRevisionId() *structpb.Value {
+	if x != nil {
+		return x.WorkingProfileRevisionId
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileState) GetCurrentPublishedProfileRevisionId() *structpb.Value {
+	if x != nil {
+		return x.CurrentPublishedProfileRevisionId
+	}
+	return nil
+}
+
+type OwnedApplicationProfileReviewDecision struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Outcome       string                 `protobuf:"bytes,1,opt,name=outcome,proto3" json:"outcome,omitempty"`
+	Reason        *structpb.Value        `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	PolicyVersion string                 `protobuf:"bytes,3,opt,name=policy_version,json=policyVersion,proto3" json:"policy_version,omitempty"`
+	DecidedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=decided_at,json=decidedAt,proto3" json:"decided_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileReviewDecision) Reset() {
+	*x = OwnedApplicationProfileReviewDecision{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileReviewDecision) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileReviewDecision) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileReviewDecision) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileReviewDecision.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileReviewDecision) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *OwnedApplicationProfileReviewDecision) GetOutcome() string {
+	if x != nil {
+		return x.Outcome
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileReviewDecision) GetReason() *structpb.Value {
+	if x != nil {
+		return x.Reason
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileReviewDecision) GetPolicyVersion() string {
+	if x != nil {
+		return x.PolicyVersion
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileReviewDecision) GetDecidedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DecidedAt
+	}
+	return nil
+}
+
+type OwnedApplicationProfileReview struct {
+	state           protoimpl.MessageState                 `protogen:"open.v1"`
+	ProfileReviewId string                                 `protobuf:"bytes,1,opt,name=profile_review_id,json=profileReviewId,proto3" json:"profile_review_id,omitempty"`
+	Attempt         int32                                  `protobuf:"varint,2,opt,name=attempt,proto3" json:"attempt,omitempty"`
+	Status          string                                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	SourceRevision  int64                                  `protobuf:"varint,4,opt,name=source_revision,json=sourceRevision,proto3" json:"source_revision,omitempty"`
+	SubmittedAt     *timestamppb.Timestamp                 `protobuf:"bytes,5,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"`
+	Decision        *OwnedApplicationProfileReviewDecision `protobuf:"bytes,6,opt,name=decision,proto3" json:"decision,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileReview) Reset() {
+	*x = OwnedApplicationProfileReview{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileReview) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileReview) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileReview) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileReview.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileReview) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *OwnedApplicationProfileReview) GetProfileReviewId() string {
+	if x != nil {
+		return x.ProfileReviewId
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileReview) GetAttempt() int32 {
+	if x != nil {
+		return x.Attempt
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileReview) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileReview) GetSourceRevision() int64 {
+	if x != nil {
+		return x.SourceRevision
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileReview) GetSubmittedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SubmittedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileReview) GetDecision() *OwnedApplicationProfileReviewDecision {
+	if x != nil {
+		return x.Decision
+	}
+	return nil
+}
+
+type OwnedApplicationProfileLatestReviewSummary struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	ProfileReviewId string                 `protobuf:"bytes,1,opt,name=profile_review_id,json=profileReviewId,proto3" json:"profile_review_id,omitempty"`
+	Attempt         int32                  `protobuf:"varint,2,opt,name=attempt,proto3" json:"attempt,omitempty"`
+	Status          string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	SubmittedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"`
+	DecidedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=decided_at,json=decidedAt,proto3" json:"decided_at,omitempty"`
+	Outcome         *string                `protobuf:"bytes,6,opt,name=outcome,proto3,oneof" json:"outcome,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) Reset() {
+	*x = OwnedApplicationProfileLatestReviewSummary{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileLatestReviewSummary) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileLatestReviewSummary.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileLatestReviewSummary) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetProfileReviewId() string {
+	if x != nil {
+		return x.ProfileReviewId
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetAttempt() int32 {
+	if x != nil {
+		return x.Attempt
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetSubmittedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SubmittedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetDecidedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DecidedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileLatestReviewSummary) GetOutcome() string {
+	if x != nil && x.Outcome != nil {
+		return *x.Outcome
+	}
+	return ""
+}
+
+type OwnedApplicationProfileRevisionSummary struct {
+	state                    protoimpl.MessageState                      `protogen:"open.v1"`
+	ProfileRevisionId        string                                      `protobuf:"bytes,1,opt,name=profile_revision_id,json=profileRevisionId,proto3" json:"profile_revision_id,omitempty"`
+	Sequence                 int32                                       `protobuf:"varint,2,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	ReviewStatus             string                                      `protobuf:"bytes,3,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	Revision                 int64                                       `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
+	DisplayName              string                                      `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Description              *structpb.Value                             `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Icon                     *structpb.Value                             `protobuf:"bytes,7,opt,name=icon,proto3" json:"icon,omitempty"`
+	CreatedAt                *timestamppb.Timestamp                      `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                *timestamppb.Timestamp                      `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	IsCurrentWorkingRevision bool                                        `protobuf:"varint,10,opt,name=is_current_working_revision,json=isCurrentWorkingRevision,proto3" json:"is_current_working_revision,omitempty"`
+	IsCurrentPublished       bool                                        `protobuf:"varint,11,opt,name=is_current_published,json=isCurrentPublished,proto3" json:"is_current_published,omitempty"`
+	LatestReview             *OwnedApplicationProfileLatestReviewSummary `protobuf:"bytes,12,opt,name=latest_review,json=latestReview,proto3" json:"latest_review,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) Reset() {
+	*x = OwnedApplicationProfileRevisionSummary{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileRevisionSummary) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileRevisionSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileRevisionSummary.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileRevisionSummary) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetProfileRevisionId() string {
+	if x != nil {
+		return x.ProfileRevisionId
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetSequence() int32 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetReviewStatus() string {
+	if x != nil {
+		return x.ReviewStatus
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetDescription() *structpb.Value {
+	if x != nil {
+		return x.Description
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetIcon() *structpb.Value {
+	if x != nil {
+		return x.Icon
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetIsCurrentWorkingRevision() bool {
+	if x != nil {
+		return x.IsCurrentWorkingRevision
+	}
+	return false
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetIsCurrentPublished() bool {
+	if x != nil {
+		return x.IsCurrentPublished
+	}
+	return false
+}
+
+func (x *OwnedApplicationProfileRevisionSummary) GetLatestReview() *OwnedApplicationProfileLatestReviewSummary {
+	if x != nil {
+		return x.LatestReview
+	}
+	return nil
+}
+
+type OwnedApplicationProfileRevisionPage struct {
+	state         protoimpl.MessageState                    `protogen:"open.v1"`
+	Items         []*OwnedApplicationProfileRevisionSummary `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	NextPageToken *structpb.Value                           `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	AsOf          *timestamppb.Timestamp                    `protobuf:"bytes,3,opt,name=as_of,json=asOf,proto3" json:"as_of,omitempty"`
+	ProfileState  *OwnedApplicationProfileState             `protobuf:"bytes,4,opt,name=profile_state,json=profileState,proto3" json:"profile_state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileRevisionPage) Reset() {
+	*x = OwnedApplicationProfileRevisionPage{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileRevisionPage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileRevisionPage) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileRevisionPage) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileRevisionPage.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileRevisionPage) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *OwnedApplicationProfileRevisionPage) GetItems() []*OwnedApplicationProfileRevisionSummary {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionPage) GetNextPageToken() *structpb.Value {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionPage) GetAsOf() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AsOf
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionPage) GetProfileState() *OwnedApplicationProfileState {
+	if x != nil {
+		return x.ProfileState
+	}
+	return nil
+}
+
+type OwnedApplicationProfileRevisionDetail struct {
+	state                    protoimpl.MessageState           `protogen:"open.v1"`
+	ApplicationId            string                           `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	ProfileRevisionId        string                           `protobuf:"bytes,2,opt,name=profile_revision_id,json=profileRevisionId,proto3" json:"profile_revision_id,omitempty"`
+	Sequence                 int32                            `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	ReviewStatus             string                           `protobuf:"bytes,4,opt,name=review_status,json=reviewStatus,proto3" json:"review_status,omitempty"`
+	Revision                 int64                            `protobuf:"varint,5,opt,name=revision,proto3" json:"revision,omitempty"`
+	Content                  *ApplicationProfileContent       `protobuf:"bytes,6,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedBy                string                           `protobuf:"bytes,7,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CreatedAt                *timestamppb.Timestamp           `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                *timestamppb.Timestamp           `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ProfileState             *OwnedApplicationProfileState    `protobuf:"bytes,10,opt,name=profile_state,json=profileState,proto3" json:"profile_state,omitempty"`
+	IsCurrentWorkingRevision bool                             `protobuf:"varint,11,opt,name=is_current_working_revision,json=isCurrentWorkingRevision,proto3" json:"is_current_working_revision,omitempty"`
+	IsCurrentPublished       bool                             `protobuf:"varint,12,opt,name=is_current_published,json=isCurrentPublished,proto3" json:"is_current_published,omitempty"`
+	LatestReview             *OwnedApplicationProfileReview   `protobuf:"bytes,13,opt,name=latest_review,json=latestReview,proto3" json:"latest_review,omitempty"`
+	Reviews                  []*OwnedApplicationProfileReview `protobuf:"bytes,14,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	NextReviewPageToken      *structpb.Value                  `protobuf:"bytes,15,opt,name=next_review_page_token,json=nextReviewPageToken,proto3" json:"next_review_page_token,omitempty"`
+	AsOf                     *timestamppb.Timestamp           `protobuf:"bytes,16,opt,name=as_of,json=asOf,proto3" json:"as_of,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) Reset() {
+	*x = OwnedApplicationProfileRevisionDetail{}
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnedApplicationProfileRevisionDetail) ProtoMessage() {}
+
+func (x *OwnedApplicationProfileRevisionDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnedApplicationProfileRevisionDetail.ProtoReflect.Descriptor instead.
+func (*OwnedApplicationProfileRevisionDetail) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetProfileRevisionId() string {
+	if x != nil {
+		return x.ProfileRevisionId
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetSequence() int32 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetReviewStatus() string {
+	if x != nil {
+		return x.ReviewStatus
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetContent() *ApplicationProfileContent {
+	if x != nil {
+		return x.Content
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetProfileState() *OwnedApplicationProfileState {
+	if x != nil {
+		return x.ProfileState
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetIsCurrentWorkingRevision() bool {
+	if x != nil {
+		return x.IsCurrentWorkingRevision
+	}
+	return false
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetIsCurrentPublished() bool {
+	if x != nil {
+		return x.IsCurrentPublished
+	}
+	return false
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetLatestReview() *OwnedApplicationProfileReview {
+	if x != nil {
+		return x.LatestReview
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetReviews() []*OwnedApplicationProfileReview {
+	if x != nil {
+		return x.Reviews
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetNextReviewPageToken() *structpb.Value {
+	if x != nil {
+		return x.NextReviewPageToken
+	}
+	return nil
+}
+
+func (x *OwnedApplicationProfileRevisionDetail) GetAsOf() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AsOf
+	}
+	return nil
+}
+
 var File_app_center_v1_application_profile_revision_application_profile_revision_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDesc = "" +
@@ -525,10 +1313,92 @@ const file_app_center_v1_application_profile_revision_application_profile_revisi
 	"\n" +
 	"updated_by\x18\v \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xde\x04\n" +
+	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc8\x01\n" +
+	"&ListApplicationProfileRevisionsRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12(\n" +
+	"\rreview_status\x18\x02 \x01(\tH\x00R\freviewStatus\x88\x01\x01\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x04 \x01(\tR\tpageTokenB\x10\n" +
+	"\x0e_review_status\"\xd6\x01\n" +
+	"$GetApplicationProfileRevisionRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x120\n" +
+	"\x13profile_revision_id\x18\x02 \x01(\tR\x13profile_revision_id\x12(\n" +
+	"\x10review_page_size\x18\x03 \x01(\x05R\x0ereviewPageSize\x12*\n" +
+	"\x11review_page_token\x18\x04 \x01(\tR\x0freviewPageToken\"\xdf\x01\n" +
+	"\x1cOwnedApplicationProfileState\x12U\n" +
+	"\x1bworking_profile_revision_id\x18\x01 \x01(\v2\x16.google.protobuf.ValueR\x18workingProfileRevisionId\x12h\n" +
+	"%current_published_profile_revision_id\x18\x02 \x01(\v2\x16.google.protobuf.ValueR!currentPublishedProfileRevisionId\"\xd3\x01\n" +
+	"%OwnedApplicationProfileReviewDecision\x12\x18\n" +
+	"\aoutcome\x18\x01 \x01(\tR\aoutcome\x12.\n" +
+	"\x06reason\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x06reason\x12%\n" +
+	"\x0epolicy_version\x18\x03 \x01(\tR\rpolicyVersion\x129\n" +
+	"\n" +
+	"decided_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tdecidedAt\"\xd4\x02\n" +
+	"\x1dOwnedApplicationProfileReview\x12*\n" +
+	"\x11profile_review_id\x18\x01 \x01(\tR\x0fprofileReviewId\x12\x18\n" +
+	"\aattempt\x18\x02 \x01(\x05R\aattempt\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12'\n" +
+	"\x0fsource_revision\x18\x04 \x01(\x03R\x0esourceRevision\x12=\n" +
+	"\fsubmitted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\x12m\n" +
+	"\bdecision\x18\x06 \x01(\v2Q.app_center.v1.application_profile_revision.OwnedApplicationProfileReviewDecisionR\bdecision\"\xaf\x02\n" +
+	"*OwnedApplicationProfileLatestReviewSummary\x12*\n" +
+	"\x11profile_review_id\x18\x01 \x01(\tR\x0fprofileReviewId\x12\x18\n" +
+	"\aattempt\x18\x02 \x01(\x05R\aattempt\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12=\n" +
+	"\fsubmitted_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\x129\n" +
+	"\n" +
+	"decided_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdecidedAt\x12\x1d\n" +
+	"\aoutcome\x18\x06 \x01(\tH\x00R\aoutcome\x88\x01\x01B\n" +
+	"\n" +
+	"\b_outcome\"\xa2\x05\n" +
+	"&OwnedApplicationProfileRevisionSummary\x12.\n" +
+	"\x13profile_revision_id\x18\x01 \x01(\tR\x11profileRevisionId\x12\x1a\n" +
+	"\bsequence\x18\x02 \x01(\x05R\bsequence\x12#\n" +
+	"\rreview_status\x18\x03 \x01(\tR\freviewStatus\x12\x1a\n" +
+	"\brevision\x18\x04 \x01(\x03R\brevision\x12!\n" +
+	"\fdisplay_name\x18\x05 \x01(\tR\vdisplayName\x128\n" +
+	"\vdescription\x18\x06 \x01(\v2\x16.google.protobuf.ValueR\vdescription\x12*\n" +
+	"\x04icon\x18\a \x01(\v2\x16.google.protobuf.ValueR\x04icon\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12=\n" +
+	"\x1bis_current_working_revision\x18\n" +
+	" \x01(\bR\x18isCurrentWorkingRevision\x120\n" +
+	"\x14is_current_published\x18\v \x01(\bR\x12isCurrentPublished\x12{\n" +
+	"\rlatest_review\x18\f \x01(\v2V.app_center.v1.application_profile_revision.OwnedApplicationProfileLatestReviewSummaryR\flatestReview\"\xef\x02\n" +
+	"#OwnedApplicationProfileRevisionPage\x12h\n" +
+	"\x05items\x18\x01 \x03(\v2R.app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummaryR\x05items\x12>\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\rnextPageToken\x12/\n" +
+	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf\x12m\n" +
+	"\rprofile_state\x18\x04 \x01(\v2H.app_center.v1.application_profile_revision.OwnedApplicationProfileStateR\fprofileState\"\x84\b\n" +
+	"%OwnedApplicationProfileRevisionDetail\x12%\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12.\n" +
+	"\x13profile_revision_id\x18\x02 \x01(\tR\x11profileRevisionId\x12\x1a\n" +
+	"\bsequence\x18\x03 \x01(\x05R\bsequence\x12#\n" +
+	"\rreview_status\x18\x04 \x01(\tR\freviewStatus\x12\x1a\n" +
+	"\brevision\x18\x05 \x01(\x03R\brevision\x12_\n" +
+	"\acontent\x18\x06 \x01(\v2E.app_center.v1.application_profile_revision.ApplicationProfileContentR\acontent\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\a \x01(\tR\tcreatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12m\n" +
+	"\rprofile_state\x18\n" +
+	" \x01(\v2H.app_center.v1.application_profile_revision.OwnedApplicationProfileStateR\fprofileState\x12=\n" +
+	"\x1bis_current_working_revision\x18\v \x01(\bR\x18isCurrentWorkingRevision\x120\n" +
+	"\x14is_current_published\x18\f \x01(\bR\x12isCurrentPublished\x12n\n" +
+	"\rlatest_review\x18\r \x01(\v2I.app_center.v1.application_profile_revision.OwnedApplicationProfileReviewR\flatestReview\x12c\n" +
+	"\areviews\x18\x0e \x03(\v2I.app_center.v1.application_profile_revision.OwnedApplicationProfileReviewR\areviews\x12K\n" +
+	"\x16next_review_page_token\x18\x0f \x01(\v2\x16.google.protobuf.ValueR\x13nextReviewPageToken\x12/\n" +
+	"\x05as_of\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf2\xfe\b\n" +
 	"\x1aApplicationProfileRevision\x12\x93\x02\n" +
 	" CreateApplicationProfileRevision\x12S.app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest\x1aT.app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse\"D\x82\xd3\xe4\x93\x02>:\aprofile\"3/v1/applications/{application_id}/profile-revisions\x12\xa9\x02\n" +
-	" UpdateApplicationProfileRevision\x12S.app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest\x1aT.app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse\"Z\x82\xd3\xe4\x93\x02T:\aprofile\x1aI/v1/applications/{application_id}/profile-revisions/{profile_revision_id}BrZpgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_revision;applicationprofilerevisionb\x06proto3"
+	" UpdateApplicationProfileRevision\x12S.app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest\x1aT.app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse\"Z\x82\xd3\xe4\x93\x02T:\aprofile\x1aI/v1/applications/{application_id}/profile-revisions/{profile_revision_id}\x12\x83\x02\n" +
+	"\x1fListApplicationProfileRevisions\x12R.app_center.v1.application_profile_revision.ListApplicationProfileRevisionsRequest\x1aO.app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage\";\x82\xd3\xe4\x93\x025\x123/v1/applications/{application_id}/profile-revisions\x12\x97\x02\n" +
+	"\x1dGetApplicationProfileRevision\x12P.app_center.v1.application_profile_revision.GetApplicationProfileRevisionRequest\x1aQ.app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail\"Q\x82\xd3\xe4\x93\x02K\x12I/v1/applications/{application_id}/profile-revisions/{profile_revision_id}BrZpgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_revision;applicationprofilerevisionb\x06proto3"
 
 var (
 	file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescOnce sync.Once
@@ -542,38 +1412,76 @@ func file_app_center_v1_application_profile_revision_application_profile_revisio
 	return file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDescData
 }
 
-var file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_app_center_v1_application_profile_revision_application_profile_revision_proto_goTypes = []any{
-	(*ApplicationProfileContent)(nil),                // 0: app_center.v1.application_profile_revision.ApplicationProfileContent
-	(*CreateApplicationProfileRevisionRequest)(nil),  // 1: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest
-	(*CreateApplicationProfileRevisionResponse)(nil), // 2: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
-	(*UpdateApplicationProfileRevisionRequest)(nil),  // 3: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest
-	(*UpdateApplicationProfileRevisionResponse)(nil), // 4: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse
-	(*structpb.Value)(nil),                           // 5: google.protobuf.Value
-	(*timestamppb.Timestamp)(nil),                    // 6: google.protobuf.Timestamp
+	(*ApplicationProfileContent)(nil),                  // 0: app_center.v1.application_profile_revision.ApplicationProfileContent
+	(*CreateApplicationProfileRevisionRequest)(nil),    // 1: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest
+	(*CreateApplicationProfileRevisionResponse)(nil),   // 2: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
+	(*UpdateApplicationProfileRevisionRequest)(nil),    // 3: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest
+	(*UpdateApplicationProfileRevisionResponse)(nil),   // 4: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse
+	(*ListApplicationProfileRevisionsRequest)(nil),     // 5: app_center.v1.application_profile_revision.ListApplicationProfileRevisionsRequest
+	(*GetApplicationProfileRevisionRequest)(nil),       // 6: app_center.v1.application_profile_revision.GetApplicationProfileRevisionRequest
+	(*OwnedApplicationProfileState)(nil),               // 7: app_center.v1.application_profile_revision.OwnedApplicationProfileState
+	(*OwnedApplicationProfileReviewDecision)(nil),      // 8: app_center.v1.application_profile_revision.OwnedApplicationProfileReviewDecision
+	(*OwnedApplicationProfileReview)(nil),              // 9: app_center.v1.application_profile_revision.OwnedApplicationProfileReview
+	(*OwnedApplicationProfileLatestReviewSummary)(nil), // 10: app_center.v1.application_profile_revision.OwnedApplicationProfileLatestReviewSummary
+	(*OwnedApplicationProfileRevisionSummary)(nil),     // 11: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary
+	(*OwnedApplicationProfileRevisionPage)(nil),        // 12: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage
+	(*OwnedApplicationProfileRevisionDetail)(nil),      // 13: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail
+	(*structpb.Value)(nil),                             // 14: google.protobuf.Value
+	(*timestamppb.Timestamp)(nil),                      // 15: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_profile_revision_application_profile_revision_proto_depIdxs = []int32{
-	5,  // 0: app_center.v1.application_profile_revision.ApplicationProfileContent.description:type_name -> google.protobuf.Value
-	5,  // 1: app_center.v1.application_profile_revision.ApplicationProfileContent.icon:type_name -> google.protobuf.Value
+	14, // 0: app_center.v1.application_profile_revision.ApplicationProfileContent.description:type_name -> google.protobuf.Value
+	14, // 1: app_center.v1.application_profile_revision.ApplicationProfileContent.icon:type_name -> google.protobuf.Value
 	0,  // 2: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest.profile:type_name -> app_center.v1.application_profile_revision.ApplicationProfileContent
-	5,  // 3: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.description:type_name -> google.protobuf.Value
-	5,  // 4: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.icon:type_name -> google.protobuf.Value
-	6,  // 5: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 6: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	14, // 3: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.description:type_name -> google.protobuf.Value
+	14, // 4: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.icon:type_name -> google.protobuf.Value
+	15, // 5: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.created_at:type_name -> google.protobuf.Timestamp
+	15, // 6: app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 7: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest.profile:type_name -> app_center.v1.application_profile_revision.ApplicationProfileContent
-	5,  // 8: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.description:type_name -> google.protobuf.Value
-	5,  // 9: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.icon:type_name -> google.protobuf.Value
-	6,  // 10: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 11: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	1,  // 12: app_center.v1.application_profile_revision.ApplicationProfileRevision.CreateApplicationProfileRevision:input_type -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest
-	3,  // 13: app_center.v1.application_profile_revision.ApplicationProfileRevision.UpdateApplicationProfileRevision:input_type -> app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest
-	2,  // 14: app_center.v1.application_profile_revision.ApplicationProfileRevision.CreateApplicationProfileRevision:output_type -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
-	4,  // 15: app_center.v1.application_profile_revision.ApplicationProfileRevision.UpdateApplicationProfileRevision:output_type -> app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse
-	14, // [14:16] is the sub-list for method output_type
-	12, // [12:14] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	14, // 8: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.description:type_name -> google.protobuf.Value
+	14, // 9: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.icon:type_name -> google.protobuf.Value
+	15, // 10: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.created_at:type_name -> google.protobuf.Timestamp
+	15, // 11: app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	14, // 12: app_center.v1.application_profile_revision.OwnedApplicationProfileState.working_profile_revision_id:type_name -> google.protobuf.Value
+	14, // 13: app_center.v1.application_profile_revision.OwnedApplicationProfileState.current_published_profile_revision_id:type_name -> google.protobuf.Value
+	14, // 14: app_center.v1.application_profile_revision.OwnedApplicationProfileReviewDecision.reason:type_name -> google.protobuf.Value
+	15, // 15: app_center.v1.application_profile_revision.OwnedApplicationProfileReviewDecision.decided_at:type_name -> google.protobuf.Timestamp
+	15, // 16: app_center.v1.application_profile_revision.OwnedApplicationProfileReview.submitted_at:type_name -> google.protobuf.Timestamp
+	8,  // 17: app_center.v1.application_profile_revision.OwnedApplicationProfileReview.decision:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileReviewDecision
+	15, // 18: app_center.v1.application_profile_revision.OwnedApplicationProfileLatestReviewSummary.submitted_at:type_name -> google.protobuf.Timestamp
+	15, // 19: app_center.v1.application_profile_revision.OwnedApplicationProfileLatestReviewSummary.decided_at:type_name -> google.protobuf.Timestamp
+	14, // 20: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary.description:type_name -> google.protobuf.Value
+	14, // 21: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary.icon:type_name -> google.protobuf.Value
+	15, // 22: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary.created_at:type_name -> google.protobuf.Timestamp
+	15, // 23: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 24: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary.latest_review:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileLatestReviewSummary
+	11, // 25: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage.items:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionSummary
+	14, // 26: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage.next_page_token:type_name -> google.protobuf.Value
+	15, // 27: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage.as_of:type_name -> google.protobuf.Timestamp
+	7,  // 28: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage.profile_state:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileState
+	0,  // 29: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.content:type_name -> app_center.v1.application_profile_revision.ApplicationProfileContent
+	15, // 30: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.created_at:type_name -> google.protobuf.Timestamp
+	15, // 31: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.updated_at:type_name -> google.protobuf.Timestamp
+	7,  // 32: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.profile_state:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileState
+	9,  // 33: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.latest_review:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileReview
+	9,  // 34: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.reviews:type_name -> app_center.v1.application_profile_revision.OwnedApplicationProfileReview
+	14, // 35: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.next_review_page_token:type_name -> google.protobuf.Value
+	15, // 36: app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail.as_of:type_name -> google.protobuf.Timestamp
+	1,  // 37: app_center.v1.application_profile_revision.ApplicationProfileRevision.CreateApplicationProfileRevision:input_type -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionRequest
+	3,  // 38: app_center.v1.application_profile_revision.ApplicationProfileRevision.UpdateApplicationProfileRevision:input_type -> app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionRequest
+	5,  // 39: app_center.v1.application_profile_revision.ApplicationProfileRevision.ListApplicationProfileRevisions:input_type -> app_center.v1.application_profile_revision.ListApplicationProfileRevisionsRequest
+	6,  // 40: app_center.v1.application_profile_revision.ApplicationProfileRevision.GetApplicationProfileRevision:input_type -> app_center.v1.application_profile_revision.GetApplicationProfileRevisionRequest
+	2,  // 41: app_center.v1.application_profile_revision.ApplicationProfileRevision.CreateApplicationProfileRevision:output_type -> app_center.v1.application_profile_revision.CreateApplicationProfileRevisionResponse
+	4,  // 42: app_center.v1.application_profile_revision.ApplicationProfileRevision.UpdateApplicationProfileRevision:output_type -> app_center.v1.application_profile_revision.UpdateApplicationProfileRevisionResponse
+	12, // 43: app_center.v1.application_profile_revision.ApplicationProfileRevision.ListApplicationProfileRevisions:output_type -> app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionPage
+	13, // 44: app_center.v1.application_profile_revision.ApplicationProfileRevision.GetApplicationProfileRevision:output_type -> app_center.v1.application_profile_revision.OwnedApplicationProfileRevisionDetail
+	41, // [41:45] is the sub-list for method output_type
+	37, // [37:41] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() {
@@ -583,13 +1491,15 @@ func file_app_center_v1_application_profile_revision_application_profile_revisio
 	if File_app_center_v1_application_profile_revision_application_profile_revision_proto != nil {
 		return
 	}
+	file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[5].OneofWrappers = []any{}
+	file_app_center_v1_application_profile_revision_application_profile_revision_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDesc), len(file_app_center_v1_application_profile_revision_application_profile_revision_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -20,10 +20,14 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationApplicationProfileRevisionCreateApplicationProfileRevision = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/CreateApplicationProfileRevision"
+const OperationApplicationProfileRevisionGetApplicationProfileRevision = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/GetApplicationProfileRevision"
+const OperationApplicationProfileRevisionListApplicationProfileRevisions = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/ListApplicationProfileRevisions"
 const OperationApplicationProfileRevisionUpdateApplicationProfileRevision = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/UpdateApplicationProfileRevision"
 
 type ApplicationProfileRevisionHTTPServer interface {
 	CreateApplicationProfileRevision(context.Context, *CreateApplicationProfileRevisionRequest) (*CreateApplicationProfileRevisionResponse, error)
+	GetApplicationProfileRevision(context.Context, *GetApplicationProfileRevisionRequest) (*OwnedApplicationProfileRevisionDetail, error)
+	ListApplicationProfileRevisions(context.Context, *ListApplicationProfileRevisionsRequest) (*OwnedApplicationProfileRevisionPage, error)
 	UpdateApplicationProfileRevision(context.Context, *UpdateApplicationProfileRevisionRequest) (*UpdateApplicationProfileRevisionResponse, error)
 }
 
@@ -31,6 +35,8 @@ func RegisterApplicationProfileRevisionHTTPServer(s *http.Server, srv Applicatio
 	r := s.Route("/")
 	r.POST("/v1/applications/{application_id}/profile-revisions", _ApplicationProfileRevision_CreateApplicationProfileRevision0_HTTP_Handler(srv))
 	r.PUT("/v1/applications/{application_id}/profile-revisions/{profile_revision_id}", _ApplicationProfileRevision_UpdateApplicationProfileRevision0_HTTP_Handler(srv))
+	r.GET("/v1/applications/{application_id}/profile-revisions", _ApplicationProfileRevision_ListApplicationProfileRevisions0_HTTP_Handler(srv))
+	r.GET("/v1/applications/{application_id}/profile-revisions/{profile_revision_id}", _ApplicationProfileRevision_GetApplicationProfileRevision0_HTTP_Handler(srv))
 }
 
 func _ApplicationProfileRevision_CreateApplicationProfileRevision0_HTTP_Handler(srv ApplicationProfileRevisionHTTPServer) func(ctx http.Context) error {
@@ -83,8 +89,54 @@ func _ApplicationProfileRevision_UpdateApplicationProfileRevision0_HTTP_Handler(
 	}
 }
 
+func _ApplicationProfileRevision_ListApplicationProfileRevisions0_HTTP_Handler(srv ApplicationProfileRevisionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListApplicationProfileRevisionsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationProfileRevisionListApplicationProfileRevisions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListApplicationProfileRevisions(ctx, req.(*ListApplicationProfileRevisionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OwnedApplicationProfileRevisionPage)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ApplicationProfileRevision_GetApplicationProfileRevision0_HTTP_Handler(srv ApplicationProfileRevisionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetApplicationProfileRevisionRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationProfileRevisionGetApplicationProfileRevision)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetApplicationProfileRevision(ctx, req.(*GetApplicationProfileRevisionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OwnedApplicationProfileRevisionDetail)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationProfileRevisionHTTPClient interface {
 	CreateApplicationProfileRevision(ctx context.Context, req *CreateApplicationProfileRevisionRequest, opts ...http.CallOption) (rsp *CreateApplicationProfileRevisionResponse, err error)
+	GetApplicationProfileRevision(ctx context.Context, req *GetApplicationProfileRevisionRequest, opts ...http.CallOption) (rsp *OwnedApplicationProfileRevisionDetail, err error)
+	ListApplicationProfileRevisions(ctx context.Context, req *ListApplicationProfileRevisionsRequest, opts ...http.CallOption) (rsp *OwnedApplicationProfileRevisionPage, err error)
 	UpdateApplicationProfileRevision(ctx context.Context, req *UpdateApplicationProfileRevisionRequest, opts ...http.CallOption) (rsp *UpdateApplicationProfileRevisionResponse, err error)
 }
 
@@ -103,6 +155,32 @@ func (c *ApplicationProfileRevisionHTTPClientImpl) CreateApplicationProfileRevis
 	opts = append(opts, http.Operation(OperationApplicationProfileRevisionCreateApplicationProfileRevision))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in.Profile, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationProfileRevisionHTTPClientImpl) GetApplicationProfileRevision(ctx context.Context, in *GetApplicationProfileRevisionRequest, opts ...http.CallOption) (*OwnedApplicationProfileRevisionDetail, error) {
+	var out OwnedApplicationProfileRevisionDetail
+	pattern := "/v1/applications/{application_id}/profile-revisions/{profile_revision_id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationProfileRevisionGetApplicationProfileRevision))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationProfileRevisionHTTPClientImpl) ListApplicationProfileRevisions(ctx context.Context, in *ListApplicationProfileRevisionsRequest, opts ...http.CallOption) (*OwnedApplicationProfileRevisionPage, error) {
+	var out OwnedApplicationProfileRevisionPage
+	pattern := "/v1/applications/{application_id}/profile-revisions"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationProfileRevisionListApplicationProfileRevisions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

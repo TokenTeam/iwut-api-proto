@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ApplicationProfileRevision_CreateApplicationProfileRevision_FullMethodName = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/CreateApplicationProfileRevision"
 	ApplicationProfileRevision_UpdateApplicationProfileRevision_FullMethodName = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/UpdateApplicationProfileRevision"
+	ApplicationProfileRevision_ListApplicationProfileRevisions_FullMethodName  = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/ListApplicationProfileRevisions"
+	ApplicationProfileRevision_GetApplicationProfileRevision_FullMethodName    = "/app_center.v1.application_profile_revision.ApplicationProfileRevision/GetApplicationProfileRevision"
 )
 
 // ApplicationProfileRevisionClient is the client API for ApplicationProfileRevision service.
@@ -29,6 +31,8 @@ const (
 type ApplicationProfileRevisionClient interface {
 	CreateApplicationProfileRevision(ctx context.Context, in *CreateApplicationProfileRevisionRequest, opts ...grpc.CallOption) (*CreateApplicationProfileRevisionResponse, error)
 	UpdateApplicationProfileRevision(ctx context.Context, in *UpdateApplicationProfileRevisionRequest, opts ...grpc.CallOption) (*UpdateApplicationProfileRevisionResponse, error)
+	ListApplicationProfileRevisions(ctx context.Context, in *ListApplicationProfileRevisionsRequest, opts ...grpc.CallOption) (*OwnedApplicationProfileRevisionPage, error)
+	GetApplicationProfileRevision(ctx context.Context, in *GetApplicationProfileRevisionRequest, opts ...grpc.CallOption) (*OwnedApplicationProfileRevisionDetail, error)
 }
 
 type applicationProfileRevisionClient struct {
@@ -59,12 +63,34 @@ func (c *applicationProfileRevisionClient) UpdateApplicationProfileRevision(ctx 
 	return out, nil
 }
 
+func (c *applicationProfileRevisionClient) ListApplicationProfileRevisions(ctx context.Context, in *ListApplicationProfileRevisionsRequest, opts ...grpc.CallOption) (*OwnedApplicationProfileRevisionPage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OwnedApplicationProfileRevisionPage)
+	err := c.cc.Invoke(ctx, ApplicationProfileRevision_ListApplicationProfileRevisions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *applicationProfileRevisionClient) GetApplicationProfileRevision(ctx context.Context, in *GetApplicationProfileRevisionRequest, opts ...grpc.CallOption) (*OwnedApplicationProfileRevisionDetail, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OwnedApplicationProfileRevisionDetail)
+	err := c.cc.Invoke(ctx, ApplicationProfileRevision_GetApplicationProfileRevision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationProfileRevisionServer is the server API for ApplicationProfileRevision service.
 // All implementations must embed UnimplementedApplicationProfileRevisionServer
 // for forward compatibility.
 type ApplicationProfileRevisionServer interface {
 	CreateApplicationProfileRevision(context.Context, *CreateApplicationProfileRevisionRequest) (*CreateApplicationProfileRevisionResponse, error)
 	UpdateApplicationProfileRevision(context.Context, *UpdateApplicationProfileRevisionRequest) (*UpdateApplicationProfileRevisionResponse, error)
+	ListApplicationProfileRevisions(context.Context, *ListApplicationProfileRevisionsRequest) (*OwnedApplicationProfileRevisionPage, error)
+	GetApplicationProfileRevision(context.Context, *GetApplicationProfileRevisionRequest) (*OwnedApplicationProfileRevisionDetail, error)
 	mustEmbedUnimplementedApplicationProfileRevisionServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedApplicationProfileRevisionServer) CreateApplicationProfileRev
 }
 func (UnimplementedApplicationProfileRevisionServer) UpdateApplicationProfileRevision(context.Context, *UpdateApplicationProfileRevisionRequest) (*UpdateApplicationProfileRevisionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateApplicationProfileRevision not implemented")
+}
+func (UnimplementedApplicationProfileRevisionServer) ListApplicationProfileRevisions(context.Context, *ListApplicationProfileRevisionsRequest) (*OwnedApplicationProfileRevisionPage, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListApplicationProfileRevisions not implemented")
+}
+func (UnimplementedApplicationProfileRevisionServer) GetApplicationProfileRevision(context.Context, *GetApplicationProfileRevisionRequest) (*OwnedApplicationProfileRevisionDetail, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApplicationProfileRevision not implemented")
 }
 func (UnimplementedApplicationProfileRevisionServer) mustEmbedUnimplementedApplicationProfileRevisionServer() {
 }
@@ -139,6 +171,42 @@ func _ApplicationProfileRevision_UpdateApplicationProfileRevision_Handler(srv in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationProfileRevision_ListApplicationProfileRevisions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListApplicationProfileRevisionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationProfileRevisionServer).ListApplicationProfileRevisions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationProfileRevision_ListApplicationProfileRevisions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationProfileRevisionServer).ListApplicationProfileRevisions(ctx, req.(*ListApplicationProfileRevisionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApplicationProfileRevision_GetApplicationProfileRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApplicationProfileRevisionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationProfileRevisionServer).GetApplicationProfileRevision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationProfileRevision_GetApplicationProfileRevision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationProfileRevisionServer).GetApplicationProfileRevision(ctx, req.(*GetApplicationProfileRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationProfileRevision_ServiceDesc is the grpc.ServiceDesc for ApplicationProfileRevision service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +221,14 @@ var ApplicationProfileRevision_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateApplicationProfileRevision",
 			Handler:    _ApplicationProfileRevision_UpdateApplicationProfileRevision_Handler,
+		},
+		{
+			MethodName: "ListApplicationProfileRevisions",
+			Handler:    _ApplicationProfileRevision_ListApplicationProfileRevisions_Handler,
+		},
+		{
+			MethodName: "GetApplicationProfileRevision",
+			Handler:    _ApplicationProfileRevision_GetApplicationProfileRevision_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
