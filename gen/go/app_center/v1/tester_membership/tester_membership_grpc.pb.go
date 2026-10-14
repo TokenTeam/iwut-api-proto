@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TesterMembership_RemoveApplicationTester_FullMethodName = "/app_center.v1.tester_membership.TesterMembership/RemoveApplicationTester"
-	TesterMembership_JoinApplicationAsTester_FullMethodName = "/app_center.v1.tester_membership.TesterMembership/JoinApplicationAsTester"
+	TesterMembership_RemoveApplicationTester_FullMethodName  = "/app_center.v1.tester_membership.TesterMembership/RemoveApplicationTester"
+	TesterMembership_JoinApplicationAsTester_FullMethodName  = "/app_center.v1.tester_membership.TesterMembership/JoinApplicationAsTester"
+	TesterMembership_LeaveApplicationAsTester_FullMethodName = "/app_center.v1.tester_membership.TesterMembership/LeaveApplicationAsTester"
 )
 
 // TesterMembershipClient is the client API for TesterMembership service.
@@ -29,6 +30,7 @@ const (
 type TesterMembershipClient interface {
 	RemoveApplicationTester(ctx context.Context, in *RemoveApplicationTesterRequest, opts ...grpc.CallOption) (*RemoveApplicationTesterResponse, error)
 	JoinApplicationAsTester(ctx context.Context, in *JoinApplicationAsTesterRequest, opts ...grpc.CallOption) (*JoinApplicationAsTesterResponse, error)
+	LeaveApplicationAsTester(ctx context.Context, in *LeaveApplicationAsTesterRequest, opts ...grpc.CallOption) (*LeaveApplicationAsTesterResponse, error)
 }
 
 type testerMembershipClient struct {
@@ -59,12 +61,23 @@ func (c *testerMembershipClient) JoinApplicationAsTester(ctx context.Context, in
 	return out, nil
 }
 
+func (c *testerMembershipClient) LeaveApplicationAsTester(ctx context.Context, in *LeaveApplicationAsTesterRequest, opts ...grpc.CallOption) (*LeaveApplicationAsTesterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LeaveApplicationAsTesterResponse)
+	err := c.cc.Invoke(ctx, TesterMembership_LeaveApplicationAsTester_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TesterMembershipServer is the server API for TesterMembership service.
 // All implementations must embed UnimplementedTesterMembershipServer
 // for forward compatibility.
 type TesterMembershipServer interface {
 	RemoveApplicationTester(context.Context, *RemoveApplicationTesterRequest) (*RemoveApplicationTesterResponse, error)
 	JoinApplicationAsTester(context.Context, *JoinApplicationAsTesterRequest) (*JoinApplicationAsTesterResponse, error)
+	LeaveApplicationAsTester(context.Context, *LeaveApplicationAsTesterRequest) (*LeaveApplicationAsTesterResponse, error)
 	mustEmbedUnimplementedTesterMembershipServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedTesterMembershipServer) RemoveApplicationTester(context.Conte
 }
 func (UnimplementedTesterMembershipServer) JoinApplicationAsTester(context.Context, *JoinApplicationAsTesterRequest) (*JoinApplicationAsTesterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method JoinApplicationAsTester not implemented")
+}
+func (UnimplementedTesterMembershipServer) LeaveApplicationAsTester(context.Context, *LeaveApplicationAsTesterRequest) (*LeaveApplicationAsTesterResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LeaveApplicationAsTester not implemented")
 }
 func (UnimplementedTesterMembershipServer) mustEmbedUnimplementedTesterMembershipServer() {}
 func (UnimplementedTesterMembershipServer) testEmbeddedByValue()                          {}
@@ -138,6 +154,24 @@ func _TesterMembership_JoinApplicationAsTester_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TesterMembership_LeaveApplicationAsTester_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LeaveApplicationAsTesterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TesterMembershipServer).LeaveApplicationAsTester(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TesterMembership_LeaveApplicationAsTester_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TesterMembershipServer).LeaveApplicationAsTester(ctx, req.(*LeaveApplicationAsTesterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TesterMembership_ServiceDesc is the grpc.ServiceDesc for TesterMembership service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var TesterMembership_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "JoinApplicationAsTester",
 			Handler:    _TesterMembership_JoinApplicationAsTester_Handler,
+		},
+		{
+			MethodName: "LeaveApplicationAsTester",
+			Handler:    _TesterMembership_LeaveApplicationAsTester_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

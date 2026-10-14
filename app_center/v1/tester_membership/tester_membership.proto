@@ -16,6 +16,11 @@ service TesterMembership {
       body: "command"
     };
   }
+  rpc LeaveApplicationAsTester(LeaveApplicationAsTesterRequest) returns (LeaveApplicationAsTesterResponse) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/tester-memberships/{membership_id}:leave"
+    };
+  }
 }
 // Removal targets an exact membership episode; identity and audit are server-owned.
 message RemoveApplicationTesterRequest {
@@ -54,4 +59,22 @@ message TesterMembershipResource {
 message TesterCapacity {
   int32 active_tester_count = 1;
   int32 tester_limit = 2;
+}
+
+// Self-exit targets exactly one owned episode and accepts no HTTP body/query.
+message LeaveApplicationAsTesterRequest {
+  string application_id = 1 [json_name = "application_id"];
+  string membership_id = 2 [json_name = "membership_id"];
+}
+message LeaveApplicationAsTesterResponse {
+  bool left = 1;
+  TesterExitMembership membership = 2;
+}
+// Minimal private response; deliberately excludes actor, capacity and source.
+message TesterExitMembership {
+  string membership_id = 1;
+  string application_id = 2;
+  string status = 3;
+  google.protobuf.Timestamp joined_at = 4;
+  google.protobuf.Timestamp removed_at = 5;
 }

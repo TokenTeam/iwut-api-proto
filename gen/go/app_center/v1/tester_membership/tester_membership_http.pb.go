@@ -20,10 +20,12 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationTesterMembershipJoinApplicationAsTester = "/app_center.v1.tester_membership.TesterMembership/JoinApplicationAsTester"
+const OperationTesterMembershipLeaveApplicationAsTester = "/app_center.v1.tester_membership.TesterMembership/LeaveApplicationAsTester"
 const OperationTesterMembershipRemoveApplicationTester = "/app_center.v1.tester_membership.TesterMembership/RemoveApplicationTester"
 
 type TesterMembershipHTTPServer interface {
 	JoinApplicationAsTester(context.Context, *JoinApplicationAsTesterRequest) (*JoinApplicationAsTesterResponse, error)
+	LeaveApplicationAsTester(context.Context, *LeaveApplicationAsTesterRequest) (*LeaveApplicationAsTesterResponse, error)
 	RemoveApplicationTester(context.Context, *RemoveApplicationTesterRequest) (*RemoveApplicationTesterResponse, error)
 }
 
@@ -31,6 +33,7 @@ func RegisterTesterMembershipHTTPServer(s *http.Server, srv TesterMembershipHTTP
 	r := s.Route("/")
 	r.DELETE("/v1/applications/{application_id}/tester-memberships/{membership_id}", _TesterMembership_RemoveApplicationTester0_HTTP_Handler(srv))
 	r.POST("/v1/tester-join-links/{join_link_id}/memberships", _TesterMembership_JoinApplicationAsTester0_HTTP_Handler(srv))
+	r.POST("/v1/applications/{application_id}/tester-memberships/{membership_id}:leave", _TesterMembership_LeaveApplicationAsTester0_HTTP_Handler(srv))
 }
 
 func _TesterMembership_RemoveApplicationTester0_HTTP_Handler(srv TesterMembershipHTTPServer) func(ctx http.Context) error {
@@ -80,8 +83,31 @@ func _TesterMembership_JoinApplicationAsTester0_HTTP_Handler(srv TesterMembershi
 	}
 }
 
+func _TesterMembership_LeaveApplicationAsTester0_HTTP_Handler(srv TesterMembershipHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LeaveApplicationAsTesterRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationTesterMembershipLeaveApplicationAsTester)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.LeaveApplicationAsTester(ctx, req.(*LeaveApplicationAsTesterRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*LeaveApplicationAsTesterResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type TesterMembershipHTTPClient interface {
 	JoinApplicationAsTester(ctx context.Context, req *JoinApplicationAsTesterRequest, opts ...http.CallOption) (rsp *JoinApplicationAsTesterResponse, err error)
+	LeaveApplicationAsTester(ctx context.Context, req *LeaveApplicationAsTesterRequest, opts ...http.CallOption) (rsp *LeaveApplicationAsTesterResponse, err error)
 	RemoveApplicationTester(ctx context.Context, req *RemoveApplicationTesterRequest, opts ...http.CallOption) (rsp *RemoveApplicationTesterResponse, err error)
 }
 
@@ -100,6 +126,19 @@ func (c *TesterMembershipHTTPClientImpl) JoinApplicationAsTester(ctx context.Con
 	opts = append(opts, http.Operation(OperationTesterMembershipJoinApplicationAsTester))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *TesterMembershipHTTPClientImpl) LeaveApplicationAsTester(ctx context.Context, in *LeaveApplicationAsTesterRequest, opts ...http.CallOption) (*LeaveApplicationAsTesterResponse, error) {
+	var out LeaveApplicationAsTesterResponse
+	pattern := "/v1/applications/{application_id}/tester-memberships/{membership_id}:leave"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationTesterMembershipLeaveApplicationAsTester))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -453,6 +453,188 @@ func (x *TesterCapacity) GetTesterLimit() int32 {
 	return 0
 }
 
+// Self-exit targets exactly one owned episode and accepts no HTTP body/query.
+type LeaveApplicationAsTesterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	MembershipId  string                 `protobuf:"bytes,2,opt,name=membership_id,proto3" json:"membership_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LeaveApplicationAsTesterRequest) Reset() {
+	*x = LeaveApplicationAsTesterRequest{}
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LeaveApplicationAsTesterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveApplicationAsTesterRequest) ProtoMessage() {}
+
+func (x *LeaveApplicationAsTesterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveApplicationAsTesterRequest.ProtoReflect.Descriptor instead.
+func (*LeaveApplicationAsTesterRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *LeaveApplicationAsTesterRequest) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *LeaveApplicationAsTesterRequest) GetMembershipId() string {
+	if x != nil {
+		return x.MembershipId
+	}
+	return ""
+}
+
+type LeaveApplicationAsTesterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Left          bool                   `protobuf:"varint,1,opt,name=left,proto3" json:"left,omitempty"`
+	Membership    *TesterExitMembership  `protobuf:"bytes,2,opt,name=membership,proto3" json:"membership,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LeaveApplicationAsTesterResponse) Reset() {
+	*x = LeaveApplicationAsTesterResponse{}
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LeaveApplicationAsTesterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveApplicationAsTesterResponse) ProtoMessage() {}
+
+func (x *LeaveApplicationAsTesterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveApplicationAsTesterResponse.ProtoReflect.Descriptor instead.
+func (*LeaveApplicationAsTesterResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *LeaveApplicationAsTesterResponse) GetLeft() bool {
+	if x != nil {
+		return x.Left
+	}
+	return false
+}
+
+func (x *LeaveApplicationAsTesterResponse) GetMembership() *TesterExitMembership {
+	if x != nil {
+		return x.Membership
+	}
+	return nil
+}
+
+// Minimal private response; deliberately excludes actor, capacity and source.
+type TesterExitMembership struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MembershipId  string                 `protobuf:"bytes,1,opt,name=membership_id,json=membershipId,proto3" json:"membership_id,omitempty"`
+	ApplicationId string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	JoinedAt      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=joined_at,json=joinedAt,proto3" json:"joined_at,omitempty"`
+	RemovedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=removed_at,json=removedAt,proto3" json:"removed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TesterExitMembership) Reset() {
+	*x = TesterExitMembership{}
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TesterExitMembership) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TesterExitMembership) ProtoMessage() {}
+
+func (x *TesterExitMembership) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_tester_membership_tester_membership_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TesterExitMembership.ProtoReflect.Descriptor instead.
+func (*TesterExitMembership) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *TesterExitMembership) GetMembershipId() string {
+	if x != nil {
+		return x.MembershipId
+	}
+	return ""
+}
+
+func (x *TesterExitMembership) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *TesterExitMembership) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *TesterExitMembership) GetJoinedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.JoinedAt
+	}
+	return nil
+}
+
+func (x *TesterExitMembership) GetRemovedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RemovedAt
+	}
+	return nil
+}
+
 var File_app_center_v1_tester_membership_tester_membership_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_tester_membership_tester_membership_proto_rawDesc = "" +
@@ -494,10 +676,26 @@ const file_app_center_v1_tester_membership_tester_membership_proto_rawDesc = "" 
 	"\v_removed_by\"c\n" +
 	"\x0eTesterCapacity\x12.\n" +
 	"\x13active_tester_count\x18\x01 \x01(\x05R\x11activeTesterCount\x12!\n" +
-	"\ftester_limit\x18\x02 \x01(\x05R\vtesterLimit2\xe1\x03\n" +
+	"\ftester_limit\x18\x02 \x01(\x05R\vtesterLimit\"o\n" +
+	"\x1fLeaveApplicationAsTesterRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rmembership_id\x18\x02 \x01(\tR\rmembership_id\"\x8d\x01\n" +
+	" LeaveApplicationAsTesterResponse\x12\x12\n" +
+	"\x04left\x18\x01 \x01(\bR\x04left\x12U\n" +
+	"\n" +
+	"membership\x18\x02 \x01(\v25.app_center.v1.tester_membership.TesterExitMembershipR\n" +
+	"membership\"\xee\x01\n" +
+	"\x14TesterExitMembership\x12#\n" +
+	"\rmembership_id\x18\x01 \x01(\tR\fmembershipId\x12%\n" +
+	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x127\n" +
+	"\tjoined_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bjoinedAt\x129\n" +
+	"\n" +
+	"removed_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tremovedAt2\xd7\x05\n" +
 	"\x10TesterMembership\x12\xea\x01\n" +
 	"\x17RemoveApplicationTester\x12?.app_center.v1.tester_membership.RemoveApplicationTesterRequest\x1a@.app_center.v1.tester_membership.RemoveApplicationTesterResponse\"L\x82\xd3\xe4\x93\x02F*D/v1/applications/{application_id}/tester-memberships/{membership_id}\x12\xdf\x01\n" +
-	"\x17JoinApplicationAsTester\x12?.app_center.v1.tester_membership.JoinApplicationAsTesterRequest\x1a@.app_center.v1.tester_membership.JoinApplicationAsTesterResponse\"A\x82\xd3\xe4\x93\x02;:\acommand\"0/v1/tester-join-links/{join_link_id}/membershipsB]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
+	"\x17JoinApplicationAsTester\x12?.app_center.v1.tester_membership.JoinApplicationAsTesterRequest\x1a@.app_center.v1.tester_membership.JoinApplicationAsTesterResponse\"A\x82\xd3\xe4\x93\x02;:\acommand\"0/v1/tester-join-links/{join_link_id}/memberships\x12\xf3\x01\n" +
+	"\x18LeaveApplicationAsTester\x12@.app_center.v1.tester_membership.LeaveApplicationAsTesterRequest\x1aA.app_center.v1.tester_membership.LeaveApplicationAsTesterResponse\"R\x82\xd3\xe4\x93\x02L\"J/v1/applications/{application_id}/tester-memberships/{membership_id}:leaveB]Z[github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/tester_membership;testermembershipb\x06proto3"
 
 var (
 	file_app_center_v1_tester_membership_tester_membership_proto_rawDescOnce sync.Once
@@ -511,34 +709,42 @@ func file_app_center_v1_tester_membership_tester_membership_proto_rawDescGZIP() 
 	return file_app_center_v1_tester_membership_tester_membership_proto_rawDescData
 }
 
-var file_app_center_v1_tester_membership_tester_membership_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_app_center_v1_tester_membership_tester_membership_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_app_center_v1_tester_membership_tester_membership_proto_goTypes = []any{
-	(*RemoveApplicationTesterRequest)(nil),  // 0: app_center.v1.tester_membership.RemoveApplicationTesterRequest
-	(*RemoveApplicationTesterResponse)(nil), // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse
-	(*JoinApplicationAsTesterRequest)(nil),  // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest
-	(*JoinApplicationAsTesterCommand)(nil),  // 3: app_center.v1.tester_membership.JoinApplicationAsTesterCommand
-	(*JoinApplicationAsTesterResponse)(nil), // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse
-	(*TesterMembershipResource)(nil),        // 5: app_center.v1.tester_membership.TesterMembershipResource
-	(*TesterCapacity)(nil),                  // 6: app_center.v1.tester_membership.TesterCapacity
-	(*timestamppb.Timestamp)(nil),           // 7: google.protobuf.Timestamp
+	(*RemoveApplicationTesterRequest)(nil),   // 0: app_center.v1.tester_membership.RemoveApplicationTesterRequest
+	(*RemoveApplicationTesterResponse)(nil),  // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse
+	(*JoinApplicationAsTesterRequest)(nil),   // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest
+	(*JoinApplicationAsTesterCommand)(nil),   // 3: app_center.v1.tester_membership.JoinApplicationAsTesterCommand
+	(*JoinApplicationAsTesterResponse)(nil),  // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse
+	(*TesterMembershipResource)(nil),         // 5: app_center.v1.tester_membership.TesterMembershipResource
+	(*TesterCapacity)(nil),                   // 6: app_center.v1.tester_membership.TesterCapacity
+	(*LeaveApplicationAsTesterRequest)(nil),  // 7: app_center.v1.tester_membership.LeaveApplicationAsTesterRequest
+	(*LeaveApplicationAsTesterResponse)(nil), // 8: app_center.v1.tester_membership.LeaveApplicationAsTesterResponse
+	(*TesterExitMembership)(nil),             // 9: app_center.v1.tester_membership.TesterExitMembership
+	(*timestamppb.Timestamp)(nil),            // 10: google.protobuf.Timestamp
 }
 var file_app_center_v1_tester_membership_tester_membership_proto_depIdxs = []int32{
-	5, // 0: app_center.v1.tester_membership.RemoveApplicationTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
-	6, // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
-	3, // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest.command:type_name -> app_center.v1.tester_membership.JoinApplicationAsTesterCommand
-	5, // 3: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
-	6, // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
-	7, // 5: app_center.v1.tester_membership.TesterMembershipResource.joined_at:type_name -> google.protobuf.Timestamp
-	7, // 6: app_center.v1.tester_membership.TesterMembershipResource.removed_at:type_name -> google.protobuf.Timestamp
-	0, // 7: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:input_type -> app_center.v1.tester_membership.RemoveApplicationTesterRequest
-	2, // 8: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:input_type -> app_center.v1.tester_membership.JoinApplicationAsTesterRequest
-	1, // 9: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:output_type -> app_center.v1.tester_membership.RemoveApplicationTesterResponse
-	4, // 10: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:output_type -> app_center.v1.tester_membership.JoinApplicationAsTesterResponse
-	9, // [9:11] is the sub-list for method output_type
-	7, // [7:9] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	5,  // 0: app_center.v1.tester_membership.RemoveApplicationTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
+	6,  // 1: app_center.v1.tester_membership.RemoveApplicationTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
+	3,  // 2: app_center.v1.tester_membership.JoinApplicationAsTesterRequest.command:type_name -> app_center.v1.tester_membership.JoinApplicationAsTesterCommand
+	5,  // 3: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterMembershipResource
+	6,  // 4: app_center.v1.tester_membership.JoinApplicationAsTesterResponse.capacity:type_name -> app_center.v1.tester_membership.TesterCapacity
+	10, // 5: app_center.v1.tester_membership.TesterMembershipResource.joined_at:type_name -> google.protobuf.Timestamp
+	10, // 6: app_center.v1.tester_membership.TesterMembershipResource.removed_at:type_name -> google.protobuf.Timestamp
+	9,  // 7: app_center.v1.tester_membership.LeaveApplicationAsTesterResponse.membership:type_name -> app_center.v1.tester_membership.TesterExitMembership
+	10, // 8: app_center.v1.tester_membership.TesterExitMembership.joined_at:type_name -> google.protobuf.Timestamp
+	10, // 9: app_center.v1.tester_membership.TesterExitMembership.removed_at:type_name -> google.protobuf.Timestamp
+	0,  // 10: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:input_type -> app_center.v1.tester_membership.RemoveApplicationTesterRequest
+	2,  // 11: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:input_type -> app_center.v1.tester_membership.JoinApplicationAsTesterRequest
+	7,  // 12: app_center.v1.tester_membership.TesterMembership.LeaveApplicationAsTester:input_type -> app_center.v1.tester_membership.LeaveApplicationAsTesterRequest
+	1,  // 13: app_center.v1.tester_membership.TesterMembership.RemoveApplicationTester:output_type -> app_center.v1.tester_membership.RemoveApplicationTesterResponse
+	4,  // 14: app_center.v1.tester_membership.TesterMembership.JoinApplicationAsTester:output_type -> app_center.v1.tester_membership.JoinApplicationAsTesterResponse
+	8,  // 15: app_center.v1.tester_membership.TesterMembership.LeaveApplicationAsTester:output_type -> app_center.v1.tester_membership.LeaveApplicationAsTesterResponse
+	13, // [13:16] is the sub-list for method output_type
+	10, // [10:13] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_tester_membership_tester_membership_proto_init() }
@@ -553,7 +759,7 @@ func file_app_center_v1_tester_membership_tester_membership_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_tester_membership_tester_membership_proto_rawDesc), len(file_app_center_v1_tester_membership_tester_membership_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
