@@ -31,6 +31,8 @@ type ProfileValue struct {
 	//	*ProfileValue_IntegerValue
 	//	*ProfileValue_BooleanValue
 	//	*ProfileValue_DateValue
+	//	*ProfileValue_StringSetValue
+	//	*ProfileValue_AcademicGradeValue
 	Value         isProfileValue_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -109,6 +111,24 @@ func (x *ProfileValue) GetDateValue() string {
 	return ""
 }
 
+func (x *ProfileValue) GetStringSetValue() *StringSetValue {
+	if x != nil {
+		if x, ok := x.Value.(*ProfileValue_StringSetValue); ok {
+			return x.StringSetValue
+		}
+	}
+	return nil
+}
+
+func (x *ProfileValue) GetAcademicGradeValue() *AcademicGradeValue {
+	if x != nil {
+		if x, ok := x.Value.(*ProfileValue_AcademicGradeValue); ok {
+			return x.AcademicGradeValue
+		}
+	}
+	return nil
+}
+
 type isProfileValue_Value interface {
 	isProfileValue_Value()
 }
@@ -129,6 +149,14 @@ type ProfileValue_DateValue struct {
 	DateValue string `protobuf:"bytes,4,opt,name=date_value,json=dateValue,proto3,oneof"`
 }
 
+type ProfileValue_StringSetValue struct {
+	StringSetValue *StringSetValue `protobuf:"bytes,5,opt,name=string_set_value,json=stringSetValue,proto3,oneof"`
+}
+
+type ProfileValue_AcademicGradeValue struct {
+	AcademicGradeValue *AcademicGradeValue `protobuf:"bytes,6,opt,name=academic_grade_value,json=academicGradeValue,proto3,oneof"`
+}
+
 func (*ProfileValue_StringValue) isProfileValue_Value() {}
 
 func (*ProfileValue_IntegerValue) isProfileValue_Value() {}
@@ -136,6 +164,130 @@ func (*ProfileValue_IntegerValue) isProfileValue_Value() {}
 func (*ProfileValue_BooleanValue) isProfileValue_Value() {}
 
 func (*ProfileValue_DateValue) isProfileValue_Value() {}
+
+func (*ProfileValue_StringSetValue) isProfileValue_Value() {}
+
+func (*ProfileValue_AcademicGradeValue) isProfileValue_Value() {}
+
+type StringSetValue struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Values        []string               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StringSetValue) Reset() {
+	*x = StringSetValue{}
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StringSetValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StringSetValue) ProtoMessage() {}
+
+func (x *StringSetValue) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StringSetValue.ProtoReflect.Descriptor instead.
+func (*StringSetValue) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StringSetValue) GetValues() []string {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
+type AcademicGradeValue struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Stage         string                 `protobuf:"bytes,1,opt,name=stage,proto3" json:"stage,omitempty"`
+	Year          int32                  `protobuf:"varint,2,opt,name=year,proto3" json:"year,omitempty"`
+	FinalYear     int32                  `protobuf:"varint,3,opt,name=final_year,json=finalYear,proto3" json:"final_year,omitempty"`
+	AcademicYear  int32                  `protobuf:"varint,4,opt,name=academic_year,json=academicYear,proto3" json:"academic_year,omitempty"`
+	ConfirmedAt   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=confirmed_at,json=confirmedAt,proto3,oneof" json:"confirmed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcademicGradeValue) Reset() {
+	*x = AcademicGradeValue{}
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcademicGradeValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcademicGradeValue) ProtoMessage() {}
+
+func (x *AcademicGradeValue) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcademicGradeValue.ProtoReflect.Descriptor instead.
+func (*AcademicGradeValue) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AcademicGradeValue) GetStage() string {
+	if x != nil {
+		return x.Stage
+	}
+	return ""
+}
+
+func (x *AcademicGradeValue) GetYear() int32 {
+	if x != nil {
+		return x.Year
+	}
+	return 0
+}
+
+func (x *AcademicGradeValue) GetFinalYear() int32 {
+	if x != nil {
+		return x.FinalYear
+	}
+	return 0
+}
+
+func (x *AcademicGradeValue) GetAcademicYear() int32 {
+	if x != nil {
+		return x.AcademicYear
+	}
+	return 0
+}
+
+func (x *AcademicGradeValue) GetConfirmedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ConfirmedAt
+	}
+	return nil
+}
 
 type ProfileFieldAssignment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -147,7 +299,7 @@ type ProfileFieldAssignment struct {
 
 func (x *ProfileFieldAssignment) Reset() {
 	*x = ProfileFieldAssignment{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[1]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -159,7 +311,7 @@ func (x *ProfileFieldAssignment) String() string {
 func (*ProfileFieldAssignment) ProtoMessage() {}
 
 func (x *ProfileFieldAssignment) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[1]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -172,7 +324,7 @@ func (x *ProfileFieldAssignment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileFieldAssignment.ProtoReflect.Descriptor instead.
 func (*ProfileFieldAssignment) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{1}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ProfileFieldAssignment) GetKey() string {
@@ -200,7 +352,7 @@ type EditOwnProfileRequest struct {
 
 func (x *EditOwnProfileRequest) Reset() {
 	*x = EditOwnProfileRequest{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[2]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -212,7 +364,7 @@ func (x *EditOwnProfileRequest) String() string {
 func (*EditOwnProfileRequest) ProtoMessage() {}
 
 func (x *EditOwnProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[2]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -225,7 +377,7 @@ func (x *EditOwnProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditOwnProfileRequest.ProtoReflect.Descriptor instead.
 func (*EditOwnProfileRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{2}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *EditOwnProfileRequest) GetExpectedRevision() int64 {
@@ -259,7 +411,7 @@ type EditOwnProfileResponse struct {
 
 func (x *EditOwnProfileResponse) Reset() {
 	*x = EditOwnProfileResponse{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[3]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -271,7 +423,7 @@ func (x *EditOwnProfileResponse) String() string {
 func (*EditOwnProfileResponse) ProtoMessage() {}
 
 func (x *EditOwnProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[3]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -284,7 +436,7 @@ func (x *EditOwnProfileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditOwnProfileResponse.ProtoReflect.Descriptor instead.
 func (*EditOwnProfileResponse) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{3}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *EditOwnProfileResponse) GetChanged() bool {
@@ -312,7 +464,7 @@ type OwnUserProfileSnapshot struct {
 
 func (x *OwnUserProfileSnapshot) Reset() {
 	*x = OwnUserProfileSnapshot{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[4]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +476,7 @@ func (x *OwnUserProfileSnapshot) String() string {
 func (*OwnUserProfileSnapshot) ProtoMessage() {}
 
 func (x *OwnUserProfileSnapshot) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[4]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +489,7 @@ func (x *OwnUserProfileSnapshot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnUserProfileSnapshot.ProtoReflect.Descriptor instead.
 func (*OwnUserProfileSnapshot) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{4}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *OwnUserProfileSnapshot) GetEntries() []*ProfileFieldAssignment {
@@ -369,7 +521,7 @@ type GetOwnProfileRequest struct {
 
 func (x *GetOwnProfileRequest) Reset() {
 	*x = GetOwnProfileRequest{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[5]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -381,7 +533,7 @@ func (x *GetOwnProfileRequest) String() string {
 func (*GetOwnProfileRequest) ProtoMessage() {}
 
 func (x *GetOwnProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[5]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +546,7 @@ func (x *GetOwnProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOwnProfileRequest.ProtoReflect.Descriptor instead.
 func (*GetOwnProfileRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{5}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{7}
 }
 
 type GetProfileEditingSchemaRequest struct {
@@ -405,7 +557,7 @@ type GetProfileEditingSchemaRequest struct {
 
 func (x *GetProfileEditingSchemaRequest) Reset() {
 	*x = GetProfileEditingSchemaRequest{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[6]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -417,7 +569,7 @@ func (x *GetProfileEditingSchemaRequest) String() string {
 func (*GetProfileEditingSchemaRequest) ProtoMessage() {}
 
 func (x *GetProfileEditingSchemaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[6]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -430,7 +582,7 @@ func (x *GetProfileEditingSchemaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProfileEditingSchemaRequest.ProtoReflect.Descriptor instead.
 func (*GetProfileEditingSchemaRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{6}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{8}
 }
 
 type ProfileFieldDefinition struct {
@@ -446,7 +598,7 @@ type ProfileFieldDefinition struct {
 
 func (x *ProfileFieldDefinition) Reset() {
 	*x = ProfileFieldDefinition{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[7]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -458,7 +610,7 @@ func (x *ProfileFieldDefinition) String() string {
 func (*ProfileFieldDefinition) ProtoMessage() {}
 
 func (x *ProfileFieldDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[7]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +623,7 @@ func (x *ProfileFieldDefinition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileFieldDefinition.ProtoReflect.Descriptor instead.
 func (*ProfileFieldDefinition) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{7}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ProfileFieldDefinition) GetKey() string {
@@ -515,13 +667,18 @@ type ProfileFieldConstraints struct {
 	MaxLength     *int64                 `protobuf:"varint,2,opt,name=max_length,json=maxLength,proto3,oneof" json:"max_length,omitempty"`
 	Minimum       *int32                 `protobuf:"varint,3,opt,name=minimum,proto3,oneof" json:"minimum,omitempty"`
 	Maximum       *int32                 `protobuf:"varint,4,opt,name=maximum,proto3,oneof" json:"maximum,omitempty"`
+	CharacterSet  *string                `protobuf:"bytes,5,opt,name=character_set,json=characterSet,proto3,oneof" json:"character_set,omitempty"`
+	Options       []*ProfileFieldOption  `protobuf:"bytes,6,rep,name=options,proto3" json:"options,omitempty"`
+	MinItems      *uint32                `protobuf:"varint,7,opt,name=min_items,json=minItems,proto3,oneof" json:"min_items,omitempty"`
+	MaxItems      *uint32                `protobuf:"varint,8,opt,name=max_items,json=maxItems,proto3,oneof" json:"max_items,omitempty"`
+	NotAfterToday *bool                  `protobuf:"varint,9,opt,name=not_after_today,json=notAfterToday,proto3,oneof" json:"not_after_today,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ProfileFieldConstraints) Reset() {
 	*x = ProfileFieldConstraints{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[8]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -533,7 +690,7 @@ func (x *ProfileFieldConstraints) String() string {
 func (*ProfileFieldConstraints) ProtoMessage() {}
 
 func (x *ProfileFieldConstraints) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[8]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -546,7 +703,7 @@ func (x *ProfileFieldConstraints) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileFieldConstraints.ProtoReflect.Descriptor instead.
 func (*ProfileFieldConstraints) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{8}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProfileFieldConstraints) GetMinLength() int64 {
@@ -577,6 +734,93 @@ func (x *ProfileFieldConstraints) GetMaximum() int32 {
 	return 0
 }
 
+func (x *ProfileFieldConstraints) GetCharacterSet() string {
+	if x != nil && x.CharacterSet != nil {
+		return *x.CharacterSet
+	}
+	return ""
+}
+
+func (x *ProfileFieldConstraints) GetOptions() []*ProfileFieldOption {
+	if x != nil {
+		return x.Options
+	}
+	return nil
+}
+
+func (x *ProfileFieldConstraints) GetMinItems() uint32 {
+	if x != nil && x.MinItems != nil {
+		return *x.MinItems
+	}
+	return 0
+}
+
+func (x *ProfileFieldConstraints) GetMaxItems() uint32 {
+	if x != nil && x.MaxItems != nil {
+		return *x.MaxItems
+	}
+	return 0
+}
+
+func (x *ProfileFieldConstraints) GetNotAfterToday() bool {
+	if x != nil && x.NotAfterToday != nil {
+		return *x.NotAfterToday
+	}
+	return false
+}
+
+type ProfileFieldOption struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Value         string                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProfileFieldOption) Reset() {
+	*x = ProfileFieldOption{}
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProfileFieldOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProfileFieldOption) ProtoMessage() {}
+
+func (x *ProfileFieldOption) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProfileFieldOption.ProtoReflect.Descriptor instead.
+func (*ProfileFieldOption) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ProfileFieldOption) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *ProfileFieldOption) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
 type ProfileEditingLimits struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	MaxOperations   uint32                 `protobuf:"varint,1,opt,name=max_operations,json=maxOperations,proto3" json:"max_operations,omitempty"`
@@ -590,7 +834,7 @@ type ProfileEditingLimits struct {
 
 func (x *ProfileEditingLimits) Reset() {
 	*x = ProfileEditingLimits{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[9]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -602,7 +846,7 @@ func (x *ProfileEditingLimits) String() string {
 func (*ProfileEditingLimits) ProtoMessage() {}
 
 func (x *ProfileEditingLimits) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[9]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -615,7 +859,7 @@ func (x *ProfileEditingLimits) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileEditingLimits.ProtoReflect.Descriptor instead.
 func (*ProfileEditingLimits) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{9}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProfileEditingLimits) GetMaxOperations() uint32 {
@@ -654,16 +898,17 @@ func (x *ProfileEditingLimits) GetMaxMessageBytes() uint32 {
 }
 
 type ProfileEditingSchema struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Definitions   []*ProfileFieldDefinition `protobuf:"bytes,1,rep,name=definitions,proto3" json:"definitions,omitempty"`
-	Limits        *ProfileEditingLimits     `protobuf:"bytes,2,opt,name=limits,proto3" json:"limits,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState    `protogen:"open.v1"`
+	Definitions         []*ProfileFieldDefinition `protobuf:"bytes,1,rep,name=definitions,proto3" json:"definitions,omitempty"`
+	Limits              *ProfileEditingLimits     `protobuf:"bytes,2,opt,name=limits,proto3" json:"limits,omitempty"`
+	CurrentAcademicYear *int32                    `protobuf:"varint,3,opt,name=current_academic_year,json=currentAcademicYear,proto3,oneof" json:"current_academic_year,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ProfileEditingSchema) Reset() {
 	*x = ProfileEditingSchema{}
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[10]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -675,7 +920,7 @@ func (x *ProfileEditingSchema) String() string {
 func (*ProfileEditingSchema) ProtoMessage() {}
 
 func (x *ProfileEditingSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[10]
+	mi := &file_auth_center_v1_user_profile_user_profile_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -688,7 +933,7 @@ func (x *ProfileEditingSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileEditingSchema.ProtoReflect.Descriptor instead.
 func (*ProfileEditingSchema) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{10}
+	return file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ProfileEditingSchema) GetDefinitions() []*ProfileFieldDefinition {
@@ -705,18 +950,37 @@ func (x *ProfileEditingSchema) GetLimits() *ProfileEditingLimits {
 	return nil
 }
 
+func (x *ProfileEditingSchema) GetCurrentAcademicYear() int32 {
+	if x != nil && x.CurrentAcademicYear != nil {
+		return *x.CurrentAcademicYear
+	}
+	return 0
+}
+
 var File_auth_center_v1_user_profile_user_profile_proto protoreflect.FileDescriptor
 
 const file_auth_center_v1_user_profile_user_profile_proto_rawDesc = "" +
 	"\n" +
-	".auth_center/v1/user_profile/user_profile.proto\x12\x1bauth_center.v1.user_profile\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x01\n" +
+	".auth_center/v1/user_profile/user_profile.proto\x12\x1bauth_center.v1.user_profile\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe9\x02\n" +
 	"\fProfileValue\x12#\n" +
 	"\fstring_value\x18\x01 \x01(\tH\x00R\vstringValue\x12%\n" +
 	"\rinteger_value\x18\x02 \x01(\x05H\x00R\fintegerValue\x12%\n" +
 	"\rboolean_value\x18\x03 \x01(\bH\x00R\fbooleanValue\x12\x1f\n" +
 	"\n" +
-	"date_value\x18\x04 \x01(\tH\x00R\tdateValueB\a\n" +
-	"\x05value\"k\n" +
+	"date_value\x18\x04 \x01(\tH\x00R\tdateValue\x12W\n" +
+	"\x10string_set_value\x18\x05 \x01(\v2+.auth_center.v1.user_profile.StringSetValueH\x00R\x0estringSetValue\x12c\n" +
+	"\x14academic_grade_value\x18\x06 \x01(\v2/.auth_center.v1.user_profile.AcademicGradeValueH\x00R\x12academicGradeValueB\a\n" +
+	"\x05value\"(\n" +
+	"\x0eStringSetValue\x12\x16\n" +
+	"\x06values\x18\x01 \x03(\tR\x06values\"\xd7\x01\n" +
+	"\x12AcademicGradeValue\x12\x14\n" +
+	"\x05stage\x18\x01 \x01(\tR\x05stage\x12\x12\n" +
+	"\x04year\x18\x02 \x01(\x05R\x04year\x12\x1d\n" +
+	"\n" +
+	"final_year\x18\x03 \x01(\x05R\tfinalYear\x12#\n" +
+	"\racademic_year\x18\x04 \x01(\x05R\facademicYear\x12B\n" +
+	"\fconfirmed_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\vconfirmedAt\x88\x01\x01B\x0f\n" +
+	"\r_confirmed_at\"k\n" +
 	"\x16ProfileFieldAssignment\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12?\n" +
 	"\x05value\x18\x02 \x01(\v2).auth_center.v1.user_profile.ProfileValueR\x05value\"\xbe\x01\n" +
@@ -741,30 +1005,46 @@ const file_auth_center_v1_user_profile_user_profile_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"value_type\x18\x04 \x01(\tR\tvalueType\x12V\n" +
-	"\vconstraints\x18\x05 \x01(\v24.auth_center.v1.user_profile.ProfileFieldConstraintsR\vconstraints\"\xd5\x01\n" +
+	"\vconstraints\x18\x05 \x01(\v24.auth_center.v1.user_profile.ProfileFieldConstraintsR\vconstraints\"\xfd\x03\n" +
 	"\x17ProfileFieldConstraints\x12\"\n" +
 	"\n" +
 	"min_length\x18\x01 \x01(\x03H\x00R\tminLength\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"max_length\x18\x02 \x01(\x03H\x01R\tmaxLength\x88\x01\x01\x12\x1d\n" +
 	"\aminimum\x18\x03 \x01(\x05H\x02R\aminimum\x88\x01\x01\x12\x1d\n" +
-	"\amaximum\x18\x04 \x01(\x05H\x03R\amaximum\x88\x01\x01B\r\n" +
+	"\amaximum\x18\x04 \x01(\x05H\x03R\amaximum\x88\x01\x01\x12(\n" +
+	"\rcharacter_set\x18\x05 \x01(\tH\x04R\fcharacterSet\x88\x01\x01\x12I\n" +
+	"\aoptions\x18\x06 \x03(\v2/.auth_center.v1.user_profile.ProfileFieldOptionR\aoptions\x12 \n" +
+	"\tmin_items\x18\a \x01(\rH\x05R\bminItems\x88\x01\x01\x12 \n" +
+	"\tmax_items\x18\b \x01(\rH\x06R\bmaxItems\x88\x01\x01\x12+\n" +
+	"\x0fnot_after_today\x18\t \x01(\bH\aR\rnotAfterToday\x88\x01\x01B\r\n" +
 	"\v_min_lengthB\r\n" +
 	"\v_max_lengthB\n" +
 	"\n" +
 	"\b_minimumB\n" +
 	"\n" +
-	"\b_maximum\"\xe0\x01\n" +
+	"\b_maximumB\x10\n" +
+	"\x0e_character_setB\f\n" +
+	"\n" +
+	"_min_itemsB\f\n" +
+	"\n" +
+	"_max_itemsB\x12\n" +
+	"\x10_not_after_today\"@\n" +
+	"\x12ProfileFieldOption\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\tR\x05value\x12\x14\n" +
+	"\x05label\x18\x02 \x01(\tR\x05label\"\xe0\x01\n" +
 	"\x14ProfileEditingLimits\x12%\n" +
 	"\x0emax_operations\x18\x01 \x01(\rR\rmaxOperations\x12\x1d\n" +
 	"\n" +
 	"max_fields\x18\x02 \x01(\rR\tmaxFields\x12*\n" +
 	"\x11max_profile_bytes\x18\x03 \x01(\rR\x0fmaxProfileBytes\x12*\n" +
 	"\x11max_command_bytes\x18\x04 \x01(\rR\x0fmaxCommandBytes\x12*\n" +
-	"\x11max_message_bytes\x18\x05 \x01(\rR\x0fmaxMessageBytes\"\xb8\x01\n" +
+	"\x11max_message_bytes\x18\x05 \x01(\rR\x0fmaxMessageBytes\"\x8b\x02\n" +
 	"\x14ProfileEditingSchema\x12U\n" +
 	"\vdefinitions\x18\x01 \x03(\v23.auth_center.v1.user_profile.ProfileFieldDefinitionR\vdefinitions\x12I\n" +
-	"\x06limits\x18\x02 \x01(\v21.auth_center.v1.user_profile.ProfileEditingLimitsR\x06limits2\xf6\x03\n" +
+	"\x06limits\x18\x02 \x01(\v21.auth_center.v1.user_profile.ProfileEditingLimitsR\x06limits\x127\n" +
+	"\x15current_academic_year\x18\x03 \x01(\x05H\x00R\x13currentAcademicYear\x88\x01\x01B\x18\n" +
+	"\x16_current_academic_year2\xf6\x03\n" +
 	"\x12UserProfileService\x12\x9a\x01\n" +
 	"\x0eEditOwnProfile\x122.auth_center.v1.user_profile.EditOwnProfileRequest\x1a3.auth_center.v1.user_profile.EditOwnProfileResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/v1/users/me/profile\x12\x95\x01\n" +
 	"\rGetOwnProfile\x121.auth_center.v1.user_profile.GetOwnProfileRequest\x1a3.auth_center.v1.user_profile.OwnUserProfileSnapshot\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/users/me/profile\x12\xaa\x01\n" +
@@ -782,41 +1062,48 @@ func file_auth_center_v1_user_profile_user_profile_proto_rawDescGZIP() []byte {
 	return file_auth_center_v1_user_profile_user_profile_proto_rawDescData
 }
 
-var file_auth_center_v1_user_profile_user_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_auth_center_v1_user_profile_user_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_auth_center_v1_user_profile_user_profile_proto_goTypes = []any{
 	(*ProfileValue)(nil),                   // 0: auth_center.v1.user_profile.ProfileValue
-	(*ProfileFieldAssignment)(nil),         // 1: auth_center.v1.user_profile.ProfileFieldAssignment
-	(*EditOwnProfileRequest)(nil),          // 2: auth_center.v1.user_profile.EditOwnProfileRequest
-	(*EditOwnProfileResponse)(nil),         // 3: auth_center.v1.user_profile.EditOwnProfileResponse
-	(*OwnUserProfileSnapshot)(nil),         // 4: auth_center.v1.user_profile.OwnUserProfileSnapshot
-	(*GetOwnProfileRequest)(nil),           // 5: auth_center.v1.user_profile.GetOwnProfileRequest
-	(*GetProfileEditingSchemaRequest)(nil), // 6: auth_center.v1.user_profile.GetProfileEditingSchemaRequest
-	(*ProfileFieldDefinition)(nil),         // 7: auth_center.v1.user_profile.ProfileFieldDefinition
-	(*ProfileFieldConstraints)(nil),        // 8: auth_center.v1.user_profile.ProfileFieldConstraints
-	(*ProfileEditingLimits)(nil),           // 9: auth_center.v1.user_profile.ProfileEditingLimits
-	(*ProfileEditingSchema)(nil),           // 10: auth_center.v1.user_profile.ProfileEditingSchema
-	(*timestamppb.Timestamp)(nil),          // 11: google.protobuf.Timestamp
+	(*StringSetValue)(nil),                 // 1: auth_center.v1.user_profile.StringSetValue
+	(*AcademicGradeValue)(nil),             // 2: auth_center.v1.user_profile.AcademicGradeValue
+	(*ProfileFieldAssignment)(nil),         // 3: auth_center.v1.user_profile.ProfileFieldAssignment
+	(*EditOwnProfileRequest)(nil),          // 4: auth_center.v1.user_profile.EditOwnProfileRequest
+	(*EditOwnProfileResponse)(nil),         // 5: auth_center.v1.user_profile.EditOwnProfileResponse
+	(*OwnUserProfileSnapshot)(nil),         // 6: auth_center.v1.user_profile.OwnUserProfileSnapshot
+	(*GetOwnProfileRequest)(nil),           // 7: auth_center.v1.user_profile.GetOwnProfileRequest
+	(*GetProfileEditingSchemaRequest)(nil), // 8: auth_center.v1.user_profile.GetProfileEditingSchemaRequest
+	(*ProfileFieldDefinition)(nil),         // 9: auth_center.v1.user_profile.ProfileFieldDefinition
+	(*ProfileFieldConstraints)(nil),        // 10: auth_center.v1.user_profile.ProfileFieldConstraints
+	(*ProfileFieldOption)(nil),             // 11: auth_center.v1.user_profile.ProfileFieldOption
+	(*ProfileEditingLimits)(nil),           // 12: auth_center.v1.user_profile.ProfileEditingLimits
+	(*ProfileEditingSchema)(nil),           // 13: auth_center.v1.user_profile.ProfileEditingSchema
+	(*timestamppb.Timestamp)(nil),          // 14: google.protobuf.Timestamp
 }
 var file_auth_center_v1_user_profile_user_profile_proto_depIdxs = []int32{
-	0,  // 0: auth_center.v1.user_profile.ProfileFieldAssignment.value:type_name -> auth_center.v1.user_profile.ProfileValue
-	1,  // 1: auth_center.v1.user_profile.EditOwnProfileRequest.set:type_name -> auth_center.v1.user_profile.ProfileFieldAssignment
-	4,  // 2: auth_center.v1.user_profile.EditOwnProfileResponse.profile:type_name -> auth_center.v1.user_profile.OwnUserProfileSnapshot
-	1,  // 3: auth_center.v1.user_profile.OwnUserProfileSnapshot.entries:type_name -> auth_center.v1.user_profile.ProfileFieldAssignment
-	11, // 4: auth_center.v1.user_profile.OwnUserProfileSnapshot.updated_at:type_name -> google.protobuf.Timestamp
-	8,  // 5: auth_center.v1.user_profile.ProfileFieldDefinition.constraints:type_name -> auth_center.v1.user_profile.ProfileFieldConstraints
-	7,  // 6: auth_center.v1.user_profile.ProfileEditingSchema.definitions:type_name -> auth_center.v1.user_profile.ProfileFieldDefinition
-	9,  // 7: auth_center.v1.user_profile.ProfileEditingSchema.limits:type_name -> auth_center.v1.user_profile.ProfileEditingLimits
-	2,  // 8: auth_center.v1.user_profile.UserProfileService.EditOwnProfile:input_type -> auth_center.v1.user_profile.EditOwnProfileRequest
-	5,  // 9: auth_center.v1.user_profile.UserProfileService.GetOwnProfile:input_type -> auth_center.v1.user_profile.GetOwnProfileRequest
-	6,  // 10: auth_center.v1.user_profile.UserProfileService.GetProfileEditingSchema:input_type -> auth_center.v1.user_profile.GetProfileEditingSchemaRequest
-	3,  // 11: auth_center.v1.user_profile.UserProfileService.EditOwnProfile:output_type -> auth_center.v1.user_profile.EditOwnProfileResponse
-	4,  // 12: auth_center.v1.user_profile.UserProfileService.GetOwnProfile:output_type -> auth_center.v1.user_profile.OwnUserProfileSnapshot
-	10, // 13: auth_center.v1.user_profile.UserProfileService.GetProfileEditingSchema:output_type -> auth_center.v1.user_profile.ProfileEditingSchema
-	11, // [11:14] is the sub-list for method output_type
-	8,  // [8:11] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	1,  // 0: auth_center.v1.user_profile.ProfileValue.string_set_value:type_name -> auth_center.v1.user_profile.StringSetValue
+	2,  // 1: auth_center.v1.user_profile.ProfileValue.academic_grade_value:type_name -> auth_center.v1.user_profile.AcademicGradeValue
+	14, // 2: auth_center.v1.user_profile.AcademicGradeValue.confirmed_at:type_name -> google.protobuf.Timestamp
+	0,  // 3: auth_center.v1.user_profile.ProfileFieldAssignment.value:type_name -> auth_center.v1.user_profile.ProfileValue
+	3,  // 4: auth_center.v1.user_profile.EditOwnProfileRequest.set:type_name -> auth_center.v1.user_profile.ProfileFieldAssignment
+	6,  // 5: auth_center.v1.user_profile.EditOwnProfileResponse.profile:type_name -> auth_center.v1.user_profile.OwnUserProfileSnapshot
+	3,  // 6: auth_center.v1.user_profile.OwnUserProfileSnapshot.entries:type_name -> auth_center.v1.user_profile.ProfileFieldAssignment
+	14, // 7: auth_center.v1.user_profile.OwnUserProfileSnapshot.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 8: auth_center.v1.user_profile.ProfileFieldDefinition.constraints:type_name -> auth_center.v1.user_profile.ProfileFieldConstraints
+	11, // 9: auth_center.v1.user_profile.ProfileFieldConstraints.options:type_name -> auth_center.v1.user_profile.ProfileFieldOption
+	9,  // 10: auth_center.v1.user_profile.ProfileEditingSchema.definitions:type_name -> auth_center.v1.user_profile.ProfileFieldDefinition
+	12, // 11: auth_center.v1.user_profile.ProfileEditingSchema.limits:type_name -> auth_center.v1.user_profile.ProfileEditingLimits
+	4,  // 12: auth_center.v1.user_profile.UserProfileService.EditOwnProfile:input_type -> auth_center.v1.user_profile.EditOwnProfileRequest
+	7,  // 13: auth_center.v1.user_profile.UserProfileService.GetOwnProfile:input_type -> auth_center.v1.user_profile.GetOwnProfileRequest
+	8,  // 14: auth_center.v1.user_profile.UserProfileService.GetProfileEditingSchema:input_type -> auth_center.v1.user_profile.GetProfileEditingSchemaRequest
+	5,  // 15: auth_center.v1.user_profile.UserProfileService.EditOwnProfile:output_type -> auth_center.v1.user_profile.EditOwnProfileResponse
+	6,  // 16: auth_center.v1.user_profile.UserProfileService.GetOwnProfile:output_type -> auth_center.v1.user_profile.OwnUserProfileSnapshot
+	13, // 17: auth_center.v1.user_profile.UserProfileService.GetProfileEditingSchema:output_type -> auth_center.v1.user_profile.ProfileEditingSchema
+	15, // [15:18] is the sub-list for method output_type
+	12, // [12:15] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_auth_center_v1_user_profile_user_profile_proto_init() }
@@ -829,16 +1116,20 @@ func file_auth_center_v1_user_profile_user_profile_proto_init() {
 		(*ProfileValue_IntegerValue)(nil),
 		(*ProfileValue_BooleanValue)(nil),
 		(*ProfileValue_DateValue)(nil),
+		(*ProfileValue_StringSetValue)(nil),
+		(*ProfileValue_AcademicGradeValue)(nil),
 	}
 	file_auth_center_v1_user_profile_user_profile_proto_msgTypes[2].OneofWrappers = []any{}
-	file_auth_center_v1_user_profile_user_profile_proto_msgTypes[8].OneofWrappers = []any{}
+	file_auth_center_v1_user_profile_user_profile_proto_msgTypes[4].OneofWrappers = []any{}
+	file_auth_center_v1_user_profile_user_profile_proto_msgTypes[10].OneofWrappers = []any{}
+	file_auth_center_v1_user_profile_user_profile_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_user_profile_user_profile_proto_rawDesc), len(file_auth_center_v1_user_profile_user_profile_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -217,7 +217,6 @@ func (x *BindEmailIntent) GetExpectedRevision() int64 {
 type RegisterEmailIntent struct {
 	state              protoimpl.MessageState                         `protogen:"open.v1"`
 	CredentialProposal *authentication.CredentialRegistrationProposal `protobuf:"bytes,1,opt,name=credential_proposal,json=credentialProposal,proto3" json:"credential_proposal,omitempty"`
-	Association        *authentication.StudentAssociationDeclaration  `protobuf:"bytes,2,opt,name=association,proto3" json:"association,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -255,13 +254,6 @@ func (*RegisterEmailIntent) Descriptor() ([]byte, []int) {
 func (x *RegisterEmailIntent) GetCredentialProposal() *authentication.CredentialRegistrationProposal {
 	if x != nil {
 		return x.CredentialProposal
-	}
-	return nil
-}
-
-func (x *RegisterEmailIntent) GetAssociation() *authentication.StudentAssociationDeclaration {
-	if x != nil {
-		return x.Association
 	}
 	return nil
 }
@@ -784,10 +776,9 @@ const file_auth_center_v1_email_binding_email_binding_proto_rawDesc = "" +
 	"\x06intent\"Y\n" +
 	"\x0fBindEmailIntent\x120\n" +
 	"\x11expected_revision\x18\x01 \x01(\x03H\x00R\x10expectedRevision\x88\x01\x01B\x14\n" +
-	"\x12_expected_revision\"\xe5\x01\n" +
+	"\x12_expected_revision\"\x98\x01\n" +
 	"\x13RegisterEmailIntent\x12n\n" +
-	"\x13credential_proposal\x18\x01 \x01(\v2=.auth_center.v1.authentication.CredentialRegistrationProposalR\x12credentialProposal\x12^\n" +
-	"\vassociation\x18\x02 \x01(\v2<.auth_center.v1.authentication.StudentAssociationDeclarationR\vassociation\"\xec\x02\n" +
+	"\x13credential_proposal\x18\x01 \x01(\v2=.auth_center.v1.authentication.CredentialRegistrationProposalR\x12credentialProposalJ\x04\b\x02\x10\x03R\vassociation\"\xec\x02\n" +
 	"\x18EmailVerificationStarted\x12!\n" +
 	"\foperation_id\x18\x01 \x01(\tR\voperationId\x12;\n" +
 	"\x04mode\x18\x02 \x01(\x0e2'.auth_center.v1.email_binding.EmailModeR\x04mode\x12!\n" +
@@ -826,10 +817,10 @@ const file_auth_center_v1_email_binding_email_binding_proto_rawDesc = "" +
 	"\tEmailMode\x12\x1a\n" +
 	"\x16EMAIL_MODE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13EMAIL_MODE_REGISTER\x10\x01\x12\x13\n" +
-	"\x0fEMAIL_MODE_BIND\x10\x022\x88\x04\n" +
-	"\x13EmailBindingService\x12\x9a\x01\n" +
-	"\rBeginSetEmail\x122.auth_center.v1.email_binding.BeginSetEmailRequest\x1a6.auth_center.v1.email_binding.EmailVerificationStarted\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/email-bindings\x12\xb0\x01\n" +
-	"\x10CompleteSetEmail\x125.auth_center.v1.email_binding.CompleteSetEmailRequest\x1a,.auth_center.v1.email_binding.EmailActivated\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/email-bindings/{operation_id}/completion\x12\xa0\x01\n" +
+	"\x0fEMAIL_MODE_BIND\x10\x022\xb9\x03\n" +
+	"\x13EmailBindingService\x12\x80\x01\n" +
+	"\rBeginSetEmail\x122.auth_center.v1.email_binding.BeginSetEmailRequest\x1a6.auth_center.v1.email_binding.EmailVerificationStarted\"\x03\x88\x02\x01\x12|\n" +
+	"\x10CompleteSetEmail\x125.auth_center.v1.email_binding.CompleteSetEmailRequest\x1a,.auth_center.v1.email_binding.EmailActivated\"\x03\x88\x02\x01\x12\xa0\x01\n" +
 	"\x12GetOwnEmailBinding\x127.auth_center.v1.email_binding.GetOwnEmailBindingRequest\x1a-.auth_center.v1.email_binding.OwnEmailBinding\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/users/me/email-bindingBWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/email_binding;email_bindingb\x06proto3"
 
 var (
@@ -860,33 +851,31 @@ var file_auth_center_v1_email_binding_email_binding_proto_goTypes = []any{
 	(*ActiveEmail)(nil),                                   // 10: auth_center.v1.email_binding.ActiveEmail
 	(*PendingEmailBinding)(nil),                           // 11: auth_center.v1.email_binding.PendingEmailBinding
 	(*authentication.CredentialRegistrationProposal)(nil), // 12: auth_center.v1.authentication.CredentialRegistrationProposal
-	(*authentication.StudentAssociationDeclaration)(nil),  // 13: auth_center.v1.authentication.StudentAssociationDeclaration
-	(*authentication.CredentialProof)(nil),                // 14: auth_center.v1.authentication.CredentialProof
-	(*authentication.UserRegistrationResult)(nil),         // 15: auth_center.v1.authentication.UserRegistrationResult
+	(*authentication.CredentialProof)(nil),                // 13: auth_center.v1.authentication.CredentialProof
+	(*authentication.UserRegistrationResult)(nil),         // 14: auth_center.v1.authentication.UserRegistrationResult
 }
 var file_auth_center_v1_email_binding_email_binding_proto_depIdxs = []int32{
 	2,  // 0: auth_center.v1.email_binding.BeginSetEmailRequest.binding:type_name -> auth_center.v1.email_binding.BindEmailIntent
 	3,  // 1: auth_center.v1.email_binding.BeginSetEmailRequest.registration:type_name -> auth_center.v1.email_binding.RegisterEmailIntent
 	12, // 2: auth_center.v1.email_binding.RegisterEmailIntent.credential_proposal:type_name -> auth_center.v1.authentication.CredentialRegistrationProposal
-	13, // 3: auth_center.v1.email_binding.RegisterEmailIntent.association:type_name -> auth_center.v1.authentication.StudentAssociationDeclaration
-	0,  // 4: auth_center.v1.email_binding.EmailVerificationStarted.mode:type_name -> auth_center.v1.email_binding.EmailMode
-	5,  // 5: auth_center.v1.email_binding.EmailVerificationStarted.registration_challenge:type_name -> auth_center.v1.email_binding.EmailRegistrationChallenge
-	14, // 6: auth_center.v1.email_binding.CompleteSetEmailRequest.registration_proof:type_name -> auth_center.v1.authentication.CredentialProof
-	0,  // 7: auth_center.v1.email_binding.EmailActivated.mode:type_name -> auth_center.v1.email_binding.EmailMode
-	15, // 8: auth_center.v1.email_binding.EmailActivated.registration_result:type_name -> auth_center.v1.authentication.UserRegistrationResult
-	10, // 9: auth_center.v1.email_binding.OwnEmailBinding.active_email:type_name -> auth_center.v1.email_binding.ActiveEmail
-	11, // 10: auth_center.v1.email_binding.OwnEmailBinding.pending:type_name -> auth_center.v1.email_binding.PendingEmailBinding
-	1,  // 11: auth_center.v1.email_binding.EmailBindingService.BeginSetEmail:input_type -> auth_center.v1.email_binding.BeginSetEmailRequest
-	6,  // 12: auth_center.v1.email_binding.EmailBindingService.CompleteSetEmail:input_type -> auth_center.v1.email_binding.CompleteSetEmailRequest
-	8,  // 13: auth_center.v1.email_binding.EmailBindingService.GetOwnEmailBinding:input_type -> auth_center.v1.email_binding.GetOwnEmailBindingRequest
-	4,  // 14: auth_center.v1.email_binding.EmailBindingService.BeginSetEmail:output_type -> auth_center.v1.email_binding.EmailVerificationStarted
-	7,  // 15: auth_center.v1.email_binding.EmailBindingService.CompleteSetEmail:output_type -> auth_center.v1.email_binding.EmailActivated
-	9,  // 16: auth_center.v1.email_binding.EmailBindingService.GetOwnEmailBinding:output_type -> auth_center.v1.email_binding.OwnEmailBinding
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	0,  // 3: auth_center.v1.email_binding.EmailVerificationStarted.mode:type_name -> auth_center.v1.email_binding.EmailMode
+	5,  // 4: auth_center.v1.email_binding.EmailVerificationStarted.registration_challenge:type_name -> auth_center.v1.email_binding.EmailRegistrationChallenge
+	13, // 5: auth_center.v1.email_binding.CompleteSetEmailRequest.registration_proof:type_name -> auth_center.v1.authentication.CredentialProof
+	0,  // 6: auth_center.v1.email_binding.EmailActivated.mode:type_name -> auth_center.v1.email_binding.EmailMode
+	14, // 7: auth_center.v1.email_binding.EmailActivated.registration_result:type_name -> auth_center.v1.authentication.UserRegistrationResult
+	10, // 8: auth_center.v1.email_binding.OwnEmailBinding.active_email:type_name -> auth_center.v1.email_binding.ActiveEmail
+	11, // 9: auth_center.v1.email_binding.OwnEmailBinding.pending:type_name -> auth_center.v1.email_binding.PendingEmailBinding
+	1,  // 10: auth_center.v1.email_binding.EmailBindingService.BeginSetEmail:input_type -> auth_center.v1.email_binding.BeginSetEmailRequest
+	6,  // 11: auth_center.v1.email_binding.EmailBindingService.CompleteSetEmail:input_type -> auth_center.v1.email_binding.CompleteSetEmailRequest
+	8,  // 12: auth_center.v1.email_binding.EmailBindingService.GetOwnEmailBinding:input_type -> auth_center.v1.email_binding.GetOwnEmailBindingRequest
+	4,  // 13: auth_center.v1.email_binding.EmailBindingService.BeginSetEmail:output_type -> auth_center.v1.email_binding.EmailVerificationStarted
+	7,  // 14: auth_center.v1.email_binding.EmailBindingService.CompleteSetEmail:output_type -> auth_center.v1.email_binding.EmailActivated
+	9,  // 15: auth_center.v1.email_binding.EmailBindingService.GetOwnEmailBinding:output_type -> auth_center.v1.email_binding.OwnEmailBinding
+	13, // [13:16] is the sub-list for method output_type
+	10, // [10:13] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_auth_center_v1_email_binding_email_binding_proto_init() }

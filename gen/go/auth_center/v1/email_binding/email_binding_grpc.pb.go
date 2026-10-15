@@ -28,9 +28,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Session absence selects registration; a supplied invalid Session never does.
+// Mutable v1 methods are permanently retired. Use EmailAccountService v3.
 type EmailBindingServiceClient interface {
+	// Deprecated: Do not use.
 	BeginSetEmail(ctx context.Context, in *BeginSetEmailRequest, opts ...grpc.CallOption) (*EmailVerificationStarted, error)
+	// Deprecated: Do not use.
 	CompleteSetEmail(ctx context.Context, in *CompleteSetEmailRequest, opts ...grpc.CallOption) (*EmailActivated, error)
 	GetOwnEmailBinding(ctx context.Context, in *GetOwnEmailBindingRequest, opts ...grpc.CallOption) (*OwnEmailBinding, error)
 }
@@ -43,6 +45,7 @@ func NewEmailBindingServiceClient(cc grpc.ClientConnInterface) EmailBindingServi
 	return &emailBindingServiceClient{cc}
 }
 
+// Deprecated: Do not use.
 func (c *emailBindingServiceClient) BeginSetEmail(ctx context.Context, in *BeginSetEmailRequest, opts ...grpc.CallOption) (*EmailVerificationStarted, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EmailVerificationStarted)
@@ -53,6 +56,7 @@ func (c *emailBindingServiceClient) BeginSetEmail(ctx context.Context, in *Begin
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *emailBindingServiceClient) CompleteSetEmail(ctx context.Context, in *CompleteSetEmailRequest, opts ...grpc.CallOption) (*EmailActivated, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EmailActivated)
@@ -77,9 +81,11 @@ func (c *emailBindingServiceClient) GetOwnEmailBinding(ctx context.Context, in *
 // All implementations must embed UnimplementedEmailBindingServiceServer
 // for forward compatibility.
 //
-// Session absence selects registration; a supplied invalid Session never does.
+// Mutable v1 methods are permanently retired. Use EmailAccountService v3.
 type EmailBindingServiceServer interface {
+	// Deprecated: Do not use.
 	BeginSetEmail(context.Context, *BeginSetEmailRequest) (*EmailVerificationStarted, error)
+	// Deprecated: Do not use.
 	CompleteSetEmail(context.Context, *CompleteSetEmailRequest) (*EmailActivated, error)
 	GetOwnEmailBinding(context.Context, *GetOwnEmailBindingRequest) (*OwnEmailBinding, error)
 	mustEmbedUnimplementedEmailBindingServiceServer()

@@ -19,68 +19,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationEmailBindingServiceBeginSetEmail = "/auth_center.v1.email_binding.EmailBindingService/BeginSetEmail"
-const OperationEmailBindingServiceCompleteSetEmail = "/auth_center.v1.email_binding.EmailBindingService/CompleteSetEmail"
 const OperationEmailBindingServiceGetOwnEmailBinding = "/auth_center.v1.email_binding.EmailBindingService/GetOwnEmailBinding"
 
 type EmailBindingServiceHTTPServer interface {
-	BeginSetEmail(context.Context, *BeginSetEmailRequest) (*EmailVerificationStarted, error)
-	CompleteSetEmail(context.Context, *CompleteSetEmailRequest) (*EmailActivated, error)
 	GetOwnEmailBinding(context.Context, *GetOwnEmailBindingRequest) (*OwnEmailBinding, error)
 }
 
 func RegisterEmailBindingServiceHTTPServer(s *http.Server, srv EmailBindingServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/email-bindings", _EmailBindingService_BeginSetEmail0_HTTP_Handler(srv))
-	r.POST("/v1/email-bindings/{operation_id}/completion", _EmailBindingService_CompleteSetEmail0_HTTP_Handler(srv))
 	r.GET("/v1/users/me/email-binding", _EmailBindingService_GetOwnEmailBinding0_HTTP_Handler(srv))
-}
-
-func _EmailBindingService_BeginSetEmail0_HTTP_Handler(srv EmailBindingServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BeginSetEmailRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationEmailBindingServiceBeginSetEmail)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BeginSetEmail(ctx, req.(*BeginSetEmailRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*EmailVerificationStarted)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _EmailBindingService_CompleteSetEmail0_HTTP_Handler(srv EmailBindingServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CompleteSetEmailRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationEmailBindingServiceCompleteSetEmail)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CompleteSetEmail(ctx, req.(*CompleteSetEmailRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*EmailActivated)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _EmailBindingService_GetOwnEmailBinding0_HTTP_Handler(srv EmailBindingServiceHTTPServer) func(ctx http.Context) error {
@@ -103,8 +50,6 @@ func _EmailBindingService_GetOwnEmailBinding0_HTTP_Handler(srv EmailBindingServi
 }
 
 type EmailBindingServiceHTTPClient interface {
-	BeginSetEmail(ctx context.Context, req *BeginSetEmailRequest, opts ...http.CallOption) (rsp *EmailVerificationStarted, err error)
-	CompleteSetEmail(ctx context.Context, req *CompleteSetEmailRequest, opts ...http.CallOption) (rsp *EmailActivated, err error)
 	GetOwnEmailBinding(ctx context.Context, req *GetOwnEmailBindingRequest, opts ...http.CallOption) (rsp *OwnEmailBinding, err error)
 }
 
@@ -114,32 +59,6 @@ type EmailBindingServiceHTTPClientImpl struct {
 
 func NewEmailBindingServiceHTTPClient(client *http.Client) EmailBindingServiceHTTPClient {
 	return &EmailBindingServiceHTTPClientImpl{client}
-}
-
-func (c *EmailBindingServiceHTTPClientImpl) BeginSetEmail(ctx context.Context, in *BeginSetEmailRequest, opts ...http.CallOption) (*EmailVerificationStarted, error) {
-	var out EmailVerificationStarted
-	pattern := "/v1/email-bindings"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationEmailBindingServiceBeginSetEmail))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *EmailBindingServiceHTTPClientImpl) CompleteSetEmail(ctx context.Context, in *CompleteSetEmailRequest, opts ...http.CallOption) (*EmailActivated, error) {
-	var out EmailActivated
-	pattern := "/v1/email-bindings/{operation_id}/completion"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationEmailBindingServiceCompleteSetEmail))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 func (c *EmailBindingServiceHTTPClientImpl) GetOwnEmailBinding(ctx context.Context, in *GetOwnEmailBindingRequest, opts ...http.CallOption) (*OwnEmailBinding, error) {

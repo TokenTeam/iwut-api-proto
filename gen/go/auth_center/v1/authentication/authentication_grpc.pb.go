@@ -34,7 +34,10 @@ const (
 // Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.
 type AuthenticationServiceClient interface {
+	// Deprecated: Do not use.
+	// Retired: retained RPC names return UNIMPLEMENTED; there is no HTTP route.
 	BeginUserRegistration(ctx context.Context, in *BeginUserRegistrationRequest, opts ...grpc.CallOption) (*AuthenticationChallenge, error)
+	// Deprecated: Do not use.
 	CompleteUserRegistration(ctx context.Context, in *CompleteUserRegistrationRequest, opts ...grpc.CallOption) (*UserRegistrationResult, error)
 	BeginDeviceLogin(ctx context.Context, in *BeginDeviceLoginRequest, opts ...grpc.CallOption) (*AuthenticationChallenge, error)
 	CompleteDeviceLogin(ctx context.Context, in *CompleteDeviceLoginRequest, opts ...grpc.CallOption) (*SessionEstablished, error)
@@ -50,6 +53,7 @@ func NewAuthenticationServiceClient(cc grpc.ClientConnInterface) AuthenticationS
 	return &authenticationServiceClient{cc}
 }
 
+// Deprecated: Do not use.
 func (c *authenticationServiceClient) BeginUserRegistration(ctx context.Context, in *BeginUserRegistrationRequest, opts ...grpc.CallOption) (*AuthenticationChallenge, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthenticationChallenge)
@@ -60,6 +64,7 @@ func (c *authenticationServiceClient) BeginUserRegistration(ctx context.Context,
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *authenticationServiceClient) CompleteUserRegistration(ctx context.Context, in *CompleteUserRegistrationRequest, opts ...grpc.CallOption) (*UserRegistrationResult, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UserRegistrationResult)
@@ -117,7 +122,10 @@ func (c *authenticationServiceClient) RevokeOwnCredential(ctx context.Context, i
 // Auth HTTP/JSON and native gRPC entry points. Authentication is selected by exact full method
 // according to platform/contracts/auth-device-session-v1.md.
 type AuthenticationServiceServer interface {
+	// Deprecated: Do not use.
+	// Retired: retained RPC names return UNIMPLEMENTED; there is no HTTP route.
 	BeginUserRegistration(context.Context, *BeginUserRegistrationRequest) (*AuthenticationChallenge, error)
+	// Deprecated: Do not use.
 	CompleteUserRegistration(context.Context, *CompleteUserRegistrationRequest) (*UserRegistrationResult, error)
 	BeginDeviceLogin(context.Context, *BeginDeviceLoginRequest) (*AuthenticationChallenge, error)
 	CompleteDeviceLogin(context.Context, *CompleteDeviceLoginRequest) (*SessionEstablished, error)

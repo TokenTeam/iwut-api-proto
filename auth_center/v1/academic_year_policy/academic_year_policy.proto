@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package auth_center.v1.academic_year_policy;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/academic_year_policy;academicyearpolicy";
+
+service AcademicYearPolicyService {
+  rpc GetAcademicYearSchedule(GetAcademicYearScheduleRequest) returns (AcademicYearSchedule) {
+    option (google.api.http) = {get: "/v1/academic-year-policy/schedule"};
+  }
+  rpc UpdateNextAcademicYearRollover(UpdateNextAcademicYearRolloverRequest) returns (AcademicYearSchedule) {
+    option (google.api.http) = {
+      put: "/v1/academic-year-policy/schedule/next-rollover"
+      body: "*"
+    };
+  }
+}
+
+message GetAcademicYearScheduleRequest {}
+
+message UpdateNextAcademicYearRolloverRequest {
+  google.protobuf.Timestamp next_rollover_at = 1;
+  optional int64 expected_revision = 2;
+  string reason = 3;
+}
+
+message AcademicYearSchedule {
+  int32 current_academic_year = 1;
+  google.protobuf.Timestamp next_rollover_at = 2;
+  google.protobuf.Timestamp observed_at = 3;
+  int64 revision = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  optional string updated_by_auth_id = 6;
+}

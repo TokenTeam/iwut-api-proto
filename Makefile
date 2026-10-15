@@ -33,7 +33,14 @@ PROTO_FILES := \
 	app_center/v1/application_review_query/error_reason.proto \
 	app_center/v1/application_profile_review_query/application_profile_review_query.proto \
 	app_center/v1/application_profile_review_query/error_reason.proto \
+	auth_center/v1/credential_management/credential_management.proto \
+	auth_center/v3/email_account/email_account.proto \
+	auth_center/v1/password_management/password_management.proto \
+	auth_center/v1/password_login/password_login.proto \
+	auth_center/v1/campus_certification/campus_certification.proto \
+	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/academic_year_policy/academic_year_policy.proto \
 	app_center/v1/application_operations/application_operations.proto \
 	app_center/v1/application_operations/error_reason.proto \
 	app_center/v1/application_closure/application_closure.proto \
@@ -108,7 +115,14 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_review_query/error_reason.proto \
 	app_center/v1/application_profile_review_query/application_profile_review_query.proto \
 	app_center/v1/application_profile_review_query/error_reason.proto \
+	auth_center/v1/credential_management/credential_management.proto \
+	auth_center/v3/email_account/email_account.proto \
+	auth_center/v1/password_management/password_management.proto \
+	auth_center/v1/password_login/password_login.proto \
+	auth_center/v1/campus_certification/campus_certification.proto \
+	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/academic_year_policy/academic_year_policy.proto \
 	app_center/v1/application_operations/application_operations.proto \
 	app_center/v1/application_operations/error_reason.proto \
 	app_center/v1/application_closure/application_closure.proto \
@@ -165,7 +179,14 @@ GENERATED_DIRS := \
 	app_center/v1/application_management \
 	app_center/v1/application_review_query \
 	app_center/v1/application_profile_review_query \
+	auth_center/v1/credential_management \
+	auth_center/v3/email_account \
+	auth_center/v1/password_management \
+	auth_center/v1/password_login \
+	auth_center/v1/campus_certification \
+	auth_center/v1/application_user_storage \
 	auth_center/v1/application_operations_permission \
+	auth_center/v1/academic_year_policy \
 	app_center/v1/application_operations \
 	app_center/v1/application_closure \
 	auth_center/v1/application_close_reauth \

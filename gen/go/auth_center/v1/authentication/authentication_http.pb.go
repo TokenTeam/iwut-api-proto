@@ -20,76 +20,23 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationAuthenticationServiceBeginDeviceLogin = "/auth_center.v1.authentication.AuthenticationService/BeginDeviceLogin"
-const OperationAuthenticationServiceBeginUserRegistration = "/auth_center.v1.authentication.AuthenticationService/BeginUserRegistration"
 const OperationAuthenticationServiceCompleteDeviceLogin = "/auth_center.v1.authentication.AuthenticationService/CompleteDeviceLogin"
-const OperationAuthenticationServiceCompleteUserRegistration = "/auth_center.v1.authentication.AuthenticationService/CompleteUserRegistration"
 const OperationAuthenticationServiceRevokeCurrentSession = "/auth_center.v1.authentication.AuthenticationService/RevokeCurrentSession"
 const OperationAuthenticationServiceRevokeOwnCredential = "/auth_center.v1.authentication.AuthenticationService/RevokeOwnCredential"
 
 type AuthenticationServiceHTTPServer interface {
 	BeginDeviceLogin(context.Context, *BeginDeviceLoginRequest) (*AuthenticationChallenge, error)
-	BeginUserRegistration(context.Context, *BeginUserRegistrationRequest) (*AuthenticationChallenge, error)
 	CompleteDeviceLogin(context.Context, *CompleteDeviceLoginRequest) (*SessionEstablished, error)
-	CompleteUserRegistration(context.Context, *CompleteUserRegistrationRequest) (*UserRegistrationResult, error)
 	RevokeCurrentSession(context.Context, *RevokeCurrentSessionRequest) (*SessionRevoked, error)
 	RevokeOwnCredential(context.Context, *RevokeOwnCredentialRequest) (*CredentialRevoked, error)
 }
 
 func RegisterAuthenticationServiceHTTPServer(s *http.Server, srv AuthenticationServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/registrations", _AuthenticationService_BeginUserRegistration0_HTTP_Handler(srv))
-	r.POST("/v1/registrations/{operation_id}/completion", _AuthenticationService_CompleteUserRegistration0_HTTP_Handler(srv))
 	r.POST("/v1/device-logins", _AuthenticationService_BeginDeviceLogin0_HTTP_Handler(srv))
 	r.POST("/v1/device-logins/{operation_id}/completion", _AuthenticationService_CompleteDeviceLogin0_HTTP_Handler(srv))
 	r.DELETE("/v1/sessions/current", _AuthenticationService_RevokeCurrentSession0_HTTP_Handler(srv))
 	r.DELETE("/v1/users/me/credentials/{credential_id}", _AuthenticationService_RevokeOwnCredential0_HTTP_Handler(srv))
-}
-
-func _AuthenticationService_BeginUserRegistration0_HTTP_Handler(srv AuthenticationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BeginUserRegistrationRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAuthenticationServiceBeginUserRegistration)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BeginUserRegistration(ctx, req.(*BeginUserRegistrationRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AuthenticationChallenge)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _AuthenticationService_CompleteUserRegistration0_HTTP_Handler(srv AuthenticationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CompleteUserRegistrationRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAuthenticationServiceCompleteUserRegistration)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CompleteUserRegistration(ctx, req.(*CompleteUserRegistrationRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UserRegistrationResult)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _AuthenticationService_BeginDeviceLogin0_HTTP_Handler(srv AuthenticationServiceHTTPServer) func(ctx http.Context) error {
@@ -182,9 +129,7 @@ func _AuthenticationService_RevokeOwnCredential0_HTTP_Handler(srv Authentication
 
 type AuthenticationServiceHTTPClient interface {
 	BeginDeviceLogin(ctx context.Context, req *BeginDeviceLoginRequest, opts ...http.CallOption) (rsp *AuthenticationChallenge, err error)
-	BeginUserRegistration(ctx context.Context, req *BeginUserRegistrationRequest, opts ...http.CallOption) (rsp *AuthenticationChallenge, err error)
 	CompleteDeviceLogin(ctx context.Context, req *CompleteDeviceLoginRequest, opts ...http.CallOption) (rsp *SessionEstablished, err error)
-	CompleteUserRegistration(ctx context.Context, req *CompleteUserRegistrationRequest, opts ...http.CallOption) (rsp *UserRegistrationResult, err error)
 	RevokeCurrentSession(ctx context.Context, req *RevokeCurrentSessionRequest, opts ...http.CallOption) (rsp *SessionRevoked, err error)
 	RevokeOwnCredential(ctx context.Context, req *RevokeOwnCredentialRequest, opts ...http.CallOption) (rsp *CredentialRevoked, err error)
 }
@@ -210,37 +155,11 @@ func (c *AuthenticationServiceHTTPClientImpl) BeginDeviceLogin(ctx context.Conte
 	return &out, nil
 }
 
-func (c *AuthenticationServiceHTTPClientImpl) BeginUserRegistration(ctx context.Context, in *BeginUserRegistrationRequest, opts ...http.CallOption) (*AuthenticationChallenge, error) {
-	var out AuthenticationChallenge
-	pattern := "/v1/registrations"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationAuthenticationServiceBeginUserRegistration))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *AuthenticationServiceHTTPClientImpl) CompleteDeviceLogin(ctx context.Context, in *CompleteDeviceLoginRequest, opts ...http.CallOption) (*SessionEstablished, error) {
 	var out SessionEstablished
 	pattern := "/v1/device-logins/{operation_id}/completion"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAuthenticationServiceCompleteDeviceLogin))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *AuthenticationServiceHTTPClientImpl) CompleteUserRegistration(ctx context.Context, in *CompleteUserRegistrationRequest, opts ...http.CallOption) (*UserRegistrationResult, error) {
-	var out UserRegistrationResult
-	pattern := "/v1/registrations/{operation_id}/completion"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationAuthenticationServiceCompleteUserRegistration))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

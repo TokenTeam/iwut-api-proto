@@ -26,6 +26,8 @@ message CompleteApplicationCloseReauthRequest {
   string operation_id = 1;
   string application_id = 2;
   bytes signature_der = 3;
+  // Required current password; never forwarded to App or included in proof JWS.
+  string current_password = 4;
 }
 message CompleteApplicationCloseReauthResponse {
   string proof_jws = 1;

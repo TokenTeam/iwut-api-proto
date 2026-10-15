@@ -132,8 +132,10 @@ type CompleteApplicationCloseReauthRequest struct {
 	OperationId   string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
 	ApplicationId string                 `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
 	SignatureDer  []byte                 `protobuf:"bytes,3,opt,name=signature_der,json=signatureDer,proto3" json:"signature_der,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Required current password; never forwarded to App or included in proof JWS.
+	CurrentPassword string `protobuf:"bytes,4,opt,name=current_password,json=currentPassword,proto3" json:"current_password,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CompleteApplicationCloseReauthRequest) Reset() {
@@ -185,6 +187,13 @@ func (x *CompleteApplicationCloseReauthRequest) GetSignatureDer() []byte {
 		return x.SignatureDer
 	}
 	return nil
+}
+
+func (x *CompleteApplicationCloseReauthRequest) GetCurrentPassword() string {
+	if x != nil {
+		return x.CurrentPassword
+	}
+	return ""
 }
 
 type CompleteApplicationCloseReauthResponse struct {
@@ -250,11 +259,12 @@ const file_auth_center_v1_application_close_reauth_application_close_reauth_prot
 	"\foperation_id\x18\x01 \x01(\tR\voperationId\x12\x1c\n" +
 	"\tchallenge\x18\x02 \x01(\fR\tchallenge\x129\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"\x96\x01\n" +
+	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"\xc1\x01\n" +
 	"%CompleteApplicationCloseReauthRequest\x12!\n" +
 	"\foperation_id\x18\x01 \x01(\tR\voperationId\x12%\n" +
 	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12#\n" +
-	"\rsignature_der\x18\x03 \x01(\fR\fsignatureDer\"\x80\x01\n" +
+	"\rsignature_der\x18\x03 \x01(\fR\fsignatureDer\x12)\n" +
+	"\x10current_password\x18\x04 \x01(\tR\x0fcurrentPassword\"\x80\x01\n" +
 	"&CompleteApplicationCloseReauthResponse\x12\x1b\n" +
 	"\tproof_jws\x18\x01 \x01(\tR\bproofJws\x129\n" +
 	"\n" +

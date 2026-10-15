@@ -1,0 +1,31 @@
+syntax = "proto3";
+package auth_center.v1.campus_certification;
+import "google/api/annotations.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/campus_certification;campus_certification";
+
+// Exact DIRECT methods require a current ACTIVE USER Session.
+service CampusCertificationService {
+  rpc BeginOwnCampusCertification(BeginOwnCampusCertificationRequest) returns (CampusVerificationStarted) {
+    option (google.api.http) = { post: "/v1/users/me/campus-certification/verifications" body: "*" };
+  }
+  rpc CompleteOwnCampusCertification(CompleteOwnCampusCertificationRequest) returns (OwnCampusCertification) {
+    option (google.api.http) = { post: "/v1/users/me/campus-certification/verifications/{operation_id}/completion" body: "*" };
+  }
+  rpc GetOwnCampusCertification(GetOwnCampusCertificationRequest) returns (OwnCampusCertification) {
+    option (google.api.http) = { get: "/v1/users/me/campus-certification" };
+  }
+}
+message BeginOwnCampusCertificationRequest { string request_id = 1; string email = 2; }
+message CampusVerificationStarted {
+  string operation_id = 1;
+  string target_email = 2;
+  int64 expires_at_unix_ms = 3;
+  int64 resend_after_unix_ms = 4;
+}
+message CompleteOwnCampusCertificationRequest { string operation_id = 1; string code = 2; }
+message GetOwnCampusCertificationRequest {}
+message OwnCampusCertification {
+  string institution = 1;
+  bool certified = 2;
+  optional int64 certified_at_unix_ms = 3;
+}

@@ -29,6 +29,8 @@ const (
 	AuthenticationMethod_AUTHENTICATION_METHOD_UNSPECIFIED AuthenticationMethod = 0
 	AuthenticationMethod_DEVICE_CREDENTIAL                 AuthenticationMethod = 1
 	AuthenticationMethod_EMAIL_CODE_AND_DEVICE             AuthenticationMethod = 2
+	AuthenticationMethod_PASSWORD_AND_DEVICE               AuthenticationMethod = 3
+	AuthenticationMethod_PASSWORD_AND_SESSION              AuthenticationMethod = 4
 )
 
 // Enum value maps for AuthenticationMethod.
@@ -37,11 +39,15 @@ var (
 		0: "AUTHENTICATION_METHOD_UNSPECIFIED",
 		1: "DEVICE_CREDENTIAL",
 		2: "EMAIL_CODE_AND_DEVICE",
+		3: "PASSWORD_AND_DEVICE",
+		4: "PASSWORD_AND_SESSION",
 	}
 	AuthenticationMethod_value = map[string]int32{
 		"AUTHENTICATION_METHOD_UNSPECIFIED": 0,
 		"DEVICE_CREDENTIAL":                 1,
 		"EMAIL_CODE_AND_DEVICE":             2,
+		"PASSWORD_AND_DEVICE":               3,
+		"PASSWORD_AND_SESSION":              4,
 	}
 )
 
@@ -408,11 +414,13 @@ const file_auth_center_v1_session_management_session_management_proto_rawDesc = 
 	"observedAt\x12P\n" +
 	"\bsessions\x18\x03 \x03(\v24.auth_center.v1.session_management.OwnSessionSummaryR\bsessions\x12\x1f\n" +
 	"\vnext_cursor\x18\x04 \x01(\tR\n" +
-	"nextCursor*o\n" +
+	"nextCursor*\xa2\x01\n" +
 	"\x14AuthenticationMethod\x12%\n" +
 	"!AUTHENTICATION_METHOD_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11DEVICE_CREDENTIAL\x10\x01\x12\x19\n" +
-	"\x15EMAIL_CODE_AND_DEVICE\x10\x022\xf3\x02\n" +
+	"\x15EMAIL_CODE_AND_DEVICE\x10\x02\x12\x17\n" +
+	"\x13PASSWORD_AND_DEVICE\x10\x03\x12\x18\n" +
+	"\x14PASSWORD_AND_SESSION\x10\x042\xf3\x02\n" +
 	"\x18SessionManagementService\x12\xa6\x01\n" +
 	"\x0fListOwnSessions\x129.auth_center.v1.session_management.ListOwnSessionsRequest\x1a1.auth_center.v1.session_management.OwnSessionPage\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/users/me/sessions:list\x12\xad\x01\n" +
 	"\x11RevokeOwnSessions\x12;.auth_center.v1.session_management.RevokeOwnSessionsRequest\x1a2.auth_center.v1.session_management.SessionsRevoked\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/users/me/sessions:revokeB`Z^github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/session_management;sessionmanagementb\x06proto3"

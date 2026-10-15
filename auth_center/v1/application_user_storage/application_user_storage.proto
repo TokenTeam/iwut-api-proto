@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package auth_center.v1.application_user_storage;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_user_storage;applicationuserstorage";
+
+service ApplicationUserStorageService {
+  rpc ClearOwnApplicationUserStorage(ClearOwnApplicationUserStorageRequest) returns (ClearOwnApplicationUserStorageResponse) {
+    option (google.api.http) = {delete: "/v1/users/me/application-user-storage/{application_id}"};
+  }
+}
+
+message ClearOwnApplicationUserStorageRequest {
+  string application_id = 1;
+}
+
+message ClearOwnApplicationUserStorageResponse {
+  bool changed = 1;
+}

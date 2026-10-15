@@ -25,6 +25,8 @@ enum AuthenticationMethod {
   AUTHENTICATION_METHOD_UNSPECIFIED = 0;
   DEVICE_CREDENTIAL = 1;
   EMAIL_CODE_AND_DEVICE = 2;
+  PASSWORD_AND_DEVICE = 3;
+  PASSWORD_AND_SESSION = 4;
 }
 message OwnSessionSummary {
   string session_id = 1;

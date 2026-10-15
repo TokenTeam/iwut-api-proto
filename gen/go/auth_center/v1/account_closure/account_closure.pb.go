@@ -433,11 +433,13 @@ func (x *AccountClosureChallenge) GetPolicyVersion() string {
 }
 
 type PrepareAccountClosureRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperationId   string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
-	Signature     []byte                 `protobuf:"bytes,2,opt,name=signature,proto3" json:"signature,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	OperationId string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
+	Signature   []byte                 `protobuf:"bytes,2,opt,name=signature,proto3" json:"signature,omitempty"`
+	// Required current password; never part of the device signing frame.
+	CurrentPassword string `protobuf:"bytes,3,opt,name=current_password,json=currentPassword,proto3" json:"current_password,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *PrepareAccountClosureRequest) Reset() {
@@ -482,6 +484,13 @@ func (x *PrepareAccountClosureRequest) GetSignature() []byte {
 		return x.Signature
 	}
 	return nil
+}
+
+func (x *PrepareAccountClosureRequest) GetCurrentPassword() string {
+	if x != nil {
+		return x.CurrentPassword
+	}
+	return ""
 }
 
 type AccountClosurePreview struct {
@@ -915,10 +924,11 @@ const file_auth_center_v1_account_closure_account_closure_proto_rawDesc = "" +
 	"\n" +
 	"service_id\x18\x05 \x01(\tR\tserviceId\x12%\n" +
 	"\x0eapplication_id\x18\x06 \x01(\tR\rapplicationId\x12%\n" +
-	"\x0epolicy_version\x18\a \x01(\tR\rpolicyVersion\"_\n" +
+	"\x0epolicy_version\x18\a \x01(\tR\rpolicyVersion\"\x8a\x01\n" +
 	"\x1cPrepareAccountClosureRequest\x12!\n" +
 	"\foperation_id\x18\x01 \x01(\tR\voperationId\x12\x1c\n" +
-	"\tsignature\x18\x02 \x01(\fR\tsignature\"\x9e\x03\n" +
+	"\tsignature\x18\x02 \x01(\fR\tsignature\x12)\n" +
+	"\x10current_password\x18\x03 \x01(\tR\x0fcurrentPassword\"\x9e\x03\n" +
 	"\x15AccountClosurePreview\x12\x17\n" +
 	"\aauth_id\x18\x01 \x01(\tR\x06authId\x12)\n" +
 	"\x10developer_handle\x18\x02 \x01(\tR\x0fdeveloperHandle\x12%\n" +

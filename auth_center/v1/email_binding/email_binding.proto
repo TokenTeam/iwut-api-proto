@@ -4,13 +4,13 @@ import "google/api/annotations.proto";
 import "auth_center/v1/authentication/authentication.proto";
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/email_binding;email_binding";
 
-// Session absence selects registration; a supplied invalid Session never does.
+// Mutable v1 methods are permanently retired. Use EmailAccountService v3.
 service EmailBindingService {
   rpc BeginSetEmail(BeginSetEmailRequest) returns (EmailVerificationStarted) {
-    option (google.api.http) = { post: "/v1/email-bindings" body: "*" };
+    option deprecated = true;
   }
   rpc CompleteSetEmail(CompleteSetEmailRequest) returns (EmailActivated) {
-    option (google.api.http) = { post: "/v1/email-bindings/{operation_id}/completion" body: "*" };
+    option deprecated = true;
   }
   rpc GetOwnEmailBinding(GetOwnEmailBindingRequest) returns (OwnEmailBinding) {
     option (google.api.http) = { get: "/v1/users/me/email-binding" };
@@ -32,7 +32,8 @@ message BeginSetEmailRequest {
 message BindEmailIntent { optional int64 expected_revision = 1; }
 message RegisterEmailIntent {
   auth_center.v1.authentication.CredentialRegistrationProposal credential_proposal = 1;
-  auth_center.v1.authentication.StudentAssociationDeclaration association = 2;
+  reserved 2;
+  reserved "association";
 }
 message EmailVerificationStarted {
   string operation_id = 1;

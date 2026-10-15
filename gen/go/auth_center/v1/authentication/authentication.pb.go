@@ -821,10 +821,10 @@ const file_auth_center_v1_authentication_authentication_proto_rawDesc = "" +
 	"\x0eSessionRevoked\"A\n" +
 	"\x1aRevokeOwnCredentialRequest\x12#\n" +
 	"\rcredential_id\x18\x01 \x01(\tR\fcredentialId\"\x13\n" +
-	"\x11CredentialRevoked2\xca\b\n" +
-	"\x15AuthenticationService\x12\xaa\x01\n" +
-	"\x15BeginUserRegistration\x12;.auth_center.v1.authentication.BeginUserRegistrationRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/registrations\x12\xc9\x01\n" +
-	"\x18CompleteUserRegistration\x12>.auth_center.v1.authentication.CompleteUserRegistrationRequest\x1a5.auth_center.v1.authentication.UserRegistrationResult\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/registrations/{operation_id}/completion\x12\xa0\x01\n" +
+	"\x11CredentialRevoked2\xfe\a\n" +
+	"\x15AuthenticationService\x12\x91\x01\n" +
+	"\x15BeginUserRegistration\x12;.auth_center.v1.authentication.BeginUserRegistrationRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x03\x88\x02\x01\x12\x96\x01\n" +
+	"\x18CompleteUserRegistration\x12>.auth_center.v1.authentication.CompleteUserRegistrationRequest\x1a5.auth_center.v1.authentication.UserRegistrationResult\"\x03\x88\x02\x01\x12\xa0\x01\n" +
 	"\x10BeginDeviceLogin\x126.auth_center.v1.authentication.BeginDeviceLoginRequest\x1a6.auth_center.v1.authentication.AuthenticationChallenge\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/device-logins\x12\xbb\x01\n" +
 	"\x13CompleteDeviceLogin\x129.auth_center.v1.authentication.CompleteDeviceLoginRequest\x1a1.auth_center.v1.authentication.SessionEstablished\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/device-logins/{operation_id}/completion\x12\x9f\x01\n" +
 	"\x14RevokeCurrentSession\x12:.auth_center.v1.authentication.RevokeCurrentSessionRequest\x1a-.auth_center.v1.authentication.SessionRevoked\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/v1/sessions/current\x12\xb4\x01\n" +

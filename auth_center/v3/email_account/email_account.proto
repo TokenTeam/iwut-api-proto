@@ -1,0 +1,31 @@
+syntax = "proto3";
+package auth_center.v3.email_account;
+import "google/api/annotations.proto";
+import "auth_center/v1/authentication/authentication.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v3/email_account;emailaccountv3";
+
+service EmailAccountService {
+  rpc BeginEmailRegistration(BeginEmailRegistrationRequest) returns (EmailRegistrationStarted) { option (google.api.http) = {post:"/v3/email-registrations" body:"*"}; }
+  rpc CompleteEmailRegistration(CompleteEmailRegistrationRequest) returns (EmailRegistrationCompleted) { option (google.api.http) = {post:"/v3/email-registrations:complete" body:"*"}; }
+  rpc GetOwnEmails(GetOwnEmailsRequest) returns (OwnEmails) { option (google.api.http) = {get:"/v3/users/me/emails"}; }
+  rpc BeginAddOwnEmail(BeginAddOwnEmailRequest) returns (OwnEmailVerificationStarted) { option (google.api.http) = {post:"/v3/users/me/email-verifications" body:"*"}; }
+  rpc CompleteAddOwnEmail(CompleteAddOwnEmailRequest) returns (OwnEmailAdded) { option (google.api.http) = {post:"/v3/users/me/email-verifications:complete" body:"*"}; }
+  rpc SwitchOwnLoginEmail(SwitchOwnLoginEmailRequest) returns (LoginEmailSwitched) { option (google.api.http) = {post:"/v3/users/me/login-email:switch" body:"*"}; }
+  rpc RemoveOwnEmail(RemoveOwnEmailRequest) returns (OwnEmailRemoved) { option (google.api.http) = {post:"/v3/users/me/emails:remove" body:"*"}; }
+}
+message BeginEmailRegistrationRequest { string request_id=1; string email=2; auth_center.v1.authentication.CredentialRegistrationProposal credential_proposal=3; }
+message EmailRegistrationStarted { string operation_id=1; string target_email=2; bytes challenge=3; bytes signing_payload=4; string protocol_version=5; int64 expires_at_unix_ms=6; int64 resend_after_unix_ms=7; }
+message CompleteEmailRegistrationRequest { string operation_id=1; string code=2; string password=3; auth_center.v1.authentication.CredentialProof proof=4; }
+message EmailRegistrationCompleted { string operation_id=1; auth_center.v1.authentication.UserRegistrationResult registration_result=2; }
+message GetOwnEmailsRequest {}
+message OwnEmail { string binding_id=1; string email=2; int64 verified_at_unix_ms=3; bool is_login=4; bool is_whut=5; }
+message OwnEmails { int64 directory_revision=1; int64 login_role_revision=2; repeated OwnEmail emails=3; repeated PendingOwnEmail pending=4; }
+message PendingOwnEmail { string operation_id=1; string target_email=2; int64 expires_at_unix_ms=3; int64 resend_after_unix_ms=4; }
+message BeginAddOwnEmailRequest { string request_id=1; string email=2; int64 expected_directory_revision=3; }
+message OwnEmailVerificationStarted { string operation_id=1; string target_email=2; int64 expires_at_unix_ms=3; int64 resend_after_unix_ms=4; }
+message CompleteAddOwnEmailRequest { string operation_id=1; string code=2; }
+message OwnEmailAdded { string operation_id=1; OwnEmails emails=2; }
+message SwitchOwnLoginEmailRequest { string request_id=1; string target_binding_id=2; string current_password=3; int64 expected_directory_revision=4; int64 expected_login_role_revision=5; }
+message LoginEmailSwitched { string operation_id=1; OwnEmails emails=2; }
+message RemoveOwnEmailRequest { string request_id=1; string binding_id=2; int64 expected_directory_revision=3; }
+message OwnEmailRemoved { string operation_id=1; OwnEmails emails=2; }

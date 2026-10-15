@@ -44,6 +44,8 @@ message AccountClosureChallenge {
 message PrepareAccountClosureRequest {
   string operation_id = 1;
   bytes signature = 2;
+  // Required current password; never part of the device signing frame.
+  string current_password = 3;
 }
 enum PreparationOutcome {
   PREPARATION_OUTCOME_UNSPECIFIED = 0;

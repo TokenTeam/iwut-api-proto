@@ -30,7 +30,19 @@ message ProfileValue {
     int32 integer_value = 2;
     bool boolean_value = 3;
     string date_value = 4;
+    StringSetValue string_set_value = 5;
+    AcademicGradeValue academic_grade_value = 6;
   }
+}
+message StringSetValue {
+  repeated string values = 1;
+}
+message AcademicGradeValue {
+  string stage = 1;
+  int32 year = 2;
+  int32 final_year = 3;
+  int32 academic_year = 4;
+  optional google.protobuf.Timestamp confirmed_at = 5;
 }
 message ProfileFieldAssignment {
   string key = 1;
@@ -64,6 +76,15 @@ message ProfileFieldConstraints {
   optional int64 max_length = 2;
   optional int32 minimum = 3;
   optional int32 maximum = 4;
+  optional string character_set = 5;
+  repeated ProfileFieldOption options = 6;
+  optional uint32 min_items = 7;
+  optional uint32 max_items = 8;
+  optional bool not_after_today = 9;
+}
+message ProfileFieldOption {
+  string value = 1;
+  string label = 2;
 }
 message ProfileEditingLimits {
   uint32 max_operations = 1;
@@ -75,4 +96,5 @@ message ProfileEditingLimits {
 message ProfileEditingSchema {
   repeated ProfileFieldDefinition definitions = 1;
   ProfileEditingLimits limits = 2;
+  optional int32 current_academic_year = 3;
 }
