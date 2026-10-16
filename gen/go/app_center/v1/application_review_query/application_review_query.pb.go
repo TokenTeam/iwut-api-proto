@@ -612,17 +612,79 @@ func (x *ReviewVersionContext) GetCreatedBy() string {
 	return ""
 }
 
+type ReviewCheckDefinition struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReviewCheckDefinition) Reset() {
+	*x = ReviewCheckDefinition{}
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReviewCheckDefinition) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReviewCheckDefinition) ProtoMessage() {}
+
+func (x *ReviewCheckDefinition) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReviewCheckDefinition.ProtoReflect.Descriptor instead.
+func (*ReviewCheckDefinition) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_review_query_application_review_query_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ReviewCheckDefinition) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ReviewCheckDefinition) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ReviewCheckDefinition) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 type ReviewPolicyContext struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Version          string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	RequiredCheckIds []string               `protobuf:"bytes,2,rep,name=required_check_ids,json=requiredCheckIds,proto3" json:"required_check_ids,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Immutable server-owned plain-text definitions, ordered like required_check_ids.
+	RequiredCheckDefinitions []*ReviewCheckDefinition `protobuf:"bytes,3,rep,name=required_check_definitions,json=requiredCheckDefinitions,proto3" json:"required_check_definitions,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ReviewPolicyContext) Reset() {
 	*x = ReviewPolicyContext{}
-	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +696,7 @@ func (x *ReviewPolicyContext) String() string {
 func (*ReviewPolicyContext) ProtoMessage() {}
 
 func (x *ReviewPolicyContext) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[8]
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -647,7 +709,7 @@ func (x *ReviewPolicyContext) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReviewPolicyContext.ProtoReflect.Descriptor instead.
 func (*ReviewPolicyContext) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_query_application_review_query_proto_rawDescGZIP(), []int{8}
+	return file_app_center_v1_application_review_query_application_review_query_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ReviewPolicyContext) GetVersion() string {
@@ -660,6 +722,13 @@ func (x *ReviewPolicyContext) GetVersion() string {
 func (x *ReviewPolicyContext) GetRequiredCheckIds() []string {
 	if x != nil {
 		return x.RequiredCheckIds
+	}
+	return nil
+}
+
+func (x *ReviewPolicyContext) GetRequiredCheckDefinitions() []*ReviewCheckDefinition {
+	if x != nil {
+		return x.RequiredCheckDefinitions
 	}
 	return nil
 }
@@ -678,7 +747,7 @@ type ApplicationVersionReviewDetail struct {
 
 func (x *ApplicationVersionReviewDetail) Reset() {
 	*x = ApplicationVersionReviewDetail{}
-	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -690,7 +759,7 @@ func (x *ApplicationVersionReviewDetail) String() string {
 func (*ApplicationVersionReviewDetail) ProtoMessage() {}
 
 func (x *ApplicationVersionReviewDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_review_query_application_review_query_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +772,7 @@ func (x *ApplicationVersionReviewDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationVersionReviewDetail.ProtoReflect.Descriptor instead.
 func (*ApplicationVersionReviewDetail) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_review_query_application_review_query_proto_rawDescGZIP(), []int{9}
+	return file_app_center_v1_application_review_query_application_review_query_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ApplicationVersionReviewDetail) GetApplication() *ReviewApplicationContext {
@@ -797,10 +866,15 @@ const file_app_center_v1_application_review_query_application_review_query_proto
 	"\rreview_status\x18\x03 \x01(\tR\freviewStatus\x12\x1a\n" +
 	"\brevision\x18\x04 \x01(\x03R\brevision\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\x05 \x01(\tR\tcreatedBy\"]\n" +
+	"created_by\x18\x05 \x01(\tR\tcreatedBy\"_\n" +
+	"\x15ReviewCheckDefinition\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xda\x01\n" +
 	"\x13ReviewPolicyContext\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12,\n" +
-	"\x12required_check_ids\x18\x02 \x03(\tR\x10requiredCheckIds\"\xbc\x04\n" +
+	"\x12required_check_ids\x18\x02 \x03(\tR\x10requiredCheckIds\x12{\n" +
+	"\x1arequired_check_definitions\x18\x03 \x03(\v2=.app_center.v1.application_review_query.ReviewCheckDefinitionR\x18requiredCheckDefinitions\"\xbc\x04\n" +
 	"\x1eApplicationVersionReviewDetail\x12b\n" +
 	"\vapplication\x18\x01 \x01(\v2@.app_center.v1.application_review_query.ReviewApplicationContextR\vapplication\x12V\n" +
 	"\aversion\x18\x02 \x01(\v2<.app_center.v1.application_review_query.ReviewVersionContextR\aversion\x12S\n" +
@@ -830,7 +904,7 @@ func file_app_center_v1_application_review_query_application_review_query_proto_
 }
 
 var file_app_center_v1_application_review_query_application_review_query_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_app_center_v1_application_review_query_application_review_query_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_app_center_v1_application_review_query_application_review_query_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_app_center_v1_application_review_query_application_review_query_proto_goTypes = []any{
 	(ReviewConflict)(0), // 0: app_center.v1.application_review_query.ReviewConflict
 	(*ListPendingApplicationVersionReviewsRequest)(nil),  // 1: app_center.v1.application_review_query.ListPendingApplicationVersionReviewsRequest
@@ -841,33 +915,35 @@ var file_app_center_v1_application_review_query_application_review_query_proto_g
 	(*PendingApplicationVersionReviewPage)(nil),          // 6: app_center.v1.application_review_query.PendingApplicationVersionReviewPage
 	(*ReviewApplicationContext)(nil),                     // 7: app_center.v1.application_review_query.ReviewApplicationContext
 	(*ReviewVersionContext)(nil),                         // 8: app_center.v1.application_review_query.ReviewVersionContext
-	(*ReviewPolicyContext)(nil),                          // 9: app_center.v1.application_review_query.ReviewPolicyContext
-	(*ApplicationVersionReviewDetail)(nil),               // 10: app_center.v1.application_review_query.ApplicationVersionReviewDetail
-	(*timestamppb.Timestamp)(nil),                        // 11: google.protobuf.Timestamp
-	(*application_review.ApplicationReviewResource)(nil), // 12: app_center.v1.application_review.ApplicationReviewResource
+	(*ReviewCheckDefinition)(nil),                        // 9: app_center.v1.application_review_query.ReviewCheckDefinition
+	(*ReviewPolicyContext)(nil),                          // 10: app_center.v1.application_review_query.ReviewPolicyContext
+	(*ApplicationVersionReviewDetail)(nil),               // 11: app_center.v1.application_review_query.ApplicationVersionReviewDetail
+	(*timestamppb.Timestamp)(nil),                        // 12: google.protobuf.Timestamp
+	(*application_review.ApplicationReviewResource)(nil), // 13: app_center.v1.application_review.ApplicationReviewResource
 }
 var file_app_center_v1_application_review_query_application_review_query_proto_depIdxs = []int32{
 	2,  // 0: app_center.v1.application_review_query.ListPendingApplicationVersionReviewsRequest.query:type_name -> app_center.v1.application_review_query.ListPendingApplicationVersionReviewsQuery
 	0,  // 1: app_center.v1.application_review_query.ReviewDecisionEligibility.conflicts:type_name -> app_center.v1.application_review_query.ReviewConflict
-	11, // 2: app_center.v1.application_review_query.PendingApplicationVersionReview.submitted_at:type_name -> google.protobuf.Timestamp
+	12, // 2: app_center.v1.application_review_query.PendingApplicationVersionReview.submitted_at:type_name -> google.protobuf.Timestamp
 	4,  // 3: app_center.v1.application_review_query.PendingApplicationVersionReview.decision_eligibility:type_name -> app_center.v1.application_review_query.ReviewDecisionEligibility
 	5,  // 4: app_center.v1.application_review_query.PendingApplicationVersionReviewPage.items:type_name -> app_center.v1.application_review_query.PendingApplicationVersionReview
-	11, // 5: app_center.v1.application_review_query.PendingApplicationVersionReviewPage.as_of:type_name -> google.protobuf.Timestamp
-	7,  // 6: app_center.v1.application_review_query.ApplicationVersionReviewDetail.application:type_name -> app_center.v1.application_review_query.ReviewApplicationContext
-	8,  // 7: app_center.v1.application_review_query.ApplicationVersionReviewDetail.version:type_name -> app_center.v1.application_review_query.ReviewVersionContext
-	12, // 8: app_center.v1.application_review_query.ApplicationVersionReviewDetail.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
-	9,  // 9: app_center.v1.application_review_query.ApplicationVersionReviewDetail.current_policy:type_name -> app_center.v1.application_review_query.ReviewPolicyContext
-	4,  // 10: app_center.v1.application_review_query.ApplicationVersionReviewDetail.decision_eligibility:type_name -> app_center.v1.application_review_query.ReviewDecisionEligibility
-	11, // 11: app_center.v1.application_review_query.ApplicationVersionReviewDetail.as_of:type_name -> google.protobuf.Timestamp
-	1,  // 12: app_center.v1.application_review_query.ApplicationReviewQueryService.ListPendingApplicationVersionReviews:input_type -> app_center.v1.application_review_query.ListPendingApplicationVersionReviewsRequest
-	3,  // 13: app_center.v1.application_review_query.ApplicationReviewQueryService.GetApplicationVersionReview:input_type -> app_center.v1.application_review_query.GetApplicationVersionReviewRequest
-	6,  // 14: app_center.v1.application_review_query.ApplicationReviewQueryService.ListPendingApplicationVersionReviews:output_type -> app_center.v1.application_review_query.PendingApplicationVersionReviewPage
-	10, // 15: app_center.v1.application_review_query.ApplicationReviewQueryService.GetApplicationVersionReview:output_type -> app_center.v1.application_review_query.ApplicationVersionReviewDetail
-	14, // [14:16] is the sub-list for method output_type
-	12, // [12:14] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	12, // 5: app_center.v1.application_review_query.PendingApplicationVersionReviewPage.as_of:type_name -> google.protobuf.Timestamp
+	9,  // 6: app_center.v1.application_review_query.ReviewPolicyContext.required_check_definitions:type_name -> app_center.v1.application_review_query.ReviewCheckDefinition
+	7,  // 7: app_center.v1.application_review_query.ApplicationVersionReviewDetail.application:type_name -> app_center.v1.application_review_query.ReviewApplicationContext
+	8,  // 8: app_center.v1.application_review_query.ApplicationVersionReviewDetail.version:type_name -> app_center.v1.application_review_query.ReviewVersionContext
+	13, // 9: app_center.v1.application_review_query.ApplicationVersionReviewDetail.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
+	10, // 10: app_center.v1.application_review_query.ApplicationVersionReviewDetail.current_policy:type_name -> app_center.v1.application_review_query.ReviewPolicyContext
+	4,  // 11: app_center.v1.application_review_query.ApplicationVersionReviewDetail.decision_eligibility:type_name -> app_center.v1.application_review_query.ReviewDecisionEligibility
+	12, // 12: app_center.v1.application_review_query.ApplicationVersionReviewDetail.as_of:type_name -> google.protobuf.Timestamp
+	1,  // 13: app_center.v1.application_review_query.ApplicationReviewQueryService.ListPendingApplicationVersionReviews:input_type -> app_center.v1.application_review_query.ListPendingApplicationVersionReviewsRequest
+	3,  // 14: app_center.v1.application_review_query.ApplicationReviewQueryService.GetApplicationVersionReview:input_type -> app_center.v1.application_review_query.GetApplicationVersionReviewRequest
+	6,  // 15: app_center.v1.application_review_query.ApplicationReviewQueryService.ListPendingApplicationVersionReviews:output_type -> app_center.v1.application_review_query.PendingApplicationVersionReviewPage
+	11, // 16: app_center.v1.application_review_query.ApplicationReviewQueryService.GetApplicationVersionReview:output_type -> app_center.v1.application_review_query.ApplicationVersionReviewDetail
+	15, // [15:17] is the sub-list for method output_type
+	13, // [13:15] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_review_query_application_review_query_proto_init() }
@@ -882,7 +958,7 @@ func file_app_center_v1_application_review_query_application_review_query_proto_
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_review_query_application_review_query_proto_rawDesc), len(file_app_center_v1_application_review_query_application_review_query_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

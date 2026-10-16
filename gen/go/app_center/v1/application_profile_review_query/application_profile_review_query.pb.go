@@ -11,6 +11,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -664,6 +665,158 @@ func (x *ProfileReviewPolicyContext) GetRequiredCheckIds() []string {
 	return nil
 }
 
+type PublishedProfileForReview struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ProfileRevisionId string                 `protobuf:"bytes,1,opt,name=profile_revision_id,json=profileRevisionId,proto3" json:"profile_revision_id,omitempty"`
+	DisplayName       string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Description       *string                `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Icon              *string                `protobuf:"bytes,4,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *PublishedProfileForReview) Reset() {
+	*x = PublishedProfileForReview{}
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublishedProfileForReview) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublishedProfileForReview) ProtoMessage() {}
+
+func (x *PublishedProfileForReview) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublishedProfileForReview.ProtoReflect.Descriptor instead.
+func (*PublishedProfileForReview) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PublishedProfileForReview) GetProfileRevisionId() string {
+	if x != nil {
+		return x.ProfileRevisionId
+	}
+	return ""
+}
+
+func (x *PublishedProfileForReview) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *PublishedProfileForReview) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *PublishedProfileForReview) GetIcon() string {
+	if x != nil && x.Icon != nil {
+		return *x.Icon
+	}
+	return ""
+}
+
+type CurrentPublishedProfileForReview struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Missing state is not equivalent to an explicitly absent public profile.
+	//
+	// Types that are valid to be assigned to State:
+	//
+	//	*CurrentPublishedProfileForReview_None
+	//	*CurrentPublishedProfileForReview_Published
+	State         isCurrentPublishedProfileForReview_State `protobuf_oneof:"state"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CurrentPublishedProfileForReview) Reset() {
+	*x = CurrentPublishedProfileForReview{}
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CurrentPublishedProfileForReview) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CurrentPublishedProfileForReview) ProtoMessage() {}
+
+func (x *CurrentPublishedProfileForReview) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CurrentPublishedProfileForReview.ProtoReflect.Descriptor instead.
+func (*CurrentPublishedProfileForReview) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CurrentPublishedProfileForReview) GetState() isCurrentPublishedProfileForReview_State {
+	if x != nil {
+		return x.State
+	}
+	return nil
+}
+
+func (x *CurrentPublishedProfileForReview) GetNone() structpb.NullValue {
+	if x != nil {
+		if x, ok := x.State.(*CurrentPublishedProfileForReview_None); ok {
+			return x.None
+		}
+	}
+	return structpb.NullValue(0)
+}
+
+func (x *CurrentPublishedProfileForReview) GetPublished() *PublishedProfileForReview {
+	if x != nil {
+		if x, ok := x.State.(*CurrentPublishedProfileForReview_Published); ok {
+			return x.Published
+		}
+	}
+	return nil
+}
+
+type isCurrentPublishedProfileForReview_State interface {
+	isCurrentPublishedProfileForReview_State()
+}
+
+type CurrentPublishedProfileForReview_None struct {
+	None structpb.NullValue `protobuf:"varint,1,opt,name=none,proto3,enum=google.protobuf.NullValue,oneof"`
+}
+
+type CurrentPublishedProfileForReview_Published struct {
+	Published *PublishedProfileForReview `protobuf:"bytes,2,opt,name=published,proto3,oneof"`
+}
+
+func (*CurrentPublishedProfileForReview_None) isCurrentPublishedProfileForReview_State() {}
+
+func (*CurrentPublishedProfileForReview_Published) isCurrentPublishedProfileForReview_State() {}
+
 type ApplicationProfileReviewDetail struct {
 	state               protoimpl.MessageState                                     `protogen:"open.v1"`
 	Application         *ProfileReviewApplicationContext                           `protobuf:"bytes,1,opt,name=application,proto3" json:"application,omitempty"`
@@ -672,13 +825,15 @@ type ApplicationProfileReviewDetail struct {
 	CurrentPolicy       *ProfileReviewPolicyContext                                `protobuf:"bytes,4,opt,name=current_policy,json=currentPolicy,proto3" json:"current_policy,omitempty"`
 	DecisionEligibility *ProfileReviewDecisionEligibility                          `protobuf:"bytes,5,opt,name=decision_eligibility,json=decisionEligibility,proto3" json:"decision_eligibility,omitempty"`
 	AsOf                *timestamppb.Timestamp                                     `protobuf:"bytes,6,opt,name=as_of,json=asOf,proto3" json:"as_of,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Current published pointer and approved content observed in the same snapshot.
+	CurrentPublishedProfile *CurrentPublishedProfileForReview `protobuf:"bytes,7,opt,name=current_published_profile,json=currentPublishedProfile,proto3" json:"current_published_profile,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ApplicationProfileReviewDetail) Reset() {
 	*x = ApplicationProfileReviewDetail{}
-	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -690,7 +845,7 @@ func (x *ApplicationProfileReviewDetail) String() string {
 func (*ApplicationProfileReviewDetail) ProtoMessage() {}
 
 func (x *ApplicationProfileReviewDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[9]
+	mi := &file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +858,7 @@ func (x *ApplicationProfileReviewDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationProfileReviewDetail.ProtoReflect.Descriptor instead.
 func (*ApplicationProfileReviewDetail) Descriptor() ([]byte, []int) {
-	return file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDescGZIP(), []int{9}
+	return file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ApplicationProfileReviewDetail) GetApplication() *ProfileReviewApplicationContext {
@@ -748,11 +903,18 @@ func (x *ApplicationProfileReviewDetail) GetAsOf() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ApplicationProfileReviewDetail) GetCurrentPublishedProfile() *CurrentPublishedProfileForReview {
+	if x != nil {
+		return x.CurrentPublishedProfile
+	}
+	return nil
+}
+
 var File_app_center_v1_application_profile_review_query_application_profile_review_query_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDesc = "" +
 	"\n" +
-	"Uapp_center/v1/application_profile_review_query/application_profile_review_query.proto\x12.app_center.v1.application_profile_review_query\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1aIapp_center/v1/application_profile_review/application_profile_review.proto\"\x9e\x01\n" +
+	"Uapp_center/v1/application_profile_review_query/application_profile_review_query.proto\x12.app_center.v1.application_profile_review_query\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1aIapp_center/v1/application_profile_review/application_profile_review.proto\"\x9e\x01\n" +
 	"+ListPendingApplicationProfileReviewsRequest\x12o\n" +
 	"\x05query\x18\x01 \x01(\v2Y.app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsQueryR\x05query\"\xa6\x01\n" +
 	")ListPendingApplicationProfileReviewsQuery\x12*\n" +
@@ -797,14 +959,26 @@ const file_app_center_v1_application_profile_review_query_application_profile_re
 	"created_by\x18\x05 \x01(\tR\tcreatedBy\"d\n" +
 	"\x1aProfileReviewPolicyContext\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12,\n" +
-	"\x12required_check_ids\x18\x02 \x03(\tR\x10requiredCheckIds\"\x98\x05\n" +
+	"\x12required_check_ids\x18\x02 \x03(\tR\x10requiredCheckIds\"\xc7\x01\n" +
+	"\x19PublishedProfileForReview\x12.\n" +
+	"\x13profile_revision_id\x18\x01 \x01(\tR\x11profileRevisionId\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12%\n" +
+	"\vdescription\x18\x03 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x17\n" +
+	"\x04icon\x18\x04 \x01(\tH\x01R\x04icon\x88\x01\x01B\x0e\n" +
+	"\f_descriptionB\a\n" +
+	"\x05_icon\"\xc8\x01\n" +
+	" CurrentPublishedProfileForReview\x120\n" +
+	"\x04none\x18\x01 \x01(\x0e2\x1a.google.protobuf.NullValueH\x00R\x04none\x12i\n" +
+	"\tpublished\x18\x02 \x01(\v2I.app_center.v1.application_profile_review_query.PublishedProfileForReviewH\x00R\tpublishedB\a\n" +
+	"\x05state\"\xa7\x06\n" +
 	"\x1eApplicationProfileReviewDetail\x12q\n" +
 	"\vapplication\x18\x01 \x01(\v2O.app_center.v1.application_profile_review_query.ProfileReviewApplicationContextR\vapplication\x12w\n" +
 	"\x10profile_revision\x18\x02 \x01(\v2L.app_center.v1.application_profile_review_query.ProfileRevisionReviewContextR\x0fprofileRevision\x12`\n" +
 	"\x06review\x18\x03 \x01(\v2H.app_center.v1.application_profile_review.ApplicationProfileReviewRecordR\x06review\x12q\n" +
 	"\x0ecurrent_policy\x18\x04 \x01(\v2J.app_center.v1.application_profile_review_query.ProfileReviewPolicyContextR\rcurrentPolicy\x12\x83\x01\n" +
 	"\x14decision_eligibility\x18\x05 \x01(\v2P.app_center.v1.application_profile_review_query.ProfileReviewDecisionEligibilityR\x13decisionEligibility\x12/\n" +
-	"\x05as_of\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf*\x7f\n" +
+	"\x05as_of\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf\x12\x8c\x01\n" +
+	"\x19current_published_profile\x18\a \x01(\v2P.app_center.v1.application_profile_review_query.CurrentPublishedProfileForReviewR\x17currentPublishedProfile*\x7f\n" +
 	"\x15ProfileReviewConflict\x12'\n" +
 	"#PROFILE_REVIEW_CONFLICT_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rCURRENT_ADMIN\x10\x01\x12\x14\n" +
@@ -827,7 +1001,7 @@ func file_app_center_v1_application_profile_review_query_application_profile_rev
 }
 
 var file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_goTypes = []any{
 	(ProfileReviewConflict)(0),                                        // 0: app_center.v1.application_profile_review_query.ProfileReviewConflict
 	(*ListPendingApplicationProfileReviewsRequest)(nil),               // 1: app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsRequest
@@ -839,32 +1013,38 @@ var file_app_center_v1_application_profile_review_query_application_profile_revi
 	(*ProfileReviewApplicationContext)(nil),                           // 7: app_center.v1.application_profile_review_query.ProfileReviewApplicationContext
 	(*ProfileRevisionReviewContext)(nil),                              // 8: app_center.v1.application_profile_review_query.ProfileRevisionReviewContext
 	(*ProfileReviewPolicyContext)(nil),                                // 9: app_center.v1.application_profile_review_query.ProfileReviewPolicyContext
-	(*ApplicationProfileReviewDetail)(nil),                            // 10: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail
-	(*timestamppb.Timestamp)(nil),                                     // 11: google.protobuf.Timestamp
-	(*application_profile_review.ApplicationProfileReviewRecord)(nil), // 12: app_center.v1.application_profile_review.ApplicationProfileReviewRecord
+	(*PublishedProfileForReview)(nil),                                 // 10: app_center.v1.application_profile_review_query.PublishedProfileForReview
+	(*CurrentPublishedProfileForReview)(nil),                          // 11: app_center.v1.application_profile_review_query.CurrentPublishedProfileForReview
+	(*ApplicationProfileReviewDetail)(nil),                            // 12: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail
+	(*timestamppb.Timestamp)(nil),                                     // 13: google.protobuf.Timestamp
+	(structpb.NullValue)(0),                                           // 14: google.protobuf.NullValue
+	(*application_profile_review.ApplicationProfileReviewRecord)(nil), // 15: app_center.v1.application_profile_review.ApplicationProfileReviewRecord
 }
 var file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_depIdxs = []int32{
 	2,  // 0: app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsRequest.query:type_name -> app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsQuery
 	0,  // 1: app_center.v1.application_profile_review_query.ProfileReviewDecisionEligibility.conflicts:type_name -> app_center.v1.application_profile_review_query.ProfileReviewConflict
-	11, // 2: app_center.v1.application_profile_review_query.PendingApplicationProfileReview.submitted_at:type_name -> google.protobuf.Timestamp
+	13, // 2: app_center.v1.application_profile_review_query.PendingApplicationProfileReview.submitted_at:type_name -> google.protobuf.Timestamp
 	4,  // 3: app_center.v1.application_profile_review_query.PendingApplicationProfileReview.decision_eligibility:type_name -> app_center.v1.application_profile_review_query.ProfileReviewDecisionEligibility
 	5,  // 4: app_center.v1.application_profile_review_query.PendingApplicationProfileReviewPage.items:type_name -> app_center.v1.application_profile_review_query.PendingApplicationProfileReview
-	11, // 5: app_center.v1.application_profile_review_query.PendingApplicationProfileReviewPage.as_of:type_name -> google.protobuf.Timestamp
-	7,  // 6: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.application:type_name -> app_center.v1.application_profile_review_query.ProfileReviewApplicationContext
-	8,  // 7: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.profile_revision:type_name -> app_center.v1.application_profile_review_query.ProfileRevisionReviewContext
-	12, // 8: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.review:type_name -> app_center.v1.application_profile_review.ApplicationProfileReviewRecord
-	9,  // 9: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.current_policy:type_name -> app_center.v1.application_profile_review_query.ProfileReviewPolicyContext
-	4,  // 10: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.decision_eligibility:type_name -> app_center.v1.application_profile_review_query.ProfileReviewDecisionEligibility
-	11, // 11: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.as_of:type_name -> google.protobuf.Timestamp
-	1,  // 12: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.ListPendingApplicationProfileReviews:input_type -> app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsRequest
-	3,  // 13: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.GetApplicationProfileReview:input_type -> app_center.v1.application_profile_review_query.GetApplicationProfileReviewRequest
-	6,  // 14: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.ListPendingApplicationProfileReviews:output_type -> app_center.v1.application_profile_review_query.PendingApplicationProfileReviewPage
-	10, // 15: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.GetApplicationProfileReview:output_type -> app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail
-	14, // [14:16] is the sub-list for method output_type
-	12, // [12:14] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	13, // 5: app_center.v1.application_profile_review_query.PendingApplicationProfileReviewPage.as_of:type_name -> google.protobuf.Timestamp
+	14, // 6: app_center.v1.application_profile_review_query.CurrentPublishedProfileForReview.none:type_name -> google.protobuf.NullValue
+	10, // 7: app_center.v1.application_profile_review_query.CurrentPublishedProfileForReview.published:type_name -> app_center.v1.application_profile_review_query.PublishedProfileForReview
+	7,  // 8: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.application:type_name -> app_center.v1.application_profile_review_query.ProfileReviewApplicationContext
+	8,  // 9: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.profile_revision:type_name -> app_center.v1.application_profile_review_query.ProfileRevisionReviewContext
+	15, // 10: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.review:type_name -> app_center.v1.application_profile_review.ApplicationProfileReviewRecord
+	9,  // 11: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.current_policy:type_name -> app_center.v1.application_profile_review_query.ProfileReviewPolicyContext
+	4,  // 12: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.decision_eligibility:type_name -> app_center.v1.application_profile_review_query.ProfileReviewDecisionEligibility
+	13, // 13: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.as_of:type_name -> google.protobuf.Timestamp
+	11, // 14: app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail.current_published_profile:type_name -> app_center.v1.application_profile_review_query.CurrentPublishedProfileForReview
+	1,  // 15: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.ListPendingApplicationProfileReviews:input_type -> app_center.v1.application_profile_review_query.ListPendingApplicationProfileReviewsRequest
+	3,  // 16: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.GetApplicationProfileReview:input_type -> app_center.v1.application_profile_review_query.GetApplicationProfileReviewRequest
+	6,  // 17: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.ListPendingApplicationProfileReviews:output_type -> app_center.v1.application_profile_review_query.PendingApplicationProfileReviewPage
+	12, // 18: app_center.v1.application_profile_review_query.ApplicationProfileReviewQueryService.GetApplicationProfileReview:output_type -> app_center.v1.application_profile_review_query.ApplicationProfileReviewDetail
+	17, // [17:19] is the sub-list for method output_type
+	15, // [15:17] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() {
@@ -875,13 +1055,18 @@ func file_app_center_v1_application_profile_review_query_application_profile_rev
 		return
 	}
 	file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[1].OneofWrappers = []any{}
+	file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[9].OneofWrappers = []any{}
+	file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_msgTypes[10].OneofWrappers = []any{
+		(*CurrentPublishedProfileForReview_None)(nil),
+		(*CurrentPublishedProfileForReview_Published)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDesc), len(file_app_center_v1_application_profile_review_query_application_profile_review_query_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

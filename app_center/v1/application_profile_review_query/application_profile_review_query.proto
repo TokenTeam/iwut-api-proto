@@ -2,6 +2,7 @@ syntax = "proto3";
 package app_center.v1.application_profile_review_query;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 import "app_center/v1/application_profile_review/application_profile_review.proto";
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_profile_review_query;applicationprofilereviewquery";
 service ApplicationProfileReviewQueryService {
@@ -21,6 +22,19 @@ message PendingApplicationProfileReviewPage { repeated PendingApplicationProfile
 message ProfileReviewApplicationContext { string application_id = 1; string name = 2; string admin_id = 3; string lifecycle_status = 4; string platform_availability_status = 5; }
 message ProfileRevisionReviewContext { string profile_revision_id = 1; int32 sequence = 2; string review_status = 3; int64 revision = 4; string created_by = 5; }
 message ProfileReviewPolicyContext { string version = 1; repeated string required_check_ids = 2; }
+message PublishedProfileForReview {
+  string profile_revision_id = 1;
+  string display_name = 2;
+  optional string description = 3;
+  optional string icon = 4;
+}
+message CurrentPublishedProfileForReview {
+  // Missing state is not equivalent to an explicitly absent public profile.
+  oneof state {
+    google.protobuf.NullValue none = 1;
+    PublishedProfileForReview published = 2;
+  }
+}
 message ApplicationProfileReviewDetail {
   ProfileReviewApplicationContext application = 1;
   ProfileRevisionReviewContext profile_revision = 2;
@@ -28,4 +42,6 @@ message ApplicationProfileReviewDetail {
   ProfileReviewPolicyContext current_policy = 4;
   ProfileReviewDecisionEligibility decision_eligibility = 5;
   google.protobuf.Timestamp as_of = 6;
+  // Current published pointer and approved content observed in the same snapshot.
+  CurrentPublishedProfileForReview current_published_profile = 7;
 }

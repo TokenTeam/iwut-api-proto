@@ -26,7 +26,17 @@ message PendingApplicationVersionReview {
 message PendingApplicationVersionReviewPage { repeated PendingApplicationVersionReview items = 1; string next_page_token = 2; google.protobuf.Timestamp as_of = 3; }
 message ReviewApplicationContext { string application_id = 1; string name = 2; string admin_id = 3; string lifecycle_status = 4; string platform_availability_status = 5; }
 message ReviewVersionContext { string version_id = 1; int32 sequence = 2; string review_status = 3; int64 revision = 4; string created_by = 5; }
-message ReviewPolicyContext { string version = 1; repeated string required_check_ids = 2; }
+message ReviewCheckDefinition {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+}
+message ReviewPolicyContext {
+  string version = 1;
+  repeated string required_check_ids = 2;
+  // Immutable server-owned plain-text definitions, ordered like required_check_ids.
+  repeated ReviewCheckDefinition required_check_definitions = 3;
+}
 message ApplicationVersionReviewDetail {
   ReviewApplicationContext application = 1;
   ReviewVersionContext version = 2;
