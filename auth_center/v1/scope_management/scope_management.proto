@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package auth_center.v1.scope_management;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/scope_management;scopemanagement";
+
+service ScopeManagementService {
+  rpc GetManagedScopeCatalog(GetManagedScopeCatalogRequest) returns (ManagedScopeCatalog) {
+    option (google.api.http) = { post: "/v1/scope-catalog:get" body: "*" };
+  }
+  rpc ChangeScopeCatalog(ChangeScopeCatalogRequest) returns (ScopeCatalogOperation) {
+    option (google.api.http) = { post: "/v1/scope-catalog:change" body: "*" };
+  }
+  rpc GetScopeCatalogOperation(GetScopeCatalogOperationRequest) returns (ScopeCatalogOperation) {
+    option (google.api.http) = { post: "/v1/scope-catalog/operations:get" body: "*" };
+  }
+}
+
+message GetManagedScopeCatalogRequest {}
+
+message ManagedScopeCatalog {
+  int64 revision = 1;
+  google.protobuf.Timestamp generated_at = 2;
+  string digest = 3;
+  repeated ScopeDefinition scopes = 4;
+}
+
+message ScopeDefinition {
+  string name = 1;
+  string label = 2;
+  string description = 3;
+  string kind = 4;
+  string audience = 5;
+  string profile_field = 6;
+  string profile_value_type = 7;
+  bool enabled = 8;
+}
+
+// Input deliberately excludes the provider-derived profile_value_type.
+message RegisterScopeDefinition {
+  string name = 1;
+  string label = 2;
+  string description = 3;
+  string kind = 4;
+  string audience = 5;
+  string profile_field = 6;
+  optional bool enabled = 7;
+}
+
+message RegisterScope {
+  RegisterScopeDefinition definition = 1;
+  string contract = 2;
+  string provider_evidence = 3;
+}
+
+message CorrectScopeText {
+  string name = 1;
+  string label = 2;
+  string description = 3;
+}
+
+message SetScopeEnabled {
+  string name = 1;
+  optional bool enabled = 2;
+}
+
+message ScopeChange {
+  oneof change {
+    RegisterScope register = 1;
+    CorrectScopeText correct_text = 2;
+    SetScopeEnabled set_enabled = 3;
+  }
+}
+
+message ChangeScopeCatalogRequest {
+  string operation_id = 1;
+  optional int64 expected_revision = 2;
+  string expected_digest = 3;
+  string reason = 4;
+  repeated ScopeChange changes = 5;
+}
+
+message GetScopeCatalogOperationRequest {
+  string operation_id = 1;
+}
+
+message ScopeCatalogOperation {
+  string operation_id = 1;
+  string request_digest = 2;
+  string actor_auth_id = 3;
+  string reason = 4;
+  string outcome = 5;
+  int64 base_revision = 6;
+  int64 result_revision = 7;
+  google.protobuf.Timestamp result_generated_at = 8;
+  string result_digest = 9;
+  google.protobuf.Timestamp occurred_at = 10;
+}
