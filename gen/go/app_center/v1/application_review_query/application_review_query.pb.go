@@ -738,7 +738,7 @@ type ApplicationVersionReviewDetail struct {
 	Application         *ReviewApplicationContext                     `protobuf:"bytes,1,opt,name=application,proto3" json:"application,omitempty"`
 	Version             *ReviewVersionContext                         `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	Review              *application_review.ApplicationReviewResource `protobuf:"bytes,3,opt,name=review,proto3" json:"review,omitempty"`
-	CurrentPolicy       *ReviewPolicyContext                          `protobuf:"bytes,4,opt,name=current_policy,json=currentPolicy,proto3" json:"current_policy,omitempty"`
+	ReviewPolicy        *ReviewPolicyContext                          `protobuf:"bytes,4,opt,name=review_policy,json=reviewPolicy,proto3" json:"review_policy,omitempty"`
 	DecisionEligibility *ReviewDecisionEligibility                    `protobuf:"bytes,5,opt,name=decision_eligibility,json=decisionEligibility,proto3" json:"decision_eligibility,omitempty"`
 	AsOf                *timestamppb.Timestamp                        `protobuf:"bytes,6,opt,name=as_of,json=asOf,proto3" json:"as_of,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -796,9 +796,9 @@ func (x *ApplicationVersionReviewDetail) GetReview() *application_review.Applica
 	return nil
 }
 
-func (x *ApplicationVersionReviewDetail) GetCurrentPolicy() *ReviewPolicyContext {
+func (x *ApplicationVersionReviewDetail) GetReviewPolicy() *ReviewPolicyContext {
 	if x != nil {
-		return x.CurrentPolicy
+		return x.ReviewPolicy
 	}
 	return nil
 }
@@ -874,12 +874,12 @@ const file_app_center_v1_application_review_query_application_review_query_proto
 	"\x13ReviewPolicyContext\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12,\n" +
 	"\x12required_check_ids\x18\x02 \x03(\tR\x10requiredCheckIds\x12{\n" +
-	"\x1arequired_check_definitions\x18\x03 \x03(\v2=.app_center.v1.application_review_query.ReviewCheckDefinitionR\x18requiredCheckDefinitions\"\xbc\x04\n" +
+	"\x1arequired_check_definitions\x18\x03 \x03(\v2=.app_center.v1.application_review_query.ReviewCheckDefinitionR\x18requiredCheckDefinitions\"\xba\x04\n" +
 	"\x1eApplicationVersionReviewDetail\x12b\n" +
 	"\vapplication\x18\x01 \x01(\v2@.app_center.v1.application_review_query.ReviewApplicationContextR\vapplication\x12V\n" +
 	"\aversion\x18\x02 \x01(\v2<.app_center.v1.application_review_query.ReviewVersionContextR\aversion\x12S\n" +
-	"\x06review\x18\x03 \x01(\v2;.app_center.v1.application_review.ApplicationReviewResourceR\x06review\x12b\n" +
-	"\x0ecurrent_policy\x18\x04 \x01(\v2;.app_center.v1.application_review_query.ReviewPolicyContextR\rcurrentPolicy\x12t\n" +
+	"\x06review\x18\x03 \x01(\v2;.app_center.v1.application_review.ApplicationReviewResourceR\x06review\x12`\n" +
+	"\rreview_policy\x18\x04 \x01(\v2;.app_center.v1.application_review_query.ReviewPolicyContextR\freviewPolicy\x12t\n" +
 	"\x14decision_eligibility\x18\x05 \x01(\v2A.app_center.v1.application_review_query.ReviewDecisionEligibilityR\x13decisionEligibility\x12/\n" +
 	"\x05as_of\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf*o\n" +
 	"\x0eReviewConflict\x12\x1f\n" +
@@ -932,7 +932,7 @@ var file_app_center_v1_application_review_query_application_review_query_proto_d
 	7,  // 7: app_center.v1.application_review_query.ApplicationVersionReviewDetail.application:type_name -> app_center.v1.application_review_query.ReviewApplicationContext
 	8,  // 8: app_center.v1.application_review_query.ApplicationVersionReviewDetail.version:type_name -> app_center.v1.application_review_query.ReviewVersionContext
 	13, // 9: app_center.v1.application_review_query.ApplicationVersionReviewDetail.review:type_name -> app_center.v1.application_review.ApplicationReviewResource
-	10, // 10: app_center.v1.application_review_query.ApplicationVersionReviewDetail.current_policy:type_name -> app_center.v1.application_review_query.ReviewPolicyContext
+	10, // 10: app_center.v1.application_review_query.ApplicationVersionReviewDetail.review_policy:type_name -> app_center.v1.application_review_query.ReviewPolicyContext
 	4,  // 11: app_center.v1.application_review_query.ApplicationVersionReviewDetail.decision_eligibility:type_name -> app_center.v1.application_review_query.ReviewDecisionEligibility
 	12, // 12: app_center.v1.application_review_query.ApplicationVersionReviewDetail.as_of:type_name -> google.protobuf.Timestamp
 	1,  // 13: app_center.v1.application_review_query.ApplicationReviewQueryService.ListPendingApplicationVersionReviews:input_type -> app_center.v1.application_review_query.ListPendingApplicationVersionReviewsRequest

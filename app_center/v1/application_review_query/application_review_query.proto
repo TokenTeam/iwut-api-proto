@@ -41,7 +41,7 @@ message ApplicationVersionReviewDetail {
   ReviewApplicationContext application = 1;
   ReviewVersionContext version = 2;
   app_center.v1.application_review.ApplicationReviewResource review = 3;
-  ReviewPolicyContext current_policy = 4;
+  ReviewPolicyContext review_policy = 4;
   ReviewDecisionEligibility decision_eligibility = 5;
   google.protobuf.Timestamp as_of = 6;
 }
