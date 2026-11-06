@@ -19,19 +19,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ApplicationOperationsPermissionService_ManageApplicationOperationsPermission_FullMethodName = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/ManageApplicationOperationsPermission"
-	ApplicationOperationsPermissionService_GetApplicationOperationsPermissions_FullMethodName   = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/GetApplicationOperationsPermissions"
+	ApplicationOperationsPermissionService_ManageApplicationOperationsPermission_FullMethodName  = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/ManageApplicationOperationsPermission"
+	ApplicationOperationsPermissionService_GetApplicationOperationsPermissions_FullMethodName    = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/GetApplicationOperationsPermissions"
+	ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions_FullMethodName = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/GetOwnApplicationOperationsPermissions"
 )
 
 // ApplicationOperationsPermissionServiceClient is the client API for ApplicationOperationsPermissionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Requires a verified Auth-audience user identity and current full platform
-// administrator authority. The operation permissions do not authorize this API.
+// All methods require a verified Auth-audience USER identity. Target Get/Manage
+// additionally require current full platform administrator authority; the exact
+// own-read method does not. App operation permissions never authorize management.
 type ApplicationOperationsPermissionServiceClient interface {
 	ManageApplicationOperationsPermission(ctx context.Context, in *ManageApplicationOperationsPermissionRequest, opts ...grpc.CallOption) (*ApplicationOperationsPermissions, error)
 	GetApplicationOperationsPermissions(ctx context.Context, in *GetApplicationOperationsPermissionsRequest, opts ...grpc.CallOption) (*ApplicationOperationsPermissions, error)
+	// Returns only the caller's current effective permissions in the published
+	// allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+	GetOwnApplicationOperationsPermissions(ctx context.Context, in *GetOwnApplicationOperationsPermissionsRequest, opts ...grpc.CallOption) (*OwnApplicationOperationsPermissions, error)
 }
 
 type applicationOperationsPermissionServiceClient struct {
@@ -62,15 +67,29 @@ func (c *applicationOperationsPermissionServiceClient) GetApplicationOperationsP
 	return out, nil
 }
 
+func (c *applicationOperationsPermissionServiceClient) GetOwnApplicationOperationsPermissions(ctx context.Context, in *GetOwnApplicationOperationsPermissionsRequest, opts ...grpc.CallOption) (*OwnApplicationOperationsPermissions, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OwnApplicationOperationsPermissions)
+	err := c.cc.Invoke(ctx, ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationOperationsPermissionServiceServer is the server API for ApplicationOperationsPermissionService service.
 // All implementations must embed UnimplementedApplicationOperationsPermissionServiceServer
 // for forward compatibility.
 //
-// Requires a verified Auth-audience user identity and current full platform
-// administrator authority. The operation permissions do not authorize this API.
+// All methods require a verified Auth-audience USER identity. Target Get/Manage
+// additionally require current full platform administrator authority; the exact
+// own-read method does not. App operation permissions never authorize management.
 type ApplicationOperationsPermissionServiceServer interface {
 	ManageApplicationOperationsPermission(context.Context, *ManageApplicationOperationsPermissionRequest) (*ApplicationOperationsPermissions, error)
 	GetApplicationOperationsPermissions(context.Context, *GetApplicationOperationsPermissionsRequest) (*ApplicationOperationsPermissions, error)
+	// Returns only the caller's current effective permissions in the published
+	// allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+	GetOwnApplicationOperationsPermissions(context.Context, *GetOwnApplicationOperationsPermissionsRequest) (*OwnApplicationOperationsPermissions, error)
 	mustEmbedUnimplementedApplicationOperationsPermissionServiceServer()
 }
 
@@ -86,6 +105,9 @@ func (UnimplementedApplicationOperationsPermissionServiceServer) ManageApplicati
 }
 func (UnimplementedApplicationOperationsPermissionServiceServer) GetApplicationOperationsPermissions(context.Context, *GetApplicationOperationsPermissionsRequest) (*ApplicationOperationsPermissions, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetApplicationOperationsPermissions not implemented")
+}
+func (UnimplementedApplicationOperationsPermissionServiceServer) GetOwnApplicationOperationsPermissions(context.Context, *GetOwnApplicationOperationsPermissionsRequest) (*OwnApplicationOperationsPermissions, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOwnApplicationOperationsPermissions not implemented")
 }
 func (UnimplementedApplicationOperationsPermissionServiceServer) mustEmbedUnimplementedApplicationOperationsPermissionServiceServer() {
 }
@@ -145,6 +167,24 @@ func _ApplicationOperationsPermissionService_GetApplicationOperationsPermissions
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOwnApplicationOperationsPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationOperationsPermissionServiceServer).GetOwnApplicationOperationsPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationOperationsPermissionServiceServer).GetOwnApplicationOperationsPermissions(ctx, req.(*GetOwnApplicationOperationsPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationOperationsPermissionService_ServiceDesc is the grpc.ServiceDesc for ApplicationOperationsPermissionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -159,6 +199,10 @@ var ApplicationOperationsPermissionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetApplicationOperationsPermissions",
 			Handler:    _ApplicationOperationsPermissionService_GetApplicationOperationsPermissions_Handler,
+		},
+		{
+			MethodName: "GetOwnApplicationOperationsPermissions",
+			Handler:    _ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

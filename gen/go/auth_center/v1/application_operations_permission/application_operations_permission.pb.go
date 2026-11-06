@@ -172,6 +172,105 @@ func (ApplicationOperationsGrantBlocker) EnumDescriptor() ([]byte, []int) {
 	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{2}
 }
 
+// No target, actor or filter input is accepted, including unknown wire fields.
+type GetOwnApplicationOperationsPermissionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOwnApplicationOperationsPermissionsRequest) Reset() {
+	*x = GetOwnApplicationOperationsPermissionsRequest{}
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOwnApplicationOperationsPermissionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOwnApplicationOperationsPermissionsRequest) ProtoMessage() {}
+
+func (x *GetOwnApplicationOperationsPermissionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOwnApplicationOperationsPermissionsRequest.ProtoReflect.Descriptor instead.
+func (*GetOwnApplicationOperationsPermissionsRequest) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{0}
+}
+
+type OwnApplicationOperationsPermissions struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	SubjectAuthId      string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
+	PermissionRevision int64                  `protobuf:"varint,2,opt,name=permission_revision,json=permissionRevision,proto3" json:"permission_revision,omitempty"`
+	// Complete, unique, lexically ordered set within the published allowlist.
+	// HTTP JSON must emit [] for no grants; omission/null is not a successful read.
+	EffectivePermissions []string `protobuf:"bytes,3,rep,name=effective_permissions,json=effectivePermissions,proto3" json:"effective_permissions,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *OwnApplicationOperationsPermissions) Reset() {
+	*x = OwnApplicationOperationsPermissions{}
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OwnApplicationOperationsPermissions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OwnApplicationOperationsPermissions) ProtoMessage() {}
+
+func (x *OwnApplicationOperationsPermissions) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OwnApplicationOperationsPermissions.ProtoReflect.Descriptor instead.
+func (*OwnApplicationOperationsPermissions) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *OwnApplicationOperationsPermissions) GetSubjectAuthId() string {
+	if x != nil {
+		return x.SubjectAuthId
+	}
+	return ""
+}
+
+func (x *OwnApplicationOperationsPermissions) GetPermissionRevision() int64 {
+	if x != nil {
+		return x.PermissionRevision
+	}
+	return 0
+}
+
+func (x *OwnApplicationOperationsPermissions) GetEffectivePermissions() []string {
+	if x != nil {
+		return x.EffectivePermissions
+	}
+	return nil
+}
+
 type ManageApplicationOperationsPermissionRequest struct {
 	state                      protoimpl.MessageState                `protogen:"open.v1"`
 	SubjectAuthId              string                                `protobuf:"bytes,1,opt,name=subject_auth_id,proto3" json:"subject_auth_id,omitempty"`
@@ -185,7 +284,7 @@ type ManageApplicationOperationsPermissionRequest struct {
 
 func (x *ManageApplicationOperationsPermissionRequest) Reset() {
 	*x = ManageApplicationOperationsPermissionRequest{}
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[0]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -197,7 +296,7 @@ func (x *ManageApplicationOperationsPermissionRequest) String() string {
 func (*ManageApplicationOperationsPermissionRequest) ProtoMessage() {}
 
 func (x *ManageApplicationOperationsPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[0]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -210,7 +309,7 @@ func (x *ManageApplicationOperationsPermissionRequest) ProtoReflect() protorefle
 
 // Deprecated: Use ManageApplicationOperationsPermissionRequest.ProtoReflect.Descriptor instead.
 func (*ManageApplicationOperationsPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{0}
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ManageApplicationOperationsPermissionRequest) GetSubjectAuthId() string {
@@ -257,7 +356,7 @@ type GetApplicationOperationsPermissionsRequest struct {
 
 func (x *GetApplicationOperationsPermissionsRequest) Reset() {
 	*x = GetApplicationOperationsPermissionsRequest{}
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[1]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -269,7 +368,7 @@ func (x *GetApplicationOperationsPermissionsRequest) String() string {
 func (*GetApplicationOperationsPermissionsRequest) ProtoMessage() {}
 
 func (x *GetApplicationOperationsPermissionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[1]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -282,7 +381,7 @@ func (x *GetApplicationOperationsPermissionsRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use GetApplicationOperationsPermissionsRequest.ProtoReflect.Descriptor instead.
 func (*GetApplicationOperationsPermissionsRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{1}
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetApplicationOperationsPermissionsRequest) GetSubjectAuthId() string {
@@ -303,7 +402,7 @@ type ApplicationOperationsPermission struct {
 
 func (x *ApplicationOperationsPermission) Reset() {
 	*x = ApplicationOperationsPermission{}
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[2]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -315,7 +414,7 @@ func (x *ApplicationOperationsPermission) String() string {
 func (*ApplicationOperationsPermission) ProtoMessage() {}
 
 func (x *ApplicationOperationsPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[2]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -328,7 +427,7 @@ func (x *ApplicationOperationsPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationOperationsPermission.ProtoReflect.Descriptor instead.
 func (*ApplicationOperationsPermission) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{2}
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ApplicationOperationsPermission) GetPermission() string {
@@ -365,7 +464,7 @@ type ApplicationOperationsPermissions struct {
 
 func (x *ApplicationOperationsPermissions) Reset() {
 	*x = ApplicationOperationsPermissions{}
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[3]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -377,7 +476,7 @@ func (x *ApplicationOperationsPermissions) String() string {
 func (*ApplicationOperationsPermissions) ProtoMessage() {}
 
 func (x *ApplicationOperationsPermissions) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[3]
+	mi := &file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -390,7 +489,7 @@ func (x *ApplicationOperationsPermissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplicationOperationsPermissions.ProtoReflect.Descriptor instead.
 func (*ApplicationOperationsPermissions) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{3}
+	return file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ApplicationOperationsPermissions) GetSubjectAuthId() string {
@@ -432,7 +531,12 @@ var File_auth_center_v1_application_operations_permission_application_operations
 
 const file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDesc = "" +
 	"\n" +
-	"Xauth_center/v1/application_operations_permission/application_operations_permission.proto\x120auth_center.v1.application_operations_permission\x1a\x1cgoogle/api/annotations.proto\"\xe9\x02\n" +
+	"Xauth_center/v1/application_operations_permission/application_operations_permission.proto\x120auth_center.v1.application_operations_permission\x1a\x1cgoogle/api/annotations.proto\"/\n" +
+	"-GetOwnApplicationOperationsPermissionsRequest\"\xb3\x01\n" +
+	"#OwnApplicationOperationsPermissions\x12&\n" +
+	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12/\n" +
+	"\x13permission_revision\x18\x02 \x01(\x03R\x12permissionRevision\x123\n" +
+	"\x15effective_permissions\x18\x03 \x03(\tR\x14effectivePermissions\"\xe9\x02\n" +
 	",ManageApplicationOperationsPermissionRequest\x12(\n" +
 	"\x0fsubject_auth_id\x18\x01 \x01(\tR\x0fsubject_auth_id\x12\x1e\n" +
 	"\n" +
@@ -468,10 +572,11 @@ const file_auth_center_v1_application_operations_permission_application_operatio
 	"0APPLICATION_OPERATIONS_GRANT_BLOCKER_UNSPECIFIED\x10\x00\x129\n" +
 	"5APPLICATION_OPERATIONS_GRANT_BLOCKER_ACCOUNT_DISABLED\x10\x01\x127\n" +
 	"3APPLICATION_OPERATIONS_GRANT_BLOCKER_EMAIL_REQUIRED\x10\x02\x12C\n" +
-	"?APPLICATION_OPERATIONS_GRANT_BLOCKER_EMAIL_RECOVERY_UNAVAILABLE\x10\x032\xfe\x04\n" +
+	"?APPLICATION_OPERATIONS_GRANT_BLOCKER_EMAIL_RECOVERY_UNAVAILABLE\x10\x032\x9a\a\n" +
 	"&ApplicationOperationsPermissionService\x12\xb2\x02\n" +
 	"%ManageApplicationOperationsPermission\x12^.auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest\x1aR.auth_center.v1.application_operations_permission.ApplicationOperationsPermissions\"U\x82\xd3\xe4\x93\x02O:\x01*\x1aJ/v1/users/{subject_auth_id}/application-operation-permissions/{permission}\x12\x9e\x02\n" +
-	"#GetApplicationOperationsPermissions\x12\\.auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest\x1aR.auth_center.v1.application_operations_permission.ApplicationOperationsPermissions\"E\x82\xd3\xe4\x93\x02?\x12=/v1/users/{subject_auth_id}/application-operation-permissionsB}Z{github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_operations_permission;applicationoperationspermissionb\x06proto3"
+	"#GetApplicationOperationsPermissions\x12\\.auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest\x1aR.auth_center.v1.application_operations_permission.ApplicationOperationsPermissions\"E\x82\xd3\xe4\x93\x02?\x12=/v1/users/{subject_auth_id}/application-operation-permissions\x12\x99\x02\n" +
+	"&GetOwnApplicationOperationsPermissions\x12_.auth_center.v1.application_operations_permission.GetOwnApplicationOperationsPermissionsRequest\x1aU.auth_center.v1.application_operations_permission.OwnApplicationOperationsPermissions\"7\x82\xd3\xe4\x93\x021\x12//v1/users/me/application-operation-capabilitiesB}Z{github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_operations_permission;applicationoperationspermissionb\x06proto3"
 
 var (
 	file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDescOnce sync.Once
@@ -486,27 +591,31 @@ func file_auth_center_v1_application_operations_permission_application_operation
 }
 
 var file_auth_center_v1_application_operations_permission_application_operations_permission_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_auth_center_v1_application_operations_permission_application_operations_permission_proto_goTypes = []any{
-	(ApplicationOperationsPermissionAction)(0),           // 0: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionAction
-	(ApplicationOperationsAccountStatus)(0),              // 1: auth_center.v1.application_operations_permission.ApplicationOperationsAccountStatus
-	(ApplicationOperationsGrantBlocker)(0),               // 2: auth_center.v1.application_operations_permission.ApplicationOperationsGrantBlocker
-	(*ManageApplicationOperationsPermissionRequest)(nil), // 3: auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest
-	(*GetApplicationOperationsPermissionsRequest)(nil),   // 4: auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest
-	(*ApplicationOperationsPermission)(nil),              // 5: auth_center.v1.application_operations_permission.ApplicationOperationsPermission
-	(*ApplicationOperationsPermissions)(nil),             // 6: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
+	(ApplicationOperationsPermissionAction)(0),            // 0: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionAction
+	(ApplicationOperationsAccountStatus)(0),               // 1: auth_center.v1.application_operations_permission.ApplicationOperationsAccountStatus
+	(ApplicationOperationsGrantBlocker)(0),                // 2: auth_center.v1.application_operations_permission.ApplicationOperationsGrantBlocker
+	(*GetOwnApplicationOperationsPermissionsRequest)(nil), // 3: auth_center.v1.application_operations_permission.GetOwnApplicationOperationsPermissionsRequest
+	(*OwnApplicationOperationsPermissions)(nil),           // 4: auth_center.v1.application_operations_permission.OwnApplicationOperationsPermissions
+	(*ManageApplicationOperationsPermissionRequest)(nil),  // 5: auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest
+	(*GetApplicationOperationsPermissionsRequest)(nil),    // 6: auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest
+	(*ApplicationOperationsPermission)(nil),               // 7: auth_center.v1.application_operations_permission.ApplicationOperationsPermission
+	(*ApplicationOperationsPermissions)(nil),              // 8: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
 }
 var file_auth_center_v1_application_operations_permission_application_operations_permission_proto_depIdxs = []int32{
 	0, // 0: auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest.action:type_name -> auth_center.v1.application_operations_permission.ApplicationOperationsPermissionAction
 	1, // 1: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions.account_status:type_name -> auth_center.v1.application_operations_permission.ApplicationOperationsAccountStatus
-	5, // 2: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions.permissions:type_name -> auth_center.v1.application_operations_permission.ApplicationOperationsPermission
+	7, // 2: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions.permissions:type_name -> auth_center.v1.application_operations_permission.ApplicationOperationsPermission
 	2, // 3: auth_center.v1.application_operations_permission.ApplicationOperationsPermissions.grant_blockers:type_name -> auth_center.v1.application_operations_permission.ApplicationOperationsGrantBlocker
-	3, // 4: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.ManageApplicationOperationsPermission:input_type -> auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest
-	4, // 5: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetApplicationOperationsPermissions:input_type -> auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest
-	6, // 6: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.ManageApplicationOperationsPermission:output_type -> auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
-	6, // 7: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetApplicationOperationsPermissions:output_type -> auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
+	5, // 4: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.ManageApplicationOperationsPermission:input_type -> auth_center.v1.application_operations_permission.ManageApplicationOperationsPermissionRequest
+	6, // 5: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetApplicationOperationsPermissions:input_type -> auth_center.v1.application_operations_permission.GetApplicationOperationsPermissionsRequest
+	3, // 6: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetOwnApplicationOperationsPermissions:input_type -> auth_center.v1.application_operations_permission.GetOwnApplicationOperationsPermissionsRequest
+	8, // 7: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.ManageApplicationOperationsPermission:output_type -> auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
+	8, // 8: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetApplicationOperationsPermissions:output_type -> auth_center.v1.application_operations_permission.ApplicationOperationsPermissions
+	4, // 9: auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService.GetOwnApplicationOperationsPermissions:output_type -> auth_center.v1.application_operations_permission.OwnApplicationOperationsPermissions
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -519,14 +628,14 @@ func file_auth_center_v1_application_operations_permission_application_operation
 	if File_auth_center_v1_application_operations_permission_application_operations_permission_proto != nil {
 		return
 	}
-	file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[0].OneofWrappers = []any{}
+	file_auth_center_v1_application_operations_permission_application_operations_permission_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDesc), len(file_auth_center_v1_application_operations_permission_application_operations_permission_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

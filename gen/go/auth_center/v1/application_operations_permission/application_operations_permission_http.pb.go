@@ -20,10 +20,14 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationApplicationOperationsPermissionServiceGetApplicationOperationsPermissions = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/GetApplicationOperationsPermissions"
+const OperationApplicationOperationsPermissionServiceGetOwnApplicationOperationsPermissions = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/GetOwnApplicationOperationsPermissions"
 const OperationApplicationOperationsPermissionServiceManageApplicationOperationsPermission = "/auth_center.v1.application_operations_permission.ApplicationOperationsPermissionService/ManageApplicationOperationsPermission"
 
 type ApplicationOperationsPermissionServiceHTTPServer interface {
 	GetApplicationOperationsPermissions(context.Context, *GetApplicationOperationsPermissionsRequest) (*ApplicationOperationsPermissions, error)
+	// GetOwnApplicationOperationsPermissions Returns only the caller's current effective permissions in the published
+	// allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+	GetOwnApplicationOperationsPermissions(context.Context, *GetOwnApplicationOperationsPermissionsRequest) (*OwnApplicationOperationsPermissions, error)
 	ManageApplicationOperationsPermission(context.Context, *ManageApplicationOperationsPermissionRequest) (*ApplicationOperationsPermissions, error)
 }
 
@@ -31,6 +35,7 @@ func RegisterApplicationOperationsPermissionServiceHTTPServer(s *http.Server, sr
 	r := s.Route("/")
 	r.PUT("/v1/users/{subject_auth_id}/application-operation-permissions/{permission}", _ApplicationOperationsPermissionService_ManageApplicationOperationsPermission0_HTTP_Handler(srv))
 	r.GET("/v1/users/{subject_auth_id}/application-operation-permissions", _ApplicationOperationsPermissionService_GetApplicationOperationsPermissions0_HTTP_Handler(srv))
+	r.GET("/v1/users/me/application-operation-capabilities", _ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions0_HTTP_Handler(srv))
 }
 
 func _ApplicationOperationsPermissionService_ManageApplicationOperationsPermission0_HTTP_Handler(srv ApplicationOperationsPermissionServiceHTTPServer) func(ctx http.Context) error {
@@ -80,8 +85,30 @@ func _ApplicationOperationsPermissionService_GetApplicationOperationsPermissions
 	}
 }
 
+func _ApplicationOperationsPermissionService_GetOwnApplicationOperationsPermissions0_HTTP_Handler(srv ApplicationOperationsPermissionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOwnApplicationOperationsPermissionsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationOperationsPermissionServiceGetOwnApplicationOperationsPermissions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOwnApplicationOperationsPermissions(ctx, req.(*GetOwnApplicationOperationsPermissionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OwnApplicationOperationsPermissions)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationOperationsPermissionServiceHTTPClient interface {
 	GetApplicationOperationsPermissions(ctx context.Context, req *GetApplicationOperationsPermissionsRequest, opts ...http.CallOption) (rsp *ApplicationOperationsPermissions, err error)
+	// GetOwnApplicationOperationsPermissions Returns only the caller's current effective permissions in the published
+	// allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+	GetOwnApplicationOperationsPermissions(ctx context.Context, req *GetOwnApplicationOperationsPermissionsRequest, opts ...http.CallOption) (rsp *OwnApplicationOperationsPermissions, err error)
 	ManageApplicationOperationsPermission(ctx context.Context, req *ManageApplicationOperationsPermissionRequest, opts ...http.CallOption) (rsp *ApplicationOperationsPermissions, err error)
 }
 
@@ -98,6 +125,21 @@ func (c *ApplicationOperationsPermissionServiceHTTPClientImpl) GetApplicationOpe
 	pattern := "/v1/users/{subject_auth_id}/application-operation-permissions"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationApplicationOperationsPermissionServiceGetApplicationOperationsPermissions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetOwnApplicationOperationsPermissions Returns only the caller's current effective permissions in the published
+// allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+func (c *ApplicationOperationsPermissionServiceHTTPClientImpl) GetOwnApplicationOperationsPermissions(ctx context.Context, in *GetOwnApplicationOperationsPermissionsRequest, opts ...http.CallOption) (*OwnApplicationOperationsPermissions, error) {
+	var out OwnApplicationOperationsPermissions
+	pattern := "/v1/users/me/application-operation-capabilities"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationOperationsPermissionServiceGetOwnApplicationOperationsPermissions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

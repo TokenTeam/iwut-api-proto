@@ -5,8 +5,9 @@ import "google/api/annotations.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/application_operations_permission;applicationoperationspermission";
 
-// Requires a verified Auth-audience user identity and current full platform
-// administrator authority. The operation permissions do not authorize this API.
+// All methods require a verified Auth-audience USER identity. Target Get/Manage
+// additionally require current full platform administrator authority; the exact
+// own-read method does not. App operation permissions never authorize management.
 service ApplicationOperationsPermissionService {
   rpc ManageApplicationOperationsPermission(ManageApplicationOperationsPermissionRequest) returns (ApplicationOperationsPermissions) {
     option (google.api.http) = {
@@ -17,6 +18,22 @@ service ApplicationOperationsPermissionService {
   rpc GetApplicationOperationsPermissions(GetApplicationOperationsPermissionsRequest) returns (ApplicationOperationsPermissions) {
     option (google.api.http) = {get: "/v1/users/{subject_auth_id}/application-operation-permissions"};
   }
+  // Returns only the caller's current effective permissions in the published
+  // allowlist. Any valid ACTIVE USER can read, including a user with no grants.
+  rpc GetOwnApplicationOperationsPermissions(GetOwnApplicationOperationsPermissionsRequest) returns (OwnApplicationOperationsPermissions) {
+    option (google.api.http) = {get: "/v1/users/me/application-operation-capabilities"};
+  }
+}
+
+// No target, actor or filter input is accepted, including unknown wire fields.
+message GetOwnApplicationOperationsPermissionsRequest {}
+
+message OwnApplicationOperationsPermissions {
+  string subject_auth_id = 1;
+  int64 permission_revision = 2;
+  // Complete, unique, lexically ordered set within the published allowlist.
+  // HTTP JSON must emit [] for no grants; omission/null is not a successful read.
+  repeated string effective_permissions = 3;
 }
 
 enum ApplicationOperationsPermissionAction {
