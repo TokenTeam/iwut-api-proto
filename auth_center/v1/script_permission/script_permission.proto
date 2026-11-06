@@ -1,0 +1,63 @@
+syntax = "proto3";
+package auth_center.v1.script_permission;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/script_permission;scriptpermission";
+
+// Both methods require a verified Auth-audience USER and current full platform
+// administrator authority. Each mutation addresses exactly one script permission.
+service ScriptPermissionService {
+  rpc GetScriptPermissions(GetScriptPermissionsRequest) returns (ScriptPermissions) {
+    option (google.api.http) = {
+      post: "/v1/script-permissions:get"
+      body: "*"
+    };
+  }
+  rpc ManageScriptPermission(ManageScriptPermissionRequest) returns (ScriptPermissions) {
+    option (google.api.http) = {
+      post: "/v1/script-permissions:manage"
+      body: "*"
+    };
+  }
+}
+
+message GetScriptPermissionsRequest {
+  string subject_auth_id = 1;
+}
+
+enum ScriptPermission {
+  SCRIPT_PERMISSION_UNSPECIFIED = 0;
+  SCRIPT_PERMISSION_MAINTAIN = 1;
+  SCRIPT_PERMISSION_REVIEW = 2;
+  SCRIPT_PERMISSION_PUBLISH = 3;
+  SCRIPT_PERMISSION_SUSPEND = 4;
+  SCRIPT_PERMISSION_RESTORE = 5;
+}
+
+enum ScriptPermissionAction {
+  SCRIPT_PERMISSION_ACTION_UNSPECIFIED = 0;
+  SCRIPT_PERMISSION_ACTION_GRANT = 1;
+  SCRIPT_PERMISSION_ACTION_REVOKE = 2;
+}
+
+message ManageScriptPermissionRequest {
+  string subject_auth_id = 1;
+  ScriptPermission permission = 2;
+  ScriptPermissionAction action = 3;
+  optional int64 expected_permission_revision = 4;
+  string reason = 5;
+}
+
+message ScriptPermissionState {
+  ScriptPermission permission = 1;
+  bool granted = 2;
+  bool effective = 3;
+}
+
+message ScriptPermissions {
+  string subject_auth_id = 1;
+  int64 permission_revision = 2;
+  // All five states in ScriptPermission enum order, from one observation.
+  repeated ScriptPermissionState permissions = 3;
+}
