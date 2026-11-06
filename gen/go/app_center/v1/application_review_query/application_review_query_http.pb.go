@@ -19,10 +19,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApplicationReviewQueryServiceGetApplicationReviewScript = "/app_center.v1.application_review_query.ApplicationReviewQueryService/GetApplicationReviewScript"
 const OperationApplicationReviewQueryServiceGetApplicationVersionReview = "/app_center.v1.application_review_query.ApplicationReviewQueryService/GetApplicationVersionReview"
 const OperationApplicationReviewQueryServiceListPendingApplicationVersionReviews = "/app_center.v1.application_review_query.ApplicationReviewQueryService/ListPendingApplicationVersionReviews"
 
 type ApplicationReviewQueryServiceHTTPServer interface {
+	GetApplicationReviewScript(context.Context, *GetApplicationReviewScriptRequest) (*ApplicationReviewScriptDetail, error)
 	GetApplicationVersionReview(context.Context, *GetApplicationVersionReviewRequest) (*ApplicationVersionReviewDetail, error)
 	ListPendingApplicationVersionReviews(context.Context, *ListPendingApplicationVersionReviewsRequest) (*PendingApplicationVersionReviewPage, error)
 }
@@ -31,6 +33,7 @@ func RegisterApplicationReviewQueryServiceHTTPServer(s *http.Server, srv Applica
 	r := s.Route("/")
 	r.POST("/v1/reviews/application-versions:search", _ApplicationReviewQueryService_ListPendingApplicationVersionReviews0_HTTP_Handler(srv))
 	r.GET("/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}", _ApplicationReviewQueryService_GetApplicationVersionReview0_HTTP_Handler(srv))
+	r.GET("/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/scripts/{script_version_id}", _ApplicationReviewQueryService_GetApplicationReviewScript0_HTTP_Handler(srv))
 }
 
 func _ApplicationReviewQueryService_ListPendingApplicationVersionReviews0_HTTP_Handler(srv ApplicationReviewQueryServiceHTTPServer) func(ctx http.Context) error {
@@ -77,7 +80,30 @@ func _ApplicationReviewQueryService_GetApplicationVersionReview0_HTTP_Handler(sr
 	}
 }
 
+func _ApplicationReviewQueryService_GetApplicationReviewScript0_HTTP_Handler(srv ApplicationReviewQueryServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetApplicationReviewScriptRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationReviewQueryServiceGetApplicationReviewScript)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetApplicationReviewScript(ctx, req.(*GetApplicationReviewScriptRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ApplicationReviewScriptDetail)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationReviewQueryServiceHTTPClient interface {
+	GetApplicationReviewScript(ctx context.Context, req *GetApplicationReviewScriptRequest, opts ...http.CallOption) (rsp *ApplicationReviewScriptDetail, err error)
 	GetApplicationVersionReview(ctx context.Context, req *GetApplicationVersionReviewRequest, opts ...http.CallOption) (rsp *ApplicationVersionReviewDetail, err error)
 	ListPendingApplicationVersionReviews(ctx context.Context, req *ListPendingApplicationVersionReviewsRequest, opts ...http.CallOption) (rsp *PendingApplicationVersionReviewPage, err error)
 }
@@ -88,6 +114,19 @@ type ApplicationReviewQueryServiceHTTPClientImpl struct {
 
 func NewApplicationReviewQueryServiceHTTPClient(client *http.Client) ApplicationReviewQueryServiceHTTPClient {
 	return &ApplicationReviewQueryServiceHTTPClientImpl{client}
+}
+
+func (c *ApplicationReviewQueryServiceHTTPClientImpl) GetApplicationReviewScript(ctx context.Context, in *GetApplicationReviewScriptRequest, opts ...http.CallOption) (*ApplicationReviewScriptDetail, error) {
+	var out ApplicationReviewScriptDetail
+	pattern := "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/scripts/{script_version_id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationReviewQueryServiceGetApplicationReviewScript))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApplicationReviewQueryServiceHTTPClientImpl) GetApplicationVersionReview(ctx context.Context, in *GetApplicationVersionReviewRequest, opts ...http.CallOption) (*ApplicationVersionReviewDetail, error) {

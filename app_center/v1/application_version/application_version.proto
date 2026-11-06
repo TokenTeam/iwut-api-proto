@@ -42,6 +42,12 @@ service ApplicationVersion {
       get: "/v1/applications/{application_id}/versions/{version_id}"
     };
   }
+  rpc ListApplicationScriptCandidates(ListApplicationScriptCandidatesRequest)
+      returns (ListApplicationScriptCandidatesResponse) {
+    option (google.api.http) = {
+      get: "/v1/applications/{application_id}/script-candidates"
+    };
+  }
 }
 
 message CreateApplicationVersionRequest {
@@ -56,6 +62,7 @@ message CreateApplicationVersionRequest {
   repeated string required_scopes = 7;
   repeated string optional_scopes = 8;
   OAuthRedirectConfiguration oauth_redirects = 9;
+  ScriptReferences script_references = 10;
 }
 
 message CreateApplicationVersionResponse {
@@ -76,6 +83,7 @@ message CreateApplicationVersionResponse {
   string updated_by = 15;
   google.protobuf.Timestamp updated_at = 16;
   OAuthRedirectConfiguration oauth_redirects = 17;
+  ScriptReferences script_references = 18;
 }
 
 message UpdateApplicationVersionRequest {
@@ -96,6 +104,7 @@ message DraftApplicationVersionReplacement {
   repeated string required_scopes = 6;
   repeated string optional_scopes = 7;
   OAuthRedirectConfiguration oauth_redirects = 8;
+  ScriptReferences script_references = 9;
 }
 
 message UpdateApplicationVersionResponse {
@@ -116,6 +125,7 @@ message UpdateApplicationVersionResponse {
   string updated_by = 15;
   google.protobuf.Timestamp updated_at = 16;
   OAuthRedirectConfiguration oauth_redirects = 17;
+  ScriptReferences script_references = 18;
 }
 
 message AbandonApplicationVersionDraftRequest {
@@ -220,6 +230,7 @@ message OwnedApplicationVersionResource {
   string created_by = 14;
   google.protobuf.Timestamp created_at = 15;
   google.protobuf.Timestamp updated_at = 17;
+  repeated ApplicationScriptDependency script_references = 18;
 }
 
 message OwnedApplicationVersionReviewDecision {
@@ -240,10 +251,49 @@ message OwnedApplicationVersionLatestReview {
   google.protobuf.Timestamp submitted_at = 5;
   optional OwnedApplicationVersionReviewDecision decision = 6;
   optional OwnedApplicationVersionDraftRestoration draft_restoration = 7;
+  repeated ApplicationScriptDependency script_dependencies = 8;
 }
 
 message OwnedApplicationVersionDetail {
   OwnedApplicationVersionResource version = 1;
   optional OwnedApplicationVersionLatestReview latest_review = 2;
   google.protobuf.Timestamp as_of = 3;
+}
+
+// Commands require this message even if items is empty.
+message ScriptReferences {
+  repeated ScriptReference items = 1;
+}
+
+message ScriptReference {
+  string script_resource_id = 1;
+  string script_version_id = 2;
+}
+
+message ApplicationScriptDependency {
+  ScriptReference reference = 1;
+  string format = 2;
+  string digest = 3;
+  string state = 4;
+  string script_review_id = 5;
+  string script_decision_id = 6;
+  bool needs_replacement = 7;
+}
+
+message ListApplicationScriptCandidatesRequest {
+  string application_id = 1;
+  optional int32 limit = 2;
+  string cursor = 3;
+}
+
+message ApplicationScriptCandidate {
+  ApplicationScriptDependency dependency = 1;
+  string resource_name = 2;
+  string resource_purpose = 3;
+  string version_label = 4;
+}
+
+message ListApplicationScriptCandidatesResponse {
+  repeated ApplicationScriptCandidate items = 1;
+  string next_cursor = 2;
 }

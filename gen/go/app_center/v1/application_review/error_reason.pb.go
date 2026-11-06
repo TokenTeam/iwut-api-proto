@@ -57,6 +57,8 @@ const (
 	ErrorReason_ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE              ErrorReason = 30
 	ErrorReason_ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE              ErrorReason = 31
 	ErrorReason_ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION      ErrorReason = 32
+	ErrorReason_ERROR_REASON_SCRIPT_DEPENDENCY_PENDING                 ErrorReason = 33
+	ErrorReason_ERROR_REASON_SCRIPT_DEPENDENCY_REJECTED                ErrorReason = 34
 )
 
 // Enum value maps for ErrorReason.
@@ -95,6 +97,8 @@ var (
 		30: "ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE",
 		31: "ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE",
 		32: "ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION",
+		33: "ERROR_REASON_SCRIPT_DEPENDENCY_PENDING",
+		34: "ERROR_REASON_SCRIPT_DEPENDENCY_REJECTED",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                               0,
@@ -130,6 +134,8 @@ var (
 		"ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE":              30,
 		"ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE":              31,
 		"ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION":      32,
+		"ERROR_REASON_SCRIPT_DEPENDENCY_PENDING":                 33,
+		"ERROR_REASON_SCRIPT_DEPENDENCY_REJECTED":                34,
 	}
 )
 
@@ -164,7 +170,7 @@ var File_app_center_v1_application_review_error_reason_proto protoreflect.FileDe
 
 const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\xeb\f\n" +
+	"3app_center/v1/application_review/error_reason.proto\x12 app_center.v1.application_review*\xc4\r\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -199,7 +205,9 @@ const file_app_center_v1_application_review_error_reason_proto_rawDesc = "" +
 	".ERROR_REASON_INVALID_APPLICATION_REVIEW_REASON\x10\x1d\x12-\n" +
 	")ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE\x10\x1e\x12-\n" +
 	")ERROR_REASON_SYSTEM_PRINCIPAL_UNAVAILABLE\x10\x1f\x125\n" +
-	"1ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION\x10 B_Z]github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
+	"1ERROR_REASON_INVALID_OAUTH_REDIRECT_CONFIGURATION\x10 \x12*\n" +
+	"&ERROR_REASON_SCRIPT_DEPENDENCY_PENDING\x10!\x12+\n" +
+	"'ERROR_REASON_SCRIPT_DEPENDENCY_REJECTED\x10\"B_Z]github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review;applicationreviewb\x06proto3"
 
 var (
 	file_app_center_v1_application_review_error_reason_proto_rawDescOnce sync.Once

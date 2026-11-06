@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ApplicationReviewQueryService_ListPendingApplicationVersionReviews_FullMethodName = "/app_center.v1.application_review_query.ApplicationReviewQueryService/ListPendingApplicationVersionReviews"
 	ApplicationReviewQueryService_GetApplicationVersionReview_FullMethodName          = "/app_center.v1.application_review_query.ApplicationReviewQueryService/GetApplicationVersionReview"
+	ApplicationReviewQueryService_GetApplicationReviewScript_FullMethodName           = "/app_center.v1.application_review_query.ApplicationReviewQueryService/GetApplicationReviewScript"
 )
 
 // ApplicationReviewQueryServiceClient is the client API for ApplicationReviewQueryService service.
@@ -29,6 +30,7 @@ const (
 type ApplicationReviewQueryServiceClient interface {
 	ListPendingApplicationVersionReviews(ctx context.Context, in *ListPendingApplicationVersionReviewsRequest, opts ...grpc.CallOption) (*PendingApplicationVersionReviewPage, error)
 	GetApplicationVersionReview(ctx context.Context, in *GetApplicationVersionReviewRequest, opts ...grpc.CallOption) (*ApplicationVersionReviewDetail, error)
+	GetApplicationReviewScript(ctx context.Context, in *GetApplicationReviewScriptRequest, opts ...grpc.CallOption) (*ApplicationReviewScriptDetail, error)
 }
 
 type applicationReviewQueryServiceClient struct {
@@ -59,12 +61,23 @@ func (c *applicationReviewQueryServiceClient) GetApplicationVersionReview(ctx co
 	return out, nil
 }
 
+func (c *applicationReviewQueryServiceClient) GetApplicationReviewScript(ctx context.Context, in *GetApplicationReviewScriptRequest, opts ...grpc.CallOption) (*ApplicationReviewScriptDetail, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplicationReviewScriptDetail)
+	err := c.cc.Invoke(ctx, ApplicationReviewQueryService_GetApplicationReviewScript_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApplicationReviewQueryServiceServer is the server API for ApplicationReviewQueryService service.
 // All implementations must embed UnimplementedApplicationReviewQueryServiceServer
 // for forward compatibility.
 type ApplicationReviewQueryServiceServer interface {
 	ListPendingApplicationVersionReviews(context.Context, *ListPendingApplicationVersionReviewsRequest) (*PendingApplicationVersionReviewPage, error)
 	GetApplicationVersionReview(context.Context, *GetApplicationVersionReviewRequest) (*ApplicationVersionReviewDetail, error)
+	GetApplicationReviewScript(context.Context, *GetApplicationReviewScriptRequest) (*ApplicationReviewScriptDetail, error)
 	mustEmbedUnimplementedApplicationReviewQueryServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedApplicationReviewQueryServiceServer) ListPendingApplicationVe
 }
 func (UnimplementedApplicationReviewQueryServiceServer) GetApplicationVersionReview(context.Context, *GetApplicationVersionReviewRequest) (*ApplicationVersionReviewDetail, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetApplicationVersionReview not implemented")
+}
+func (UnimplementedApplicationReviewQueryServiceServer) GetApplicationReviewScript(context.Context, *GetApplicationReviewScriptRequest) (*ApplicationReviewScriptDetail, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApplicationReviewScript not implemented")
 }
 func (UnimplementedApplicationReviewQueryServiceServer) mustEmbedUnimplementedApplicationReviewQueryServiceServer() {
 }
@@ -139,6 +155,24 @@ func _ApplicationReviewQueryService_GetApplicationVersionReview_Handler(srv inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApplicationReviewQueryService_GetApplicationReviewScript_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApplicationReviewScriptRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationReviewQueryServiceServer).GetApplicationReviewScript(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationReviewQueryService_GetApplicationReviewScript_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationReviewQueryServiceServer).GetApplicationReviewScript(ctx, req.(*GetApplicationReviewScriptRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApplicationReviewQueryService_ServiceDesc is the grpc.ServiceDesc for ApplicationReviewQueryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +187,10 @@ var ApplicationReviewQueryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetApplicationVersionReview",
 			Handler:    _ApplicationReviewQueryService_GetApplicationVersionReview_Handler,
+		},
+		{
+			MethodName: "GetApplicationReviewScript",
+			Handler:    _ApplicationReviewQueryService_GetApplicationReviewScript_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

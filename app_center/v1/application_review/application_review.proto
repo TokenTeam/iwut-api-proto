@@ -103,6 +103,13 @@ message ApplicationReviewDecision {
 message ApplicationReviewApprovalValidation {
   int64 scope_catalog_revision = 1;
   string preflight_policy_version = 2;
+  repeated ScriptApprovalFact script_approvals = 3;
+}
+
+message ScriptApprovalFact {
+  string script_version_id = 1;
+  string digest = 2;
+  string script_decision_id = 3;
 }
 
 message DecidedApplicationVersion {
@@ -156,6 +163,7 @@ message ApplicationVersionReviewSnapshot {
   repeated string required_scopes = 6;
   repeated string optional_scopes = 7;
   app_center.v1.application_version.OAuthRedirectConfiguration oauth_redirects = 8;
+  repeated app_center.v1.application_version.ApplicationScriptDependency script_dependencies = 9;
 }
 
 message SubmittedApplicationVersion {

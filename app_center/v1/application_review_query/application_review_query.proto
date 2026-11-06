@@ -3,6 +3,8 @@ package app_center.v1.application_review_query;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "app_center/v1/application_review/application_review.proto";
+import "app_center/v1/application_version/application_version.proto";
+import "app_center/v1/script_query/script_query.proto";
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_review_query;applicationreviewquery";
 
 service ApplicationReviewQueryService {
@@ -11,6 +13,9 @@ service ApplicationReviewQueryService {
   }
   rpc GetApplicationVersionReview(GetApplicationVersionReviewRequest) returns (ApplicationVersionReviewDetail) {
     option (google.api.http) = {get: "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}"};
+  }
+  rpc GetApplicationReviewScript(GetApplicationReviewScriptRequest) returns (ApplicationReviewScriptDetail) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/versions/{version_id}/reviews/{review_id}/scripts/{script_version_id}"};
   }
 }
 message ListPendingApplicationVersionReviewsRequest { ListPendingApplicationVersionReviewsQuery query = 1; }
@@ -44,4 +49,18 @@ message ApplicationVersionReviewDetail {
   ReviewPolicyContext review_policy = 4;
   ReviewDecisionEligibility decision_eligibility = 5;
   google.protobuf.Timestamp as_of = 6;
+}
+
+message GetApplicationReviewScriptRequest {
+  string application_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  string script_version_id = 4;
+}
+
+message ApplicationReviewScriptDetail {
+  app_center.v1.application_version.ApplicationScriptDependency dependency = 1;
+  string content_text = 2;
+  string policy_version = 3;
+  repeated app_center.v1.script_query.ScriptReviewCheck checks = 4;
 }

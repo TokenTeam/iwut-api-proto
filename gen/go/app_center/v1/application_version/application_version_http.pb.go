@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationApplicationVersionAbandonApplicationVersionDraft = "/app_center.v1.application_version.ApplicationVersion/AbandonApplicationVersionDraft"
 const OperationApplicationVersionCreateApplicationVersion = "/app_center.v1.application_version.ApplicationVersion/CreateApplicationVersion"
 const OperationApplicationVersionGetApplicationVersion = "/app_center.v1.application_version.ApplicationVersion/GetApplicationVersion"
+const OperationApplicationVersionListApplicationScriptCandidates = "/app_center.v1.application_version.ApplicationVersion/ListApplicationScriptCandidates"
 const OperationApplicationVersionListApplicationVersions = "/app_center.v1.application_version.ApplicationVersion/ListApplicationVersions"
 const OperationApplicationVersionUpdateApplicationVersion = "/app_center.v1.application_version.ApplicationVersion/UpdateApplicationVersion"
 
@@ -29,6 +30,7 @@ type ApplicationVersionHTTPServer interface {
 	AbandonApplicationVersionDraft(context.Context, *AbandonApplicationVersionDraftRequest) (*AbandonApplicationVersionDraftResponse, error)
 	CreateApplicationVersion(context.Context, *CreateApplicationVersionRequest) (*CreateApplicationVersionResponse, error)
 	GetApplicationVersion(context.Context, *GetApplicationVersionRequest) (*OwnedApplicationVersionDetail, error)
+	ListApplicationScriptCandidates(context.Context, *ListApplicationScriptCandidatesRequest) (*ListApplicationScriptCandidatesResponse, error)
 	ListApplicationVersions(context.Context, *ListApplicationVersionsRequest) (*OwnedApplicationVersionPage, error)
 	UpdateApplicationVersion(context.Context, *UpdateApplicationVersionRequest) (*UpdateApplicationVersionResponse, error)
 }
@@ -40,6 +42,7 @@ func RegisterApplicationVersionHTTPServer(s *http.Server, srv ApplicationVersion
 	r.DELETE("/v1/applications/{application_id}/versions/{version_id}", _ApplicationVersion_AbandonApplicationVersionDraft0_HTTP_Handler(srv))
 	r.POST("/v1/applications/{application_id}/versions:search", _ApplicationVersion_ListApplicationVersions0_HTTP_Handler(srv))
 	r.GET("/v1/applications/{application_id}/versions/{version_id}", _ApplicationVersion_GetApplicationVersion0_HTTP_Handler(srv))
+	r.GET("/v1/applications/{application_id}/script-candidates", _ApplicationVersion_ListApplicationScriptCandidates0_HTTP_Handler(srv))
 }
 
 func _ApplicationVersion_CreateApplicationVersion0_HTTP_Handler(srv ApplicationVersionHTTPServer) func(ctx http.Context) error {
@@ -161,10 +164,33 @@ func _ApplicationVersion_GetApplicationVersion0_HTTP_Handler(srv ApplicationVers
 	}
 }
 
+func _ApplicationVersion_ListApplicationScriptCandidates0_HTTP_Handler(srv ApplicationVersionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListApplicationScriptCandidatesRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationVersionListApplicationScriptCandidates)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListApplicationScriptCandidates(ctx, req.(*ListApplicationScriptCandidatesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListApplicationScriptCandidatesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApplicationVersionHTTPClient interface {
 	AbandonApplicationVersionDraft(ctx context.Context, req *AbandonApplicationVersionDraftRequest, opts ...http.CallOption) (rsp *AbandonApplicationVersionDraftResponse, err error)
 	CreateApplicationVersion(ctx context.Context, req *CreateApplicationVersionRequest, opts ...http.CallOption) (rsp *CreateApplicationVersionResponse, err error)
 	GetApplicationVersion(ctx context.Context, req *GetApplicationVersionRequest, opts ...http.CallOption) (rsp *OwnedApplicationVersionDetail, err error)
+	ListApplicationScriptCandidates(ctx context.Context, req *ListApplicationScriptCandidatesRequest, opts ...http.CallOption) (rsp *ListApplicationScriptCandidatesResponse, err error)
 	ListApplicationVersions(ctx context.Context, req *ListApplicationVersionsRequest, opts ...http.CallOption) (rsp *OwnedApplicationVersionPage, err error)
 	UpdateApplicationVersion(ctx context.Context, req *UpdateApplicationVersionRequest, opts ...http.CallOption) (rsp *UpdateApplicationVersionResponse, err error)
 }
@@ -208,6 +234,19 @@ func (c *ApplicationVersionHTTPClientImpl) GetApplicationVersion(ctx context.Con
 	pattern := "/v1/applications/{application_id}/versions/{version_id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationApplicationVersionGetApplicationVersion))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationVersionHTTPClientImpl) ListApplicationScriptCandidates(ctx context.Context, in *ListApplicationScriptCandidatesRequest, opts ...http.CallOption) (*ListApplicationScriptCandidatesResponse, error) {
+	var out ListApplicationScriptCandidatesResponse
+	pattern := "/v1/applications/{application_id}/script-candidates"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApplicationVersionListApplicationScriptCandidates))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

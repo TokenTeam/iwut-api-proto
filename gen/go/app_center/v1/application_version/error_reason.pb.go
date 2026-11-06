@@ -56,6 +56,7 @@ const (
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED        ErrorReason = 29
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT ErrorReason = 30
 	ErrorReason_ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE        ErrorReason = 31
+	ErrorReason_ERROR_REASON_INVALID_SCRIPT_REFERENCES                          ErrorReason = 32
 )
 
 // Enum value maps for ErrorReason.
@@ -93,6 +94,7 @@ var (
 		29: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED",
 		30: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT",
 		31: "ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE",
+		32: "ERROR_REASON_INVALID_SCRIPT_REFERENCES",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                                        0,
@@ -127,6 +129,7 @@ var (
 		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED":        29,
 		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT": 30,
 		"ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE":        31,
+		"ERROR_REASON_INVALID_SCRIPT_REFERENCES":                          32,
 	}
 )
 
@@ -161,7 +164,7 @@ var File_app_center_v1_application_version_error_reason_proto protoreflect.FileD
 
 const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\xc1\f\n" +
+	"4app_center/v1/application_version/error_reason.proto\x12!app_center.v1.application_version*\xed\f\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_INVALID_APPLICATION_ID\x10\x01\x12&\n" +
@@ -195,7 +198,8 @@ const file_app_center_v1_application_version_error_reason_proto_rawDesc = "" +
 	"0ERROR_REASON_APPLICATION_VERSION_NOT_ABANDONABLE\x10\x1c\x12<\n" +
 	"8ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_NOT_ALLOWED\x10\x1d\x12C\n" +
 	"?ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_STATE_INCONSISTENT\x10\x1e\x12<\n" +
-	"8ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE\x10\x1fBaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
+	"8ERROR_REASON_APPLICATION_VERSION_ABANDONMENT_UNAVAILABLE\x10\x1f\x12*\n" +
+	"&ERROR_REASON_INVALID_SCRIPT_REFERENCES\x10 BaZ_github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_version;applicationversionb\x06proto3"
 
 var (
 	file_app_center_v1_application_version_error_reason_proto_rawDescOnce sync.Once
