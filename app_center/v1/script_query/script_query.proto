@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+package app_center.v1.script_query;
+
+import "app_center/v1/script_resource/script_resource.proto";
+import "app_center/v1/script_version/script_version.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_query;scriptquery";
+
+// Platform script management views. The service applies the trusted App USER
+// identity's exact script permissions before looking up any target.
+service ScriptQueryService {
+  rpc ListScriptResources(ListScriptResourcesRequest) returns (ListScriptResourcesResponse) {
+    option (google.api.http) = { get: "/v1/script-resources" };
+  }
+  rpc GetScriptResource(GetScriptResourceRequest) returns (app_center.v1.script_resource.ScriptResource) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}" };
+  }
+  rpc ListScriptVersions(ListScriptVersionsRequest) returns (ListScriptVersionsResponse) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}/versions" };
+  }
+  rpc GetScriptVersion(GetScriptVersionRequest) returns (GetScriptVersionResponse) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}/versions/{version_id}" };
+  }
+  rpc ListPendingScriptReviews(ListPendingScriptReviewsRequest) returns (ListPendingScriptReviewsResponse) {
+    option (google.api.http) = { get: "/v1/script-reviews/pending" };
+  }
+  rpc GetScriptReview(GetScriptReviewRequest) returns (GetScriptReviewResponse) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}/versions/{version_id}/reviews/{review_id}" };
+  }
+}
+
+message ListScriptResourcesRequest {
+  optional int32 limit = 1;
+  string cursor = 2;
+}
+
+message ListScriptResourcesResponse {
+  repeated app_center.v1.script_resource.ScriptResource items = 1;
+  string next_cursor = 2;
+}
+
+message GetScriptResourceRequest {
+  string resource_id = 1;
+}
+
+message ListScriptVersionsRequest {
+  string resource_id = 1;
+  optional int32 limit = 2;
+  string cursor = 3;
+  app_center.v1.script_version.ScriptVersionState state = 4;
+}
+
+message ListScriptVersionsResponse {
+  repeated ScriptVersionSummary items = 1;
+  string next_cursor = 2;
+}
+
+message GetScriptVersionRequest {
+  string resource_id = 1;
+  string version_id = 2;
+}
+
+message ScriptVersionSummary {
+  string resource_id = 1;
+  string version_id = 2;
+  string version_label = 3;
+  string content_format = 4;
+  string digest = 5;
+  app_center.v1.script_version.ScriptVersionState state = 6;
+  int64 revision = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message GetScriptVersionResponse {
+  ScriptVersionSummary version = 1;
+  optional string content_text = 2;
+  string review_id = 3;
+}
+
+message ListPendingScriptReviewsRequest {
+  string resource_id = 1;
+  optional int32 limit = 2;
+  string cursor = 3;
+}
+
+message ListPendingScriptReviewsResponse {
+  repeated PendingScriptReviewSummary items = 1;
+  string next_cursor = 2;
+}
+
+message PendingScriptReviewSummary {
+  string resource_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  string version_label = 4;
+  string digest = 5;
+  google.protobuf.Timestamp submitted_at = 6;
+}
+
+message GetScriptReviewRequest {
+  string resource_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+}
+
+enum ScriptReviewStatus {
+  SCRIPT_REVIEW_STATUS_UNSPECIFIED = 0;
+  SCRIPT_REVIEW_STATUS_PENDING = 1;
+}
+
+enum ScriptDecisionConflict {
+  SCRIPT_DECISION_CONFLICT_UNSPECIFIED = 0;
+  SCRIPT_DECISION_CONFLICT_VERSION_CREATOR = 1;
+  SCRIPT_DECISION_CONFLICT_CONTENT_EDITOR = 2;
+  SCRIPT_DECISION_CONFLICT_REVIEW_SUBMITTER = 3;
+}
+
+message ScriptReviewCheck {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool mandatory = 4;
+}
+
+message GetScriptReviewResponse {
+  PendingScriptReviewSummary submission = 1;
+  ScriptReviewStatus status = 2;
+  ScriptVersionSummary version = 3;
+  string content_text = 4;
+  int64 source_revision = 5;
+  string resource_name = 6;
+  string resource_purpose = 7;
+  int64 resource_revision = 8;
+  string policy_version = 9;
+  repeated ScriptReviewCheck checks = 10;
+  bool can_decide = 11;
+  repeated ScriptDecisionConflict conflicts = 12;
+}
