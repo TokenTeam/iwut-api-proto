@@ -1,0 +1,47 @@
+syntax = "proto3";
+package auth_center.v1.script_maintainer_permission;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/script_maintainer_permission;scriptmaintainerpermission";
+
+// Both methods require a verified Auth-audience USER and current full platform
+// administrator authority. They address only app.script.maintain.
+service ScriptMaintainerPermissionService {
+  rpc GetScriptMaintainerPermission(GetScriptMaintainerPermissionRequest) returns (ScriptMaintainerPermission) {
+    option (google.api.http) = {
+      post: "/v1/script-maintainer-permissions:get"
+      body: "*"
+    };
+  }
+  rpc ManageScriptMaintainerPermission(ManageScriptMaintainerPermissionRequest) returns (ScriptMaintainerPermission) {
+    option (google.api.http) = {
+      post: "/v1/script-maintainer-permissions:manage"
+      body: "*"
+    };
+  }
+}
+
+message GetScriptMaintainerPermissionRequest {
+  string subject_auth_id = 1;
+}
+
+enum ScriptMaintainerPermissionAction {
+  SCRIPT_MAINTAINER_PERMISSION_ACTION_UNSPECIFIED = 0;
+  SCRIPT_MAINTAINER_PERMISSION_ACTION_GRANT = 1;
+  SCRIPT_MAINTAINER_PERMISSION_ACTION_REVOKE = 2;
+}
+
+message ManageScriptMaintainerPermissionRequest {
+  string subject_auth_id = 1;
+  ScriptMaintainerPermissionAction action = 2;
+  optional int64 expected_permission_revision = 3;
+  string reason = 4;
+}
+
+message ScriptMaintainerPermission {
+  string subject_auth_id = 1;
+  bool granted = 2;
+  bool effective = 3;
+  int64 permission_revision = 4;
+}

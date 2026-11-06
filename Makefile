@@ -44,6 +44,7 @@ PROTO_FILES := \
 	auth_center/v1/campus_certification/campus_certification.proto \
 	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/script_maintainer_permission/script_maintainer_permission.proto \
 	auth_center/v1/academic_year_policy/academic_year_policy.proto \
 	auth_center/v1/scope_management/scope_management.proto \
 	app_center/v1/application_operations/application_operations.proto \
@@ -131,6 +132,7 @@ HTTP_PROTO_FILES := \
 	auth_center/v1/campus_certification/campus_certification.proto \
 	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
+	auth_center/v1/script_maintainer_permission/script_maintainer_permission.proto \
 	auth_center/v1/academic_year_policy/academic_year_policy.proto \
 	auth_center/v1/scope_management/scope_management.proto \
 	app_center/v1/application_operations/application_operations.proto \
@@ -198,6 +200,7 @@ GENERATED_DIRS := \
 	auth_center/v1/campus_certification \
 	auth_center/v1/application_user_storage \
 	auth_center/v1/application_operations_permission \
+	auth_center/v1/script_maintainer_permission \
 	auth_center/v1/academic_year_policy \
 	auth_center/v1/scope_management \
 	app_center/v1/application_operations \
