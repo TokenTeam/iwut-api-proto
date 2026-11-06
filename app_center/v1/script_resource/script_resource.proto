@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package app_center.v1.script_resource;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource;scriptresource";
+
+// Management operations for platform-owned script metadata. Both methods
+// require the exact app.script.maintain permission on a trusted App USER JWS.
+service ScriptResourceService {
+  rpc CreateScriptResource(CreateScriptResourceRequest) returns (ScriptResource) {
+    option (google.api.http) = {
+      post: "/v1/script-resources"
+      body: "*"
+    };
+  }
+
+  rpc ReplaceScriptResourceMetadata(ReplaceScriptResourceMetadataRequest) returns (ScriptResource) {
+    option (google.api.http) = {
+      put: "/v1/script-resources/{resource_id}/metadata"
+      body: "command"
+    };
+  }
+}
+
+message CreateScriptResourceRequest {
+  string name = 1;
+  string purpose = 2;
+}
+
+message ReplaceScriptResourceMetadataRequest {
+  string resource_id = 1;
+  ReplaceScriptResourceMetadataCommand command = 2;
+}
+
+message ReplaceScriptResourceMetadataCommand {
+  int64 expected_revision = 1;
+  string name = 2;
+  string purpose = 3;
+}
+
+message ScriptResource {
+  string resource_id = 1;
+  string name = 2;
+  string purpose = 3;
+  int64 revision = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}

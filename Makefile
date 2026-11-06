@@ -21,6 +21,10 @@ THIRD_PARTY := third_party
 GEN_OUT := gen/go
 
 PROTO_FILES := \
+	app_center/v1/script_version/script_version.proto \
+	app_center/v1/script_version/error_reason.proto \
+	app_center/v1/script_resource/script_resource.proto \
+	app_center/v1/script_resource/error_reason.proto \
 	app_center/v1/test_application_catalog/test_application_catalog.proto \
 	app_center/v1/test_application_catalog/error_reason.proto \
 	app_center/v1/tester_management/tester_management.proto \
@@ -104,6 +108,10 @@ PROTO_FILES := \
 	auth_center/v1/system_principal/error_reason.proto
 
 HTTP_PROTO_FILES := \
+	app_center/v1/script_version/script_version.proto \
+	app_center/v1/script_version/error_reason.proto \
+	app_center/v1/script_resource/script_resource.proto \
+	app_center/v1/script_resource/error_reason.proto \
 	app_center/v1/test_application_catalog/test_application_catalog.proto \
 	app_center/v1/test_application_catalog/error_reason.proto \
 	app_center/v1/tester_management/tester_management.proto \
@@ -176,6 +184,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_version/error_reason.proto
 
 GENERATED_DIRS := \
+	app_center/v1/script_version \
+	app_center/v1/script_resource \
 	app_center/v1/tester_management \
 	app_center/v1/application_archival \
 	app_center/v1/application_management \
