@@ -21,16 +21,18 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ScriptVersionService_CreateScriptVersionDraft_FullMethodName  = "/app_center.v1.script_version.ScriptVersionService/CreateScriptVersionDraft"
 	ScriptVersionService_ReplaceScriptVersionDraft_FullMethodName = "/app_center.v1.script_version.ScriptVersionService/ReplaceScriptVersionDraft"
+	ScriptVersionService_SubmitScriptVersionReview_FullMethodName = "/app_center.v1.script_version.ScriptVersionService/SubmitScriptVersionReview"
 )
 
 // ScriptVersionServiceClient is the client API for ScriptVersionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Both commands require app.script.maintain in a trusted App USER identity.
+// The write commands require app.script.maintain in a trusted App USER identity.
 type ScriptVersionServiceClient interface {
 	CreateScriptVersionDraft(ctx context.Context, in *CreateScriptVersionDraftRequest, opts ...grpc.CallOption) (*ScriptVersion, error)
 	ReplaceScriptVersionDraft(ctx context.Context, in *ReplaceScriptVersionDraftRequest, opts ...grpc.CallOption) (*ScriptVersion, error)
+	SubmitScriptVersionReview(ctx context.Context, in *SubmitScriptVersionReviewRequest, opts ...grpc.CallOption) (*ScriptVersionReviewSubmission, error)
 }
 
 type scriptVersionServiceClient struct {
@@ -61,14 +63,25 @@ func (c *scriptVersionServiceClient) ReplaceScriptVersionDraft(ctx context.Conte
 	return out, nil
 }
 
+func (c *scriptVersionServiceClient) SubmitScriptVersionReview(ctx context.Context, in *SubmitScriptVersionReviewRequest, opts ...grpc.CallOption) (*ScriptVersionReviewSubmission, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ScriptVersionReviewSubmission)
+	err := c.cc.Invoke(ctx, ScriptVersionService_SubmitScriptVersionReview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ScriptVersionServiceServer is the server API for ScriptVersionService service.
 // All implementations must embed UnimplementedScriptVersionServiceServer
 // for forward compatibility.
 //
-// Both commands require app.script.maintain in a trusted App USER identity.
+// The write commands require app.script.maintain in a trusted App USER identity.
 type ScriptVersionServiceServer interface {
 	CreateScriptVersionDraft(context.Context, *CreateScriptVersionDraftRequest) (*ScriptVersion, error)
 	ReplaceScriptVersionDraft(context.Context, *ReplaceScriptVersionDraftRequest) (*ScriptVersion, error)
+	SubmitScriptVersionReview(context.Context, *SubmitScriptVersionReviewRequest) (*ScriptVersionReviewSubmission, error)
 	mustEmbedUnimplementedScriptVersionServiceServer()
 }
 
@@ -84,6 +97,9 @@ func (UnimplementedScriptVersionServiceServer) CreateScriptVersionDraft(context.
 }
 func (UnimplementedScriptVersionServiceServer) ReplaceScriptVersionDraft(context.Context, *ReplaceScriptVersionDraftRequest) (*ScriptVersion, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReplaceScriptVersionDraft not implemented")
+}
+func (UnimplementedScriptVersionServiceServer) SubmitScriptVersionReview(context.Context, *SubmitScriptVersionReviewRequest) (*ScriptVersionReviewSubmission, error) {
+	return nil, status.Error(codes.Unimplemented, "method SubmitScriptVersionReview not implemented")
 }
 func (UnimplementedScriptVersionServiceServer) mustEmbedUnimplementedScriptVersionServiceServer() {}
 func (UnimplementedScriptVersionServiceServer) testEmbeddedByValue()                              {}
@@ -142,6 +158,24 @@ func _ScriptVersionService_ReplaceScriptVersionDraft_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ScriptVersionService_SubmitScriptVersionReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitScriptVersionReviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScriptVersionServiceServer).SubmitScriptVersionReview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScriptVersionService_SubmitScriptVersionReview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScriptVersionServiceServer).SubmitScriptVersionReview(ctx, req.(*SubmitScriptVersionReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ScriptVersionService_ServiceDesc is the grpc.ServiceDesc for ScriptVersionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +190,10 @@ var ScriptVersionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReplaceScriptVersionDraft",
 			Handler:    _ScriptVersionService_ReplaceScriptVersionDraft_Handler,
+		},
+		{
+			MethodName: "SubmitScriptVersionReview",
+			Handler:    _ScriptVersionService_SubmitScriptVersionReview_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

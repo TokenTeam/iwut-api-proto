@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversion";
 
-// Both commands require app.script.maintain in a trusted App USER identity.
+// The write commands require app.script.maintain in a trusted App USER identity.
 service ScriptVersionService {
   rpc CreateScriptVersionDraft(CreateScriptVersionDraftRequest) returns (ScriptVersion) {
     option (google.api.http) = {
@@ -19,6 +19,13 @@ service ScriptVersionService {
   rpc ReplaceScriptVersionDraft(ReplaceScriptVersionDraftRequest) returns (ScriptVersion) {
     option (google.api.http) = {
       put: "/v1/script-resources/{resource_id}/versions/{version_id}/draft"
+      body: "command"
+    };
+  }
+
+  rpc SubmitScriptVersionReview(SubmitScriptVersionReviewRequest) returns (ScriptVersionReviewSubmission) {
+    option (google.api.http) = {
+      post: "/v1/script-resources/{resource_id}/versions/{version_id}/reviews"
       body: "command"
     };
   }
@@ -66,4 +73,23 @@ message ScriptVersion {
   int64 revision = 8;
   google.protobuf.Timestamp created_at = 9;
   google.protobuf.Timestamp updated_at = 10;
+}
+
+
+message SubmitScriptVersionReviewRequest {
+  string resource_id = 1;
+  string version_id = 2;
+  SubmitScriptVersionReviewInput command = 3;
+}
+
+message SubmitScriptVersionReviewInput {
+  int64 expected_revision = 1;
+}
+
+message ScriptVersionReviewSubmission {
+  string review_id = 1;
+  ScriptVersionState state = 2;
+  int64 revision = 3;
+  google.protobuf.Timestamp submitted_at = 4;
+  string policy_version = 5;
 }

@@ -21,16 +21,19 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationScriptVersionServiceCreateScriptVersionDraft = "/app_center.v1.script_version.ScriptVersionService/CreateScriptVersionDraft"
 const OperationScriptVersionServiceReplaceScriptVersionDraft = "/app_center.v1.script_version.ScriptVersionService/ReplaceScriptVersionDraft"
+const OperationScriptVersionServiceSubmitScriptVersionReview = "/app_center.v1.script_version.ScriptVersionService/SubmitScriptVersionReview"
 
 type ScriptVersionServiceHTTPServer interface {
 	CreateScriptVersionDraft(context.Context, *CreateScriptVersionDraftRequest) (*ScriptVersion, error)
 	ReplaceScriptVersionDraft(context.Context, *ReplaceScriptVersionDraftRequest) (*ScriptVersion, error)
+	SubmitScriptVersionReview(context.Context, *SubmitScriptVersionReviewRequest) (*ScriptVersionReviewSubmission, error)
 }
 
 func RegisterScriptVersionServiceHTTPServer(s *http.Server, srv ScriptVersionServiceHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/script-resources/{resource_id}/versions", _ScriptVersionService_CreateScriptVersionDraft0_HTTP_Handler(srv))
 	r.PUT("/v1/script-resources/{resource_id}/versions/{version_id}/draft", _ScriptVersionService_ReplaceScriptVersionDraft0_HTTP_Handler(srv))
+	r.POST("/v1/script-resources/{resource_id}/versions/{version_id}/reviews", _ScriptVersionService_SubmitScriptVersionReview0_HTTP_Handler(srv))
 }
 
 func _ScriptVersionService_CreateScriptVersionDraft0_HTTP_Handler(srv ScriptVersionServiceHTTPServer) func(ctx http.Context) error {
@@ -83,9 +86,35 @@ func _ScriptVersionService_ReplaceScriptVersionDraft0_HTTP_Handler(srv ScriptVer
 	}
 }
 
+func _ScriptVersionService_SubmitScriptVersionReview0_HTTP_Handler(srv ScriptVersionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SubmitScriptVersionReviewRequest
+		if err := ctx.Bind(&in.Command); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationScriptVersionServiceSubmitScriptVersionReview)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SubmitScriptVersionReview(ctx, req.(*SubmitScriptVersionReviewRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ScriptVersionReviewSubmission)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ScriptVersionServiceHTTPClient interface {
 	CreateScriptVersionDraft(ctx context.Context, req *CreateScriptVersionDraftRequest, opts ...http.CallOption) (rsp *ScriptVersion, err error)
 	ReplaceScriptVersionDraft(ctx context.Context, req *ReplaceScriptVersionDraftRequest, opts ...http.CallOption) (rsp *ScriptVersion, err error)
+	SubmitScriptVersionReview(ctx context.Context, req *SubmitScriptVersionReviewRequest, opts ...http.CallOption) (rsp *ScriptVersionReviewSubmission, err error)
 }
 
 type ScriptVersionServiceHTTPClientImpl struct {
@@ -116,6 +145,19 @@ func (c *ScriptVersionServiceHTTPClientImpl) ReplaceScriptVersionDraft(ctx conte
 	opts = append(opts, http.Operation(OperationScriptVersionServiceReplaceScriptVersionDraft))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ScriptVersionServiceHTTPClientImpl) SubmitScriptVersionReview(ctx context.Context, in *SubmitScriptVersionReviewRequest, opts ...http.CallOption) (*ScriptVersionReviewSubmission, error) {
+	var out ScriptVersionReviewSubmission
+	pattern := "/v1/script-resources/{resource_id}/versions/{version_id}/reviews"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationScriptVersionServiceSubmitScriptVersionReview))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

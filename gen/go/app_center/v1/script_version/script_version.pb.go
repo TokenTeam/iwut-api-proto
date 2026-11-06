@@ -426,6 +426,186 @@ func (x *ScriptVersion) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type SubmitScriptVersionReviewRequest struct {
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	Command       *SubmitScriptVersionReviewInput `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitScriptVersionReviewRequest) Reset() {
+	*x = SubmitScriptVersionReviewRequest{}
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitScriptVersionReviewRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitScriptVersionReviewRequest) ProtoMessage() {}
+
+func (x *SubmitScriptVersionReviewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitScriptVersionReviewRequest.ProtoReflect.Descriptor instead.
+func (*SubmitScriptVersionReviewRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_version_script_version_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SubmitScriptVersionReviewRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *SubmitScriptVersionReviewRequest) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *SubmitScriptVersionReviewRequest) GetCommand() *SubmitScriptVersionReviewInput {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+type SubmitScriptVersionReviewInput struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ExpectedRevision int64                  `protobuf:"varint,1,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *SubmitScriptVersionReviewInput) Reset() {
+	*x = SubmitScriptVersionReviewInput{}
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitScriptVersionReviewInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitScriptVersionReviewInput) ProtoMessage() {}
+
+func (x *SubmitScriptVersionReviewInput) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitScriptVersionReviewInput.ProtoReflect.Descriptor instead.
+func (*SubmitScriptVersionReviewInput) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_version_script_version_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SubmitScriptVersionReviewInput) GetExpectedRevision() int64 {
+	if x != nil {
+		return x.ExpectedRevision
+	}
+	return 0
+}
+
+type ScriptVersionReviewSubmission struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReviewId      string                 `protobuf:"bytes,1,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	State         ScriptVersionState     `protobuf:"varint,2,opt,name=state,proto3,enum=app_center.v1.script_version.ScriptVersionState" json:"state,omitempty"`
+	Revision      int64                  `protobuf:"varint,3,opt,name=revision,proto3" json:"revision,omitempty"`
+	SubmittedAt   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"`
+	PolicyVersion string                 `protobuf:"bytes,5,opt,name=policy_version,json=policyVersion,proto3" json:"policy_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ScriptVersionReviewSubmission) Reset() {
+	*x = ScriptVersionReviewSubmission{}
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScriptVersionReviewSubmission) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScriptVersionReviewSubmission) ProtoMessage() {}
+
+func (x *ScriptVersionReviewSubmission) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_version_script_version_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScriptVersionReviewSubmission.ProtoReflect.Descriptor instead.
+func (*ScriptVersionReviewSubmission) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_version_script_version_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ScriptVersionReviewSubmission) GetReviewId() string {
+	if x != nil {
+		return x.ReviewId
+	}
+	return ""
+}
+
+func (x *ScriptVersionReviewSubmission) GetState() ScriptVersionState {
+	if x != nil {
+		return x.State
+	}
+	return ScriptVersionState_SCRIPT_VERSION_STATE_UNSPECIFIED
+}
+
+func (x *ScriptVersionReviewSubmission) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *ScriptVersionReviewSubmission) GetSubmittedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SubmittedAt
+	}
+	return nil
+}
+
+func (x *ScriptVersionReviewSubmission) GetPolicyVersion() string {
+	if x != nil {
+		return x.PolicyVersion
+	}
+	return ""
+}
+
 var File_app_center_v1_script_version_script_version_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
@@ -464,16 +644,31 @@ const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt*\xc4\x01\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xba\x01\n" +
+	" SubmitScriptVersionReviewRequest\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12V\n" +
+	"\acommand\x18\x03 \x01(\v2<.app_center.v1.script_version.SubmitScriptVersionReviewInputR\acommand\"M\n" +
+	"\x1eSubmitScriptVersionReviewInput\x12+\n" +
+	"\x11expected_revision\x18\x01 \x01(\x03R\x10expectedRevision\"\x86\x02\n" +
+	"\x1dScriptVersionReviewSubmission\x12\x1b\n" +
+	"\treview_id\x18\x01 \x01(\tR\breviewId\x12F\n" +
+	"\x05state\x18\x02 \x01(\x0e20.app_center.v1.script_version.ScriptVersionStateR\x05state\x12\x1a\n" +
+	"\brevision\x18\x03 \x01(\x03R\brevision\x12=\n" +
+	"\fsubmitted_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\x12%\n" +
+	"\x0epolicy_version\x18\x05 \x01(\tR\rpolicyVersion*\xc4\x01\n" +
 	"\x12ScriptVersionState\x12$\n" +
 	" SCRIPT_VERSION_STATE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aSCRIPT_VERSION_STATE_DRAFT\x10\x01\x12\"\n" +
 	"\x1eSCRIPT_VERSION_STATE_SUBMITTED\x10\x02\x12!\n" +
 	"\x1dSCRIPT_VERSION_STATE_APPROVED\x10\x03\x12!\n" +
-	"\x1dSCRIPT_VERSION_STATE_REJECTED\x10\x042\xb7\x03\n" +
+	"\x1dSCRIPT_VERSION_STATE_REJECTED\x10\x042\xa5\x05\n" +
 	"\x14ScriptVersionService\x12\xc2\x01\n" +
 	"\x18CreateScriptVersionDraft\x12=.app_center.v1.script_version.CreateScriptVersionDraftRequest\x1a+.app_center.v1.script_version.ScriptVersion\":\x82\xd3\xe4\x93\x024:\x05draft\"+/v1/script-resources/{resource_id}/versions\x12\xd9\x01\n" +
-	"\x19ReplaceScriptVersionDraft\x12>.app_center.v1.script_version.ReplaceScriptVersionDraftRequest\x1a+.app_center.v1.script_version.ScriptVersion\"O\x82\xd3\xe4\x93\x02I:\acommand\x1a>/v1/script-resources/{resource_id}/versions/{version_id}/draftBWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
+	"\x19ReplaceScriptVersionDraft\x12>.app_center.v1.script_version.ReplaceScriptVersionDraftRequest\x1a+.app_center.v1.script_version.ScriptVersion\"O\x82\xd3\xe4\x93\x02I:\acommand\x1a>/v1/script-resources/{resource_id}/versions/{version_id}/draft\x12\xeb\x01\n" +
+	"\x19SubmitScriptVersionReview\x12>.app_center.v1.script_version.SubmitScriptVersionReviewRequest\x1a;.app_center.v1.script_version.ScriptVersionReviewSubmission\"Q\x82\xd3\xe4\x93\x02K:\acommand\"@/v1/script-resources/{resource_id}/versions/{version_id}/reviewsBWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
 
 var (
 	file_app_center_v1_script_version_script_version_proto_rawDescOnce sync.Once
@@ -488,7 +683,7 @@ func file_app_center_v1_script_version_script_version_proto_rawDescGZIP() []byte
 }
 
 var file_app_center_v1_script_version_script_version_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_app_center_v1_script_version_script_version_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_app_center_v1_script_version_script_version_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_app_center_v1_script_version_script_version_proto_goTypes = []any{
 	(ScriptVersionState)(0),                  // 0: app_center.v1.script_version.ScriptVersionState
 	(*CreateScriptVersionDraftRequest)(nil),  // 1: app_center.v1.script_version.CreateScriptVersionDraftRequest
@@ -496,23 +691,31 @@ var file_app_center_v1_script_version_script_version_proto_goTypes = []any{
 	(*ReplaceScriptVersionDraftRequest)(nil), // 3: app_center.v1.script_version.ReplaceScriptVersionDraftRequest
 	(*ReplaceScriptVersionDraftInput)(nil),   // 4: app_center.v1.script_version.ReplaceScriptVersionDraftInput
 	(*ScriptVersion)(nil),                    // 5: app_center.v1.script_version.ScriptVersion
-	(*timestamppb.Timestamp)(nil),            // 6: google.protobuf.Timestamp
+	(*SubmitScriptVersionReviewRequest)(nil), // 6: app_center.v1.script_version.SubmitScriptVersionReviewRequest
+	(*SubmitScriptVersionReviewInput)(nil),   // 7: app_center.v1.script_version.SubmitScriptVersionReviewInput
+	(*ScriptVersionReviewSubmission)(nil),    // 8: app_center.v1.script_version.ScriptVersionReviewSubmission
+	(*timestamppb.Timestamp)(nil),            // 9: google.protobuf.Timestamp
 }
 var file_app_center_v1_script_version_script_version_proto_depIdxs = []int32{
-	2, // 0: app_center.v1.script_version.CreateScriptVersionDraftRequest.draft:type_name -> app_center.v1.script_version.CreateScriptVersionDraftInput
-	4, // 1: app_center.v1.script_version.ReplaceScriptVersionDraftRequest.command:type_name -> app_center.v1.script_version.ReplaceScriptVersionDraftInput
-	0, // 2: app_center.v1.script_version.ScriptVersion.state:type_name -> app_center.v1.script_version.ScriptVersionState
-	6, // 3: app_center.v1.script_version.ScriptVersion.created_at:type_name -> google.protobuf.Timestamp
-	6, // 4: app_center.v1.script_version.ScriptVersion.updated_at:type_name -> google.protobuf.Timestamp
-	1, // 5: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:input_type -> app_center.v1.script_version.CreateScriptVersionDraftRequest
-	3, // 6: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:input_type -> app_center.v1.script_version.ReplaceScriptVersionDraftRequest
-	5, // 7: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
-	5, // 8: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	2,  // 0: app_center.v1.script_version.CreateScriptVersionDraftRequest.draft:type_name -> app_center.v1.script_version.CreateScriptVersionDraftInput
+	4,  // 1: app_center.v1.script_version.ReplaceScriptVersionDraftRequest.command:type_name -> app_center.v1.script_version.ReplaceScriptVersionDraftInput
+	0,  // 2: app_center.v1.script_version.ScriptVersion.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	9,  // 3: app_center.v1.script_version.ScriptVersion.created_at:type_name -> google.protobuf.Timestamp
+	9,  // 4: app_center.v1.script_version.ScriptVersion.updated_at:type_name -> google.protobuf.Timestamp
+	7,  // 5: app_center.v1.script_version.SubmitScriptVersionReviewRequest.command:type_name -> app_center.v1.script_version.SubmitScriptVersionReviewInput
+	0,  // 6: app_center.v1.script_version.ScriptVersionReviewSubmission.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	9,  // 7: app_center.v1.script_version.ScriptVersionReviewSubmission.submitted_at:type_name -> google.protobuf.Timestamp
+	1,  // 8: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:input_type -> app_center.v1.script_version.CreateScriptVersionDraftRequest
+	3,  // 9: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:input_type -> app_center.v1.script_version.ReplaceScriptVersionDraftRequest
+	6,  // 10: app_center.v1.script_version.ScriptVersionService.SubmitScriptVersionReview:input_type -> app_center.v1.script_version.SubmitScriptVersionReviewRequest
+	5,  // 11: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
+	5,  // 12: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
+	8,  // 13: app_center.v1.script_version.ScriptVersionService.SubmitScriptVersionReview:output_type -> app_center.v1.script_version.ScriptVersionReviewSubmission
+	11, // [11:14] is the sub-list for method output_type
+	8,  // [8:11] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_script_version_script_version_proto_init() }
@@ -526,7 +729,7 @@ func file_app_center_v1_script_version_script_version_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_script_version_script_version_proto_rawDesc), len(file_app_center_v1_script_version_script_version_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

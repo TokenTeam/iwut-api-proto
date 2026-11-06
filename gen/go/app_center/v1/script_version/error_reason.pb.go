@@ -41,6 +41,7 @@ const (
 	ErrorReason_ERROR_REASON_SCRIPT_VERSION_REVISION_CONFLICT ErrorReason = 14
 	ErrorReason_ERROR_REASON_SCRIPT_VERSION_NOT_DRAFT         ErrorReason = 15
 	ErrorReason_ERROR_REASON_INTERNAL                         ErrorReason = 16
+	ErrorReason_ERROR_REASON_SCRIPT_REVIEW_POLICY_UNAVAILABLE ErrorReason = 17
 )
 
 // Enum value maps for ErrorReason.
@@ -63,6 +64,7 @@ var (
 		14: "ERROR_REASON_SCRIPT_VERSION_REVISION_CONFLICT",
 		15: "ERROR_REASON_SCRIPT_VERSION_NOT_DRAFT",
 		16: "ERROR_REASON_INTERNAL",
+		17: "ERROR_REASON_SCRIPT_REVIEW_POLICY_UNAVAILABLE",
 	}
 	ErrorReason_value = map[string]int32{
 		"ERROR_REASON_UNSPECIFIED":                      0,
@@ -82,6 +84,7 @@ var (
 		"ERROR_REASON_SCRIPT_VERSION_REVISION_CONFLICT": 14,
 		"ERROR_REASON_SCRIPT_VERSION_NOT_DRAFT":         15,
 		"ERROR_REASON_INTERNAL":                         16,
+		"ERROR_REASON_SCRIPT_REVIEW_POLICY_UNAVAILABLE": 17,
 	}
 )
 
@@ -116,7 +119,7 @@ var File_app_center_v1_script_version_error_reason_proto protoreflect.FileDescri
 
 const file_app_center_v1_script_version_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"/app_center/v1/script_version/error_reason.proto\x12\x1capp_center.v1.script_version*\xe5\x05\n" +
+	"/app_center/v1/script_version/error_reason.proto\x12\x1capp_center.v1.script_version*\x98\x06\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12'\n" +
 	"#ERROR_REASON_USER_IDENTITY_REQUIRED\x10\x01\x12&\n" +
@@ -135,7 +138,8 @@ const file_app_center_v1_script_version_error_reason_proto_rawDesc = "" +
 	"*ERROR_REASON_SCRIPT_VERSION_LABEL_CONFLICT\x10\r\x121\n" +
 	"-ERROR_REASON_SCRIPT_VERSION_REVISION_CONFLICT\x10\x0e\x12)\n" +
 	"%ERROR_REASON_SCRIPT_VERSION_NOT_DRAFT\x10\x0f\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\x10BWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\x10\x121\n" +
+	"-ERROR_REASON_SCRIPT_REVIEW_POLICY_UNAVAILABLE\x10\x11BWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
 
 var (
 	file_app_center_v1_script_version_error_reason_proto_rawDescOnce sync.Once
