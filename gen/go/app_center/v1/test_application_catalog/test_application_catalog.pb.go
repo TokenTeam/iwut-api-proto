@@ -32,6 +32,7 @@ const (
 	TestAvailability_TEST_AVAILABILITY_PROFILE_REQUIRED               TestAvailability = 2
 	TestAvailability_TEST_AVAILABILITY_TEST_TARGET_UNAVAILABLE        TestAvailability = 3
 	TestAvailability_TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT TestAvailability = 4
+	TestAvailability_TEST_AVAILABILITY_SCRIPT_DEPENDENCY_UNAVAILABLE  TestAvailability = 5
 )
 
 // Enum value maps for TestAvailability.
@@ -42,6 +43,7 @@ var (
 		2: "TEST_AVAILABILITY_PROFILE_REQUIRED",
 		3: "TEST_AVAILABILITY_TEST_TARGET_UNAVAILABLE",
 		4: "TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT",
+		5: "TEST_AVAILABILITY_SCRIPT_DEPENDENCY_UNAVAILABLE",
 	}
 	TestAvailability_value = map[string]int32{
 		"TEST_AVAILABILITY_UNSPECIFIED":                    0,
@@ -49,6 +51,7 @@ var (
 		"TEST_AVAILABILITY_PROFILE_REQUIRED":               2,
 		"TEST_AVAILABILITY_TEST_TARGET_UNAVAILABLE":        3,
 		"TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT": 4,
+		"TEST_AVAILABILITY_SCRIPT_DEPENDENCY_UNAVAILABLE":  5,
 	}
 )
 
@@ -649,13 +652,14 @@ const file_app_center_v1_test_application_catalog_test_application_catalog_proto
 	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf\"\x9d\x01\n" +
 	"\x17MyTestApplicationDetail\x12Q\n" +
 	"\x04item\x18\x01 \x01(\v2=.app_center.v1.test_application_catalog.MyTestApplicationItemR\x04item\x12/\n" +
-	"\x05as_of\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf*\xdf\x01\n" +
+	"\x05as_of\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf*\x94\x02\n" +
 	"\x10TestAvailability\x12!\n" +
 	"\x1dTEST_AVAILABILITY_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17TEST_AVAILABILITY_READY\x10\x01\x12&\n" +
 	"\"TEST_AVAILABILITY_PROFILE_REQUIRED\x10\x02\x12-\n" +
 	")TEST_AVAILABILITY_TEST_TARGET_UNAVAILABLE\x10\x03\x124\n" +
-	"0TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT\x10\x042\xcd\x03\n" +
+	"0TEST_AVAILABILITY_HOST_CAPABILITIES_INSUFFICIENT\x10\x04\x123\n" +
+	"/TEST_AVAILABILITY_SCRIPT_DEPENDENCY_UNAVAILABLE\x10\x052\xcd\x03\n" +
 	"\x1dTestApplicationCatalogService\x12\xcb\x01\n" +
 	"\x16ListMyTestApplications\x12E.app_center.v1.test_application_catalog.ListMyTestApplicationsRequest\x1a=.app_center.v1.test_application_catalog.MyTestApplicationPage\"+\x82\xd3\xe4\x93\x02%:\x05query\"\x1c/v1/test-applications:search\x12\xdd\x01\n" +
 	"\x14GetMyTestApplication\x12C.app_center.v1.test_application_catalog.GetMyTestApplicationRequest\x1a?.app_center.v1.test_application_catalog.MyTestApplicationDetail\"?\x82\xd3\xe4\x93\x029:\aruntime\"./v1/test-applications/{application_id}:resolveBjZhgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/test_application_catalog;testapplicationcatalogb\x06proto3"

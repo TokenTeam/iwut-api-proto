@@ -32,7 +32,7 @@ service ScriptVersionService {
 }
 
 message CreateScriptVersionDraftRequest {
-  string resource_id = 1;
+  string resource_id = 1 [json_name = "resource_id"];
   CreateScriptVersionDraftInput draft = 2;
 }
 
@@ -43,8 +43,8 @@ message CreateScriptVersionDraftInput {
 }
 
 message ReplaceScriptVersionDraftRequest {
-  string resource_id = 1;
-  string version_id = 2;
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
   ReplaceScriptVersionDraftInput command = 3;
 }
 
@@ -77,8 +77,8 @@ message ScriptVersion {
 
 
 message SubmitScriptVersionReviewRequest {
-  string resource_id = 1;
-  string version_id = 2;
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
   SubmitScriptVersionReviewInput command = 3;
 }
 

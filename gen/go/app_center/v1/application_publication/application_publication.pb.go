@@ -25,8 +25,8 @@ const (
 
 type PlaceApprovedVersionInTestSlotRequest struct {
 	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor   int32                                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	RpcApiMajor   int32                                  `protobuf:"varint,2,opt,name=rpc_api_major,proto3" json:"rpc_api_major,omitempty"`
 	Command       *PlaceApprovedVersionInTestSlotCommand `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -197,8 +197,8 @@ func (x *PlaceApprovedVersionInTestSlotResponse) GetHistory() *ApplicationPublic
 
 type SetApprovedVersionInStableSlotRequest struct {
 	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor   int32                                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ApplicationId string                                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	RpcApiMajor   int32                                  `protobuf:"varint,2,opt,name=rpc_api_major,proto3" json:"rpc_api_major,omitempty"`
 	Command       *SetApprovedVersionInStableSlotCommand `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -369,8 +369,8 @@ func (x *SetApprovedVersionInStableSlotResponse) GetHistory() *ApplicationPublic
 
 type ClearStableSlotRequest struct {
 	state                       protoimpl.MessageState `protogen:"open.v1"`
-	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,proto3" json:"rpc_api_major,omitempty"`
 	ExpectedPublicationRevision int64                  `protobuf:"varint,3,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3" json:"expected_publication_revision,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
@@ -609,8 +609,8 @@ func (x *ClearTestSlotResponse) GetHistory() *ApplicationPublicationHistoryResou
 
 type SetGreyRolloutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor   int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ApplicationId string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	RpcApiMajor   int32                  `protobuf:"varint,2,opt,name=rpc_api_major,proto3" json:"rpc_api_major,omitempty"`
 	Command       *SetGreyRolloutCommand `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -789,8 +789,8 @@ func (x *SetGreyRolloutResponse) GetHistory() *ApplicationPublicationHistoryReso
 
 type ClearGreyRolloutRequest struct {
 	state                       protoimpl.MessageState `protogen:"open.v1"`
-	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
-	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,json=rpcApiMajor,proto3" json:"rpc_api_major,omitempty"`
+	ApplicationId               string                 `protobuf:"bytes,1,opt,name=application_id,proto3" json:"application_id,omitempty"`
+	RpcApiMajor                 int32                  `protobuf:"varint,2,opt,name=rpc_api_major,proto3" json:"rpc_api_major,omitempty"`
 	ExpectedPublicationRevision int64                  `protobuf:"varint,3,opt,name=expected_publication_revision,json=expectedPublicationRevision,proto3" json:"expected_publication_revision,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
@@ -1259,10 +1259,10 @@ var File_app_center_v1_application_publication_application_publication_proto pro
 
 const file_app_center_v1_application_publication_application_publication_proto_rawDesc = "" +
 	"\n" +
-	"Capp_center/v1/application_publication/application_publication.proto\x12%app_center.v1.application_publication\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xda\x01\n" +
-	"%PlaceApprovedVersionInTestSlotRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12f\n" +
+	"Capp_center/v1/application_publication/application_publication.proto\x12%app_center.v1.application_publication\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdd\x01\n" +
+	"%PlaceApprovedVersionInTestSlotRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\rrpc_api_major\x12f\n" +
 	"\acommand\x18\x03 \x01(\v2L.app_center.v1.application_publication.PlaceApprovedVersionInTestSlotCommandR\acommand\"\xb1\x01\n" +
 	"%PlaceApprovedVersionInTestSlotCommand\x12\x1d\n" +
 	"\n" +
@@ -1272,10 +1272,10 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"&PlaceApprovedVersionInTestSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xda\x01\n" +
-	"%SetApprovedVersionInStableSlotRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12f\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xdd\x01\n" +
+	"%SetApprovedVersionInStableSlotRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\rrpc_api_major\x12f\n" +
 	"\acommand\x18\x03 \x01(\v2L.app_center.v1.application_publication.SetApprovedVersionInStableSlotCommandR\acommand\"\xb1\x01\n" +
 	"%SetApprovedVersionInStableSlotCommand\x12\x1d\n" +
 	"\n" +
@@ -1285,10 +1285,10 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"&SetApprovedVersionInStableSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xa7\x01\n" +
-	"\x16ClearStableSlotRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12B\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xaa\x01\n" +
+	"\x16ClearStableSlotRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\rrpc_api_major\x12B\n" +
 	"\x1dexpected_publication_revision\x18\x03 \x01(\x03R\x1bexpectedPublicationRevision\"\x84\x02\n" +
 	"\x17ClearStableSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
@@ -1301,10 +1301,10 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\x15ClearTestSlotResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xba\x01\n" +
-	"\x15SetGreyRolloutRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12V\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xbd\x01\n" +
+	"\x15SetGreyRolloutRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\rrpc_api_major\x12V\n" +
 	"\acommand\x18\x03 \x01(\v2<.app_center.v1.application_publication.SetGreyRolloutCommandR\acommand\"\xae\x01\n" +
 	"\x15SetGreyRolloutCommand\x12\x1d\n" +
 	"\n" +
@@ -1314,10 +1314,10 @@ const file_app_center_v1_application_publication_application_publication_proto_r
 	"\x16SetGreyRolloutResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +
 	"\vpublication\x18\x02 \x01(\v2E.app_center.v1.application_publication.ApplicationPublicationResourceR\vpublication\x12f\n" +
-	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xa8\x01\n" +
-	"\x17ClearGreyRolloutRequest\x12%\n" +
-	"\x0eapplication_id\x18\x01 \x01(\tR\rapplicationId\x12\"\n" +
-	"\rrpc_api_major\x18\x02 \x01(\x05R\vrpcApiMajor\x12B\n" +
+	"\ahistory\x18\x03 \x01(\v2L.app_center.v1.application_publication.ApplicationPublicationHistoryResourceR\ahistory\"\xab\x01\n" +
+	"\x17ClearGreyRolloutRequest\x12&\n" +
+	"\x0eapplication_id\x18\x01 \x01(\tR\x0eapplication_id\x12$\n" +
+	"\rrpc_api_major\x18\x02 \x01(\x05R\rrpc_api_major\x12B\n" +
 	"\x1dexpected_publication_revision\x18\x03 \x01(\x03R\x1bexpectedPublicationRevision\"\x85\x02\n" +
 	"\x18ClearGreyRolloutResponse\x12\x18\n" +
 	"\achanged\x18\x01 \x01(\bR\achanged\x12g\n" +

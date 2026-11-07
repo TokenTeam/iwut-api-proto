@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package app_center.v1.script_distribution;
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_distribution;scriptdistribution";
+
+enum ErrorReason {
+  ERROR_REASON_UNSPECIFIED = 0;
+  ERROR_REASON_USER_IDENTITY_REQUIRED = 1;
+  ERROR_REASON_INVALID_USER_IDENTITY = 2;
+  ERROR_REASON_INVALID_SCRIPT_DISTRIBUTION_REQUEST = 3;
+  ERROR_REASON_INVALID_SCRIPT_DISTRIBUTION_CURSOR = 4;
+  ERROR_REASON_SCRIPT_CONTENT_UNAVAILABLE = 5;
+  ERROR_REASON_SCRIPT_DISTRIBUTION_STATE_INCONSISTENT = 6;
+  ERROR_REASON_SCRIPT_DISTRIBUTION_UNAVAILABLE = 7;
+}

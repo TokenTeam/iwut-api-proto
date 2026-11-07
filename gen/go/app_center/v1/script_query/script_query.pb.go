@@ -237,7 +237,7 @@ func (x *ListScriptResourcesResponse) GetNextCursor() string {
 
 type GetScriptResourceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -281,7 +281,7 @@ func (x *GetScriptResourceRequest) GetResourceId() string {
 
 type ListScriptVersionsRequest struct {
 	state         protoimpl.MessageState            `protogen:"open.v1"`
-	ResourceId    string                            `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                            `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Limit         *int32                            `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
 	Cursor        string                            `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
 	State         script_version.ScriptVersionState `protobuf:"varint,4,opt,name=state,proto3,enum=app_center.v1.script_version.ScriptVersionState" json:"state,omitempty"`
@@ -401,8 +401,8 @@ func (x *ListScriptVersionsResponse) GetNextCursor() string {
 
 type GetScriptVersionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -825,9 +825,9 @@ func (x *PendingScriptReviewSummary) GetSubmittedAt() *timestamppb.Timestamp {
 
 type GetScriptReviewRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	ReviewId      string                 `protobuf:"bytes,3,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
+	ReviewId      string                 `protobuf:"bytes,3,opt,name=review_id,proto3" json:"review_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1101,7 +1101,7 @@ func (x *GetScriptReviewResponse) GetCascade() *script_review.ScriptCascadeProgr
 
 type GetScriptPublicationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1145,7 +1145,7 @@ func (x *GetScriptPublicationRequest) GetResourceId() string {
 
 type ListScriptPublicationHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Limit         *int32                 `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
 	Cursor        string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1267,13 +1267,11 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\x1bListScriptResourcesResponse\x12C\n" +
 	"\x05items\x18\x01 \x03(\v2-.app_center.v1.script_resource.ScriptResourceR\x05items\x12\x1f\n" +
 	"\vnext_cursor\x18\x02 \x01(\tR\n" +
-	"nextCursor\";\n" +
-	"\x18GetScriptResourceRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\"\xc1\x01\n" +
-	"\x19ListScriptVersionsRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x19\n" +
+	"nextCursor\"<\n" +
+	"\x18GetScriptResourceRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\"\xc2\x01\n" +
+	"\x19ListScriptVersionsRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x19\n" +
 	"\x05limit\x18\x02 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x16\n" +
 	"\x06cursor\x18\x03 \x01(\tR\x06cursor\x12F\n" +
 	"\x05state\x18\x04 \x01(\x0e20.app_center.v1.script_version.ScriptVersionStateR\x05stateB\b\n" +
@@ -1281,12 +1279,12 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\x1aListScriptVersionsResponse\x12F\n" +
 	"\x05items\x18\x01 \x03(\v20.app_center.v1.script_query.ScriptVersionSummaryR\x05items\x12\x1f\n" +
 	"\vnext_cursor\x18\x02 \x01(\tR\n" +
-	"nextCursor\"Y\n" +
-	"\x17GetScriptVersionRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	"nextCursor\"[\n" +
+	"\x17GetScriptVersionRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\"\x94\x03\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\"\x94\x03\n" +
 	"\x14ScriptVersionSummary\x12\x1f\n" +
 	"\vresource_id\x18\x01 \x01(\tR\n" +
 	"resourceId\x12\x1d\n" +
@@ -1326,13 +1324,13 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\treview_id\x18\x03 \x01(\tR\breviewId\x12#\n" +
 	"\rversion_label\x18\x04 \x01(\tR\fversionLabel\x12\x16\n" +
 	"\x06digest\x18\x05 \x01(\tR\x06digest\x12=\n" +
-	"\fsubmitted_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\"u\n" +
-	"\x16GetScriptReviewRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	"\fsubmitted_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vsubmittedAt\"x\n" +
+	"\x16GetScriptReviewRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12\x1b\n" +
-	"\treview_id\x18\x03 \x01(\tR\breviewId\"y\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\x12\x1c\n" +
+	"\treview_id\x18\x03 \x01(\tR\treview_id\"y\n" +
 	"\x11ScriptReviewCheck\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
@@ -1356,13 +1354,11 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"can_decide\x18\v \x01(\bR\tcanDecide\x12P\n" +
 	"\tconflicts\x18\f \x03(\x0e22.app_center.v1.script_query.ScriptDecisionConflictR\tconflicts\x12M\n" +
 	"\bdecision\x18\r \x01(\v21.app_center.v1.script_review.ScriptReviewDecisionR\bdecision\x12L\n" +
-	"\acascade\x18\x0e \x01(\v22.app_center.v1.script_review.ScriptCascadeProgressR\acascade\">\n" +
-	"\x1bGetScriptPublicationRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\"\x83\x01\n" +
-	"#ListScriptPublicationHistoryRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x19\n" +
+	"\acascade\x18\x0e \x01(\v22.app_center.v1.script_review.ScriptCascadeProgressR\acascade\"?\n" +
+	"\x1bGetScriptPublicationRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\"\x84\x01\n" +
+	"#ListScriptPublicationHistoryRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x19\n" +
 	"\x05limit\x18\x02 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x16\n" +
 	"\x06cursor\x18\x03 \x01(\tR\x06cursorB\b\n" +
 	"\x06_limit\"\x9d\x01\n" +

@@ -52,11 +52,11 @@ message ListScriptResourcesResponse {
 }
 
 message GetScriptResourceRequest {
-  string resource_id = 1;
+  string resource_id = 1 [json_name = "resource_id"];
 }
 
 message ListScriptVersionsRequest {
-  string resource_id = 1;
+  string resource_id = 1 [json_name = "resource_id"];
   optional int32 limit = 2;
   string cursor = 3;
   app_center.v1.script_version.ScriptVersionState state = 4;
@@ -68,8 +68,8 @@ message ListScriptVersionsResponse {
 }
 
 message GetScriptVersionRequest {
-  string resource_id = 1;
-  string version_id = 2;
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
 }
 
 message ScriptVersionSummary {
@@ -112,9 +112,9 @@ message PendingScriptReviewSummary {
 }
 
 message GetScriptReviewRequest {
-  string resource_id = 1;
-  string version_id = 2;
-  string review_id = 3;
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
+  string review_id = 3 [json_name = "review_id"];
 }
 
 enum ScriptReviewStatus {
@@ -155,6 +155,6 @@ message GetScriptReviewResponse {
   app_center.v1.script_review.ScriptCascadeProgress cascade = 14;
 }
 
-message GetScriptPublicationRequest { string resource_id = 1; }
-message ListScriptPublicationHistoryRequest { string resource_id = 1; optional int32 limit = 2; string cursor = 3; }
+message GetScriptPublicationRequest { string resource_id = 1 [json_name = "resource_id"]; }
+message ListScriptPublicationHistoryRequest { string resource_id = 1 [json_name = "resource_id"]; optional int32 limit = 2; string cursor = 3; }
 message ListScriptPublicationHistoryResponse { repeated app_center.v1.script_publication.ScriptPublicationHistoryItem items = 1; string next_cursor = 2; }

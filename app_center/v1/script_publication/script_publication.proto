@@ -19,11 +19,11 @@ service ScriptPublicationService {
     option (google.api.http) = { post: "/v1/script-resources/{resource_id}/distribution/restore" body: "command" };
   }
 }
-message PublishScriptVersionRequest { string resource_id = 1; string version_id = 2; ScriptPublicationRevisionInput command = 3; }
-message ClearScriptHeadRequest { string resource_id = 1; ScriptPublicationRevisionInput command = 2; }
+message PublishScriptVersionRequest { string resource_id = 1 [json_name = "resource_id"]; string version_id = 2 [json_name = "version_id"]; ScriptPublicationRevisionInput command = 3; }
+message ClearScriptHeadRequest { string resource_id = 1 [json_name = "resource_id"]; ScriptPublicationRevisionInput command = 2; }
 message ScriptPublicationRevisionInput { int64 expected_publication_revision = 1; }
-message SuspendScriptDistributionRequest { string resource_id = 1; ScriptAvailabilityInput command = 2; }
-message RestoreScriptDistributionRequest { string resource_id = 1; ScriptAvailabilityInput command = 2; }
+message SuspendScriptDistributionRequest { string resource_id = 1 [json_name = "resource_id"]; ScriptAvailabilityInput command = 2; }
+message RestoreScriptDistributionRequest { string resource_id = 1 [json_name = "resource_id"]; ScriptAvailabilityInput command = 2; }
 message ScriptAvailabilityInput { int64 expected_availability_revision = 1; string reason = 2; }
 enum ScriptDistributionAvailability {
   SCRIPT_DISTRIBUTION_AVAILABILITY_UNSPECIFIED = 0;

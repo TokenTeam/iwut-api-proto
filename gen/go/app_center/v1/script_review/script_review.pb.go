@@ -126,9 +126,9 @@ func (ScriptCascadeStatus) EnumDescriptor() ([]byte, []int) {
 
 type DecideScriptVersionReviewRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	ReviewId      string                          `protobuf:"bytes,3,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
+	ReviewId      string                          `protobuf:"bytes,3,opt,name=review_id,proto3" json:"review_id,omitempty"`
 	Command       *DecideScriptVersionReviewInput `protobuf:"bytes,4,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -541,13 +541,13 @@ var File_app_center_v1_script_review_script_review_proto protoreflect.FileDescri
 
 const file_app_center_v1_script_review_script_review_proto_rawDesc = "" +
 	"\n" +
-	"/app_center/v1/script_review/script_review.proto\x12\x1bapp_center.v1.script_review\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd6\x01\n" +
-	" DecideScriptVersionReviewRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	"/app_center/v1/script_review/script_review.proto\x12\x1bapp_center.v1.script_review\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd9\x01\n" +
+	" DecideScriptVersionReviewRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12\x1b\n" +
-	"\treview_id\x18\x03 \x01(\tR\breviewId\x12U\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\x12\x1c\n" +
+	"\treview_id\x18\x03 \x01(\tR\treview_id\x12U\n" +
 	"\acommand\x18\x04 \x01(\v2;.app_center.v1.script_review.DecideScriptVersionReviewInputR\acommand\"\x98\x02\n" +
 	"\x1eDecideScriptVersionReviewInput\x12:\n" +
 	"\x19expected_version_revision\x18\x01 \x01(\x03R\x17expectedVersionRevision\x12%\n" +

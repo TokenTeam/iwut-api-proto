@@ -31,7 +31,7 @@ message CreateScriptResourceRequest {
 }
 
 message ReplaceScriptResourceMetadataRequest {
-  string resource_id = 1;
+  string resource_id = 1 [json_name = "resource_id"];
   ReplaceScriptResourceMetadataCommand command = 2;
 }
 

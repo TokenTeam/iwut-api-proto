@@ -77,7 +77,7 @@ func (x *CreateScriptResourceRequest) GetPurpose() string {
 
 type ReplaceScriptResourceMetadataRequest struct {
 	state         protoimpl.MessageState                `protogen:"open.v1"`
-	ResourceId    string                                `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                                `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Command       *ReplaceScriptResourceMetadataCommand `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -278,10 +278,9 @@ const file_app_center_v1_script_resource_script_resource_proto_rawDesc = "" +
 	"3app_center/v1/script_resource/script_resource.proto\x12\x1dapp_center.v1.script_resource\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"K\n" +
 	"\x1bCreateScriptResourceRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\apurpose\x18\x02 \x01(\tR\apurpose\"\xa6\x01\n" +
-	"$ReplaceScriptResourceMetadataRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12]\n" +
+	"\apurpose\x18\x02 \x01(\tR\apurpose\"\xa7\x01\n" +
+	"$ReplaceScriptResourceMetadataRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12]\n" +
 	"\acommand\x18\x02 \x01(\v2C.app_center.v1.script_resource.ReplaceScriptResourceMetadataCommandR\acommand\"\x81\x01\n" +
 	"$ReplaceScriptResourceMetadataCommand\x12+\n" +
 	"\x11expected_revision\x18\x01 \x01(\x03R\x10expectedRevision\x12\x12\n" +

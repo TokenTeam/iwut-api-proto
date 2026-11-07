@@ -14,9 +14,9 @@ service ScriptReviewService {
   }
 }
 message DecideScriptVersionReviewRequest {
-  string resource_id = 1;
-  string version_id = 2;
-  string review_id = 3;
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
+  string review_id = 3 [json_name = "review_id"];
   DecideScriptVersionReviewInput command = 4;
 }
 enum ScriptReviewAction {

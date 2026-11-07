@@ -123,8 +123,8 @@ func (ScriptPublicationAction) EnumDescriptor() ([]byte, []int) {
 
 type PublishScriptVersionRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
 	Command       *ScriptPublicationRevisionInput `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -183,7 +183,7 @@ func (x *PublishScriptVersionRequest) GetCommand() *ScriptPublicationRevisionInp
 
 type ClearScriptHeadRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Command       *ScriptPublicationRevisionInput `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -279,7 +279,7 @@ func (x *ScriptPublicationRevisionInput) GetExpectedPublicationRevision() int64 
 
 type SuspendScriptDistributionRequest struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	ResourceId    string                   `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                   `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Command       *ScriptAvailabilityInput `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -331,7 +331,7 @@ func (x *SuspendScriptDistributionRequest) GetCommand() *ScriptAvailabilityInput
 
 type RestoreScriptDistributionRequest struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	ResourceId    string                   `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                   `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Command       *ScriptAvailabilityInput `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -775,26 +775,23 @@ var File_app_center_v1_script_publication_script_publication_proto protoreflect.
 
 const file_app_center_v1_script_publication_script_publication_proto_rawDesc = "" +
 	"\n" +
-	"9app_center/v1/script_publication/script_publication.proto\x12 app_center.v1.script_publication\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb9\x01\n" +
-	"\x1bPublishScriptVersionRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	"9app_center/v1/script_publication/script_publication.proto\x12 app_center.v1.script_publication\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x01\n" +
+	"\x1bPublishScriptVersionRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12Z\n" +
-	"\acommand\x18\x03 \x01(\v2@.app_center.v1.script_publication.ScriptPublicationRevisionInputR\acommand\"\x95\x01\n" +
-	"\x16ClearScriptHeadRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12Z\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\x12Z\n" +
+	"\acommand\x18\x03 \x01(\v2@.app_center.v1.script_publication.ScriptPublicationRevisionInputR\acommand\"\x96\x01\n" +
+	"\x16ClearScriptHeadRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12Z\n" +
 	"\acommand\x18\x02 \x01(\v2@.app_center.v1.script_publication.ScriptPublicationRevisionInputR\acommand\"d\n" +
 	"\x1eScriptPublicationRevisionInput\x12B\n" +
-	"\x1dexpected_publication_revision\x18\x01 \x01(\x03R\x1bexpectedPublicationRevision\"\x98\x01\n" +
-	" SuspendScriptDistributionRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12S\n" +
-	"\acommand\x18\x02 \x01(\v29.app_center.v1.script_publication.ScriptAvailabilityInputR\acommand\"\x98\x01\n" +
-	" RestoreScriptDistributionRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12S\n" +
+	"\x1dexpected_publication_revision\x18\x01 \x01(\x03R\x1bexpectedPublicationRevision\"\x99\x01\n" +
+	" SuspendScriptDistributionRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12S\n" +
+	"\acommand\x18\x02 \x01(\v29.app_center.v1.script_publication.ScriptAvailabilityInputR\acommand\"\x99\x01\n" +
+	" RestoreScriptDistributionRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12S\n" +
 	"\acommand\x18\x02 \x01(\v29.app_center.v1.script_publication.ScriptAvailabilityInputR\acommand\"w\n" +
 	"\x17ScriptAvailabilityInput\x12D\n" +
 	"\x1eexpected_availability_revision\x18\x01 \x01(\x03R\x1cexpectedAvailabilityRevision\x12\x16\n" +

@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+package app_center.v1.script_distribution;
+
+import "app_center/v1/runtime_resolution/runtime_resolution.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_distribution;scriptdistribution";
+
+// All methods require a trusted ACTIVE USER. Script management permissions and
+// application association are not prerequisites for independent distribution.
+// Responses and errors are private, no-store; exact content is never a lease.
+service ScriptDistributionService {
+  rpc ListPublishedScripts(ListPublishedScriptsRequest) returns (PublishedScriptPage) {
+    option (google.api.http) = { get: "/v1/scripts" };
+  }
+  rpc GetPublishedScriptContent(GetPublishedScriptContentRequest) returns (ScriptContent) {
+    option (google.api.http) = { get: "/v1/scripts/{resource_id}/versions/{version_id}/content" };
+  }
+  rpc ResolveApplicationScriptManifest(ResolveApplicationScriptManifestRequest) returns (ApplicationScriptManifest) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions/{application_version_id}/scripts:resolve"
+      body: "query"
+    };
+  }
+  rpc GetApplicationScriptContent(GetApplicationScriptContentRequest) returns (ApplicationScriptContent) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/versions/{application_version_id}/scripts/{script_version_id}:getContent"
+      body: "query"
+    };
+  }
+}
+
+enum ScriptRuntimeMode {
+  SCRIPT_RUNTIME_MODE_UNSPECIFIED = 0;
+  SCRIPT_RUNTIME_MODE_PURE_TEST = 1;
+  SCRIPT_RUNTIME_MODE_UNIFIED = 2;
+}
+
+message ScriptRuntimeQuery {
+  ScriptRuntimeMode mode = 1;
+  int32 host_rpc_api_major = 2;
+  repeated string host_capabilities = 3;
+}
+
+message ScriptDescriptor {
+  string resource_id = 1;
+  string version_id = 2;
+  string content_format = 3;
+  string digest = 4;
+  int64 byte_length = 5;
+}
+
+message PublishedScriptHead {
+  string version_id = 1;
+  string version_label = 2;
+  string content_format = 3;
+  string digest = 4;
+  int64 byte_length = 5;
+}
+
+message PublishedScriptItem {
+  string resource_id = 1;
+  string name = 2;
+  string purpose = 3;
+  PublishedScriptHead head = 4;
+}
+
+message ListPublishedScriptsRequest {
+  optional int32 limit = 1;
+  string cursor = 2;
+}
+
+message PublishedScriptPage {
+  repeated PublishedScriptItem items = 1;
+  string next_cursor = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
+
+message GetPublishedScriptContentRequest {
+  string resource_id = 1 [json_name = "resource_id"];
+  string version_id = 2 [json_name = "version_id"];
+  string expected_digest = 3 [json_name = "expectedDigest"];
+}
+
+// One complete opaque UTF-8 text, at most 1 MiB before JSON escaping. The digest
+// and byte length describe the exact decoded UTF-8 bytes, including whitespace.
+message ScriptContent {
+  string resource_id = 1;
+  string version_id = 2;
+  string content_format = 3;
+  string digest = 4;
+  int64 byte_length = 5;
+  string content_text = 6;
+  google.protobuf.Timestamp as_of = 7;
+}
+
+message ResolveApplicationScriptManifestRequest {
+  string application_id = 1 [json_name = "application_id"];
+  string application_version_id = 2 [json_name = "application_version_id"];
+  ResolveApplicationScriptManifestInput query = 3;
+}
+
+message ResolveApplicationScriptManifestInput {
+  ScriptRuntimeQuery runtime = 1;
+}
+
+message ApplicationScriptManifest {
+  string application_id = 1;
+  string application_version_id = 2;
+  int64 publication_revision = 3;
+  app_center.v1.runtime_resolution.LaunchChannel channel = 4;
+  int32 rpc_api_major = 5;
+  // Explicitly empty for a valid application version with no dependencies.
+  repeated ScriptDescriptor scripts = 6;
+  google.protobuf.Timestamp as_of = 7;
+}
+
+message GetApplicationScriptContentRequest {
+  string application_id = 1 [json_name = "application_id"];
+  string application_version_id = 2 [json_name = "application_version_id"];
+  string script_version_id = 3 [json_name = "script_version_id"];
+  GetApplicationScriptContentInput query = 4;
+}
+
+message GetApplicationScriptContentInput {
+  ScriptRuntimeQuery runtime = 1;
+  string expected_digest = 2;
+}
+
+message ApplicationScriptContent {
+  string application_id = 1;
+  string application_version_id = 2;
+  int64 publication_revision = 3;
+  app_center.v1.runtime_resolution.LaunchChannel channel = 4;
+  int32 rpc_api_major = 5;
+  string resource_id = 6;
+  string version_id = 7;
+  string content_format = 8;
+  string digest = 9;
+  int64 byte_length = 10;
+  string content_text = 11;
+  google.protobuf.Timestamp as_of = 12;
+}

@@ -80,7 +80,7 @@ func (ScriptVersionState) EnumDescriptor() ([]byte, []int) {
 
 type CreateScriptVersionDraftRequest struct {
 	state         protoimpl.MessageState         `protogen:"open.v1"`
-	ResourceId    string                         `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId    string                         `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
 	Draft         *CreateScriptVersionDraftInput `protobuf:"bytes,2,opt,name=draft,proto3" json:"draft,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -192,8 +192,8 @@ func (x *CreateScriptVersionDraftInput) GetContentText() string {
 
 type ReplaceScriptVersionDraftRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
 	Command       *ReplaceScriptVersionDraftInput `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -428,8 +428,8 @@ func (x *ScriptVersion) GetUpdatedAt() *timestamppb.Timestamp {
 
 type SubmitScriptVersionReviewRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	ResourceId    string                          `protobuf:"bytes,1,opt,name=resource_id,proto3" json:"resource_id,omitempty"`
+	VersionId     string                          `protobuf:"bytes,2,opt,name=version_id,proto3" json:"version_id,omitempty"`
 	Command       *SubmitScriptVersionReviewInput `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -610,20 +610,19 @@ var File_app_center_v1_script_version_script_version_proto protoreflect.FileDesc
 
 const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
 	"\n" +
-	"1app_center/v1/script_version/script_version.proto\x12\x1capp_center.v1.script_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x95\x01\n" +
-	"\x1fCreateScriptVersionDraftRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12Q\n" +
+	"1app_center/v1/script_version/script_version.proto\x12\x1capp_center.v1.script_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x01\n" +
+	"\x1fCreateScriptVersionDraftRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12Q\n" +
 	"\x05draft\x18\x02 \x01(\v2;.app_center.v1.script_version.CreateScriptVersionDraftInputR\x05draft\"\x8e\x01\n" +
 	"\x1dCreateScriptVersionDraftInput\x12#\n" +
 	"\rversion_label\x18\x01 \x01(\tR\fversionLabel\x12%\n" +
 	"\x0econtent_format\x18\x02 \x01(\tR\rcontentFormat\x12!\n" +
-	"\fcontent_text\x18\x03 \x01(\tR\vcontentText\"\xba\x01\n" +
-	" ReplaceScriptVersionDraftRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	"\fcontent_text\x18\x03 \x01(\tR\vcontentText\"\xbc\x01\n" +
+	" ReplaceScriptVersionDraftRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12V\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\x12V\n" +
 	"\acommand\x18\x03 \x01(\v2<.app_center.v1.script_version.ReplaceScriptVersionDraftInputR\acommand\"\x97\x01\n" +
 	"\x1eReplaceScriptVersionDraftInput\x12+\n" +
 	"\x11expected_revision\x18\x01 \x01(\x03R\x10expectedRevision\x12%\n" +
@@ -644,12 +643,12 @@ const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xba\x01\n" +
-	" SubmitScriptVersionReviewRequest\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\x12\x1d\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xbc\x01\n" +
+	" SubmitScriptVersionReviewRequest\x12 \n" +
+	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12V\n" +
+	"version_id\x18\x02 \x01(\tR\n" +
+	"version_id\x12V\n" +
 	"\acommand\x18\x03 \x01(\v2<.app_center.v1.script_version.SubmitScriptVersionReviewInputR\acommand\"M\n" +
 	"\x1eSubmitScriptVersionReviewInput\x12+\n" +
 	"\x11expected_revision\x18\x01 \x01(\x03R\x10expectedRevision\"\x86\x02\n" +
