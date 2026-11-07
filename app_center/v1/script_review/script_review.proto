@@ -1,0 +1,66 @@
+syntax = "proto3";
+package app_center.v1.script_review;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_review;scriptreview";
+
+// Requires an ACTIVE App USER with app.script.review. The server checks conflicts.
+service ScriptReviewService {
+  rpc DecideScriptVersionReview(DecideScriptVersionReviewRequest) returns (ScriptReviewDecisionReceipt) {
+    option (google.api.http) = {
+      post: "/v1/script-resources/{resource_id}/versions/{version_id}/reviews/{review_id}/decision"
+      body: "command"
+    };
+  }
+}
+message DecideScriptVersionReviewRequest {
+  string resource_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  DecideScriptVersionReviewInput command = 4;
+}
+enum ScriptReviewAction {
+  SCRIPT_REVIEW_ACTION_UNSPECIFIED = 0;
+  SCRIPT_REVIEW_ACTION_APPROVE = 1;
+  SCRIPT_REVIEW_ACTION_REJECT = 2;
+}
+message DecideScriptVersionReviewInput {
+  int64 expected_version_revision = 1;
+  string policy_version = 2;
+  ScriptReviewAction decision = 3;
+  repeated string confirmed_check_ids = 4;
+  string reason = 5;
+}
+message ScriptReviewDecision {
+  string decision_id = 1;
+  ScriptReviewAction decision = 2;
+  string policy_version = 3;
+  repeated string confirmed_check_ids = 4;
+  string reason = 5;
+  string decided_by = 6;
+  google.protobuf.Timestamp decided_at = 7;
+}
+enum ScriptCascadeStatus {
+  SCRIPT_CASCADE_STATUS_UNSPECIFIED = 0;
+  SCRIPT_CASCADE_STATUS_PENDING = 1;
+  SCRIPT_CASCADE_STATUS_RUNNING = 2;
+  SCRIPT_CASCADE_STATUS_COMPLETE = 3;
+}
+message ScriptCascadeProgress {
+  string task_id = 1;
+  ScriptCascadeStatus status = 2;
+  int64 processed = 3;
+  int64 total = 4;
+  string last_failure = 5;
+  int64 rejected = 6;
+  int64 already_terminal = 7;
+  int64 application_closed = 8;
+  google.protobuf.Timestamp observed_at = 9;
+}
+message ScriptReviewDecisionReceipt {
+  string review_id = 1;
+  int64 version_revision = 2;
+  ScriptReviewDecision decision = 3;
+  // REJECT acknowledges the durable task with PENDING, before worker completion.
+  ScriptCascadeProgress cascade = 4;
+}

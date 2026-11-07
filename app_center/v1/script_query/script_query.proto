@@ -5,6 +5,7 @@ package app_center.v1.script_query;
 import "app_center/v1/script_resource/script_resource.proto";
 import "app_center/v1/script_version/script_version.proto";
 import "google/api/annotations.proto";
+import "app_center/v1/script_review/script_review.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_query;scriptquery";
@@ -79,6 +80,7 @@ message GetScriptVersionResponse {
   ScriptVersionSummary version = 1;
   optional string content_text = 2;
   string review_id = 3;
+  string decision_id = 4;
 }
 
 message ListPendingScriptReviewsRequest {
@@ -110,6 +112,8 @@ message GetScriptReviewRequest {
 enum ScriptReviewStatus {
   SCRIPT_REVIEW_STATUS_UNSPECIFIED = 0;
   SCRIPT_REVIEW_STATUS_PENDING = 1;
+  SCRIPT_REVIEW_STATUS_APPROVED = 2;
+  SCRIPT_REVIEW_STATUS_REJECTED = 3;
 }
 
 enum ScriptDecisionConflict {
@@ -139,4 +143,6 @@ message GetScriptReviewResponse {
   repeated ScriptReviewCheck checks = 10;
   bool can_decide = 11;
   repeated ScriptDecisionConflict conflicts = 12;
+  app_center.v1.script_review.ScriptReviewDecision decision = 13;
+  app_center.v1.script_review.ScriptCascadeProgress cascade = 14;
 }
