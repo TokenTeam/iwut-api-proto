@@ -8,6 +8,7 @@ package scriptquery
 
 import (
 	context "context"
+	script_publication "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_publication"
 	script_resource "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
@@ -20,30 +21,80 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationScriptQueryServiceGetScriptPublication = "/app_center.v1.script_query.ScriptQueryService/GetScriptPublication"
 const OperationScriptQueryServiceGetScriptResource = "/app_center.v1.script_query.ScriptQueryService/GetScriptResource"
 const OperationScriptQueryServiceGetScriptReview = "/app_center.v1.script_query.ScriptQueryService/GetScriptReview"
 const OperationScriptQueryServiceGetScriptVersion = "/app_center.v1.script_query.ScriptQueryService/GetScriptVersion"
 const OperationScriptQueryServiceListPendingScriptReviews = "/app_center.v1.script_query.ScriptQueryService/ListPendingScriptReviews"
+const OperationScriptQueryServiceListScriptPublicationHistory = "/app_center.v1.script_query.ScriptQueryService/ListScriptPublicationHistory"
 const OperationScriptQueryServiceListScriptResources = "/app_center.v1.script_query.ScriptQueryService/ListScriptResources"
 const OperationScriptQueryServiceListScriptVersions = "/app_center.v1.script_query.ScriptQueryService/ListScriptVersions"
 
 type ScriptQueryServiceHTTPServer interface {
+	GetScriptPublication(context.Context, *GetScriptPublicationRequest) (*script_publication.ScriptPublicationState, error)
 	GetScriptResource(context.Context, *GetScriptResourceRequest) (*script_resource.ScriptResource, error)
 	GetScriptReview(context.Context, *GetScriptReviewRequest) (*GetScriptReviewResponse, error)
 	GetScriptVersion(context.Context, *GetScriptVersionRequest) (*GetScriptVersionResponse, error)
 	ListPendingScriptReviews(context.Context, *ListPendingScriptReviewsRequest) (*ListPendingScriptReviewsResponse, error)
+	ListScriptPublicationHistory(context.Context, *ListScriptPublicationHistoryRequest) (*ListScriptPublicationHistoryResponse, error)
 	ListScriptResources(context.Context, *ListScriptResourcesRequest) (*ListScriptResourcesResponse, error)
 	ListScriptVersions(context.Context, *ListScriptVersionsRequest) (*ListScriptVersionsResponse, error)
 }
 
 func RegisterScriptQueryServiceHTTPServer(s *http.Server, srv ScriptQueryServiceHTTPServer) {
 	r := s.Route("/")
+	r.GET("/v1/script-resources/{resource_id}/publication", _ScriptQueryService_GetScriptPublication0_HTTP_Handler(srv))
+	r.GET("/v1/script-resources/{resource_id}/publication/history", _ScriptQueryService_ListScriptPublicationHistory0_HTTP_Handler(srv))
 	r.GET("/v1/script-resources", _ScriptQueryService_ListScriptResources0_HTTP_Handler(srv))
 	r.GET("/v1/script-resources/{resource_id}", _ScriptQueryService_GetScriptResource0_HTTP_Handler(srv))
 	r.GET("/v1/script-resources/{resource_id}/versions", _ScriptQueryService_ListScriptVersions0_HTTP_Handler(srv))
 	r.GET("/v1/script-resources/{resource_id}/versions/{version_id}", _ScriptQueryService_GetScriptVersion0_HTTP_Handler(srv))
 	r.GET("/v1/script-reviews/pending", _ScriptQueryService_ListPendingScriptReviews0_HTTP_Handler(srv))
 	r.GET("/v1/script-resources/{resource_id}/versions/{version_id}/reviews/{review_id}", _ScriptQueryService_GetScriptReview0_HTTP_Handler(srv))
+}
+
+func _ScriptQueryService_GetScriptPublication0_HTTP_Handler(srv ScriptQueryServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetScriptPublicationRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationScriptQueryServiceGetScriptPublication)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetScriptPublication(ctx, req.(*GetScriptPublicationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*script_publication.ScriptPublicationState)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ScriptQueryService_ListScriptPublicationHistory0_HTTP_Handler(srv ScriptQueryServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListScriptPublicationHistoryRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationScriptQueryServiceListScriptPublicationHistory)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListScriptPublicationHistory(ctx, req.(*ListScriptPublicationHistoryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListScriptPublicationHistoryResponse)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _ScriptQueryService_ListScriptResources0_HTTP_Handler(srv ScriptQueryServiceHTTPServer) func(ctx http.Context) error {
@@ -173,10 +224,12 @@ func _ScriptQueryService_GetScriptReview0_HTTP_Handler(srv ScriptQueryServiceHTT
 }
 
 type ScriptQueryServiceHTTPClient interface {
+	GetScriptPublication(ctx context.Context, req *GetScriptPublicationRequest, opts ...http.CallOption) (rsp *script_publication.ScriptPublicationState, err error)
 	GetScriptResource(ctx context.Context, req *GetScriptResourceRequest, opts ...http.CallOption) (rsp *script_resource.ScriptResource, err error)
 	GetScriptReview(ctx context.Context, req *GetScriptReviewRequest, opts ...http.CallOption) (rsp *GetScriptReviewResponse, err error)
 	GetScriptVersion(ctx context.Context, req *GetScriptVersionRequest, opts ...http.CallOption) (rsp *GetScriptVersionResponse, err error)
 	ListPendingScriptReviews(ctx context.Context, req *ListPendingScriptReviewsRequest, opts ...http.CallOption) (rsp *ListPendingScriptReviewsResponse, err error)
+	ListScriptPublicationHistory(ctx context.Context, req *ListScriptPublicationHistoryRequest, opts ...http.CallOption) (rsp *ListScriptPublicationHistoryResponse, err error)
 	ListScriptResources(ctx context.Context, req *ListScriptResourcesRequest, opts ...http.CallOption) (rsp *ListScriptResourcesResponse, err error)
 	ListScriptVersions(ctx context.Context, req *ListScriptVersionsRequest, opts ...http.CallOption) (rsp *ListScriptVersionsResponse, err error)
 }
@@ -187,6 +240,19 @@ type ScriptQueryServiceHTTPClientImpl struct {
 
 func NewScriptQueryServiceHTTPClient(client *http.Client) ScriptQueryServiceHTTPClient {
 	return &ScriptQueryServiceHTTPClientImpl{client}
+}
+
+func (c *ScriptQueryServiceHTTPClientImpl) GetScriptPublication(ctx context.Context, in *GetScriptPublicationRequest, opts ...http.CallOption) (*script_publication.ScriptPublicationState, error) {
+	var out script_publication.ScriptPublicationState
+	pattern := "/v1/script-resources/{resource_id}/publication"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationScriptQueryServiceGetScriptPublication))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ScriptQueryServiceHTTPClientImpl) GetScriptResource(ctx context.Context, in *GetScriptResourceRequest, opts ...http.CallOption) (*script_resource.ScriptResource, error) {
@@ -233,6 +299,19 @@ func (c *ScriptQueryServiceHTTPClientImpl) ListPendingScriptReviews(ctx context.
 	pattern := "/v1/script-reviews/pending"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationScriptQueryServiceListPendingScriptReviews))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ScriptQueryServiceHTTPClientImpl) ListScriptPublicationHistory(ctx context.Context, in *ListScriptPublicationHistoryRequest, opts ...http.CallOption) (*ListScriptPublicationHistoryResponse, error) {
+	var out ListScriptPublicationHistoryResponse
+	pattern := "/v1/script-resources/{resource_id}/publication/history"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationScriptQueryServiceListScriptPublicationHistory))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

@@ -8,6 +8,7 @@ package scriptquery
 
 import (
 	context "context"
+	script_publication "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_publication"
 	script_resource "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,12 +21,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ScriptQueryService_ListScriptResources_FullMethodName      = "/app_center.v1.script_query.ScriptQueryService/ListScriptResources"
-	ScriptQueryService_GetScriptResource_FullMethodName        = "/app_center.v1.script_query.ScriptQueryService/GetScriptResource"
-	ScriptQueryService_ListScriptVersions_FullMethodName       = "/app_center.v1.script_query.ScriptQueryService/ListScriptVersions"
-	ScriptQueryService_GetScriptVersion_FullMethodName         = "/app_center.v1.script_query.ScriptQueryService/GetScriptVersion"
-	ScriptQueryService_ListPendingScriptReviews_FullMethodName = "/app_center.v1.script_query.ScriptQueryService/ListPendingScriptReviews"
-	ScriptQueryService_GetScriptReview_FullMethodName          = "/app_center.v1.script_query.ScriptQueryService/GetScriptReview"
+	ScriptQueryService_GetScriptPublication_FullMethodName         = "/app_center.v1.script_query.ScriptQueryService/GetScriptPublication"
+	ScriptQueryService_ListScriptPublicationHistory_FullMethodName = "/app_center.v1.script_query.ScriptQueryService/ListScriptPublicationHistory"
+	ScriptQueryService_ListScriptResources_FullMethodName          = "/app_center.v1.script_query.ScriptQueryService/ListScriptResources"
+	ScriptQueryService_GetScriptResource_FullMethodName            = "/app_center.v1.script_query.ScriptQueryService/GetScriptResource"
+	ScriptQueryService_ListScriptVersions_FullMethodName           = "/app_center.v1.script_query.ScriptQueryService/ListScriptVersions"
+	ScriptQueryService_GetScriptVersion_FullMethodName             = "/app_center.v1.script_query.ScriptQueryService/GetScriptVersion"
+	ScriptQueryService_ListPendingScriptReviews_FullMethodName     = "/app_center.v1.script_query.ScriptQueryService/ListPendingScriptReviews"
+	ScriptQueryService_GetScriptReview_FullMethodName              = "/app_center.v1.script_query.ScriptQueryService/GetScriptReview"
 )
 
 // ScriptQueryServiceClient is the client API for ScriptQueryService service.
@@ -35,6 +38,8 @@ const (
 // Platform script management views. The service applies the trusted App USER
 // identity's exact script permissions before looking up any target.
 type ScriptQueryServiceClient interface {
+	GetScriptPublication(ctx context.Context, in *GetScriptPublicationRequest, opts ...grpc.CallOption) (*script_publication.ScriptPublicationState, error)
+	ListScriptPublicationHistory(ctx context.Context, in *ListScriptPublicationHistoryRequest, opts ...grpc.CallOption) (*ListScriptPublicationHistoryResponse, error)
 	ListScriptResources(ctx context.Context, in *ListScriptResourcesRequest, opts ...grpc.CallOption) (*ListScriptResourcesResponse, error)
 	GetScriptResource(ctx context.Context, in *GetScriptResourceRequest, opts ...grpc.CallOption) (*script_resource.ScriptResource, error)
 	ListScriptVersions(ctx context.Context, in *ListScriptVersionsRequest, opts ...grpc.CallOption) (*ListScriptVersionsResponse, error)
@@ -49,6 +54,26 @@ type scriptQueryServiceClient struct {
 
 func NewScriptQueryServiceClient(cc grpc.ClientConnInterface) ScriptQueryServiceClient {
 	return &scriptQueryServiceClient{cc}
+}
+
+func (c *scriptQueryServiceClient) GetScriptPublication(ctx context.Context, in *GetScriptPublicationRequest, opts ...grpc.CallOption) (*script_publication.ScriptPublicationState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(script_publication.ScriptPublicationState)
+	err := c.cc.Invoke(ctx, ScriptQueryService_GetScriptPublication_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scriptQueryServiceClient) ListScriptPublicationHistory(ctx context.Context, in *ListScriptPublicationHistoryRequest, opts ...grpc.CallOption) (*ListScriptPublicationHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListScriptPublicationHistoryResponse)
+	err := c.cc.Invoke(ctx, ScriptQueryService_ListScriptPublicationHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *scriptQueryServiceClient) ListScriptResources(ctx context.Context, in *ListScriptResourcesRequest, opts ...grpc.CallOption) (*ListScriptResourcesResponse, error) {
@@ -118,6 +143,8 @@ func (c *scriptQueryServiceClient) GetScriptReview(ctx context.Context, in *GetS
 // Platform script management views. The service applies the trusted App USER
 // identity's exact script permissions before looking up any target.
 type ScriptQueryServiceServer interface {
+	GetScriptPublication(context.Context, *GetScriptPublicationRequest) (*script_publication.ScriptPublicationState, error)
+	ListScriptPublicationHistory(context.Context, *ListScriptPublicationHistoryRequest) (*ListScriptPublicationHistoryResponse, error)
 	ListScriptResources(context.Context, *ListScriptResourcesRequest) (*ListScriptResourcesResponse, error)
 	GetScriptResource(context.Context, *GetScriptResourceRequest) (*script_resource.ScriptResource, error)
 	ListScriptVersions(context.Context, *ListScriptVersionsRequest) (*ListScriptVersionsResponse, error)
@@ -134,6 +161,12 @@ type ScriptQueryServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedScriptQueryServiceServer struct{}
 
+func (UnimplementedScriptQueryServiceServer) GetScriptPublication(context.Context, *GetScriptPublicationRequest) (*script_publication.ScriptPublicationState, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetScriptPublication not implemented")
+}
+func (UnimplementedScriptQueryServiceServer) ListScriptPublicationHistory(context.Context, *ListScriptPublicationHistoryRequest) (*ListScriptPublicationHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListScriptPublicationHistory not implemented")
+}
 func (UnimplementedScriptQueryServiceServer) ListScriptResources(context.Context, *ListScriptResourcesRequest) (*ListScriptResourcesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListScriptResources not implemented")
 }
@@ -171,6 +204,42 @@ func RegisterScriptQueryServiceServer(s grpc.ServiceRegistrar, srv ScriptQuerySe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ScriptQueryService_ServiceDesc, srv)
+}
+
+func _ScriptQueryService_GetScriptPublication_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetScriptPublicationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScriptQueryServiceServer).GetScriptPublication(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScriptQueryService_GetScriptPublication_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScriptQueryServiceServer).GetScriptPublication(ctx, req.(*GetScriptPublicationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScriptQueryService_ListScriptPublicationHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListScriptPublicationHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScriptQueryServiceServer).ListScriptPublicationHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScriptQueryService_ListScriptPublicationHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScriptQueryServiceServer).ListScriptPublicationHistory(ctx, req.(*ListScriptPublicationHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ScriptQueryService_ListScriptResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -288,6 +357,14 @@ var ScriptQueryService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "app_center.v1.script_query.ScriptQueryService",
 	HandlerType: (*ScriptQueryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetScriptPublication",
+			Handler:    _ScriptQueryService_GetScriptPublication_Handler,
+		},
+		{
+			MethodName: "ListScriptPublicationHistory",
+			Handler:    _ScriptQueryService_ListScriptPublicationHistory_Handler,
+		},
 		{
 			MethodName: "ListScriptResources",
 			Handler:    _ScriptQueryService_ListScriptResources_Handler,

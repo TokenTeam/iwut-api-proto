@@ -7,6 +7,7 @@
 package scriptquery
 
 import (
+	script_publication "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_publication"
 	script_resource "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource"
 	script_review "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_review"
 	script_version "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version"
@@ -1098,11 +1099,167 @@ func (x *GetScriptReviewResponse) GetCascade() *script_review.ScriptCascadeProgr
 	return nil
 }
 
+type GetScriptPublicationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetScriptPublicationRequest) Reset() {
+	*x = GetScriptPublicationRequest{}
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetScriptPublicationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetScriptPublicationRequest) ProtoMessage() {}
+
+func (x *GetScriptPublicationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetScriptPublicationRequest.ProtoReflect.Descriptor instead.
+func (*GetScriptPublicationRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_query_script_query_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetScriptPublicationRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+type ListScriptPublicationHistoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ResourceId    string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	Limit         *int32                 `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	Cursor        string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListScriptPublicationHistoryRequest) Reset() {
+	*x = ListScriptPublicationHistoryRequest{}
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListScriptPublicationHistoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListScriptPublicationHistoryRequest) ProtoMessage() {}
+
+func (x *ListScriptPublicationHistoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListScriptPublicationHistoryRequest.ProtoReflect.Descriptor instead.
+func (*ListScriptPublicationHistoryRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_query_script_query_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListScriptPublicationHistoryRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *ListScriptPublicationHistoryRequest) GetLimit() int32 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *ListScriptPublicationHistoryRequest) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
+type ListScriptPublicationHistoryResponse struct {
+	state         protoimpl.MessageState                             `protogen:"open.v1"`
+	Items         []*script_publication.ScriptPublicationHistoryItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	NextCursor    string                                             `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListScriptPublicationHistoryResponse) Reset() {
+	*x = ListScriptPublicationHistoryResponse{}
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListScriptPublicationHistoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListScriptPublicationHistoryResponse) ProtoMessage() {}
+
+func (x *ListScriptPublicationHistoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_script_query_script_query_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListScriptPublicationHistoryResponse.ProtoReflect.Descriptor instead.
+func (*ListScriptPublicationHistoryResponse) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_script_query_script_query_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListScriptPublicationHistoryResponse) GetItems() []*script_publication.ScriptPublicationHistoryItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListScriptPublicationHistoryResponse) GetNextCursor() string {
+	if x != nil {
+		return x.NextCursor
+	}
+	return ""
+}
+
 var File_app_center_v1_script_query_script_query_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\n" +
-	"-app_center/v1/script_query/script_query.proto\x12\x1aapp_center.v1.script_query\x1a3app_center/v1/script_resource/script_resource.proto\x1a1app_center/v1/script_version/script_version.proto\x1a\x1cgoogle/api/annotations.proto\x1a/app_center/v1/script_review/script_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Y\n" +
+	"-app_center/v1/script_query/script_query.proto\x12\x1aapp_center.v1.script_query\x1a3app_center/v1/script_resource/script_resource.proto\x1a1app_center/v1/script_version/script_version.proto\x1a\x1cgoogle/api/annotations.proto\x1a9app_center/v1/script_publication/script_publication.proto\x1a/app_center/v1/script_review/script_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Y\n" +
 	"\x1aListScriptResourcesRequest\x12\x19\n" +
 	"\x05limit\x18\x01 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x16\n" +
 	"\x06cursor\x18\x02 \x01(\tR\x06cursorB\b\n" +
@@ -1199,7 +1356,20 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"can_decide\x18\v \x01(\bR\tcanDecide\x12P\n" +
 	"\tconflicts\x18\f \x03(\x0e22.app_center.v1.script_query.ScriptDecisionConflictR\tconflicts\x12M\n" +
 	"\bdecision\x18\r \x01(\v21.app_center.v1.script_review.ScriptReviewDecisionR\bdecision\x12L\n" +
-	"\acascade\x18\x0e \x01(\v22.app_center.v1.script_review.ScriptCascadeProgressR\acascade*\xa2\x01\n" +
+	"\acascade\x18\x0e \x01(\v22.app_center.v1.script_review.ScriptCascadeProgressR\acascade\">\n" +
+	"\x1bGetScriptPublicationRequest\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\"\x83\x01\n" +
+	"#ListScriptPublicationHistoryRequest\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\x12\x19\n" +
+	"\x05limit\x18\x02 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x16\n" +
+	"\x06cursor\x18\x03 \x01(\tR\x06cursorB\b\n" +
+	"\x06_limit\"\x9d\x01\n" +
+	"$ListScriptPublicationHistoryResponse\x12T\n" +
+	"\x05items\x18\x01 \x03(\v2>.app_center.v1.script_publication.ScriptPublicationHistoryItemR\x05items\x12\x1f\n" +
+	"\vnext_cursor\x18\x02 \x01(\tR\n" +
+	"nextCursor*\xa2\x01\n" +
 	"\x12ScriptReviewStatus\x12$\n" +
 	" SCRIPT_REVIEW_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSCRIPT_REVIEW_STATUS_PENDING\x10\x01\x12!\n" +
@@ -1209,8 +1379,10 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"$SCRIPT_DECISION_CONFLICT_UNSPECIFIED\x10\x00\x12,\n" +
 	"(SCRIPT_DECISION_CONFLICT_VERSION_CREATOR\x10\x01\x12+\n" +
 	"'SCRIPT_DECISION_CONFLICT_CONTENT_EDITOR\x10\x02\x12-\n" +
-	")SCRIPT_DECISION_CONFLICT_REVIEW_SUBMITTER\x10\x032\xee\b\n" +
-	"\x12ScriptQueryService\x12\xa4\x01\n" +
+	")SCRIPT_DECISION_CONFLICT_REVIEW_SUBMITTER\x10\x032\x96\f\n" +
+	"\x12ScriptQueryService\x12\xc1\x01\n" +
+	"\x14GetScriptPublication\x127.app_center.v1.script_query.GetScriptPublicationRequest\x1a8.app_center.v1.script_publication.ScriptPublicationState\"6\x82\xd3\xe4\x93\x020\x12./v1/script-resources/{resource_id}/publication\x12\xe1\x01\n" +
+	"\x1cListScriptPublicationHistory\x12?.app_center.v1.script_query.ListScriptPublicationHistoryRequest\x1a@.app_center.v1.script_query.ListScriptPublicationHistoryResponse\">\x82\xd3\xe4\x93\x028\x126/v1/script-resources/{resource_id}/publication/history\x12\xa4\x01\n" +
 	"\x13ListScriptResources\x126.app_center.v1.script_query.ListScriptResourcesRequest\x1a7.app_center.v1.script_query.ListScriptResourcesResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/script-resources\x12\xa4\x01\n" +
 	"\x11GetScriptResource\x124.app_center.v1.script_query.GetScriptResourceRequest\x1a-.app_center.v1.script_resource.ScriptResource\"*\x82\xd3\xe4\x93\x02$\x12\"/v1/script-resources/{resource_id}\x12\xb8\x01\n" +
 	"\x12ListScriptVersions\x125.app_center.v1.script_query.ListScriptVersionsRequest\x1a6.app_center.v1.script_query.ListScriptVersionsResponse\"3\x82\xd3\xe4\x93\x02-\x12+/v1/script-resources/{resource_id}/versions\x12\xbf\x01\n" +
@@ -1231,64 +1403,74 @@ func file_app_center_v1_script_query_script_query_proto_rawDescGZIP() []byte {
 }
 
 var file_app_center_v1_script_query_script_query_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_app_center_v1_script_query_script_query_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_app_center_v1_script_query_script_query_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_app_center_v1_script_query_script_query_proto_goTypes = []any{
-	(ScriptReviewStatus)(0),                     // 0: app_center.v1.script_query.ScriptReviewStatus
-	(ScriptDecisionConflict)(0),                 // 1: app_center.v1.script_query.ScriptDecisionConflict
-	(*ListScriptResourcesRequest)(nil),          // 2: app_center.v1.script_query.ListScriptResourcesRequest
-	(*ListScriptResourcesResponse)(nil),         // 3: app_center.v1.script_query.ListScriptResourcesResponse
-	(*GetScriptResourceRequest)(nil),            // 4: app_center.v1.script_query.GetScriptResourceRequest
-	(*ListScriptVersionsRequest)(nil),           // 5: app_center.v1.script_query.ListScriptVersionsRequest
-	(*ListScriptVersionsResponse)(nil),          // 6: app_center.v1.script_query.ListScriptVersionsResponse
-	(*GetScriptVersionRequest)(nil),             // 7: app_center.v1.script_query.GetScriptVersionRequest
-	(*ScriptVersionSummary)(nil),                // 8: app_center.v1.script_query.ScriptVersionSummary
-	(*GetScriptVersionResponse)(nil),            // 9: app_center.v1.script_query.GetScriptVersionResponse
-	(*ListPendingScriptReviewsRequest)(nil),     // 10: app_center.v1.script_query.ListPendingScriptReviewsRequest
-	(*ListPendingScriptReviewsResponse)(nil),    // 11: app_center.v1.script_query.ListPendingScriptReviewsResponse
-	(*PendingScriptReviewSummary)(nil),          // 12: app_center.v1.script_query.PendingScriptReviewSummary
-	(*GetScriptReviewRequest)(nil),              // 13: app_center.v1.script_query.GetScriptReviewRequest
-	(*ScriptReviewCheck)(nil),                   // 14: app_center.v1.script_query.ScriptReviewCheck
-	(*GetScriptReviewResponse)(nil),             // 15: app_center.v1.script_query.GetScriptReviewResponse
-	(*script_resource.ScriptResource)(nil),      // 16: app_center.v1.script_resource.ScriptResource
-	(script_version.ScriptVersionState)(0),      // 17: app_center.v1.script_version.ScriptVersionState
-	(*timestamppb.Timestamp)(nil),               // 18: google.protobuf.Timestamp
-	(*script_review.ScriptReviewDecision)(nil),  // 19: app_center.v1.script_review.ScriptReviewDecision
-	(*script_review.ScriptCascadeProgress)(nil), // 20: app_center.v1.script_review.ScriptCascadeProgress
+	(ScriptReviewStatus)(0),                                 // 0: app_center.v1.script_query.ScriptReviewStatus
+	(ScriptDecisionConflict)(0),                             // 1: app_center.v1.script_query.ScriptDecisionConflict
+	(*ListScriptResourcesRequest)(nil),                      // 2: app_center.v1.script_query.ListScriptResourcesRequest
+	(*ListScriptResourcesResponse)(nil),                     // 3: app_center.v1.script_query.ListScriptResourcesResponse
+	(*GetScriptResourceRequest)(nil),                        // 4: app_center.v1.script_query.GetScriptResourceRequest
+	(*ListScriptVersionsRequest)(nil),                       // 5: app_center.v1.script_query.ListScriptVersionsRequest
+	(*ListScriptVersionsResponse)(nil),                      // 6: app_center.v1.script_query.ListScriptVersionsResponse
+	(*GetScriptVersionRequest)(nil),                         // 7: app_center.v1.script_query.GetScriptVersionRequest
+	(*ScriptVersionSummary)(nil),                            // 8: app_center.v1.script_query.ScriptVersionSummary
+	(*GetScriptVersionResponse)(nil),                        // 9: app_center.v1.script_query.GetScriptVersionResponse
+	(*ListPendingScriptReviewsRequest)(nil),                 // 10: app_center.v1.script_query.ListPendingScriptReviewsRequest
+	(*ListPendingScriptReviewsResponse)(nil),                // 11: app_center.v1.script_query.ListPendingScriptReviewsResponse
+	(*PendingScriptReviewSummary)(nil),                      // 12: app_center.v1.script_query.PendingScriptReviewSummary
+	(*GetScriptReviewRequest)(nil),                          // 13: app_center.v1.script_query.GetScriptReviewRequest
+	(*ScriptReviewCheck)(nil),                               // 14: app_center.v1.script_query.ScriptReviewCheck
+	(*GetScriptReviewResponse)(nil),                         // 15: app_center.v1.script_query.GetScriptReviewResponse
+	(*GetScriptPublicationRequest)(nil),                     // 16: app_center.v1.script_query.GetScriptPublicationRequest
+	(*ListScriptPublicationHistoryRequest)(nil),             // 17: app_center.v1.script_query.ListScriptPublicationHistoryRequest
+	(*ListScriptPublicationHistoryResponse)(nil),            // 18: app_center.v1.script_query.ListScriptPublicationHistoryResponse
+	(*script_resource.ScriptResource)(nil),                  // 19: app_center.v1.script_resource.ScriptResource
+	(script_version.ScriptVersionState)(0),                  // 20: app_center.v1.script_version.ScriptVersionState
+	(*timestamppb.Timestamp)(nil),                           // 21: google.protobuf.Timestamp
+	(*script_review.ScriptReviewDecision)(nil),              // 22: app_center.v1.script_review.ScriptReviewDecision
+	(*script_review.ScriptCascadeProgress)(nil),             // 23: app_center.v1.script_review.ScriptCascadeProgress
+	(*script_publication.ScriptPublicationHistoryItem)(nil), // 24: app_center.v1.script_publication.ScriptPublicationHistoryItem
+	(*script_publication.ScriptPublicationState)(nil),       // 25: app_center.v1.script_publication.ScriptPublicationState
 }
 var file_app_center_v1_script_query_script_query_proto_depIdxs = []int32{
-	16, // 0: app_center.v1.script_query.ListScriptResourcesResponse.items:type_name -> app_center.v1.script_resource.ScriptResource
-	17, // 1: app_center.v1.script_query.ListScriptVersionsRequest.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	19, // 0: app_center.v1.script_query.ListScriptResourcesResponse.items:type_name -> app_center.v1.script_resource.ScriptResource
+	20, // 1: app_center.v1.script_query.ListScriptVersionsRequest.state:type_name -> app_center.v1.script_version.ScriptVersionState
 	8,  // 2: app_center.v1.script_query.ListScriptVersionsResponse.items:type_name -> app_center.v1.script_query.ScriptVersionSummary
-	17, // 3: app_center.v1.script_query.ScriptVersionSummary.state:type_name -> app_center.v1.script_version.ScriptVersionState
-	18, // 4: app_center.v1.script_query.ScriptVersionSummary.created_at:type_name -> google.protobuf.Timestamp
-	18, // 5: app_center.v1.script_query.ScriptVersionSummary.updated_at:type_name -> google.protobuf.Timestamp
+	20, // 3: app_center.v1.script_query.ScriptVersionSummary.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	21, // 4: app_center.v1.script_query.ScriptVersionSummary.created_at:type_name -> google.protobuf.Timestamp
+	21, // 5: app_center.v1.script_query.ScriptVersionSummary.updated_at:type_name -> google.protobuf.Timestamp
 	8,  // 6: app_center.v1.script_query.GetScriptVersionResponse.version:type_name -> app_center.v1.script_query.ScriptVersionSummary
 	12, // 7: app_center.v1.script_query.ListPendingScriptReviewsResponse.items:type_name -> app_center.v1.script_query.PendingScriptReviewSummary
-	18, // 8: app_center.v1.script_query.PendingScriptReviewSummary.submitted_at:type_name -> google.protobuf.Timestamp
+	21, // 8: app_center.v1.script_query.PendingScriptReviewSummary.submitted_at:type_name -> google.protobuf.Timestamp
 	12, // 9: app_center.v1.script_query.GetScriptReviewResponse.submission:type_name -> app_center.v1.script_query.PendingScriptReviewSummary
 	0,  // 10: app_center.v1.script_query.GetScriptReviewResponse.status:type_name -> app_center.v1.script_query.ScriptReviewStatus
 	8,  // 11: app_center.v1.script_query.GetScriptReviewResponse.version:type_name -> app_center.v1.script_query.ScriptVersionSummary
 	14, // 12: app_center.v1.script_query.GetScriptReviewResponse.checks:type_name -> app_center.v1.script_query.ScriptReviewCheck
 	1,  // 13: app_center.v1.script_query.GetScriptReviewResponse.conflicts:type_name -> app_center.v1.script_query.ScriptDecisionConflict
-	19, // 14: app_center.v1.script_query.GetScriptReviewResponse.decision:type_name -> app_center.v1.script_review.ScriptReviewDecision
-	20, // 15: app_center.v1.script_query.GetScriptReviewResponse.cascade:type_name -> app_center.v1.script_review.ScriptCascadeProgress
-	2,  // 16: app_center.v1.script_query.ScriptQueryService.ListScriptResources:input_type -> app_center.v1.script_query.ListScriptResourcesRequest
-	4,  // 17: app_center.v1.script_query.ScriptQueryService.GetScriptResource:input_type -> app_center.v1.script_query.GetScriptResourceRequest
-	5,  // 18: app_center.v1.script_query.ScriptQueryService.ListScriptVersions:input_type -> app_center.v1.script_query.ListScriptVersionsRequest
-	7,  // 19: app_center.v1.script_query.ScriptQueryService.GetScriptVersion:input_type -> app_center.v1.script_query.GetScriptVersionRequest
-	10, // 20: app_center.v1.script_query.ScriptQueryService.ListPendingScriptReviews:input_type -> app_center.v1.script_query.ListPendingScriptReviewsRequest
-	13, // 21: app_center.v1.script_query.ScriptQueryService.GetScriptReview:input_type -> app_center.v1.script_query.GetScriptReviewRequest
-	3,  // 22: app_center.v1.script_query.ScriptQueryService.ListScriptResources:output_type -> app_center.v1.script_query.ListScriptResourcesResponse
-	16, // 23: app_center.v1.script_query.ScriptQueryService.GetScriptResource:output_type -> app_center.v1.script_resource.ScriptResource
-	6,  // 24: app_center.v1.script_query.ScriptQueryService.ListScriptVersions:output_type -> app_center.v1.script_query.ListScriptVersionsResponse
-	9,  // 25: app_center.v1.script_query.ScriptQueryService.GetScriptVersion:output_type -> app_center.v1.script_query.GetScriptVersionResponse
-	11, // 26: app_center.v1.script_query.ScriptQueryService.ListPendingScriptReviews:output_type -> app_center.v1.script_query.ListPendingScriptReviewsResponse
-	15, // 27: app_center.v1.script_query.ScriptQueryService.GetScriptReview:output_type -> app_center.v1.script_query.GetScriptReviewResponse
-	22, // [22:28] is the sub-list for method output_type
-	16, // [16:22] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	22, // 14: app_center.v1.script_query.GetScriptReviewResponse.decision:type_name -> app_center.v1.script_review.ScriptReviewDecision
+	23, // 15: app_center.v1.script_query.GetScriptReviewResponse.cascade:type_name -> app_center.v1.script_review.ScriptCascadeProgress
+	24, // 16: app_center.v1.script_query.ListScriptPublicationHistoryResponse.items:type_name -> app_center.v1.script_publication.ScriptPublicationHistoryItem
+	16, // 17: app_center.v1.script_query.ScriptQueryService.GetScriptPublication:input_type -> app_center.v1.script_query.GetScriptPublicationRequest
+	17, // 18: app_center.v1.script_query.ScriptQueryService.ListScriptPublicationHistory:input_type -> app_center.v1.script_query.ListScriptPublicationHistoryRequest
+	2,  // 19: app_center.v1.script_query.ScriptQueryService.ListScriptResources:input_type -> app_center.v1.script_query.ListScriptResourcesRequest
+	4,  // 20: app_center.v1.script_query.ScriptQueryService.GetScriptResource:input_type -> app_center.v1.script_query.GetScriptResourceRequest
+	5,  // 21: app_center.v1.script_query.ScriptQueryService.ListScriptVersions:input_type -> app_center.v1.script_query.ListScriptVersionsRequest
+	7,  // 22: app_center.v1.script_query.ScriptQueryService.GetScriptVersion:input_type -> app_center.v1.script_query.GetScriptVersionRequest
+	10, // 23: app_center.v1.script_query.ScriptQueryService.ListPendingScriptReviews:input_type -> app_center.v1.script_query.ListPendingScriptReviewsRequest
+	13, // 24: app_center.v1.script_query.ScriptQueryService.GetScriptReview:input_type -> app_center.v1.script_query.GetScriptReviewRequest
+	25, // 25: app_center.v1.script_query.ScriptQueryService.GetScriptPublication:output_type -> app_center.v1.script_publication.ScriptPublicationState
+	18, // 26: app_center.v1.script_query.ScriptQueryService.ListScriptPublicationHistory:output_type -> app_center.v1.script_query.ListScriptPublicationHistoryResponse
+	3,  // 27: app_center.v1.script_query.ScriptQueryService.ListScriptResources:output_type -> app_center.v1.script_query.ListScriptResourcesResponse
+	19, // 28: app_center.v1.script_query.ScriptQueryService.GetScriptResource:output_type -> app_center.v1.script_resource.ScriptResource
+	6,  // 29: app_center.v1.script_query.ScriptQueryService.ListScriptVersions:output_type -> app_center.v1.script_query.ListScriptVersionsResponse
+	9,  // 30: app_center.v1.script_query.ScriptQueryService.GetScriptVersion:output_type -> app_center.v1.script_query.GetScriptVersionResponse
+	11, // 31: app_center.v1.script_query.ScriptQueryService.ListPendingScriptReviews:output_type -> app_center.v1.script_query.ListPendingScriptReviewsResponse
+	15, // 32: app_center.v1.script_query.ScriptQueryService.GetScriptReview:output_type -> app_center.v1.script_query.GetScriptReviewResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_script_query_script_query_proto_init() }
@@ -1300,13 +1482,14 @@ func file_app_center_v1_script_query_script_query_proto_init() {
 	file_app_center_v1_script_query_script_query_proto_msgTypes[3].OneofWrappers = []any{}
 	file_app_center_v1_script_query_script_query_proto_msgTypes[7].OneofWrappers = []any{}
 	file_app_center_v1_script_query_script_query_proto_msgTypes[8].OneofWrappers = []any{}
+	file_app_center_v1_script_query_script_query_proto_msgTypes[15].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_script_query_script_query_proto_rawDesc), len(file_app_center_v1_script_query_script_query_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   14,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

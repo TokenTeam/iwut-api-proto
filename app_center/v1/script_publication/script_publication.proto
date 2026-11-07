@@ -1,0 +1,71 @@
+syntax = "proto3";
+package app_center.v1.script_publication;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_publication;scriptpublication";
+
+// Commands independently require app.script.publish/suspend/restore.
+service ScriptPublicationService {
+  rpc PublishScriptVersion(PublishScriptVersionRequest) returns (ScriptPublicationCommandResult) {
+    option (google.api.http) = { post: "/v1/script-resources/{resource_id}/versions/{version_id}/publication" body: "command" };
+  }
+  rpc ClearScriptHead(ClearScriptHeadRequest) returns (ScriptPublicationCommandResult) {
+    option (google.api.http) = { post: "/v1/script-resources/{resource_id}/publication/head/clear" body: "command" };
+  }
+  rpc SuspendScriptDistribution(SuspendScriptDistributionRequest) returns (ScriptPublicationCommandResult) {
+    option (google.api.http) = { post: "/v1/script-resources/{resource_id}/distribution/suspend" body: "command" };
+  }
+  rpc RestoreScriptDistribution(RestoreScriptDistributionRequest) returns (ScriptPublicationCommandResult) {
+    option (google.api.http) = { post: "/v1/script-resources/{resource_id}/distribution/restore" body: "command" };
+  }
+}
+message PublishScriptVersionRequest { string resource_id = 1; string version_id = 2; ScriptPublicationRevisionInput command = 3; }
+message ClearScriptHeadRequest { string resource_id = 1; ScriptPublicationRevisionInput command = 2; }
+message ScriptPublicationRevisionInput { int64 expected_publication_revision = 1; }
+message SuspendScriptDistributionRequest { string resource_id = 1; ScriptAvailabilityInput command = 2; }
+message RestoreScriptDistributionRequest { string resource_id = 1; ScriptAvailabilityInput command = 2; }
+message ScriptAvailabilityInput { int64 expected_availability_revision = 1; string reason = 2; }
+enum ScriptDistributionAvailability {
+  SCRIPT_DISTRIBUTION_AVAILABILITY_UNSPECIFIED = 0;
+  SCRIPT_DISTRIBUTION_AVAILABILITY_AVAILABLE = 1;
+  SCRIPT_DISTRIBUTION_AVAILABILITY_SUSPENDED = 2;
+}
+message ScriptPublishedVersion {
+  string version_id = 1;
+  string review_id = 2;
+  string decision_id = 3;
+  string version_label = 4;
+  string content_format = 5;
+  string digest = 6;
+  int64 byte_length = 7;
+}
+message ScriptPublicationState {
+  string resource_id = 1;
+  // Absent when no release head is selected. Historical qualifications persist.
+  ScriptPublishedVersion head = 2;
+  int64 publication_revision = 3;
+  ScriptDistributionAvailability availability = 4;
+  int64 availability_revision = 5;
+  google.protobuf.Timestamp publication_updated_at = 6;
+  google.protobuf.Timestamp availability_updated_at = 7;
+}
+message ScriptPublicationCommandResult {
+  ScriptPublicationState state = 1;
+  bool changed = 2;
+  // Empty/absent for a matching no-op.
+  string event_id = 3;
+  google.protobuf.Timestamp event_at = 4;
+}
+enum ScriptPublicationAction {
+  SCRIPT_PUBLICATION_ACTION_UNSPECIFIED = 0;
+  SCRIPT_PUBLICATION_ACTION_PUBLISH = 1;
+  SCRIPT_PUBLICATION_ACTION_CLEAR_HEAD = 2;
+}
+message ScriptPublicationHistoryItem {
+  string event_id = 1;
+  string resource_id = 2;
+  ScriptPublicationAction action = 3;
+  int64 publication_revision = 4;
+  ScriptPublishedVersion version = 5;
+  google.protobuf.Timestamp at = 6;
+}

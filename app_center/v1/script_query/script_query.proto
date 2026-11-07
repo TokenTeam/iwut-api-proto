@@ -5,6 +5,7 @@ package app_center.v1.script_query;
 import "app_center/v1/script_resource/script_resource.proto";
 import "app_center/v1/script_version/script_version.proto";
 import "google/api/annotations.proto";
+import "app_center/v1/script_publication/script_publication.proto";
 import "app_center/v1/script_review/script_review.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -13,6 +14,13 @@ option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/sc
 // Platform script management views. The service applies the trusted App USER
 // identity's exact script permissions before looking up any target.
 service ScriptQueryService {
+  rpc GetScriptPublication(GetScriptPublicationRequest) returns (app_center.v1.script_publication.ScriptPublicationState) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}/publication" };
+  }
+  rpc ListScriptPublicationHistory(ListScriptPublicationHistoryRequest) returns (ListScriptPublicationHistoryResponse) {
+    option (google.api.http) = { get: "/v1/script-resources/{resource_id}/publication/history" };
+  }
+
   rpc ListScriptResources(ListScriptResourcesRequest) returns (ListScriptResourcesResponse) {
     option (google.api.http) = { get: "/v1/script-resources" };
   }
@@ -146,3 +154,7 @@ message GetScriptReviewResponse {
   app_center.v1.script_review.ScriptReviewDecision decision = 13;
   app_center.v1.script_review.ScriptCascadeProgress cascade = 14;
 }
+
+message GetScriptPublicationRequest { string resource_id = 1; }
+message ListScriptPublicationHistoryRequest { string resource_id = 1; optional int32 limit = 2; string cursor = 3; }
+message ListScriptPublicationHistoryResponse { repeated app_center.v1.script_publication.ScriptPublicationHistoryItem items = 1; string next_cursor = 2; }
