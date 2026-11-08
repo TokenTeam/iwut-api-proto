@@ -8,6 +8,9 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_admin_transfer;applicationadmintransfer";
 
 service ApplicationAdminTransferService {
+  rpc ListIncomingApplicationAdminTransfers(ListIncomingApplicationAdminTransfersRequest) returns (IncomingApplicationAdminTransferPage) {
+    option (google.api.http) = {post: "/v1/application-admin-transfers/incoming:search" body: "query"};
+  }
   rpc GetApplicationOwnership(GetApplicationOwnershipRequest) returns (GetApplicationOwnershipResponse) {
     option (google.api.http) = {get: "/v1/applications/{application_id}/ownership"};
   }
@@ -117,3 +120,21 @@ message RejectApplicationAdminTransferResponse { ApplicationAdminTransferResourc
 
 message CancelApplicationAdminTransferRequest { string transfer_id = 1; }
 message CancelApplicationAdminTransferResponse { ApplicationAdminTransferResource transfer = 1; }
+
+message ListIncomingApplicationAdminTransfersRequest { IncomingApplicationAdminTransferQuery query = 1; }
+message IncomingApplicationAdminTransferQuery { int32 page_size = 1; string page_token = 2; }
+message IncomingApplicationAdminTransferItem {
+ string transfer_id = 1;
+ string application_id = 2;
+ string application_name = 3;
+ string from_auth_id = 4;
+ string to_auth_id = 5;
+ ApplicationAdminTransferStatus status = 6;
+ google.protobuf.Timestamp requested_at = 7;
+ google.protobuf.Timestamp expires_at = 8;
+}
+message IncomingApplicationAdminTransferPage {
+ repeated IncomingApplicationAdminTransferItem items = 1;
+ string next_page_token = 2;
+ google.protobuf.Timestamp as_of = 3;
+}

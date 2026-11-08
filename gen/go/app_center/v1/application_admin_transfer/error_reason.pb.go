@@ -24,31 +24,36 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_ERROR_REASON_UNSPECIFIED                                     ErrorReason = 0
-	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                     ErrorReason = 1
-	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                      ErrorReason = 2
-	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                     ErrorReason = 3
-	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                          ErrorReason = 4
-	ErrorReason_ERROR_REASON_INVALID_TRANSFER_ID                             ErrorReason = 5
-	ErrorReason_ERROR_REASON_INVALID_TARGET_AUTH_ID                          ErrorReason = 6
-	ErrorReason_ERROR_REASON_INVALID_OWNERSHIP_REVISION                      ErrorReason = 7
-	ErrorReason_ERROR_REASON_INVALID_CONFIDENTIAL_CREDENTIAL_HANDLING        ErrorReason = 8
-	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                           ErrorReason = 9
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_FOUND            ErrorReason = 10
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                      ErrorReason = 11
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_PARTICIPANT_REQUIRED ErrorReason = 12
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_ALREADY_PENDING      ErrorReason = 13
-	ErrorReason_ERROR_REASON_APPLICATION_NAME_CONFLICT                       ErrorReason = 14
-	ErrorReason_ERROR_REASON_APPLICATION_QUOTA_EXCEEDED                      ErrorReason = 15
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_EXPIRED              ErrorReason = 16
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_PENDING          ErrorReason = 17
-	ErrorReason_ERROR_REASON_APPLICATION_OWNERSHIP_CHANGED                   ErrorReason = 18
-	ErrorReason_ERROR_REASON_ACCOUNT_OWNER_EXIT_IN_PROGRESS                  ErrorReason = 19
-	ErrorReason_ERROR_REASON_SOURCE_DEVELOPER_INELIGIBLE                     ErrorReason = 20
-	ErrorReason_ERROR_REASON_TARGET_DEVELOPER_INELIGIBLE                     ErrorReason = 21
-	ErrorReason_ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE                    ErrorReason = 22
-	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT   ErrorReason = 23
-	ErrorReason_ERROR_REASON_INTERNAL                                        ErrorReason = 24
+	ErrorReason_ERROR_REASON_UNSPECIFIED                                      ErrorReason = 0
+	ErrorReason_ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED                      ErrorReason = 1
+	ErrorReason_ERROR_REASON_INVALID_DEVELOPER_IDENTITY                       ErrorReason = 2
+	ErrorReason_ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED                      ErrorReason = 3
+	ErrorReason_ERROR_REASON_INVALID_APPLICATION_ID                           ErrorReason = 4
+	ErrorReason_ERROR_REASON_INVALID_TRANSFER_ID                              ErrorReason = 5
+	ErrorReason_ERROR_REASON_INVALID_TARGET_AUTH_ID                           ErrorReason = 6
+	ErrorReason_ERROR_REASON_INVALID_OWNERSHIP_REVISION                       ErrorReason = 7
+	ErrorReason_ERROR_REASON_INVALID_CONFIDENTIAL_CREDENTIAL_HANDLING         ErrorReason = 8
+	ErrorReason_ERROR_REASON_APPLICATION_NOT_FOUND                            ErrorReason = 9
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_FOUND             ErrorReason = 10
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_REQUIRED                       ErrorReason = 11
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_PARTICIPANT_REQUIRED  ErrorReason = 12
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_ALREADY_PENDING       ErrorReason = 13
+	ErrorReason_ERROR_REASON_APPLICATION_NAME_CONFLICT                        ErrorReason = 14
+	ErrorReason_ERROR_REASON_APPLICATION_QUOTA_EXCEEDED                       ErrorReason = 15
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_EXPIRED               ErrorReason = 16
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_PENDING           ErrorReason = 17
+	ErrorReason_ERROR_REASON_APPLICATION_OWNERSHIP_CHANGED                    ErrorReason = 18
+	ErrorReason_ERROR_REASON_ACCOUNT_OWNER_EXIT_IN_PROGRESS                   ErrorReason = 19
+	ErrorReason_ERROR_REASON_SOURCE_DEVELOPER_INELIGIBLE                      ErrorReason = 20
+	ErrorReason_ERROR_REASON_TARGET_DEVELOPER_INELIGIBLE                      ErrorReason = 21
+	ErrorReason_ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE                     ErrorReason = 22
+	ErrorReason_ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT    ErrorReason = 23
+	ErrorReason_ERROR_REASON_INTERNAL                                         ErrorReason = 24
+	ErrorReason_ERROR_REASON_USER_IDENTITY_REQUIRED                           ErrorReason = 25
+	ErrorReason_ERROR_REASON_INVALID_USER_IDENTITY                            ErrorReason = 26
+	ErrorReason_ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_QUERY      ErrorReason = 27
+	ErrorReason_ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_PAGE_TOKEN ErrorReason = 28
+	ErrorReason_ERROR_REASON_INCOMING_APPLICATION_TRANSFER_UNAVAILABLE        ErrorReason = 29
 )
 
 // Enum value maps for ErrorReason.
@@ -79,33 +84,43 @@ var (
 		22: "ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE",
 		23: "ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT",
 		24: "ERROR_REASON_INTERNAL",
+		25: "ERROR_REASON_USER_IDENTITY_REQUIRED",
+		26: "ERROR_REASON_INVALID_USER_IDENTITY",
+		27: "ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_QUERY",
+		28: "ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_PAGE_TOKEN",
+		29: "ERROR_REASON_INCOMING_APPLICATION_TRANSFER_UNAVAILABLE",
 	}
 	ErrorReason_value = map[string]int32{
-		"ERROR_REASON_UNSPECIFIED":                                     0,
-		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                     1,
-		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                      2,
-		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                     3,
-		"ERROR_REASON_INVALID_APPLICATION_ID":                          4,
-		"ERROR_REASON_INVALID_TRANSFER_ID":                             5,
-		"ERROR_REASON_INVALID_TARGET_AUTH_ID":                          6,
-		"ERROR_REASON_INVALID_OWNERSHIP_REVISION":                      7,
-		"ERROR_REASON_INVALID_CONFIDENTIAL_CREDENTIAL_HANDLING":        8,
-		"ERROR_REASON_APPLICATION_NOT_FOUND":                           9,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_FOUND":            10,
-		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                      11,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_PARTICIPANT_REQUIRED": 12,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_ALREADY_PENDING":      13,
-		"ERROR_REASON_APPLICATION_NAME_CONFLICT":                       14,
-		"ERROR_REASON_APPLICATION_QUOTA_EXCEEDED":                      15,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_EXPIRED":              16,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_PENDING":          17,
-		"ERROR_REASON_APPLICATION_OWNERSHIP_CHANGED":                   18,
-		"ERROR_REASON_ACCOUNT_OWNER_EXIT_IN_PROGRESS":                  19,
-		"ERROR_REASON_SOURCE_DEVELOPER_INELIGIBLE":                     20,
-		"ERROR_REASON_TARGET_DEVELOPER_INELIGIBLE":                     21,
-		"ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE":                    22,
-		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT":   23,
-		"ERROR_REASON_INTERNAL":                                        24,
+		"ERROR_REASON_UNSPECIFIED":                                      0,
+		"ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED":                      1,
+		"ERROR_REASON_INVALID_DEVELOPER_IDENTITY":                       2,
+		"ERROR_REASON_DEVELOPER_APPROVAL_REQUIRED":                      3,
+		"ERROR_REASON_INVALID_APPLICATION_ID":                           4,
+		"ERROR_REASON_INVALID_TRANSFER_ID":                              5,
+		"ERROR_REASON_INVALID_TARGET_AUTH_ID":                           6,
+		"ERROR_REASON_INVALID_OWNERSHIP_REVISION":                       7,
+		"ERROR_REASON_INVALID_CONFIDENTIAL_CREDENTIAL_HANDLING":         8,
+		"ERROR_REASON_APPLICATION_NOT_FOUND":                            9,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_FOUND":             10,
+		"ERROR_REASON_APPLICATION_ADMIN_REQUIRED":                       11,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_PARTICIPANT_REQUIRED":  12,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_ALREADY_PENDING":       13,
+		"ERROR_REASON_APPLICATION_NAME_CONFLICT":                        14,
+		"ERROR_REASON_APPLICATION_QUOTA_EXCEEDED":                       15,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_EXPIRED":               16,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_NOT_PENDING":           17,
+		"ERROR_REASON_APPLICATION_OWNERSHIP_CHANGED":                    18,
+		"ERROR_REASON_ACCOUNT_OWNER_EXIT_IN_PROGRESS":                   19,
+		"ERROR_REASON_SOURCE_DEVELOPER_INELIGIBLE":                      20,
+		"ERROR_REASON_TARGET_DEVELOPER_INELIGIBLE":                      21,
+		"ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE":                     22,
+		"ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT":    23,
+		"ERROR_REASON_INTERNAL":                                         24,
+		"ERROR_REASON_USER_IDENTITY_REQUIRED":                           25,
+		"ERROR_REASON_INVALID_USER_IDENTITY":                            26,
+		"ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_QUERY":      27,
+		"ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_PAGE_TOKEN": 28,
+		"ERROR_REASON_INCOMING_APPLICATION_TRANSFER_UNAVAILABLE":        29,
 	}
 )
 
@@ -140,7 +155,7 @@ var File_app_center_v1_application_admin_transfer_error_reason_proto protoreflec
 
 const file_app_center_v1_application_admin_transfer_error_reason_proto_rawDesc = "" +
 	"\n" +
-	";app_center/v1/application_admin_transfer/error_reason.proto\x12(app_center.v1.application_admin_transfer*\xad\t\n" +
+	";app_center/v1/application_admin_transfer/error_reason.proto\x12(app_center.v1.application_admin_transfer*\xbb\v\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(ERROR_REASON_DEVELOPER_IDENTITY_REQUIRED\x10\x01\x12+\n" +
@@ -167,7 +182,12 @@ const file_app_center_v1_application_admin_transfer_error_reason_proto_rawDesc =
 	"(ERROR_REASON_TARGET_DEVELOPER_INELIGIBLE\x10\x15\x12-\n" +
 	")ERROR_REASON_DEVELOPER_STATUS_UNAVAILABLE\x10\x16\x12>\n" +
 	":ERROR_REASON_APPLICATION_ADMIN_TRANSFER_STATE_INCONSISTENT\x10\x17\x12\x19\n" +
-	"\x15ERROR_REASON_INTERNAL\x10\x18BnZlgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_admin_transfer;applicationadmintransferb\x06proto3"
+	"\x15ERROR_REASON_INTERNAL\x10\x18\x12'\n" +
+	"#ERROR_REASON_USER_IDENTITY_REQUIRED\x10\x19\x12&\n" +
+	"\"ERROR_REASON_INVALID_USER_IDENTITY\x10\x1a\x12<\n" +
+	"8ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_QUERY\x10\x1b\x12A\n" +
+	"=ERROR_REASON_INVALID_INCOMING_APPLICATION_TRANSFER_PAGE_TOKEN\x10\x1c\x12:\n" +
+	"6ERROR_REASON_INCOMING_APPLICATION_TRANSFER_UNAVAILABLE\x10\x1dBnZlgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_admin_transfer;applicationadmintransferb\x06proto3"
 
 var (
 	file_app_center_v1_application_admin_transfer_error_reason_proto_rawDescOnce sync.Once

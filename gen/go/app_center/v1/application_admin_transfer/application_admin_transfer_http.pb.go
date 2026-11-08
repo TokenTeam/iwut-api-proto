@@ -24,6 +24,7 @@ const OperationApplicationAdminTransferServiceCancelApplicationAdminTransfer = "
 const OperationApplicationAdminTransferServiceGetApplicationAdminTransfer = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationAdminTransfer"
 const OperationApplicationAdminTransferServiceGetApplicationOwnership = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationOwnership"
 const OperationApplicationAdminTransferServiceInitiateApplicationAdminTransfer = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/InitiateApplicationAdminTransfer"
+const OperationApplicationAdminTransferServiceListIncomingApplicationAdminTransfers = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/ListIncomingApplicationAdminTransfers"
 const OperationApplicationAdminTransferServiceRejectApplicationAdminTransfer = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/RejectApplicationAdminTransfer"
 
 type ApplicationAdminTransferServiceHTTPServer interface {
@@ -32,17 +33,41 @@ type ApplicationAdminTransferServiceHTTPServer interface {
 	GetApplicationAdminTransfer(context.Context, *GetApplicationAdminTransferRequest) (*GetApplicationAdminTransferResponse, error)
 	GetApplicationOwnership(context.Context, *GetApplicationOwnershipRequest) (*GetApplicationOwnershipResponse, error)
 	InitiateApplicationAdminTransfer(context.Context, *InitiateApplicationAdminTransferRequest) (*InitiateApplicationAdminTransferResponse, error)
+	ListIncomingApplicationAdminTransfers(context.Context, *ListIncomingApplicationAdminTransfersRequest) (*IncomingApplicationAdminTransferPage, error)
 	RejectApplicationAdminTransfer(context.Context, *RejectApplicationAdminTransferRequest) (*RejectApplicationAdminTransferResponse, error)
 }
 
 func RegisterApplicationAdminTransferServiceHTTPServer(s *http.Server, srv ApplicationAdminTransferServiceHTTPServer) {
 	r := s.Route("/")
+	r.POST("/v1/application-admin-transfers/incoming:search", _ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers0_HTTP_Handler(srv))
 	r.GET("/v1/applications/{application_id}/ownership", _ApplicationAdminTransferService_GetApplicationOwnership0_HTTP_Handler(srv))
 	r.POST("/v1/applications/{application_id}/admin-transfers", _ApplicationAdminTransferService_InitiateApplicationAdminTransfer0_HTTP_Handler(srv))
 	r.GET("/v1/application-admin-transfers/{transfer_id}", _ApplicationAdminTransferService_GetApplicationAdminTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/application-admin-transfers/{transfer_id}:accept", _ApplicationAdminTransferService_AcceptApplicationAdminTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/application-admin-transfers/{transfer_id}:reject", _ApplicationAdminTransferService_RejectApplicationAdminTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/application-admin-transfers/{transfer_id}:cancel", _ApplicationAdminTransferService_CancelApplicationAdminTransfer0_HTTP_Handler(srv))
+}
+
+func _ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers0_HTTP_Handler(srv ApplicationAdminTransferServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListIncomingApplicationAdminTransfersRequest
+		if err := ctx.Bind(&in.Query); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApplicationAdminTransferServiceListIncomingApplicationAdminTransfers)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListIncomingApplicationAdminTransfers(ctx, req.(*ListIncomingApplicationAdminTransfersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*IncomingApplicationAdminTransferPage)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _ApplicationAdminTransferService_GetApplicationOwnership0_HTTP_Handler(srv ApplicationAdminTransferServiceHTTPServer) func(ctx http.Context) error {
@@ -195,6 +220,7 @@ type ApplicationAdminTransferServiceHTTPClient interface {
 	GetApplicationAdminTransfer(ctx context.Context, req *GetApplicationAdminTransferRequest, opts ...http.CallOption) (rsp *GetApplicationAdminTransferResponse, err error)
 	GetApplicationOwnership(ctx context.Context, req *GetApplicationOwnershipRequest, opts ...http.CallOption) (rsp *GetApplicationOwnershipResponse, err error)
 	InitiateApplicationAdminTransfer(ctx context.Context, req *InitiateApplicationAdminTransferRequest, opts ...http.CallOption) (rsp *InitiateApplicationAdminTransferResponse, err error)
+	ListIncomingApplicationAdminTransfers(ctx context.Context, req *ListIncomingApplicationAdminTransfersRequest, opts ...http.CallOption) (rsp *IncomingApplicationAdminTransferPage, err error)
 	RejectApplicationAdminTransfer(ctx context.Context, req *RejectApplicationAdminTransferRequest, opts ...http.CallOption) (rsp *RejectApplicationAdminTransferResponse, err error)
 }
 
@@ -265,6 +291,19 @@ func (c *ApplicationAdminTransferServiceHTTPClientImpl) InitiateApplicationAdmin
 	opts = append(opts, http.Operation(OperationApplicationAdminTransferServiceInitiateApplicationAdminTransfer))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in.Command, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApplicationAdminTransferServiceHTTPClientImpl) ListIncomingApplicationAdminTransfers(ctx context.Context, in *ListIncomingApplicationAdminTransfersRequest, opts ...http.CallOption) (*IncomingApplicationAdminTransferPage, error) {
+	var out IncomingApplicationAdminTransferPage
+	pattern := "/v1/application-admin-transfers/incoming:search"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApplicationAdminTransferServiceListIncomingApplicationAdminTransfers))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.Query, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -1046,6 +1046,262 @@ func (x *CancelApplicationAdminTransferResponse) GetTransfer() *ApplicationAdmin
 	return nil
 }
 
+type ListIncomingApplicationAdminTransfersRequest struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Query         *IncomingApplicationAdminTransferQuery `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListIncomingApplicationAdminTransfersRequest) Reset() {
+	*x = ListIncomingApplicationAdminTransfersRequest{}
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListIncomingApplicationAdminTransfersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListIncomingApplicationAdminTransfersRequest) ProtoMessage() {}
+
+func (x *ListIncomingApplicationAdminTransfersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListIncomingApplicationAdminTransfersRequest.ProtoReflect.Descriptor instead.
+func (*ListIncomingApplicationAdminTransfersRequest) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListIncomingApplicationAdminTransfersRequest) GetQuery() *IncomingApplicationAdminTransferQuery {
+	if x != nil {
+		return x.Query
+	}
+	return nil
+}
+
+type IncomingApplicationAdminTransferQuery struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PageSize      int32                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IncomingApplicationAdminTransferQuery) Reset() {
+	*x = IncomingApplicationAdminTransferQuery{}
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IncomingApplicationAdminTransferQuery) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IncomingApplicationAdminTransferQuery) ProtoMessage() {}
+
+func (x *IncomingApplicationAdminTransferQuery) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IncomingApplicationAdminTransferQuery.ProtoReflect.Descriptor instead.
+func (*IncomingApplicationAdminTransferQuery) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *IncomingApplicationAdminTransferQuery) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *IncomingApplicationAdminTransferQuery) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type IncomingApplicationAdminTransferItem struct {
+	state           protoimpl.MessageState         `protogen:"open.v1"`
+	TransferId      string                         `protobuf:"bytes,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	ApplicationId   string                         `protobuf:"bytes,2,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	ApplicationName string                         `protobuf:"bytes,3,opt,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
+	FromAuthId      string                         `protobuf:"bytes,4,opt,name=from_auth_id,json=fromAuthId,proto3" json:"from_auth_id,omitempty"`
+	ToAuthId        string                         `protobuf:"bytes,5,opt,name=to_auth_id,json=toAuthId,proto3" json:"to_auth_id,omitempty"`
+	Status          ApplicationAdminTransferStatus `protobuf:"varint,6,opt,name=status,proto3,enum=app_center.v1.application_admin_transfer.ApplicationAdminTransferStatus" json:"status,omitempty"`
+	RequestedAt     *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=requested_at,json=requestedAt,proto3" json:"requested_at,omitempty"`
+	ExpiresAt       *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *IncomingApplicationAdminTransferItem) Reset() {
+	*x = IncomingApplicationAdminTransferItem{}
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IncomingApplicationAdminTransferItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IncomingApplicationAdminTransferItem) ProtoMessage() {}
+
+func (x *IncomingApplicationAdminTransferItem) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IncomingApplicationAdminTransferItem.ProtoReflect.Descriptor instead.
+func (*IncomingApplicationAdminTransferItem) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetTransferId() string {
+	if x != nil {
+		return x.TransferId
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetApplicationId() string {
+	if x != nil {
+		return x.ApplicationId
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetApplicationName() string {
+	if x != nil {
+		return x.ApplicationName
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetFromAuthId() string {
+	if x != nil {
+		return x.FromAuthId
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetToAuthId() string {
+	if x != nil {
+		return x.ToAuthId
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetStatus() ApplicationAdminTransferStatus {
+	if x != nil {
+		return x.Status
+	}
+	return ApplicationAdminTransferStatus_APPLICATION_ADMIN_TRANSFER_STATUS_UNSPECIFIED
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetRequestedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RequestedAt
+	}
+	return nil
+}
+
+func (x *IncomingApplicationAdminTransferItem) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
+type IncomingApplicationAdminTransferPage struct {
+	state         protoimpl.MessageState                  `protogen:"open.v1"`
+	Items         []*IncomingApplicationAdminTransferItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	NextPageToken string                                  `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	AsOf          *timestamppb.Timestamp                  `protobuf:"bytes,3,opt,name=as_of,json=asOf,proto3" json:"as_of,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IncomingApplicationAdminTransferPage) Reset() {
+	*x = IncomingApplicationAdminTransferPage{}
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IncomingApplicationAdminTransferPage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IncomingApplicationAdminTransferPage) ProtoMessage() {}
+
+func (x *IncomingApplicationAdminTransferPage) ProtoReflect() protoreflect.Message {
+	mi := &file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IncomingApplicationAdminTransferPage.ProtoReflect.Descriptor instead.
+func (*IncomingApplicationAdminTransferPage) Descriptor() ([]byte, []int) {
+	return file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *IncomingApplicationAdminTransferPage) GetItems() []*IncomingApplicationAdminTransferItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *IncomingApplicationAdminTransferPage) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+func (x *IncomingApplicationAdminTransferPage) GetAsOf() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AsOf
+	}
+	return nil
+}
+
 var File_app_center_v1_application_admin_transfer_application_admin_transfer_proto protoreflect.FileDescriptor
 
 const file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDesc = "" +
@@ -1120,7 +1376,30 @@ const file_app_center_v1_application_admin_transfer_application_admin_transfer_p
 	"\vtransfer_id\x18\x01 \x01(\tR\n" +
 	"transferId\"\x90\x01\n" +
 	"&CancelApplicationAdminTransferResponse\x12f\n" +
-	"\btransfer\x18\x01 \x01(\v2J.app_center.v1.application_admin_transfer.ApplicationAdminTransferResourceR\btransfer*\xc2\x02\n" +
+	"\btransfer\x18\x01 \x01(\v2J.app_center.v1.application_admin_transfer.ApplicationAdminTransferResourceR\btransfer\"\x95\x01\n" +
+	",ListIncomingApplicationAdminTransfersRequest\x12e\n" +
+	"\x05query\x18\x01 \x01(\v2O.app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferQueryR\x05query\"c\n" +
+	"%IncomingApplicationAdminTransferQuery\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xb5\x03\n" +
+	"$IncomingApplicationAdminTransferItem\x12\x1f\n" +
+	"\vtransfer_id\x18\x01 \x01(\tR\n" +
+	"transferId\x12%\n" +
+	"\x0eapplication_id\x18\x02 \x01(\tR\rapplicationId\x12)\n" +
+	"\x10application_name\x18\x03 \x01(\tR\x0fapplicationName\x12 \n" +
+	"\ffrom_auth_id\x18\x04 \x01(\tR\n" +
+	"fromAuthId\x12\x1c\n" +
+	"\n" +
+	"to_auth_id\x18\x05 \x01(\tR\btoAuthId\x12`\n" +
+	"\x06status\x18\x06 \x01(\x0e2H.app_center.v1.application_admin_transfer.ApplicationAdminTransferStatusR\x06status\x12=\n" +
+	"\frequested_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\vrequestedAt\x129\n" +
+	"\n" +
+	"expires_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"\xe5\x01\n" +
+	"$IncomingApplicationAdminTransferPage\x12d\n" +
+	"\x05items\x18\x01 \x03(\v2N.app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItemR\x05items\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12/\n" +
+	"\x05as_of\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04asOf*\xc2\x02\n" +
 	"\x1eApplicationAdminTransferStatus\x121\n" +
 	"-APPLICATION_ADMIN_TRANSFER_STATUS_UNSPECIFIED\x10\x00\x12-\n" +
 	")APPLICATION_ADMIN_TRANSFER_STATUS_PENDING\x10\x01\x12.\n" +
@@ -1131,8 +1410,9 @@ const file_app_center_v1_application_admin_transfer_application_admin_transfer_p
 	"\x1eConfidentialCredentialHandling\x120\n" +
 	",CONFIDENTIAL_CREDENTIAL_HANDLING_UNSPECIFIED\x10\x00\x12)\n" +
 	"%CONFIDENTIAL_CREDENTIAL_HANDLING_KEEP\x10\x01\x12+\n" +
-	"'CONFIDENTIAL_CREDENTIAL_HANDLING_ROTATE\x10\x022\xa6\f\n" +
-	"\x1fApplicationAdminTransferService\x12\xe3\x01\n" +
+	"'CONFIDENTIAL_CREDENTIAL_HANDLING_ROTATE\x10\x022\xb8\x0e\n" +
+	"\x1fApplicationAdminTransferService\x12\x8f\x02\n" +
+	"%ListIncomingApplicationAdminTransfers\x12V.app_center.v1.application_admin_transfer.ListIncomingApplicationAdminTransfersRequest\x1aN.app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferPage\">\x82\xd3\xe4\x93\x028:\x05query\"//v1/application-admin-transfers/incoming:search\x12\xe3\x01\n" +
 	"\x17GetApplicationOwnership\x12H.app_center.v1.application_admin_transfer.GetApplicationOwnershipRequest\x1aI.app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse\"3\x82\xd3\xe4\x93\x02-\x12+/v1/applications/{application_id}/ownership\x12\x8d\x02\n" +
 	" InitiateApplicationAdminTransfer\x12Q.app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest\x1aR.app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferResponse\"B\x82\xd3\xe4\x93\x02<:\acommand\"1/v1/applications/{application_id}/admin-transfers\x12\xf1\x01\n" +
 	"\x1bGetApplicationAdminTransfer\x12L.app_center.v1.application_admin_transfer.GetApplicationAdminTransferRequest\x1aM.app_center.v1.application_admin_transfer.GetApplicationAdminTransferResponse\"5\x82\xd3\xe4\x93\x02/\x12-/v1/application-admin-transfers/{transfer_id}\x12\x8a\x02\n" +
@@ -1153,35 +1433,39 @@ func file_app_center_v1_application_admin_transfer_application_admin_transfer_pr
 }
 
 var file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_goTypes = []any{
-	(ApplicationAdminTransferStatus)(0),              // 0: app_center.v1.application_admin_transfer.ApplicationAdminTransferStatus
-	(ConfidentialCredentialHandling)(0),              // 1: app_center.v1.application_admin_transfer.ConfidentialCredentialHandling
-	(*ApplicationOwnershipResource)(nil),             // 2: app_center.v1.application_admin_transfer.ApplicationOwnershipResource
-	(*ApplicationAdminTransferResource)(nil),         // 3: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource
-	(*RotatedCredentialResource)(nil),                // 4: app_center.v1.application_admin_transfer.RotatedCredentialResource
-	(*GetApplicationOwnershipRequest)(nil),           // 5: app_center.v1.application_admin_transfer.GetApplicationOwnershipRequest
-	(*GetApplicationOwnershipResponse)(nil),          // 6: app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse
-	(*InitiateApplicationAdminTransferRequest)(nil),  // 7: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest
-	(*InitiateApplicationAdminTransferCommand)(nil),  // 8: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferCommand
-	(*InitiateApplicationAdminTransferResponse)(nil), // 9: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferResponse
-	(*GetApplicationAdminTransferRequest)(nil),       // 10: app_center.v1.application_admin_transfer.GetApplicationAdminTransferRequest
-	(*GetApplicationAdminTransferResponse)(nil),      // 11: app_center.v1.application_admin_transfer.GetApplicationAdminTransferResponse
-	(*AcceptApplicationAdminTransferRequest)(nil),    // 12: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferRequest
-	(*AcceptApplicationAdminTransferCommand)(nil),    // 13: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferCommand
-	(*AcceptApplicationAdminTransferResponse)(nil),   // 14: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferResponse
-	(*RejectApplicationAdminTransferRequest)(nil),    // 15: app_center.v1.application_admin_transfer.RejectApplicationAdminTransferRequest
-	(*RejectApplicationAdminTransferResponse)(nil),   // 16: app_center.v1.application_admin_transfer.RejectApplicationAdminTransferResponse
-	(*CancelApplicationAdminTransferRequest)(nil),    // 17: app_center.v1.application_admin_transfer.CancelApplicationAdminTransferRequest
-	(*CancelApplicationAdminTransferResponse)(nil),   // 18: app_center.v1.application_admin_transfer.CancelApplicationAdminTransferResponse
-	(*timestamppb.Timestamp)(nil),                    // 19: google.protobuf.Timestamp
+	(ApplicationAdminTransferStatus)(0),                  // 0: app_center.v1.application_admin_transfer.ApplicationAdminTransferStatus
+	(ConfidentialCredentialHandling)(0),                  // 1: app_center.v1.application_admin_transfer.ConfidentialCredentialHandling
+	(*ApplicationOwnershipResource)(nil),                 // 2: app_center.v1.application_admin_transfer.ApplicationOwnershipResource
+	(*ApplicationAdminTransferResource)(nil),             // 3: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource
+	(*RotatedCredentialResource)(nil),                    // 4: app_center.v1.application_admin_transfer.RotatedCredentialResource
+	(*GetApplicationOwnershipRequest)(nil),               // 5: app_center.v1.application_admin_transfer.GetApplicationOwnershipRequest
+	(*GetApplicationOwnershipResponse)(nil),              // 6: app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse
+	(*InitiateApplicationAdminTransferRequest)(nil),      // 7: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest
+	(*InitiateApplicationAdminTransferCommand)(nil),      // 8: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferCommand
+	(*InitiateApplicationAdminTransferResponse)(nil),     // 9: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferResponse
+	(*GetApplicationAdminTransferRequest)(nil),           // 10: app_center.v1.application_admin_transfer.GetApplicationAdminTransferRequest
+	(*GetApplicationAdminTransferResponse)(nil),          // 11: app_center.v1.application_admin_transfer.GetApplicationAdminTransferResponse
+	(*AcceptApplicationAdminTransferRequest)(nil),        // 12: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferRequest
+	(*AcceptApplicationAdminTransferCommand)(nil),        // 13: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferCommand
+	(*AcceptApplicationAdminTransferResponse)(nil),       // 14: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferResponse
+	(*RejectApplicationAdminTransferRequest)(nil),        // 15: app_center.v1.application_admin_transfer.RejectApplicationAdminTransferRequest
+	(*RejectApplicationAdminTransferResponse)(nil),       // 16: app_center.v1.application_admin_transfer.RejectApplicationAdminTransferResponse
+	(*CancelApplicationAdminTransferRequest)(nil),        // 17: app_center.v1.application_admin_transfer.CancelApplicationAdminTransferRequest
+	(*CancelApplicationAdminTransferResponse)(nil),       // 18: app_center.v1.application_admin_transfer.CancelApplicationAdminTransferResponse
+	(*ListIncomingApplicationAdminTransfersRequest)(nil), // 19: app_center.v1.application_admin_transfer.ListIncomingApplicationAdminTransfersRequest
+	(*IncomingApplicationAdminTransferQuery)(nil),        // 20: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferQuery
+	(*IncomingApplicationAdminTransferItem)(nil),         // 21: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItem
+	(*IncomingApplicationAdminTransferPage)(nil),         // 22: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferPage
+	(*timestamppb.Timestamp)(nil),                        // 23: google.protobuf.Timestamp
 }
 var file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_depIdxs = []int32{
-	19, // 0: app_center.v1.application_admin_transfer.ApplicationOwnershipResource.pending_expires_at:type_name -> google.protobuf.Timestamp
+	23, // 0: app_center.v1.application_admin_transfer.ApplicationOwnershipResource.pending_expires_at:type_name -> google.protobuf.Timestamp
 	0,  // 1: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.status:type_name -> app_center.v1.application_admin_transfer.ApplicationAdminTransferStatus
-	19, // 2: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.requested_at:type_name -> google.protobuf.Timestamp
-	19, // 3: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.expires_at:type_name -> google.protobuf.Timestamp
-	19, // 4: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.resolved_at:type_name -> google.protobuf.Timestamp
+	23, // 2: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.requested_at:type_name -> google.protobuf.Timestamp
+	23, // 3: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.expires_at:type_name -> google.protobuf.Timestamp
+	23, // 4: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.resolved_at:type_name -> google.protobuf.Timestamp
 	1,  // 5: app_center.v1.application_admin_transfer.ApplicationAdminTransferResource.confidential_credential_handling:type_name -> app_center.v1.application_admin_transfer.ConfidentialCredentialHandling
 	2,  // 6: app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse.ownership:type_name -> app_center.v1.application_admin_transfer.ApplicationOwnershipResource
 	8,  // 7: app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest.command:type_name -> app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferCommand
@@ -1193,23 +1477,31 @@ var file_app_center_v1_application_admin_transfer_application_admin_transfer_pro
 	4,  // 13: app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferResponse.rotated_credentials:type_name -> app_center.v1.application_admin_transfer.RotatedCredentialResource
 	3,  // 14: app_center.v1.application_admin_transfer.RejectApplicationAdminTransferResponse.transfer:type_name -> app_center.v1.application_admin_transfer.ApplicationAdminTransferResource
 	3,  // 15: app_center.v1.application_admin_transfer.CancelApplicationAdminTransferResponse.transfer:type_name -> app_center.v1.application_admin_transfer.ApplicationAdminTransferResource
-	5,  // 16: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationOwnership:input_type -> app_center.v1.application_admin_transfer.GetApplicationOwnershipRequest
-	7,  // 17: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.InitiateApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest
-	10, // 18: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.GetApplicationAdminTransferRequest
-	12, // 19: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.AcceptApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferRequest
-	15, // 20: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.RejectApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.RejectApplicationAdminTransferRequest
-	17, // 21: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.CancelApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.CancelApplicationAdminTransferRequest
-	6,  // 22: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationOwnership:output_type -> app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse
-	9,  // 23: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.InitiateApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferResponse
-	11, // 24: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.GetApplicationAdminTransferResponse
-	14, // 25: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.AcceptApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferResponse
-	16, // 26: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.RejectApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.RejectApplicationAdminTransferResponse
-	18, // 27: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.CancelApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.CancelApplicationAdminTransferResponse
-	22, // [22:28] is the sub-list for method output_type
-	16, // [16:22] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	20, // 16: app_center.v1.application_admin_transfer.ListIncomingApplicationAdminTransfersRequest.query:type_name -> app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferQuery
+	0,  // 17: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItem.status:type_name -> app_center.v1.application_admin_transfer.ApplicationAdminTransferStatus
+	23, // 18: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItem.requested_at:type_name -> google.protobuf.Timestamp
+	23, // 19: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItem.expires_at:type_name -> google.protobuf.Timestamp
+	21, // 20: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferPage.items:type_name -> app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferItem
+	23, // 21: app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferPage.as_of:type_name -> google.protobuf.Timestamp
+	19, // 22: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.ListIncomingApplicationAdminTransfers:input_type -> app_center.v1.application_admin_transfer.ListIncomingApplicationAdminTransfersRequest
+	5,  // 23: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationOwnership:input_type -> app_center.v1.application_admin_transfer.GetApplicationOwnershipRequest
+	7,  // 24: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.InitiateApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferRequest
+	10, // 25: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.GetApplicationAdminTransferRequest
+	12, // 26: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.AcceptApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferRequest
+	15, // 27: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.RejectApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.RejectApplicationAdminTransferRequest
+	17, // 28: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.CancelApplicationAdminTransfer:input_type -> app_center.v1.application_admin_transfer.CancelApplicationAdminTransferRequest
+	22, // 29: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.ListIncomingApplicationAdminTransfers:output_type -> app_center.v1.application_admin_transfer.IncomingApplicationAdminTransferPage
+	6,  // 30: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationOwnership:output_type -> app_center.v1.application_admin_transfer.GetApplicationOwnershipResponse
+	9,  // 31: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.InitiateApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.InitiateApplicationAdminTransferResponse
+	11, // 32: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.GetApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.GetApplicationAdminTransferResponse
+	14, // 33: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.AcceptApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.AcceptApplicationAdminTransferResponse
+	16, // 34: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.RejectApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.RejectApplicationAdminTransferResponse
+	18, // 35: app_center.v1.application_admin_transfer.ApplicationAdminTransferService.CancelApplicationAdminTransfer:output_type -> app_center.v1.application_admin_transfer.CancelApplicationAdminTransferResponse
+	29, // [29:36] is the sub-list for method output_type
+	22, // [22:29] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_init() }
@@ -1225,7 +1517,7 @@ func file_app_center_v1_application_admin_transfer_application_admin_transfer_pr
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDesc), len(file_app_center_v1_application_admin_transfer_application_admin_transfer_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   17,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,18 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ApplicationAdminTransferService_GetApplicationOwnership_FullMethodName          = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationOwnership"
-	ApplicationAdminTransferService_InitiateApplicationAdminTransfer_FullMethodName = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/InitiateApplicationAdminTransfer"
-	ApplicationAdminTransferService_GetApplicationAdminTransfer_FullMethodName      = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationAdminTransfer"
-	ApplicationAdminTransferService_AcceptApplicationAdminTransfer_FullMethodName   = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/AcceptApplicationAdminTransfer"
-	ApplicationAdminTransferService_RejectApplicationAdminTransfer_FullMethodName   = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/RejectApplicationAdminTransfer"
-	ApplicationAdminTransferService_CancelApplicationAdminTransfer_FullMethodName   = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/CancelApplicationAdminTransfer"
+	ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers_FullMethodName = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/ListIncomingApplicationAdminTransfers"
+	ApplicationAdminTransferService_GetApplicationOwnership_FullMethodName               = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationOwnership"
+	ApplicationAdminTransferService_InitiateApplicationAdminTransfer_FullMethodName      = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/InitiateApplicationAdminTransfer"
+	ApplicationAdminTransferService_GetApplicationAdminTransfer_FullMethodName           = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/GetApplicationAdminTransfer"
+	ApplicationAdminTransferService_AcceptApplicationAdminTransfer_FullMethodName        = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/AcceptApplicationAdminTransfer"
+	ApplicationAdminTransferService_RejectApplicationAdminTransfer_FullMethodName        = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/RejectApplicationAdminTransfer"
+	ApplicationAdminTransferService_CancelApplicationAdminTransfer_FullMethodName        = "/app_center.v1.application_admin_transfer.ApplicationAdminTransferService/CancelApplicationAdminTransfer"
 )
 
 // ApplicationAdminTransferServiceClient is the client API for ApplicationAdminTransferService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApplicationAdminTransferServiceClient interface {
+	ListIncomingApplicationAdminTransfers(ctx context.Context, in *ListIncomingApplicationAdminTransfersRequest, opts ...grpc.CallOption) (*IncomingApplicationAdminTransferPage, error)
 	GetApplicationOwnership(ctx context.Context, in *GetApplicationOwnershipRequest, opts ...grpc.CallOption) (*GetApplicationOwnershipResponse, error)
 	InitiateApplicationAdminTransfer(ctx context.Context, in *InitiateApplicationAdminTransferRequest, opts ...grpc.CallOption) (*InitiateApplicationAdminTransferResponse, error)
 	GetApplicationAdminTransfer(ctx context.Context, in *GetApplicationAdminTransferRequest, opts ...grpc.CallOption) (*GetApplicationAdminTransferResponse, error)
@@ -45,6 +47,16 @@ type applicationAdminTransferServiceClient struct {
 
 func NewApplicationAdminTransferServiceClient(cc grpc.ClientConnInterface) ApplicationAdminTransferServiceClient {
 	return &applicationAdminTransferServiceClient{cc}
+}
+
+func (c *applicationAdminTransferServiceClient) ListIncomingApplicationAdminTransfers(ctx context.Context, in *ListIncomingApplicationAdminTransfersRequest, opts ...grpc.CallOption) (*IncomingApplicationAdminTransferPage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IncomingApplicationAdminTransferPage)
+	err := c.cc.Invoke(ctx, ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *applicationAdminTransferServiceClient) GetApplicationOwnership(ctx context.Context, in *GetApplicationOwnershipRequest, opts ...grpc.CallOption) (*GetApplicationOwnershipResponse, error) {
@@ -111,6 +123,7 @@ func (c *applicationAdminTransferServiceClient) CancelApplicationAdminTransfer(c
 // All implementations must embed UnimplementedApplicationAdminTransferServiceServer
 // for forward compatibility.
 type ApplicationAdminTransferServiceServer interface {
+	ListIncomingApplicationAdminTransfers(context.Context, *ListIncomingApplicationAdminTransfersRequest) (*IncomingApplicationAdminTransferPage, error)
 	GetApplicationOwnership(context.Context, *GetApplicationOwnershipRequest) (*GetApplicationOwnershipResponse, error)
 	InitiateApplicationAdminTransfer(context.Context, *InitiateApplicationAdminTransferRequest) (*InitiateApplicationAdminTransferResponse, error)
 	GetApplicationAdminTransfer(context.Context, *GetApplicationAdminTransferRequest) (*GetApplicationAdminTransferResponse, error)
@@ -127,6 +140,9 @@ type ApplicationAdminTransferServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedApplicationAdminTransferServiceServer struct{}
 
+func (UnimplementedApplicationAdminTransferServiceServer) ListIncomingApplicationAdminTransfers(context.Context, *ListIncomingApplicationAdminTransfersRequest) (*IncomingApplicationAdminTransferPage, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListIncomingApplicationAdminTransfers not implemented")
+}
 func (UnimplementedApplicationAdminTransferServiceServer) GetApplicationOwnership(context.Context, *GetApplicationOwnershipRequest) (*GetApplicationOwnershipResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetApplicationOwnership not implemented")
 }
@@ -165,6 +181,24 @@ func RegisterApplicationAdminTransferServiceServer(s grpc.ServiceRegistrar, srv 
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ApplicationAdminTransferService_ServiceDesc, srv)
+}
+
+func _ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIncomingApplicationAdminTransfersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApplicationAdminTransferServiceServer).ListIncomingApplicationAdminTransfers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApplicationAdminTransferServiceServer).ListIncomingApplicationAdminTransfers(ctx, req.(*ListIncomingApplicationAdminTransfersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ApplicationAdminTransferService_GetApplicationOwnership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -282,6 +316,10 @@ var ApplicationAdminTransferService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "app_center.v1.application_admin_transfer.ApplicationAdminTransferService",
 	HandlerType: (*ApplicationAdminTransferServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListIncomingApplicationAdminTransfers",
+			Handler:    _ApplicationAdminTransferService_ListIncomingApplicationAdminTransfers_Handler,
+		},
 		{
 			MethodName: "GetApplicationOwnership",
 			Handler:    _ApplicationAdminTransferService_GetApplicationOwnership_Handler,
