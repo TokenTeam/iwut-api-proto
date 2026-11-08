@@ -1,0 +1,50 @@
+syntax = "proto3";
+package app_center.v1.application_platform_query;
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_platform_query;applicationplatformquery";
+
+// Both methods require the exact app.application.search permission. Other
+// roles and operation grants do not authorize this minimum core projection.
+service ApplicationPlatformQueryService {
+  rpc SearchPlatformApplications(SearchPlatformApplicationsRequest) returns (PlatformApplicationPage) {
+    option (google.api.http) = {post: "/v1/platform/applications:search" body: "query"};
+  }
+  rpc GetPlatformApplicationSummary(GetPlatformApplicationSummaryRequest) returns (PlatformApplicationSummary) {
+    option (google.api.http) = {get: "/v1/platform/applications/{application_id}"};
+  }
+}
+message SearchPlatformApplicationsRequest { SearchPlatformApplicationsQuery query = 1; }
+message SearchPlatformApplicationsQuery {
+  string application_id = 1;
+  string name_prefix = 2;
+  string admin_auth_id = 3;
+  // ACTIVE, CLOSING, CLOSED; empty means all. Nonempty dimensions are ANDed.
+  repeated string lifecycle_statuses = 4;
+  // AVAILABLE, SUSPENDED.
+  repeated string platform_availability_statuses = 5;
+  // UNARCHIVED, ARCHIVED.
+  repeated string archive_statuses = 6;
+  int32 page_size = 7;
+  string page_token = 8;
+}
+// The path binding uses the Proto field name, including in generated HTTP clients.
+message GetPlatformApplicationSummaryRequest { string application_id = 1 [json_name = "application_id"]; }
+message PlatformApplicationSummary {
+  string application_id = 1;
+  string name = 2;
+  string admin_auth_id = 3;
+  google.protobuf.Timestamp created_at = 4;
+  int64 ownership_revision = 5;
+  string lifecycle_status = 6;
+  int64 lifecycle_revision = 7;
+  string platform_availability_status = 8;
+  int64 platform_availability_revision = 9;
+  string archive_status = 10;
+  int64 archive_revision = 11;
+}
+message PlatformApplicationPage {
+  repeated PlatformApplicationSummary items = 1;
+  string next_page_token = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
