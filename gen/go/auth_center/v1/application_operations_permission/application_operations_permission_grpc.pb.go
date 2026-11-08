@@ -31,6 +31,8 @@ const (
 // All methods require a verified Auth-audience USER identity. Target Get/Manage
 // additionally require current full platform administrator authority; the exact
 // own-read method does not. App operation permissions never authorize management.
+// The fixed published allowlist is app.application.restore, app.application.search,
+// and app.application.suspend. Each grant is independent.
 type ApplicationOperationsPermissionServiceClient interface {
 	ManageApplicationOperationsPermission(ctx context.Context, in *ManageApplicationOperationsPermissionRequest, opts ...grpc.CallOption) (*ApplicationOperationsPermissions, error)
 	GetApplicationOperationsPermissions(ctx context.Context, in *GetApplicationOperationsPermissionsRequest, opts ...grpc.CallOption) (*ApplicationOperationsPermissions, error)
@@ -84,6 +86,8 @@ func (c *applicationOperationsPermissionServiceClient) GetOwnApplicationOperatio
 // All methods require a verified Auth-audience USER identity. Target Get/Manage
 // additionally require current full platform administrator authority; the exact
 // own-read method does not. App operation permissions never authorize management.
+// The fixed published allowlist is app.application.restore, app.application.search,
+// and app.application.suspend. Each grant is independent.
 type ApplicationOperationsPermissionServiceServer interface {
 	ManageApplicationOperationsPermission(context.Context, *ManageApplicationOperationsPermissionRequest) (*ApplicationOperationsPermissions, error)
 	GetApplicationOperationsPermissions(context.Context, *GetApplicationOperationsPermissionsRequest) (*ApplicationOperationsPermissions, error)

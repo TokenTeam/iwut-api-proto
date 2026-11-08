@@ -1,0 +1,38 @@
+syntax = "proto3";
+package auth_center.v1.managed_user_search;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "auth_center/v1/developer_status/developer_status.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/managed_user_search;managedusersearch";
+
+// Exact governance lookup. Requires a verified Auth-audience USER and current
+// full platform administrator authority, checked online before target lookup.
+service ManagedUserSearchService {
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
+    option (google.api.http) = {
+      post: "/v1/managed-users:search"
+      body: "*"
+    };
+  }
+}
+message SearchUsersRequest {
+  oneof selector {
+    string auth_id = 1;
+    string email = 2;
+  }
+}
+message ManagedUserSummary {
+  string auth_id = 1;
+  auth_center.v1.developer_status.AccountStatus account_status = 2;
+  // Null for a USER who has not applied. Otherwise one of the existing
+  // PENDING/APPROVED/REJECTED/SUSPENDED/WITHDRAWN values.
+  google.protobuf.StringValue developer_status = 3;
+}
+message SearchUsersResponse {
+  // Zero or one item. No pagination or permission/revision disclosure.
+  repeated ManagedUserSummary items = 1;
+  google.protobuf.Timestamp as_of = 2;
+}
