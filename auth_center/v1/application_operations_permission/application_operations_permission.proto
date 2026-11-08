@@ -8,6 +8,8 @@ option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/a
 // All methods require a verified Auth-audience USER identity. Target Get/Manage
 // additionally require current full platform administrator authority; the exact
 // own-read method does not. App operation permissions never authorize management.
+// The fixed published allowlist is app.application.restore, app.application.search,
+// and app.application.suspend. Each grant is independent.
 service ApplicationOperationsPermissionService {
   rpc ManageApplicationOperationsPermission(ManageApplicationOperationsPermissionRequest) returns (ApplicationOperationsPermissions) {
     option (google.api.http) = {
