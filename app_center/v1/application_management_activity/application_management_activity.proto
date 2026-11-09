@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package app_center.v1.application_management_activity;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/application_management_activity;applicationmanagementactivity";
+
+// ApplicationManagementActivityService exposes the current Application
+// administrator's bounded, read-only Version/Profile review history.
+service ApplicationManagementActivityService {
+  rpc ListApplicationManagementActivity(ListApplicationManagementActivityRequest) returns (ApplicationManagementActivityPage) {
+    option (google.api.http) = {
+      post: "/v1/applications/{application_id}/management-activity:search"
+      body: "query"
+    };
+  }
+
+  rpc GetApplicationManagementActivity(GetApplicationManagementActivityRequest) returns (ApplicationManagementActivityDetail) {
+    option (google.api.http) = {get: "/v1/applications/{application_id}/management-activity/{activity_id}"};
+  }
+}
+
+message ListApplicationManagementActivityRequest {
+  // Keep the Proto JSON name for generated HTTP path binding.
+  string application_id = 1 [json_name = "application_id"];
+  ListApplicationManagementActivityQuery query = 2;
+}
+
+message ListApplicationManagementActivityQuery {
+  // Empty means all six kinds. Servers reject unknown enum values.
+  repeated ApplicationManagementActivityKind kinds = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message GetApplicationManagementActivityRequest {
+  // Keep the Proto JSON names for generated HTTP path binding.
+  string application_id = 1 [json_name = "application_id"];
+  string activity_id = 2 [json_name = "activity_id"];
+}
+
+enum ApplicationManagementActivityKind {
+  APPLICATION_MANAGEMENT_ACTIVITY_KIND_UNSPECIFIED = 0;
+  VERSION_REVIEW_SUBMITTED = 1;
+  VERSION_REVIEW_APPROVED = 2;
+  VERSION_REVIEW_REJECTED = 3;
+  PROFILE_REVIEW_SUBMITTED = 4;
+  PROFILE_REVIEW_APPROVED = 5;
+  PROFILE_REVIEW_REJECTED = 6;
+}
+
+message VersionReviewRef {
+  string version_id = 1;
+  string review_id = 2;
+  int32 attempt = 3;
+  // Immutable label captured by this Review's submission snapshot.
+  string version_label_at_submission = 4;
+}
+
+message ProfileReviewRef {
+  string profile_revision_id = 1;
+  string profile_review_id = 2;
+  int32 attempt = 3;
+  // Stable sequence of the Profile revision that owns this Review.
+  int32 profile_revision_sequence = 4;
+}
+
+message ApplicationManagementActivity {
+  string activity_id = 1;
+  string application_id = 2;
+  ApplicationManagementActivityKind kind = 3;
+  google.protobuf.Timestamp occurred_at = 4;
+
+  // The selected target must match kind. Historical Version labels and Profile
+  // sequences live inside the mutually exclusive branch that owns them.
+  oneof target {
+    VersionReviewRef version_review = 5;
+    ProfileReviewRef profile_review = 6;
+  }
+}
+
+message ApplicationManagementActivityPage {
+  repeated ApplicationManagementActivity items = 1;
+  string next_page_token = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
+
+message ApplicationManagementActivityDetail {
+  ApplicationManagementActivity activity = 1;
+  // Always populated. REJECTED activities carry a StringValue with the exact
+  // historical reason; all other kinds carry NullValue. This maps to a direct
+  // JSON string/null while remaining distinguishable in native gRPC.
+  google.protobuf.Value rejection_reason = 2;
+  google.protobuf.Timestamp as_of = 3;
+}
