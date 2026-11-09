@@ -19,18 +19,42 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationScriptPermissionServiceGetOwnScriptPermissions = "/auth_center.v1.script_permission.ScriptPermissionService/GetOwnScriptPermissions"
 const OperationScriptPermissionServiceGetScriptPermissions = "/auth_center.v1.script_permission.ScriptPermissionService/GetScriptPermissions"
 const OperationScriptPermissionServiceManageScriptPermission = "/auth_center.v1.script_permission.ScriptPermissionService/ManageScriptPermission"
 
 type ScriptPermissionServiceHTTPServer interface {
+	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+	// and one shared revision from the current Auth transaction observation.
+	GetOwnScriptPermissions(context.Context, *GetOwnScriptPermissionsRequest) (*ScriptPermissions, error)
 	GetScriptPermissions(context.Context, *GetScriptPermissionsRequest) (*ScriptPermissions, error)
 	ManageScriptPermission(context.Context, *ManageScriptPermissionRequest) (*ScriptPermissions, error)
 }
 
 func RegisterScriptPermissionServiceHTTPServer(s *http.Server, srv ScriptPermissionServiceHTTPServer) {
 	r := s.Route("/")
+	r.GET("/v1/users/me/script-permissions", _ScriptPermissionService_GetOwnScriptPermissions0_HTTP_Handler(srv))
 	r.POST("/v1/script-permissions:get", _ScriptPermissionService_GetScriptPermissions0_HTTP_Handler(srv))
 	r.POST("/v1/script-permissions:manage", _ScriptPermissionService_ManageScriptPermission0_HTTP_Handler(srv))
+}
+
+func _ScriptPermissionService_GetOwnScriptPermissions0_HTTP_Handler(srv ScriptPermissionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOwnScriptPermissionsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationScriptPermissionServiceGetOwnScriptPermissions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOwnScriptPermissions(ctx, req.(*GetOwnScriptPermissionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ScriptPermissions)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _ScriptPermissionService_GetScriptPermissions0_HTTP_Handler(srv ScriptPermissionServiceHTTPServer) func(ctx http.Context) error {
@@ -78,6 +102,9 @@ func _ScriptPermissionService_ManageScriptPermission0_HTTP_Handler(srv ScriptPer
 }
 
 type ScriptPermissionServiceHTTPClient interface {
+	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+	// and one shared revision from the current Auth transaction observation.
+	GetOwnScriptPermissions(ctx context.Context, req *GetOwnScriptPermissionsRequest, opts ...http.CallOption) (rsp *ScriptPermissions, err error)
 	GetScriptPermissions(ctx context.Context, req *GetScriptPermissionsRequest, opts ...http.CallOption) (rsp *ScriptPermissions, err error)
 	ManageScriptPermission(ctx context.Context, req *ManageScriptPermissionRequest, opts ...http.CallOption) (rsp *ScriptPermissions, err error)
 }
@@ -88,6 +115,21 @@ type ScriptPermissionServiceHTTPClientImpl struct {
 
 func NewScriptPermissionServiceHTTPClient(client *http.Client) ScriptPermissionServiceHTTPClient {
 	return &ScriptPermissionServiceHTTPClientImpl{client}
+}
+
+// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+// and one shared revision from the current Auth transaction observation.
+func (c *ScriptPermissionServiceHTTPClientImpl) GetOwnScriptPermissions(ctx context.Context, in *GetOwnScriptPermissionsRequest, opts ...http.CallOption) (*ScriptPermissions, error) {
+	var out ScriptPermissions
+	pattern := "/v1/users/me/script-permissions"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationScriptPermissionServiceGetOwnScriptPermissions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ScriptPermissionServiceHTTPClientImpl) GetScriptPermissions(ctx context.Context, in *GetScriptPermissionsRequest, opts ...http.CallOption) (*ScriptPermissions, error) {

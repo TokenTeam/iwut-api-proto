@@ -129,6 +129,43 @@ func (ScriptPermissionAction) EnumDescriptor() ([]byte, []int) {
 	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{1}
 }
 
+// No subject, filter or unknown wire fields are accepted.
+type GetOwnScriptPermissionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOwnScriptPermissionsRequest) Reset() {
+	*x = GetOwnScriptPermissionsRequest{}
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOwnScriptPermissionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOwnScriptPermissionsRequest) ProtoMessage() {}
+
+func (x *GetOwnScriptPermissionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOwnScriptPermissionsRequest.ProtoReflect.Descriptor instead.
+func (*GetOwnScriptPermissionsRequest) Descriptor() ([]byte, []int) {
+	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{0}
+}
+
 type GetScriptPermissionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SubjectAuthId string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
@@ -138,7 +175,7 @@ type GetScriptPermissionsRequest struct {
 
 func (x *GetScriptPermissionsRequest) Reset() {
 	*x = GetScriptPermissionsRequest{}
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[0]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -150,7 +187,7 @@ func (x *GetScriptPermissionsRequest) String() string {
 func (*GetScriptPermissionsRequest) ProtoMessage() {}
 
 func (x *GetScriptPermissionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[0]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +200,7 @@ func (x *GetScriptPermissionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetScriptPermissionsRequest.ProtoReflect.Descriptor instead.
 func (*GetScriptPermissionsRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{0}
+	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetScriptPermissionsRequest) GetSubjectAuthId() string {
@@ -186,7 +223,7 @@ type ManageScriptPermissionRequest struct {
 
 func (x *ManageScriptPermissionRequest) Reset() {
 	*x = ManageScriptPermissionRequest{}
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[1]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -198,7 +235,7 @@ func (x *ManageScriptPermissionRequest) String() string {
 func (*ManageScriptPermissionRequest) ProtoMessage() {}
 
 func (x *ManageScriptPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[1]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -211,7 +248,7 @@ func (x *ManageScriptPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManageScriptPermissionRequest.ProtoReflect.Descriptor instead.
 func (*ManageScriptPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{1}
+	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ManageScriptPermissionRequest) GetSubjectAuthId() string {
@@ -260,7 +297,7 @@ type ScriptPermissionState struct {
 
 func (x *ScriptPermissionState) Reset() {
 	*x = ScriptPermissionState{}
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[2]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +309,7 @@ func (x *ScriptPermissionState) String() string {
 func (*ScriptPermissionState) ProtoMessage() {}
 
 func (x *ScriptPermissionState) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[2]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +322,7 @@ func (x *ScriptPermissionState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScriptPermissionState.ProtoReflect.Descriptor instead.
 func (*ScriptPermissionState) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{2}
+	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ScriptPermissionState) GetPermission() ScriptPermission {
@@ -321,7 +358,7 @@ type ScriptPermissions struct {
 
 func (x *ScriptPermissions) Reset() {
 	*x = ScriptPermissions{}
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[3]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -333,7 +370,7 @@ func (x *ScriptPermissions) String() string {
 func (*ScriptPermissions) ProtoMessage() {}
 
 func (x *ScriptPermissions) ProtoReflect() protoreflect.Message {
-	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[3]
+	mi := &file_auth_center_v1_script_permission_script_permission_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -346,7 +383,7 @@ func (x *ScriptPermissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScriptPermissions.ProtoReflect.Descriptor instead.
 func (*ScriptPermissions) Descriptor() ([]byte, []int) {
-	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{3}
+	return file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ScriptPermissions) GetSubjectAuthId() string {
@@ -374,7 +411,8 @@ var File_auth_center_v1_script_permission_script_permission_proto protoreflect.F
 
 const file_auth_center_v1_script_permission_script_permission_proto_rawDesc = "" +
 	"\n" +
-	"8auth_center/v1/script_permission/script_permission.proto\x12 auth_center.v1.script_permission\x1a\x1cgoogle/api/annotations.proto\"E\n" +
+	"8auth_center/v1/script_permission/script_permission.proto\x12 auth_center.v1.script_permission\x1a\x1cgoogle/api/annotations.proto\" \n" +
+	"\x1eGetOwnScriptPermissionsRequest\"E\n" +
 	"\x1bGetScriptPermissionsRequest\x12&\n" +
 	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\"\xed\x02\n" +
 	"\x1dManageScriptPermissionRequest\x12&\n" +
@@ -406,8 +444,9 @@ const file_auth_center_v1_script_permission_script_permission_proto_rawDesc = ""
 	"\x16ScriptPermissionAction\x12(\n" +
 	"$SCRIPT_PERMISSION_ACTION_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eSCRIPT_PERMISSION_ACTION_GRANT\x10\x01\x12#\n" +
-	"\x1fSCRIPT_PERMISSION_ACTION_REVOKE\x10\x022\x88\x03\n" +
-	"\x17ScriptPermissionService\x12\xb1\x01\n" +
+	"\x1fSCRIPT_PERMISSION_ACTION_REVOKE\x10\x022\xc4\x04\n" +
+	"\x17ScriptPermissionService\x12\xb9\x01\n" +
+	"\x17GetOwnScriptPermissions\x12@.auth_center.v1.script_permission.GetOwnScriptPermissionsRequest\x1a3.auth_center.v1.script_permission.ScriptPermissions\"'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/users/me/script-permissions\x12\xb1\x01\n" +
 	"\x14GetScriptPermissions\x12=.auth_center.v1.script_permission.GetScriptPermissionsRequest\x1a3.auth_center.v1.script_permission.ScriptPermissions\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/script-permissions:get\x12\xb8\x01\n" +
 	"\x16ManageScriptPermission\x12?.auth_center.v1.script_permission.ManageScriptPermissionRequest\x1a3.auth_center.v1.script_permission.ScriptPermissions\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/script-permissions:manageB^Z\\github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/script_permission;scriptpermissionb\x06proto3"
 
@@ -424,26 +463,29 @@ func file_auth_center_v1_script_permission_script_permission_proto_rawDescGZIP()
 }
 
 var file_auth_center_v1_script_permission_script_permission_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_auth_center_v1_script_permission_script_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_auth_center_v1_script_permission_script_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_auth_center_v1_script_permission_script_permission_proto_goTypes = []any{
-	(ScriptPermission)(0),                 // 0: auth_center.v1.script_permission.ScriptPermission
-	(ScriptPermissionAction)(0),           // 1: auth_center.v1.script_permission.ScriptPermissionAction
-	(*GetScriptPermissionsRequest)(nil),   // 2: auth_center.v1.script_permission.GetScriptPermissionsRequest
-	(*ManageScriptPermissionRequest)(nil), // 3: auth_center.v1.script_permission.ManageScriptPermissionRequest
-	(*ScriptPermissionState)(nil),         // 4: auth_center.v1.script_permission.ScriptPermissionState
-	(*ScriptPermissions)(nil),             // 5: auth_center.v1.script_permission.ScriptPermissions
+	(ScriptPermission)(0),                  // 0: auth_center.v1.script_permission.ScriptPermission
+	(ScriptPermissionAction)(0),            // 1: auth_center.v1.script_permission.ScriptPermissionAction
+	(*GetOwnScriptPermissionsRequest)(nil), // 2: auth_center.v1.script_permission.GetOwnScriptPermissionsRequest
+	(*GetScriptPermissionsRequest)(nil),    // 3: auth_center.v1.script_permission.GetScriptPermissionsRequest
+	(*ManageScriptPermissionRequest)(nil),  // 4: auth_center.v1.script_permission.ManageScriptPermissionRequest
+	(*ScriptPermissionState)(nil),          // 5: auth_center.v1.script_permission.ScriptPermissionState
+	(*ScriptPermissions)(nil),              // 6: auth_center.v1.script_permission.ScriptPermissions
 }
 var file_auth_center_v1_script_permission_script_permission_proto_depIdxs = []int32{
 	0, // 0: auth_center.v1.script_permission.ManageScriptPermissionRequest.permission:type_name -> auth_center.v1.script_permission.ScriptPermission
 	1, // 1: auth_center.v1.script_permission.ManageScriptPermissionRequest.action:type_name -> auth_center.v1.script_permission.ScriptPermissionAction
 	0, // 2: auth_center.v1.script_permission.ScriptPermissionState.permission:type_name -> auth_center.v1.script_permission.ScriptPermission
-	4, // 3: auth_center.v1.script_permission.ScriptPermissions.permissions:type_name -> auth_center.v1.script_permission.ScriptPermissionState
-	2, // 4: auth_center.v1.script_permission.ScriptPermissionService.GetScriptPermissions:input_type -> auth_center.v1.script_permission.GetScriptPermissionsRequest
-	3, // 5: auth_center.v1.script_permission.ScriptPermissionService.ManageScriptPermission:input_type -> auth_center.v1.script_permission.ManageScriptPermissionRequest
-	5, // 6: auth_center.v1.script_permission.ScriptPermissionService.GetScriptPermissions:output_type -> auth_center.v1.script_permission.ScriptPermissions
-	5, // 7: auth_center.v1.script_permission.ScriptPermissionService.ManageScriptPermission:output_type -> auth_center.v1.script_permission.ScriptPermissions
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
+	5, // 3: auth_center.v1.script_permission.ScriptPermissions.permissions:type_name -> auth_center.v1.script_permission.ScriptPermissionState
+	2, // 4: auth_center.v1.script_permission.ScriptPermissionService.GetOwnScriptPermissions:input_type -> auth_center.v1.script_permission.GetOwnScriptPermissionsRequest
+	3, // 5: auth_center.v1.script_permission.ScriptPermissionService.GetScriptPermissions:input_type -> auth_center.v1.script_permission.GetScriptPermissionsRequest
+	4, // 6: auth_center.v1.script_permission.ScriptPermissionService.ManageScriptPermission:input_type -> auth_center.v1.script_permission.ManageScriptPermissionRequest
+	6, // 7: auth_center.v1.script_permission.ScriptPermissionService.GetOwnScriptPermissions:output_type -> auth_center.v1.script_permission.ScriptPermissions
+	6, // 8: auth_center.v1.script_permission.ScriptPermissionService.GetScriptPermissions:output_type -> auth_center.v1.script_permission.ScriptPermissions
+	6, // 9: auth_center.v1.script_permission.ScriptPermissionService.ManageScriptPermission:output_type -> auth_center.v1.script_permission.ScriptPermissions
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -454,14 +496,14 @@ func file_auth_center_v1_script_permission_script_permission_proto_init() {
 	if File_auth_center_v1_script_permission_script_permission_proto != nil {
 		return
 	}
-	file_auth_center_v1_script_permission_script_permission_proto_msgTypes[1].OneofWrappers = []any{}
+	file_auth_center_v1_script_permission_script_permission_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_center_v1_script_permission_script_permission_proto_rawDesc), len(file_auth_center_v1_script_permission_script_permission_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

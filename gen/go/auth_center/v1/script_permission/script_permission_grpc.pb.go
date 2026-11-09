@@ -19,17 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ScriptPermissionService_GetScriptPermissions_FullMethodName   = "/auth_center.v1.script_permission.ScriptPermissionService/GetScriptPermissions"
-	ScriptPermissionService_ManageScriptPermission_FullMethodName = "/auth_center.v1.script_permission.ScriptPermissionService/ManageScriptPermission"
+	ScriptPermissionService_GetOwnScriptPermissions_FullMethodName = "/auth_center.v1.script_permission.ScriptPermissionService/GetOwnScriptPermissions"
+	ScriptPermissionService_GetScriptPermissions_FullMethodName    = "/auth_center.v1.script_permission.ScriptPermissionService/GetScriptPermissions"
+	ScriptPermissionService_ManageScriptPermission_FullMethodName  = "/auth_center.v1.script_permission.ScriptPermissionService/ManageScriptPermission"
 )
 
 // ScriptPermissionServiceClient is the client API for ScriptPermissionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Both methods require a verified Auth-audience USER and current full platform
-// administrator authority. Each mutation addresses exactly one script permission.
+// Every method requires a verified Auth-audience USER. Target Get/Manage also
+// require current full platform administrator authority. Only the exact own-read
+// method is ordinary ACTIVE USER access, including users with no script grants.
 type ScriptPermissionServiceClient interface {
+	// Empty input, current trusted subject only. Returns all five permission states
+	// and one shared revision from the current Auth transaction observation.
+	GetOwnScriptPermissions(ctx context.Context, in *GetOwnScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error)
 	GetScriptPermissions(ctx context.Context, in *GetScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error)
 	ManageScriptPermission(ctx context.Context, in *ManageScriptPermissionRequest, opts ...grpc.CallOption) (*ScriptPermissions, error)
 }
@@ -40,6 +45,16 @@ type scriptPermissionServiceClient struct {
 
 func NewScriptPermissionServiceClient(cc grpc.ClientConnInterface) ScriptPermissionServiceClient {
 	return &scriptPermissionServiceClient{cc}
+}
+
+func (c *scriptPermissionServiceClient) GetOwnScriptPermissions(ctx context.Context, in *GetOwnScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ScriptPermissions)
+	err := c.cc.Invoke(ctx, ScriptPermissionService_GetOwnScriptPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *scriptPermissionServiceClient) GetScriptPermissions(ctx context.Context, in *GetScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error) {
@@ -66,9 +81,13 @@ func (c *scriptPermissionServiceClient) ManageScriptPermission(ctx context.Conte
 // All implementations must embed UnimplementedScriptPermissionServiceServer
 // for forward compatibility.
 //
-// Both methods require a verified Auth-audience USER and current full platform
-// administrator authority. Each mutation addresses exactly one script permission.
+// Every method requires a verified Auth-audience USER. Target Get/Manage also
+// require current full platform administrator authority. Only the exact own-read
+// method is ordinary ACTIVE USER access, including users with no script grants.
 type ScriptPermissionServiceServer interface {
+	// Empty input, current trusted subject only. Returns all five permission states
+	// and one shared revision from the current Auth transaction observation.
+	GetOwnScriptPermissions(context.Context, *GetOwnScriptPermissionsRequest) (*ScriptPermissions, error)
 	GetScriptPermissions(context.Context, *GetScriptPermissionsRequest) (*ScriptPermissions, error)
 	ManageScriptPermission(context.Context, *ManageScriptPermissionRequest) (*ScriptPermissions, error)
 	mustEmbedUnimplementedScriptPermissionServiceServer()
@@ -81,6 +100,9 @@ type ScriptPermissionServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedScriptPermissionServiceServer struct{}
 
+func (UnimplementedScriptPermissionServiceServer) GetOwnScriptPermissions(context.Context, *GetOwnScriptPermissionsRequest) (*ScriptPermissions, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOwnScriptPermissions not implemented")
+}
 func (UnimplementedScriptPermissionServiceServer) GetScriptPermissions(context.Context, *GetScriptPermissionsRequest) (*ScriptPermissions, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetScriptPermissions not implemented")
 }
@@ -107,6 +129,24 @@ func RegisterScriptPermissionServiceServer(s grpc.ServiceRegistrar, srv ScriptPe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ScriptPermissionService_ServiceDesc, srv)
+}
+
+func _ScriptPermissionService_GetOwnScriptPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOwnScriptPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScriptPermissionServiceServer).GetOwnScriptPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScriptPermissionService_GetOwnScriptPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScriptPermissionServiceServer).GetOwnScriptPermissions(ctx, req.(*GetOwnScriptPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ScriptPermissionService_GetScriptPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -152,6 +192,10 @@ var ScriptPermissionService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "auth_center.v1.script_permission.ScriptPermissionService",
 	HandlerType: (*ScriptPermissionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetOwnScriptPermissions",
+			Handler:    _ScriptPermissionService_GetOwnScriptPermissions_Handler,
+		},
 		{
 			MethodName: "GetScriptPermissions",
 			Handler:    _ScriptPermissionService_GetScriptPermissions_Handler,

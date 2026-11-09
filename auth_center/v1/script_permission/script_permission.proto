@@ -5,9 +5,15 @@ import "google/api/annotations.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/script_permission;scriptpermission";
 
-// Both methods require a verified Auth-audience USER and current full platform
-// administrator authority. Each mutation addresses exactly one script permission.
+// Every method requires a verified Auth-audience USER. Target Get/Manage also
+// require current full platform administrator authority. Only the exact own-read
+// method is ordinary ACTIVE USER access, including users with no script grants.
 service ScriptPermissionService {
+  // Empty input, current trusted subject only. Returns all five permission states
+  // and one shared revision from the current Auth transaction observation.
+  rpc GetOwnScriptPermissions(GetOwnScriptPermissionsRequest) returns (ScriptPermissions) {
+    option (google.api.http) = {get: "/v1/users/me/script-permissions"};
+  }
   rpc GetScriptPermissions(GetScriptPermissionsRequest) returns (ScriptPermissions) {
     option (google.api.http) = {
       post: "/v1/script-permissions:get"
@@ -21,6 +27,9 @@ service ScriptPermissionService {
     };
   }
 }
+
+// No subject, filter or unknown wire fields are accepted.
+message GetOwnScriptPermissionsRequest {}
 
 message GetScriptPermissionsRequest {
   string subject_auth_id = 1;
