@@ -462,6 +462,8 @@ type ScriptVersionSummary struct {
 	Revision      int64                             `protobuf:"varint,7,opt,name=revision,proto3" json:"revision,omitempty"`
 	CreatedAt     *timestamppb.Timestamp            `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp            `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Empty only while this version has never been submitted.
+	ReviewId      string `protobuf:"bytes,10,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -557,6 +559,13 @@ func (x *ScriptVersionSummary) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *ScriptVersionSummary) GetReviewId() string {
+	if x != nil {
+		return x.ReviewId
+	}
+	return ""
 }
 
 type GetScriptVersionResponse struct {
@@ -1284,7 +1293,7 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12\x1e\n" +
 	"\n" +
 	"version_id\x18\x02 \x01(\tR\n" +
-	"version_id\"\x94\x03\n" +
+	"version_id\"\xb1\x03\n" +
 	"\x14ScriptVersionSummary\x12\x1f\n" +
 	"\vresource_id\x18\x01 \x01(\tR\n" +
 	"resourceId\x12\x1d\n" +
@@ -1298,7 +1307,9 @@ const file_app_center_v1_script_query_script_query_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xdd\x01\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1b\n" +
+	"\treview_id\x18\n" +
+	" \x01(\tR\breviewId\"\xdd\x01\n" +
 	"\x18GetScriptVersionResponse\x12J\n" +
 	"\aversion\x18\x01 \x01(\v20.app_center.v1.script_query.ScriptVersionSummaryR\aversion\x12&\n" +
 	"\fcontent_text\x18\x02 \x01(\tH\x00R\vcontentText\x88\x01\x01\x12\x1b\n" +

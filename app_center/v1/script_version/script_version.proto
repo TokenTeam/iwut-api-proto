@@ -2,34 +2,9 @@ syntax = "proto3";
 
 package app_center.v1.script_version;
 
-import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversion";
-
-// The write commands require app.script.maintain in a trusted App USER identity.
-service ScriptVersionService {
-  rpc CreateScriptVersionDraft(CreateScriptVersionDraftRequest) returns (ScriptVersion) {
-    option (google.api.http) = {
-      post: "/v1/script-resources/{resource_id}/versions"
-      body: "draft"
-    };
-  }
-
-  rpc ReplaceScriptVersionDraft(ReplaceScriptVersionDraftRequest) returns (ScriptVersion) {
-    option (google.api.http) = {
-      put: "/v1/script-resources/{resource_id}/versions/{version_id}/draft"
-      body: "command"
-    };
-  }
-
-  rpc SubmitScriptVersionReview(SubmitScriptVersionReviewRequest) returns (ScriptVersionReviewSubmission) {
-    option (google.api.http) = {
-      post: "/v1/script-resources/{resource_id}/versions/{version_id}/reviews"
-      body: "command"
-    };
-  }
-}
 
 message CreateScriptVersionDraftRequest {
   string resource_id = 1 [json_name = "resource_id"];

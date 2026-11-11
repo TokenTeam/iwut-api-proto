@@ -82,6 +82,8 @@ message ScriptVersionSummary {
   int64 revision = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
+  // Empty only while this version has never been submitted.
+  string review_id = 10;
 }
 
 message GetScriptVersionResponse {

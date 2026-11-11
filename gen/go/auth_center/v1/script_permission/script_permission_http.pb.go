@@ -24,7 +24,7 @@ const OperationScriptPermissionServiceGetScriptPermissions = "/auth_center.v1.sc
 const OperationScriptPermissionServiceManageScriptPermission = "/auth_center.v1.script_permission.ScriptPermissionService/ManageScriptPermission"
 
 type ScriptPermissionServiceHTTPServer interface {
-	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all four permission states
 	// and one shared revision from the current Auth transaction observation.
 	GetOwnScriptPermissions(context.Context, *GetOwnScriptPermissionsRequest) (*ScriptPermissions, error)
 	GetScriptPermissions(context.Context, *GetScriptPermissionsRequest) (*ScriptPermissions, error)
@@ -102,7 +102,7 @@ func _ScriptPermissionService_ManageScriptPermission0_HTTP_Handler(srv ScriptPer
 }
 
 type ScriptPermissionServiceHTTPClient interface {
-	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+	// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all four permission states
 	// and one shared revision from the current Auth transaction observation.
 	GetOwnScriptPermissions(ctx context.Context, req *GetOwnScriptPermissionsRequest, opts ...http.CallOption) (rsp *ScriptPermissions, err error)
 	GetScriptPermissions(ctx context.Context, req *GetScriptPermissionsRequest, opts ...http.CallOption) (rsp *ScriptPermissions, err error)
@@ -117,7 +117,7 @@ func NewScriptPermissionServiceHTTPClient(client *http.Client) ScriptPermissionS
 	return &ScriptPermissionServiceHTTPClientImpl{client}
 }
 
-// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all five permission states
+// GetOwnScriptPermissions Empty input, current trusted subject only. Returns all four permission states
 // and one shared revision from the current Auth transaction observation.
 func (c *ScriptPermissionServiceHTTPClientImpl) GetOwnScriptPermissions(ctx context.Context, in *GetOwnScriptPermissionsRequest, opts ...http.CallOption) (*ScriptPermissions, error) {
 	var out ScriptPermissions

@@ -25,6 +25,8 @@ PROTO_FILES := \
 	app_center/v1/application_management_activity/error_reason.proto \
 	app_center/v1/application_platform_query/application_platform_query.proto \
 	app_center/v1/application_platform_query/error_reason.proto \
+	app_center/v1/script_authoring/script_authoring.proto \
+	app_center/v1/script_authoring/error_reason.proto \
 	app_center/v1/script_distribution/script_distribution.proto \
 	app_center/v1/script_distribution/error_reason.proto \
 	app_center/v1/script_publication/script_publication.proto \
@@ -32,9 +34,7 @@ PROTO_FILES := \
 	app_center/v1/script_review/script_review.proto \
 	app_center/v1/script_review/error_reason.proto \
 	app_center/v1/script_version/script_version.proto \
-	app_center/v1/script_version/error_reason.proto \
 	app_center/v1/script_resource/script_resource.proto \
-	app_center/v1/script_resource/error_reason.proto \
 	app_center/v1/script_query/script_query.proto \
 	app_center/v1/script_query/error_reason.proto \
 	app_center/v1/test_application_catalog/test_application_catalog.proto \
@@ -56,7 +56,6 @@ PROTO_FILES := \
 	auth_center/v1/campus_certification/campus_certification.proto \
 	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
-	auth_center/v1/script_maintainer_permission/script_maintainer_permission.proto \
 	auth_center/v1/script_permission/script_permission.proto \
 	auth_center/v1/managed_user_search/managed_user_search.proto \
 	auth_center/v1/academic_year_policy/academic_year_policy.proto \
@@ -126,6 +125,8 @@ HTTP_PROTO_FILES := \
 	app_center/v1/application_management_activity/application_management_activity.proto \
 	app_center/v1/application_management_activity/error_reason.proto \
 	app_center/v1/application_platform_query/application_platform_query.proto \
+	app_center/v1/script_authoring/script_authoring.proto \
+	app_center/v1/script_authoring/error_reason.proto \
 	app_center/v1/script_distribution/script_distribution.proto \
 	app_center/v1/script_distribution/error_reason.proto \
 	app_center/v1/script_publication/script_publication.proto \
@@ -133,9 +134,7 @@ HTTP_PROTO_FILES := \
 	app_center/v1/script_review/script_review.proto \
 	app_center/v1/script_review/error_reason.proto \
 	app_center/v1/script_version/script_version.proto \
-	app_center/v1/script_version/error_reason.proto \
 	app_center/v1/script_resource/script_resource.proto \
-	app_center/v1/script_resource/error_reason.proto \
 	app_center/v1/script_query/script_query.proto \
 	app_center/v1/script_query/error_reason.proto \
 	app_center/v1/test_application_catalog/test_application_catalog.proto \
@@ -157,7 +156,6 @@ HTTP_PROTO_FILES := \
 	auth_center/v1/campus_certification/campus_certification.proto \
 	auth_center/v1/application_user_storage/application_user_storage.proto \
 	auth_center/v1/application_operations_permission/application_operations_permission.proto \
-	auth_center/v1/script_maintainer_permission/script_maintainer_permission.proto \
 	auth_center/v1/script_permission/script_permission.proto \
 	auth_center/v1/managed_user_search/managed_user_search.proto \
 	auth_center/v1/academic_year_policy/academic_year_policy.proto \
@@ -215,6 +213,7 @@ HTTP_PROTO_FILES := \
 GENERATED_DIRS := \
 	app_center/v1/application_management_activity \
 	app_center/v1/application_platform_query \
+	app_center/v1/script_authoring \
 	app_center/v1/script_distribution \
 	app_center/v1/script_publication \
 	app_center/v1/script_review \
@@ -233,7 +232,6 @@ GENERATED_DIRS := \
 	auth_center/v1/campus_certification \
 	auth_center/v1/application_user_storage \
 	auth_center/v1/application_operations_permission \
-	auth_center/v1/script_maintainer_permission \
 	auth_center/v1/script_permission \
 	auth_center/v1/managed_user_search \
 	auth_center/v1/academic_year_policy \

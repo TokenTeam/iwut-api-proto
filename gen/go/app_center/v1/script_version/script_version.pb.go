@@ -7,7 +7,6 @@
 package scriptversion
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -610,7 +609,7 @@ var File_app_center_v1_script_version_script_version_proto protoreflect.FileDesc
 
 const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
 	"\n" +
-	"1app_center/v1/script_version/script_version.proto\x12\x1capp_center.v1.script_version\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x01\n" +
+	"1app_center/v1/script_version/script_version.proto\x12\x1capp_center.v1.script_version\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x01\n" +
 	"\x1fCreateScriptVersionDraftRequest\x12 \n" +
 	"\vresource_id\x18\x01 \x01(\tR\vresource_id\x12Q\n" +
 	"\x05draft\x18\x02 \x01(\v2;.app_center.v1.script_version.CreateScriptVersionDraftInputR\x05draft\"\x8e\x01\n" +
@@ -663,11 +662,7 @@ const file_app_center_v1_script_version_script_version_proto_rawDesc = "" +
 	"\x1aSCRIPT_VERSION_STATE_DRAFT\x10\x01\x12\"\n" +
 	"\x1eSCRIPT_VERSION_STATE_SUBMITTED\x10\x02\x12!\n" +
 	"\x1dSCRIPT_VERSION_STATE_APPROVED\x10\x03\x12!\n" +
-	"\x1dSCRIPT_VERSION_STATE_REJECTED\x10\x042\xa5\x05\n" +
-	"\x14ScriptVersionService\x12\xc2\x01\n" +
-	"\x18CreateScriptVersionDraft\x12=.app_center.v1.script_version.CreateScriptVersionDraftRequest\x1a+.app_center.v1.script_version.ScriptVersion\":\x82\xd3\xe4\x93\x024:\x05draft\"+/v1/script-resources/{resource_id}/versions\x12\xd9\x01\n" +
-	"\x19ReplaceScriptVersionDraft\x12>.app_center.v1.script_version.ReplaceScriptVersionDraftRequest\x1a+.app_center.v1.script_version.ScriptVersion\"O\x82\xd3\xe4\x93\x02I:\acommand\x1a>/v1/script-resources/{resource_id}/versions/{version_id}/draft\x12\xeb\x01\n" +
-	"\x19SubmitScriptVersionReview\x12>.app_center.v1.script_version.SubmitScriptVersionReviewRequest\x1a;.app_center.v1.script_version.ScriptVersionReviewSubmission\"Q\x82\xd3\xe4\x93\x02K:\acommand\"@/v1/script-resources/{resource_id}/versions/{version_id}/reviewsBWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
+	"\x1dSCRIPT_VERSION_STATE_REJECTED\x10\x04BWZUgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_version;scriptversionb\x06proto3"
 
 var (
 	file_app_center_v1_script_version_script_version_proto_rawDescOnce sync.Once
@@ -696,25 +691,19 @@ var file_app_center_v1_script_version_script_version_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),            // 9: google.protobuf.Timestamp
 }
 var file_app_center_v1_script_version_script_version_proto_depIdxs = []int32{
-	2,  // 0: app_center.v1.script_version.CreateScriptVersionDraftRequest.draft:type_name -> app_center.v1.script_version.CreateScriptVersionDraftInput
-	4,  // 1: app_center.v1.script_version.ReplaceScriptVersionDraftRequest.command:type_name -> app_center.v1.script_version.ReplaceScriptVersionDraftInput
-	0,  // 2: app_center.v1.script_version.ScriptVersion.state:type_name -> app_center.v1.script_version.ScriptVersionState
-	9,  // 3: app_center.v1.script_version.ScriptVersion.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 4: app_center.v1.script_version.ScriptVersion.updated_at:type_name -> google.protobuf.Timestamp
-	7,  // 5: app_center.v1.script_version.SubmitScriptVersionReviewRequest.command:type_name -> app_center.v1.script_version.SubmitScriptVersionReviewInput
-	0,  // 6: app_center.v1.script_version.ScriptVersionReviewSubmission.state:type_name -> app_center.v1.script_version.ScriptVersionState
-	9,  // 7: app_center.v1.script_version.ScriptVersionReviewSubmission.submitted_at:type_name -> google.protobuf.Timestamp
-	1,  // 8: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:input_type -> app_center.v1.script_version.CreateScriptVersionDraftRequest
-	3,  // 9: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:input_type -> app_center.v1.script_version.ReplaceScriptVersionDraftRequest
-	6,  // 10: app_center.v1.script_version.ScriptVersionService.SubmitScriptVersionReview:input_type -> app_center.v1.script_version.SubmitScriptVersionReviewRequest
-	5,  // 11: app_center.v1.script_version.ScriptVersionService.CreateScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
-	5,  // 12: app_center.v1.script_version.ScriptVersionService.ReplaceScriptVersionDraft:output_type -> app_center.v1.script_version.ScriptVersion
-	8,  // 13: app_center.v1.script_version.ScriptVersionService.SubmitScriptVersionReview:output_type -> app_center.v1.script_version.ScriptVersionReviewSubmission
-	11, // [11:14] is the sub-list for method output_type
-	8,  // [8:11] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	2, // 0: app_center.v1.script_version.CreateScriptVersionDraftRequest.draft:type_name -> app_center.v1.script_version.CreateScriptVersionDraftInput
+	4, // 1: app_center.v1.script_version.ReplaceScriptVersionDraftRequest.command:type_name -> app_center.v1.script_version.ReplaceScriptVersionDraftInput
+	0, // 2: app_center.v1.script_version.ScriptVersion.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	9, // 3: app_center.v1.script_version.ScriptVersion.created_at:type_name -> google.protobuf.Timestamp
+	9, // 4: app_center.v1.script_version.ScriptVersion.updated_at:type_name -> google.protobuf.Timestamp
+	7, // 5: app_center.v1.script_version.SubmitScriptVersionReviewRequest.command:type_name -> app_center.v1.script_version.SubmitScriptVersionReviewInput
+	0, // 6: app_center.v1.script_version.ScriptVersionReviewSubmission.state:type_name -> app_center.v1.script_version.ScriptVersionState
+	9, // 7: app_center.v1.script_version.ScriptVersionReviewSubmission.submitted_at:type_name -> google.protobuf.Timestamp
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_app_center_v1_script_version_script_version_proto_init() }
@@ -730,7 +719,7 @@ func file_app_center_v1_script_version_script_version_proto_init() {
 			NumEnums:      1,
 			NumMessages:   8,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   0,
 		},
 		GoTypes:           file_app_center_v1_script_version_script_version_proto_goTypes,
 		DependencyIndexes: file_app_center_v1_script_version_script_version_proto_depIdxs,

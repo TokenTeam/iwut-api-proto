@@ -32,7 +32,7 @@ const (
 // require current full platform administrator authority. Only the exact own-read
 // method is ordinary ACTIVE USER access, including users with no script grants.
 type ScriptPermissionServiceClient interface {
-	// Empty input, current trusted subject only. Returns all five permission states
+	// Empty input, current trusted subject only. Returns all four permission states
 	// and one shared revision from the current Auth transaction observation.
 	GetOwnScriptPermissions(ctx context.Context, in *GetOwnScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error)
 	GetScriptPermissions(ctx context.Context, in *GetScriptPermissionsRequest, opts ...grpc.CallOption) (*ScriptPermissions, error)
@@ -85,7 +85,7 @@ func (c *scriptPermissionServiceClient) ManageScriptPermission(ctx context.Conte
 // require current full platform administrator authority. Only the exact own-read
 // method is ordinary ACTIVE USER access, including users with no script grants.
 type ScriptPermissionServiceServer interface {
-	// Empty input, current trusted subject only. Returns all five permission states
+	// Empty input, current trusted subject only. Returns all four permission states
 	// and one shared revision from the current Auth transaction observation.
 	GetOwnScriptPermissions(context.Context, *GetOwnScriptPermissionsRequest) (*ScriptPermissions, error)
 	GetScriptPermissions(context.Context, *GetScriptPermissionsRequest) (*ScriptPermissions, error)

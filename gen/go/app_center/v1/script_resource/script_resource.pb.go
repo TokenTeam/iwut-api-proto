@@ -7,7 +7,6 @@
 package scriptresource
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -275,7 +274,7 @@ var File_app_center_v1_script_resource_script_resource_proto protoreflect.FileDe
 
 const file_app_center_v1_script_resource_script_resource_proto_rawDesc = "" +
 	"\n" +
-	"3app_center/v1/script_resource/script_resource.proto\x12\x1dapp_center.v1.script_resource\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"K\n" +
+	"3app_center/v1/script_resource/script_resource.proto\x12\x1dapp_center.v1.script_resource\x1a\x1fgoogle/protobuf/timestamp.proto\"K\n" +
 	"\x1bCreateScriptResourceRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\apurpose\x18\x02 \x01(\tR\apurpose\"\xa7\x01\n" +
@@ -295,10 +294,7 @@ const file_app_center_v1_script_resource_script_resource_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\x90\x03\n" +
-	"\x15ScriptResourceService\x12\xa2\x01\n" +
-	"\x14CreateScriptResource\x12:.app_center.v1.script_resource.CreateScriptResourceRequest\x1a-.app_center.v1.script_resource.ScriptResource\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/script-resources\x12\xd1\x01\n" +
-	"\x1dReplaceScriptResourceMetadata\x12C.app_center.v1.script_resource.ReplaceScriptResourceMetadataRequest\x1a-.app_center.v1.script_resource.ScriptResource\"<\x82\xd3\xe4\x93\x026:\acommand\x1a+/v1/script-resources/{resource_id}/metadataBYZWgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource;scriptresourceb\x06proto3"
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBYZWgithub.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_resource;scriptresourceb\x06proto3"
 
 var (
 	file_app_center_v1_script_resource_script_resource_proto_rawDescOnce sync.Once
@@ -324,12 +320,8 @@ var file_app_center_v1_script_resource_script_resource_proto_depIdxs = []int32{
 	2, // 0: app_center.v1.script_resource.ReplaceScriptResourceMetadataRequest.command:type_name -> app_center.v1.script_resource.ReplaceScriptResourceMetadataCommand
 	4, // 1: app_center.v1.script_resource.ScriptResource.created_at:type_name -> google.protobuf.Timestamp
 	4, // 2: app_center.v1.script_resource.ScriptResource.updated_at:type_name -> google.protobuf.Timestamp
-	0, // 3: app_center.v1.script_resource.ScriptResourceService.CreateScriptResource:input_type -> app_center.v1.script_resource.CreateScriptResourceRequest
-	1, // 4: app_center.v1.script_resource.ScriptResourceService.ReplaceScriptResourceMetadata:input_type -> app_center.v1.script_resource.ReplaceScriptResourceMetadataRequest
-	3, // 5: app_center.v1.script_resource.ScriptResourceService.CreateScriptResource:output_type -> app_center.v1.script_resource.ScriptResource
-	3, // 6: app_center.v1.script_resource.ScriptResourceService.ReplaceScriptResourceMetadata:output_type -> app_center.v1.script_resource.ScriptResource
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -348,7 +340,7 @@ func file_app_center_v1_script_resource_script_resource_proto_init() {
 			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   0,
 		},
 		GoTypes:           file_app_center_v1_script_resource_script_resource_proto_goTypes,
 		DependencyIndexes: file_app_center_v1_script_resource_script_resource_proto_depIdxs,

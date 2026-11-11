@@ -26,7 +26,6 @@ type ScriptPermission int32
 
 const (
 	ScriptPermission_SCRIPT_PERMISSION_UNSPECIFIED ScriptPermission = 0
-	ScriptPermission_SCRIPT_PERMISSION_MAINTAIN    ScriptPermission = 1
 	ScriptPermission_SCRIPT_PERMISSION_REVIEW      ScriptPermission = 2
 	ScriptPermission_SCRIPT_PERMISSION_PUBLISH     ScriptPermission = 3
 	ScriptPermission_SCRIPT_PERMISSION_SUSPEND     ScriptPermission = 4
@@ -37,7 +36,6 @@ const (
 var (
 	ScriptPermission_name = map[int32]string{
 		0: "SCRIPT_PERMISSION_UNSPECIFIED",
-		1: "SCRIPT_PERMISSION_MAINTAIN",
 		2: "SCRIPT_PERMISSION_REVIEW",
 		3: "SCRIPT_PERMISSION_PUBLISH",
 		4: "SCRIPT_PERMISSION_SUSPEND",
@@ -45,7 +43,6 @@ var (
 	}
 	ScriptPermission_value = map[string]int32{
 		"SCRIPT_PERMISSION_UNSPECIFIED": 0,
-		"SCRIPT_PERMISSION_MAINTAIN":    1,
 		"SCRIPT_PERMISSION_REVIEW":      2,
 		"SCRIPT_PERMISSION_PUBLISH":     3,
 		"SCRIPT_PERMISSION_SUSPEND":     4,
@@ -350,7 +347,7 @@ type ScriptPermissions struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	SubjectAuthId      string                 `protobuf:"bytes,1,opt,name=subject_auth_id,json=subjectAuthId,proto3" json:"subject_auth_id,omitempty"`
 	PermissionRevision int64                  `protobuf:"varint,2,opt,name=permission_revision,json=permissionRevision,proto3" json:"permission_revision,omitempty"`
-	// All five states in ScriptPermission enum order, from one observation.
+	// All four states in ScriptPermission enum order, from one observation.
 	Permissions   []*ScriptPermissionState `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -433,14 +430,13 @@ const file_auth_center_v1_script_permission_script_permission_proto_rawDesc = ""
 	"\x11ScriptPermissions\x12&\n" +
 	"\x0fsubject_auth_id\x18\x01 \x01(\tR\rsubjectAuthId\x12/\n" +
 	"\x13permission_revision\x18\x02 \x01(\x03R\x12permissionRevision\x12Y\n" +
-	"\vpermissions\x18\x03 \x03(\v27.auth_center.v1.script_permission.ScriptPermissionStateR\vpermissions*\xd0\x01\n" +
+	"\vpermissions\x18\x03 \x03(\v27.auth_center.v1.script_permission.ScriptPermissionStateR\vpermissions*\xd2\x01\n" +
 	"\x10ScriptPermission\x12!\n" +
-	"\x1dSCRIPT_PERMISSION_UNSPECIFIED\x10\x00\x12\x1e\n" +
-	"\x1aSCRIPT_PERMISSION_MAINTAIN\x10\x01\x12\x1c\n" +
+	"\x1dSCRIPT_PERMISSION_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18SCRIPT_PERMISSION_REVIEW\x10\x02\x12\x1d\n" +
 	"\x19SCRIPT_PERMISSION_PUBLISH\x10\x03\x12\x1d\n" +
 	"\x19SCRIPT_PERMISSION_SUSPEND\x10\x04\x12\x1d\n" +
-	"\x19SCRIPT_PERMISSION_RESTORE\x10\x05*\x8b\x01\n" +
+	"\x19SCRIPT_PERMISSION_RESTORE\x10\x05\"\x04\b\x01\x10\x01*\x1aSCRIPT_PERMISSION_MAINTAIN*\x8b\x01\n" +
 	"\x16ScriptPermissionAction\x12(\n" +
 	"$SCRIPT_PERMISSION_ACTION_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eSCRIPT_PERMISSION_ACTION_GRANT\x10\x01\x12#\n" +

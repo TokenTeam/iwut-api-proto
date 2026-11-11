@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package app_center.v1.script_authoring;
+
+import "app_center/v1/script_query/script_query.proto";
+import "app_center/v1/script_resource/script_resource.proto";
+import "app_center/v1/script_review/script_review.proto";
+import "app_center/v1/script_version/script_version.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/app_center/v1/script_authoring;scriptauthoring";
+
+// ScriptAuthoringService is the only script creation surface. Write methods
+// require the current trusted USER to be an APPROVED Developer and the owner of
+// every existing target. Read methods require only the current resource owner.
+service ScriptAuthoringService {
+  rpc CreateOwnScriptResource(app_center.v1.script_resource.CreateScriptResourceRequest) returns (app_center.v1.script_resource.ScriptResource) {
+    option (google.api.http) = {
+      post: "/v1/users/me/script-resources"
+      body: "*"
+    };
+  }
+
+  rpc ReplaceOwnScriptResourceMetadata(app_center.v1.script_resource.ReplaceScriptResourceMetadataRequest) returns (app_center.v1.script_resource.ScriptResource) {
+    option (google.api.http) = {
+      put: "/v1/users/me/script-resources/{resource_id}/metadata"
+      body: "command"
+    };
+  }
+
+  rpc CreateOwnScriptVersionDraft(app_center.v1.script_version.CreateScriptVersionDraftRequest) returns (app_center.v1.script_version.ScriptVersion) {
+    option (google.api.http) = {
+      post: "/v1/users/me/script-resources/{resource_id}/versions"
+      body: "draft"
+    };
+  }
+
+  rpc ReplaceOwnScriptVersionDraft(app_center.v1.script_version.ReplaceScriptVersionDraftRequest) returns (app_center.v1.script_version.ScriptVersion) {
+    option (google.api.http) = {
+      put: "/v1/users/me/script-resources/{resource_id}/versions/{version_id}/draft"
+      body: "command"
+    };
+  }
+
+  rpc SubmitOwnScriptVersionReview(app_center.v1.script_version.SubmitScriptVersionReviewRequest) returns (app_center.v1.script_version.ScriptVersionReviewSubmission) {
+    option (google.api.http) = {
+      post: "/v1/users/me/script-resources/{resource_id}/versions/{version_id}/reviews"
+      body: "command"
+    };
+  }
+
+  rpc ListOwnScriptResources(app_center.v1.script_query.ListScriptResourcesRequest) returns (ListOwnScriptResourcesResponse) {
+    option (google.api.http) = {get: "/v1/users/me/script-resources"};
+  }
+
+  rpc GetOwnScriptResource(app_center.v1.script_query.GetScriptResourceRequest) returns (OwnScriptResource) {
+    option (google.api.http) = {get: "/v1/users/me/script-resources/{resource_id}"};
+  }
+
+  rpc ListOwnScriptVersions(app_center.v1.script_query.ListScriptVersionsRequest) returns (app_center.v1.script_query.ListScriptVersionsResponse) {
+    option (google.api.http) = {get: "/v1/users/me/script-resources/{resource_id}/versions"};
+  }
+
+  rpc GetOwnScriptVersion(app_center.v1.script_query.GetScriptVersionRequest) returns (GetOwnScriptVersionResponse) {
+    option (google.api.http) = {get: "/v1/users/me/script-resources/{resource_id}/versions/{version_id}"};
+  }
+
+  rpc GetOwnScriptReviewResult(app_center.v1.script_query.GetScriptReviewRequest) returns (OwnScriptReviewResult) {
+    option (google.api.http) = {get: "/v1/users/me/script-resources/{resource_id}/versions/{version_id}/reviews/{review_id}"};
+  }
+}
+
+message OwnScriptResource {
+  string resource_id = 1;
+  string name = 2;
+  string purpose = 3;
+  int64 revision = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  // Absent when the resource has no versions.
+  app_center.v1.script_query.ScriptVersionSummary latest_version = 7;
+}
+
+message ListOwnScriptResourcesResponse {
+  repeated OwnScriptResource items = 1;
+  string next_cursor = 2;
+}
+
+message GetOwnScriptVersionResponse {
+  app_center.v1.script_query.ScriptVersionSummary version = 1;
+  string content_text = 2;
+}
+
+message OwnScriptReviewDecision {
+  string decision_id = 1;
+  app_center.v1.script_review.ScriptReviewAction decision = 2;
+  google.protobuf.Timestamp decided_at = 3;
+  string reason = 4;
+}
+
+message OwnScriptReviewResult {
+  string resource_id = 1;
+  string version_id = 2;
+  string review_id = 3;
+  app_center.v1.script_query.ScriptReviewStatus status = 4;
+  google.protobuf.Timestamp submitted_at = 5;
+  string resource_name = 6;
+  string resource_purpose = 7;
+  int64 resource_revision = 8;
+  int64 source_version_revision = 9;
+  string content_format = 10;
+  string digest = 11;
+  string policy_version = 12;
+  // Absent while the review is pending.
+  OwnScriptReviewDecision decision = 13;
+}

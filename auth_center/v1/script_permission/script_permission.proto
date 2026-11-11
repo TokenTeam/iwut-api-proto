@@ -9,7 +9,7 @@ option go_package = "github.com/TokenTeam/iwut-api-proto/gen/go/auth_center/v1/s
 // require current full platform administrator authority. Only the exact own-read
 // method is ordinary ACTIVE USER access, including users with no script grants.
 service ScriptPermissionService {
-  // Empty input, current trusted subject only. Returns all five permission states
+  // Empty input, current trusted subject only. Returns all four permission states
   // and one shared revision from the current Auth transaction observation.
   rpc GetOwnScriptPermissions(GetOwnScriptPermissionsRequest) returns (ScriptPermissions) {
     option (google.api.http) = {get: "/v1/users/me/script-permissions"};
@@ -37,7 +37,8 @@ message GetScriptPermissionsRequest {
 
 enum ScriptPermission {
   SCRIPT_PERMISSION_UNSPECIFIED = 0;
-  SCRIPT_PERMISSION_MAINTAIN = 1;
+  reserved 1;
+  reserved "SCRIPT_PERMISSION_MAINTAIN";
   SCRIPT_PERMISSION_REVIEW = 2;
   SCRIPT_PERMISSION_PUBLISH = 3;
   SCRIPT_PERMISSION_SUSPEND = 4;
@@ -67,6 +68,6 @@ message ScriptPermissionState {
 message ScriptPermissions {
   string subject_auth_id = 1;
   int64 permission_revision = 2;
-  // All five states in ScriptPermission enum order, from one observation.
+  // All four states in ScriptPermission enum order, from one observation.
   repeated ScriptPermissionState permissions = 3;
 }
